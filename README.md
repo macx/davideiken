@@ -45,6 +45,8 @@ pnpm build
 pnpm preview
 ```
 
+**Note:** CodeQL security analysis runs automatically via GitHub Actions on every push and pull request. See `.github/workflows/codeql.yml` for configuration.
+
 ### Testing
 
 ```bash
@@ -76,6 +78,16 @@ pnpm test
 - 🎨 **Tailwind CSS** - Utility-first styling
 - 🔒 **Type-safe** - Strict TypeScript configuration
 - 🧪 **Tested** - Playwright end-to-end tests
+- 🔐 **Secure** - CodeQL security scanning via GitHub Actions
+
+## 🔒 Security
+
+This project uses GitHub CodeQL for automated security analysis. CodeQL scans run:
+- On every push to main and feature branches
+- On every pull request
+- Weekly on a schedule
+
+Security findings are reported in the GitHub Security tab.
 
 ## 📄 License
 
