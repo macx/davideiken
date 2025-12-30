@@ -35,11 +35,11 @@ jobs:
     - name: Run TypeScript Check
       run: pnpm astro check
 
-    - name: Run Playwright Tests
-      run: pnpm test
-
     - name: Build
       run: pnpm astro build
+
+    - name: Run Playwright Tests
+      run: pnpm test
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
