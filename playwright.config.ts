@@ -17,6 +17,8 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
+  // Note: The site must be built before running tests.
+  // Run 'pnpm astro build' first if the dist folder doesn't exist.
   webServer: {
     command: 'pnpm preview',
     url: 'http://localhost:4321',

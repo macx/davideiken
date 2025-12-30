@@ -31,10 +31,8 @@ test.describe('Homepage', () => {
     // Click toggle
     await themeToggle.click();
     
-    // Check theme changed
-    await page.waitForTimeout(100);
-    const afterClickHasDark = await html.getAttribute('class');
-    expect(initialHasDark).not.toBe(afterClickHasDark);
+    // Wait for theme to change by checking the class attribute
+    await expect(html).not.toHaveAttribute('class', initialHasDark || '');
   });
 
   test('navigation to Baustellenkamera page works', async ({ page }) => {
