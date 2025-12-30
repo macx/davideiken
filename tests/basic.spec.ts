@@ -24,15 +24,19 @@ test.describe('Homepage', () => {
     const themeToggle = page.getByRole('button', { name: /toggle theme/i });
     await expect(themeToggle).toBeVisible();
     
-    // Get initial theme
+    // Get initial theme state
     const html = page.locator('html');
-    const initialHasDark = await html.getAttribute('class');
+    const initialIsDark = await html.evaluate((el) => el.classList.contains('dark'));
     
     // Click toggle
     await themeToggle.click();
     
-    // Wait for theme to change by checking the class attribute
-    await expect(html).not.toHaveAttribute('class', initialHasDark || '');
+    // Verify theme changed - if it was dark, it should now be light and vice versa
+    if (initialIsDark) {
+      await expect(html).not.toHaveClass(/dark/);
+    } else {
+      await expect(html).toHaveClass(/dark/);
+    }
   });
 
   test('navigation to Baustellenkamera page works', async ({ page }) => {
