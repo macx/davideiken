@@ -28,7 +28,7 @@ jobs:
       run: pnpm install
 
     - name: Install Playwright Browsers
-      run: pnpx playwright install --with-deps chromium
+      run: pnpm exec playwright install --with-deps chromium
 
     - name: Run TypeScript Check
       run: pnpm astro check
