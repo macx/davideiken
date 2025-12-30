@@ -140,3 +140,8 @@ vite.config.ts.timestamp-*
 
 # Astro
 .astro/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
