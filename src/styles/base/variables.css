@@ -1,0 +1,137 @@
+:root {
+  --sp: 1.25rem;
+  --sp-2xs: calc(var(--sp) * 0.25);
+  --sp-xs: calc(var(--sp) * 0.5);
+  --sp-s: calc(var(--sp) * 0.75);
+  --sp-m: calc(var(--sp) * 1.5);
+  --sp-l: calc(var(--sp) * 2);
+  --sp-xl: calc(var(--sp) * 3);
+  --sp-2xl: calc(var(--sp) * 4);
+  --sp-3xl: calc(var(--sp) * 6);
+  --sp-site: var(--sp-3xl);
+
+  /* Core light theme roles (Standard) */
+  --clr-bg: oklch(98% 0.01 260);
+  --clr-surface: oklch(100% 0 0);
+  --clr-primary: oklch(55% 0.22 25);
+  --clr-secondary: oklch(60% 0.15 220);
+  --clr-tertiary: oklch(70% 0.15 80);
+  --clr-text: oklch(15% 0.01 260);
+  --clr-text-muted: oklch(45% 0.02 260);
+
+  /* Semantic text and surface roles */
+  --clr-on-bg: var(--clr-text);
+  --clr-on-surface: var(--clr-text);
+  --clr-surface-dim: color-mix(in oklch, var(--clr-surface), black 5%);
+  --clr-surface-strong: color-mix(in oklch, var(--clr-surface), black 9%);
+  --clr-surface-raised: color-mix(in oklch, var(--clr-surface), black 15%);
+  --clr-surface-overlay: color-mix(
+    in oklch,
+    var(--clr-bg),
+    var(--clr-surface) 65%
+  );
+
+  /* Modern tonal steps for brand colors */
+  --clr-primary-weak: color-mix(
+    in oklch,
+    var(--clr-primary),
+    var(--clr-surface) 68%
+  );
+  --clr-primary-strong: color-mix(in oklch, var(--clr-primary), black 16%);
+  --clr-primary-deep: color-mix(in oklch, var(--clr-primary), black 24%);
+
+  --clr-secondary-weak: color-mix(
+    in oklch,
+    var(--clr-secondary),
+    var(--clr-surface) 66%
+  );
+  --clr-secondary-strong: color-mix(in oklch, var(--clr-secondary), black 14%);
+  --clr-secondary-deep: color-mix(in oklch, var(--clr-secondary), black 22%);
+
+  --clr-tertiary-weak: color-mix(
+    in oklch,
+    var(--clr-tertiary),
+    var(--clr-surface) 67%
+  );
+  --clr-tertiary-strong: color-mix(in oklch, var(--clr-tertiary), black 15%);
+  --clr-tertiary-deep: color-mix(in oklch, var(--clr-tertiary), black 23%);
+
+  /* Utility and state roles */
+  --clr-outline: color-mix(
+    in oklch,
+    var(--clr-text-muted),
+    var(--clr-surface) 55%
+  );
+  --clr-focus: var(--clr-secondary-strong);
+  --clr-success: oklch(75% 0.16 152);
+  --clr-warning: oklch(82% 0.16 84);
+  --clr-danger: oklch(68% 0.2 25);
+
+  --clr-highlight: hsl(50 100% 62%);
+
+  /* Unified type scale */
+  --fs: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+  --fs-2xs: clamp(0.625rem, 0.6rem + 0.12vw, 0.6875rem);
+  --fs-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --fs-s: clamp(0.875rem, 0.83rem + 0.22vw, 1rem);
+  --fs-m: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --fs-l: var(--fs);
+  --fs-xl: clamp(1.375rem, 1.15rem + 1vw, 1.875rem);
+  --fs-2xl: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+  --fs-3xl: clamp(1.875rem, 1.2rem + 3.4vw, 4rem);
+
+  /* Semantic aliases */
+  --fs-copy: var(--fs-l);
+  --fs-eyebrow: var(--fs-xs);
+  --fs-lead: var(--fs-xl);
+  --fs-subtitle: var(--fs-m);
+  --fs-headline: var(--fs-3xl);
+}
+
+[data-theme="dark"] {
+  --clr-bg: oklch(18.2% 0.041 262.1);
+  --clr-surface: oklch(24.8% 0.035 261.5);
+  --clr-primary: oklch(58.5% 0.222 264.1);
+  --clr-secondary: oklch(78.9% 0.154 203.4);
+  --clr-tertiary: oklch(64.5% 0.246 16.439);
+  --clr-text: oklch(97.9% 0.005 253.2);
+  --clr-text-muted: oklch(82.4% 0.078 266.3);
+
+  --clr-surface-dim: color-mix(in oklch, var(--clr-surface), black 20%);
+  --clr-surface-strong: color-mix(in oklch, var(--clr-surface), white 9%);
+  --clr-surface-raised: color-mix(in oklch, var(--clr-surface), white 15%);
+
+  --clr-primary-strong: color-mix(in oklch, var(--clr-primary), white 16%);
+  --clr-primary-deep: color-mix(in oklch, var(--clr-primary), black 24%);
+
+  --clr-secondary-strong: color-mix(in oklch, var(--clr-secondary), white 14%);
+  --clr-secondary-deep: color-mix(in oklch, var(--clr-secondary), black 22%);
+
+  --clr-tertiary-strong: color-mix(in oklch, var(--clr-tertiary), white 15%);
+  --clr-tertiary-deep: color-mix(in oklch, var(--clr-tertiary), black 23%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    --clr-bg: oklch(18.2% 0.041 262.1);
+    --clr-surface: oklch(24.8% 0.035 261.5);
+    --clr-primary: oklch(58.5% 0.222 264.1);
+    --clr-secondary: oklch(78.9% 0.154 203.4);
+    --clr-tertiary: oklch(64.5% 0.246 16.439);
+    --clr-text: oklch(97.9% 0.005 253.2);
+    --clr-text-muted: oklch(82.4% 0.078 266.3);
+
+    --clr-surface-dim: color-mix(in oklch, var(--clr-surface), black 20%);
+    --clr-surface-strong: color-mix(in oklch, var(--clr-surface), white 9%);
+    --clr-surface-raised: color-mix(in oklch, var(--clr-surface), white 15%);
+
+    --clr-primary-strong: color-mix(in oklch, var(--clr-primary), white 16%);
+    --clr-primary-deep: color-mix(in oklch, var(--clr-primary), black 24%);
+
+    --clr-secondary-strong: color-mix(in oklch, var(--clr-secondary), white 14%);
+    --clr-secondary-deep: color-mix(in oklch, var(--clr-secondary), black 22%);
+
+    --clr-tertiary-strong: color-mix(in oklch, var(--clr-tertiary), white 15%);
+    --clr-tertiary-deep: color-mix(in oklch, var(--clr-tertiary), black 23%);
+  }
+}

@@ -1,0 +1,48 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ff-copy);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-2xl);
+}
+
+h2 {
+  font-size: var(--fs-xl);
+}
+
+h3 {
+  font-size: var(--fs-l);
+}
+
+h4,
+h5,
+h6 {
+  font-size: var(--fs-m);
+}
+
+p,
+li {
+  font-size: var(--fs-copy);
+  text-wrap: pretty;
+}
+
+:where(h1, h2, h3, h4, h5, h6, p, li) {
+  overflow-wrap: break-word;
+}
+
+::selection {
+  background-color: var(--clr-highlight);
+  color: inherit;
+}
+
+::-moz-selection {
+  background-color: var(--clr-highlight);
+  color: inherit;
+}

@@ -1,0 +1,8 @@
+@layer base, components, utilities;
+
+@import "./base/variables.css" layer(base);
+@import "./base/layout.css" layer(base);
+@import "./base/typo.css" layer(base);
+@import "./utilities/utilities.css" layer(utilities);
+
+@import "./components/hero.css" layer(components);
