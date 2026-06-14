@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "stitch": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "export STITCH_API_KEY=$(op read 'op://macx.io/Google Stitch/Section_335p3kbs6zr4ciw5aakmhmshxy/api key') && npx @_davideast/stitch-mcp proxy"
+      ]
+    }
+  }
+}
