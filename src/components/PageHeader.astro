@@ -1,0 +1,182 @@
+---
+/**
+ * PageHeader Component
+ *
+ * Flexible page header with eyebrow, headline, optional subtitle, and lead text.
+ * Supports simple markdown-like syntax for styling:
+ *
+ * __text__ → accent color (secondary/cyan)
+ * ~~text~~ → slant (skewed italic)
+ * **text** → bold
+ *
+ * Usage:
+ * <PageHeader
+ *   eyebrow="PEAK PERFORMANCE ARCHITECTURE"
+ *   headline="PASSION & PERFORMANCE"
+ *   lead="The same discipline..."
+ * />
+ *
+ * With styling:
+ * <PageHeader
+ *   eyebrow="SYSTEM INITIALIZATION SUCCESS"
+ *   headline="David Eiken"
+ *   subtitle="(formerly Maciejewski)"
+ *   lead="Your next __Senior UI/UX Engineer__. Building high-precision frontends with __surgical precision__..."
+ * />
+ */
+
+interface Props {
+  layout?: "compact" | "large" | "hero";
+  eyebrow: string;
+  headline: string;
+  subtitle?: string;
+  lead: string;
+}
+
+const { layout = "compact", eyebrow, headline, subtitle, lead } = Astro.props;
+
+/**
+ * Replace spaces with underscores for display
+ * "Hello World" → "Hello_World"
+ */
+function formatEyebrow(text: string): string {
+  return text.replace(/ /g, "_");
+}
+
+/**
+ * Parse markdown-like syntax into HTML
+ * __text__ → <span class="accent">text</span>
+ * ~~text~~ → <span class="slant">text</span>
+ * **text** → <strong>text</strong>
+ */
+function parseMarkdown(text: string): string {
+  return (
+    text
+      // __text__ → accent
+      .replace(/__(.+?)__/g, '<span class="accent">$1</span>')
+      // ~~text~~ → slant
+      .replace(/~~(.+?)~~/g, '<span class="slant">$1</span>')
+      // **text** → bold
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+  );
+}
+
+const parsedHeadline = parseMarkdown(headline);
+const parsedSubtitle = subtitle ? parseMarkdown(subtitle) : undefined;
+const parsedLead = parseMarkdown(lead);
+---
+
+<div class:list={["page-header", layout]}>
+  <div class="container">
+    <hgroup class="hgroup">
+      <p class="eyebrow">{formatEyebrow(eyebrow)}</p>
+
+      <h1 class="headline">
+        <Fragment set:html={parsedHeadline} />
+      </h1>
+
+      {
+        parsedSubtitle && (
+          <p class="subtitle">
+            <Fragment set:html={parsedSubtitle} />
+          </p>
+        )
+      }
+    </hgroup>
+
+    <p class="lead">
+      <Fragment set:html={parsedLead} />
+    </p>
+  </div>
+</div>
+
+<style>
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-m);
+
+    &.compact {
+      border: 5px solid green;
+      padding-block-start: var(--sp-site);
+    }
+
+    &.hero {
+      border: 5px solid red;
+    }
+
+    &.large {
+      border: 5px solid yellow;
+    }
+
+    .hgroup {
+      display: block;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1.5ch;
+
+      font-family: var(--ff-label, "Courier New", "Courier", monospace);
+      font-size: var(--fs-eyebrow);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--clr-secondary);
+      margin-block: 0 0.5em;
+      line-height: 1.5;
+
+      &::before {
+        content: "";
+        display: block;
+        block-size: 1cap;
+        inline-size: 0.125em;
+        background-color: var(--clr-secondary);
+      }
+    }
+
+    .headline {
+      font-size: var(--fs-headline);
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--clr-text);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: var(--fs-subtitle);
+      font-style: italic;
+      color: var(--clr-text-muted);
+      margin: var(--sp-s) 0 0;
+      line-height: 1.4;
+    }
+
+    .lead {
+      font-size: var(--fs-lead);
+      line-height: 1.4;
+      color: var(--clr-text-muted);
+      margin: 0;
+      max-width: 65ch;
+    }
+
+    :global(.accent) {
+      color: var(--clr-secondary);
+      font-style: italic;
+    }
+
+    :global(.slant) {
+      font-style: italic;
+      font-weight: 700;
+      color: var(--clr-secondary);
+      transform: skewX(-10deg);
+      display: inline-block;
+    }
+
+    @media (max-width: 768px) {
+      gap: var(--sp-m);
+    }
+  }
+</style>

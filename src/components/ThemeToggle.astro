@@ -1,0 +1,123 @@
+---
+import ThemeAuto from '../assets/icons/theme-auto.svg';
+import ThemeLight from '../assets/icons/theme-light.svg';
+import ThemeDark from '../assets/icons/theme-dark.svg';
+
+import Tooltip from './Tooltip.astro';
+
+interface Props {
+  class?: string;
+  variant?: 'header' | 'drawer';
+  locale?: string;
+}
+
+const { class: className, variant = 'header', locale = 'en' } = Astro.props;
+
+const labels = {
+  en: { auto: 'Theme: Auto', light: 'Theme: Light', dark: 'Theme: Dark' },
+  de: { auto: 'Design: Auto', light: 'Design: Hell', dark: 'Design: Dunkel' }
+};
+const t = labels[locale as 'en' | 'de'] || labels.en;
+---
+{variant === 'header' ? (
+  <Tooltip 
+    as="button"
+    type="button"
+    class:list={["theme-toggle", className]} 
+    position="bottom"
+  >
+    <ThemeAuto class="icon-theme icon-auto" aria-hidden="true" />
+    <ThemeLight class="icon-theme icon-light" aria-hidden="true" />
+    <ThemeDark class="icon-theme icon-dark" aria-hidden="true" />
+    <span slot="tooltip-content" class="theme-label">
+      <span class="label-auto">{t.auto}</span>
+      <span class="label-light">{t.light}</span>
+      <span class="label-dark">{t.dark}</span>
+    </span>
+  </Tooltip>
+) : (
+  <button class:list={["theme-toggle is-drawer", className]} type="button">
+    <ThemeAuto class="icon-theme icon-auto" aria-hidden="true" />
+    <ThemeLight class="icon-theme icon-light" aria-hidden="true" />
+    <ThemeDark class="icon-theme icon-dark" aria-hidden="true" />
+    <span class="theme-label">
+      <span class="label-auto">{t.auto}</span>
+      <span class="label-light">{t.light}</span>
+      <span class="label-dark">{t.dark}</span>
+    </span>
+  </button>
+)}
+
+<style>
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-toggle.is-drawer {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.6rem;
+  }
+  .icon-theme {
+    display: none;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  :global(html[data-theme="auto"]) .icon-auto {
+    display: block;
+  }
+  :global(html[data-theme="light"]) .icon-light {
+    display: block;
+  }
+  :global(html[data-theme="dark"]) .icon-dark {
+    display: block;
+  }
+
+  .theme-label span {
+    display: none;
+  }
+  :global(html[data-theme="auto"]) .label-auto {
+    display: inline;
+  }
+  :global(html[data-theme="light"]) .label-light {
+    display: inline;
+  }
+  :global(html[data-theme="dark"]) .label-dark {
+    display: inline;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
+
+<script>
+  const themes = ['auto', 'light', 'dark'];
+
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.theme-toggle');
+    if (!btn) return;
+    
+    let currentTheme = document.documentElement.getAttribute('data-theme') || 'auto';
+    let nextIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
+    let nextTheme = themes[nextIndex];
+    
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  });
+</script>
