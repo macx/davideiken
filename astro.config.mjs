@@ -1,47 +1,48 @@
 import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
+import node from "@astrojs/node";
+import { satteri } from "@astrojs/markdown-satteri";
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: node({
+    mode: "standalone",
+  }),
   i18n: {
     locales: ["en", "de"],
-    defaultLocale: "en",
+    defaultLocale: "de",
     routing: {
       prefixDefaultLocale: false,
     },
   },
   fonts: [
     {
-      provider: fontProviders.fontsource(),
-      name: "Manrope",
-      cssVariable: "--ff-copy",
-      weights: [400, 500, 700],
-      styles: ["normal"],
+      provider: fontProviders.google(),
+      name: "Strichpunkt Sans",
+      cssVariable: "--ff-heading",
+      weights: [400, 900],
+      subsets: ["latin"],
+      fallbacks: ["sans-serif"],
+      options: {
+        experimental: {
+          variableAxis: {
+            wdth: [["100", "150"]],
+          },
+        },
+      },
     },
     {
       provider: fontProviders.fontsource(),
-      name: "Space Grotesk",
-      cssVariable: "--ff-label",
-      weights: ["300 700"],
-      styles: ["normal"],
+      name: "Geologica",
+      cssVariable: "--ff-copy",
     },
   ],
   markdown: {
+    processor: satteri(),
     shikiConfig: { wrap: true },
-    gfm: true,
-    smartypants: {
-      dashes: true,
-      openingQuotes: { double: "„", single: "„" },
-      closingQuotes: { double: "“", single: "“" },
-      ellipses: true,
-      quotes: false,
-    },
   },
   integrations: [mdx()],
   experimental: {
     rustCompiler: true,
-    queuedRendering: {
-      enabled: true,
-    },
   },
 });

@@ -94,6 +94,6 @@ When a new content page is requested:
 
 ## 9) MDX Translation Sync
 
-- Any time an English MDX file under `src/pages/` is fully drafted, modified, renamed, or deleted, you MUST trigger the `mdx-translation-sync` skill.
+- Any time an German MDX file under `src/pages/` is fully drafted, modified, renamed, or deleted, you MUST trigger the `mdx-translation-sync` skill.
 - Read the instructions in `skills/mdx-translation-sync/SKILL.md` to perform the sync.
-- To save tokens, do not perform line-by-line translations during drafting. Only execute the sync as a final step when the English file is ready.
+- To save tokens, do not perform line-by-line translations during drafting. Only execute the sync as a final step when the German file is ready.
