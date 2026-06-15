@@ -5,12 +5,10 @@ description: "One-Pager von David Eiken mit Fokus auf digitale Architektur, Stra
 ---
 
 import PageHeader from "../../components/PageHeader.astro";
+import LogoGrid from "../../components/LogoGrid.astro";
 
 <PageHeader
-  layout="hero"
-  eyebrow="Open for work"
-  headline="David Eiken"
-  subtitle="(ehemals Maciejewski)"
+  title="David Eiken"
   lead="Dein nächster __Senior UI/UX Frontend Engineer__. Ich baue hochpräzise, frustfreie Frontends mit chirurgischer Präzision seit 1997."
 />
 
@@ -69,16 +67,7 @@ import PageHeader from "../../components/PageHeader.astro";
   </div>
 </section>
 
-<section id="kontakt" class="section-surface">
-  <div class="kontakt-grid">
-    <div>
-      <p class="eyebrow">Ping</p>
-      <h2>Lass uns ein digitales Produkt mit Substanz bauen.</h2>
-    </div>
-    <div class="kontakt-action">
-      <a href="mailto:hello@davideiken.de" class="btn-outline">
-        hello@davideiken.de
-      </a>
-    </div>
-  </div>
-</section>
+<hr class="fat-divider" />
+
+<h2>Aus meiner Projektgeschichte – in guter Gesellschaft</h2>
+<LogoGrid />
