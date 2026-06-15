@@ -1,28 +1,154 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { Image } from "astro:assets";
+import avatarImg from "../assets/images/davideiken-1200.jpg";
+import SectionLabel from "./SectionLabel.astro";
 
-const locale = Astro.currentLocale ?? "en";
-const privacyHref = getRelativeLocaleUrl(locale, "privacy/construction-camera");
+const locale = Astro.currentLocale ?? "de";
+const privacyHref =
+  locale === "de"
+    ? getRelativeLocaleUrl(locale, "datenschutz/baustellenkamera")
+    : getRelativeLocaleUrl(locale, "privacy/construction-camera");
 const imprintHref = getRelativeLocaleUrl(locale, "imprint");
 
 const rights =
   locale === "de" ? "Alle Rechte vorbehalten." : "All rights reserved.";
 const privacyLabel = locale === "de" ? "Datenschutz" : "Privacy";
 const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
-const profileNotice =
-  locale === "de"
-    ? "Hinweis: Diese Website ist ein berufliches Profil zur Bewerbung als UI/UX Frontend Engineer. Über diese Website werden keine Dienstleistungen angeboten oder verkauft."
-    : "Note: This website is a professional profile used for job applications as a UI/UX Frontend Engineer. No services are offered or sold through this website.";
 ---
 
 <footer class="site-footer">
-  <div class="container">
-    <p>&copy; {new Date().getFullYear()} David Maciejewski. {rights}</p>
-    <p class="footer-note">{profileNotice}</p>
-    <p class="footer-links">
+  <div class="editorial-layout footer-grid">
+    <!-- Column 1: Profile -->
+    <div class="footer-col">
+      <Image src={avatarImg} alt="David Eiken" class="footer-avatar" width={160} height={160} densities={[1.5, 2]} />
+      <p class="footer-name"><strong>David Maciejewski*</strong><br />
+      <em>*ab 21. August 2026: David Eiken (Heirat)</em></p>
+      <p>Schillerstr. 35a<br />
+      32427 Minden</p>
+    </div>
+
+    <!-- Column 2: PING -->
+    <div class="footer-col">
+      <SectionLabel text="PING" />
+      <dl>
+        <dt>TELEFON:</dt>
+        <dd>+49 160 06997824</dd>
+        
+        <dt>E-MAIL:</dt>
+        <dd><a href="mailto:hallo@davideiken.de">hallo@davideiken.de</a></dd>
+        
+        <dt>WEB:</dt>
+        <dd>
+          <a href="https://davideiken.de">davideiken.de</a><br />
+          <a href="https://hawk-gt1191.de">hawk-gt1191.de</a><br />
+          <a href="https://technikwuerze.de">technikwuerze.de</a>
+        </dd>
+      </dl>
+    </div>
+
+    <!-- Column 3: SETUP -->
+    <div class="footer-col">
+      <SectionLabel text="SETUP" />
+      <dl>
+        <dt>BUILD:</dt>
+        <dd>28.02.1977 in Celle</dd>
+        
+        <dt>ROOTS:</dt>
+        <dd>Minden, NRW – fest verwurzelt</dd>
+        
+        <dt>DEPLOY:</dt>
+        <dd>Remote Deutschland, hybrid & DACH auf Anfrage</dd>
+
+        <dt>LANGUAGES:</dt>
+        <dd>Deutsch (Muttersprache), Englisch (fließend)</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="footer-bottom editorial-layout">
+    <p>&copy; {new Date().getFullYear()} David Maciejewski*. {rights}</p>
+    <p>
       <a href={privacyHref}>{privacyLabel}</a>
       <span aria-hidden="true"> · </span>
       <a href={imprintHref}>{imprintLabel}</a>
     </p>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--sp-2xl) var(--sp-xl);
+    border-top: 1px solid var(--clr-outline);
+    margin-block-start: var(--sp-3xl);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-xl);
+    margin-block-end: var(--sp-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-s);
+    font-size: var(--fs-s);
+  }
+
+  .footer-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    margin-block-end: var(--sp-xs);
+  }
+
+  .footer-name {
+    margin-block-end: var(--sp-2xs);
+  }
+
+  .footer-col dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-2xs);
+  }
+
+  .footer-col dt {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: var(--fs-2xs);
+    letter-spacing: 0.05em;
+    margin-block-start: var(--sp-xs);
+  }
+
+  .footer-col dd {
+    margin: 0;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-s);
+    align-items: center;
+    border-top: 1px solid var(--clr-outline);
+    padding-block-start: var(--sp-l);
+    font-size: var(--fs-xs);
+    color: var(--clr-text-muted);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+</style>
