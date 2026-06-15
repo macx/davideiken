@@ -1,0 +1,236 @@
+---
+export interface Props {
+  date: string;
+  title: string;
+  company: string;
+  impact: string;
+  type: 'freelance' | 'employed' | 'education';
+}
+
+const { date, title, company, impact, type } = Astro.props;
+
+// SVG Icons for mobile differentiation
+const ICONS = {
+  freelance: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+  employed: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+  education: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`
+};
+---
+
+<li class={`timeline-item type-${type}`}>
+  <div class="timeline-content">
+    <div class="timeline-meta">
+      <span class="timeline-date">{date}</span>
+      <span class="timeline-icon mobile-only" set:html={ICONS[type]} title={type} />
+    </div>
+    <div class="timeline-body">
+      <h3 class="timeline-title">{title}</h3>
+      <p class="timeline-company">{company}</p>
+      <div class="timeline-impact">
+        <span class="impact-label">IMPACT:</span> {impact}
+      </div>
+    </div>
+  </div>
+</li>
+
+<style>
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--sp-2xl);
+  }
+
+  .timeline-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-s);
+    margin-bottom: var(--sp-s);
+    position: relative;
+  }
+
+  .timeline-date {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    border: 1px solid var(--clr-text-muted);
+    border-radius: 99px;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    white-space: nowrap;
+    background: var(--clr-surface);
+  }
+
+  .timeline-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-text-muted);
+  }
+
+  .timeline-meta::before {
+    content: "";
+    display: none; /* hidden on mobile, line is vertical only */
+  }
+
+  .timeline-meta::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -25px; /* aligns perfectly with the extreme left 10px center line on mobile */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    z-index: 2;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Specific dot colors based on type */
+  .type-freelance .timeline-meta::after {
+    background: var(--clr-tertiary);
+  }
+  .type-employed .timeline-meta::after {
+    background: var(--clr-text);
+  }
+  .type-education .timeline-meta::after {
+    background: var(--clr-text-muted);
+  }
+
+  .timeline-title {
+    font-size: var(--fs-m);
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .timeline-company {
+    font-size: var(--fs-s);
+    color: var(--clr-text-muted);
+    margin: 0 0 var(--sp-s);
+  }
+
+  .timeline-impact {
+    font-size: var(--fs-s);
+    line-height: 1.6;
+    color: var(--clr-text);
+  }
+
+  .impact-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  /* Unveil Animation for Scroll */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports ((animation-timeline: view()) and (animation-range: entry)) {
+      @keyframes unveil {
+        from {
+          opacity: 0;
+          transform: translateY(80px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .timeline-item {
+        animation: unveil auto linear both;
+        animation-timeline: view(block);
+        animation-range: entry 10% cover 35%;
+      }
+    }
+  }
+
+  /* --- Desktop Layout --- */
+  @media (min-width: 768px) {
+    .mobile-only {
+      display: none;
+    }
+
+    .timeline-item {
+      margin-bottom: var(--sp-xl);
+    }
+
+    .timeline-meta {
+      margin-bottom: var(--sp-m);
+      display: flex;
+      position: relative; /* relative to position the absolute line */
+    }
+
+    .impact-label {
+      display: inline;
+      margin-right: 0.2rem;
+    }
+
+    .timeline-meta::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      height: 2px;
+      width: var(--sp-xl);
+      z-index: 1;
+      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), right 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Freelance & Education go left */
+    .type-freelance, .type-education {
+      grid-column: 1;
+      text-align: right;
+    }
+
+    .type-freelance .timeline-meta, .type-education .timeline-meta {
+      justify-content: flex-end; /* Date pill flushes to the right edge with the text */
+      flex-direction: row;
+    }
+
+    /* Red color for freelance line & dot */
+    .type-freelance .timeline-meta::before {
+      right: calc(-1 * var(--sp-xl));
+      background: var(--clr-tertiary); /* Rot/Primary Accent */
+      opacity: 1;
+    }
+    .type-freelance .timeline-meta::after {
+      left: auto;
+      right: calc(-1 * var(--sp-xl) - 8px); /* Center dot perfectly on the 3px line */
+      background: var(--clr-tertiary);
+    }
+
+    .type-education .timeline-meta::before {
+      right: calc(-1 * var(--sp-xl));
+      background: var(--clr-text-muted);
+      opacity: 0.5;
+    }
+    .type-education .timeline-meta::after {
+      left: auto;
+      right: calc(-1 * var(--sp-xl) - 8px);
+      background: var(--clr-text-muted);
+    }
+
+    /* Employed goes right */
+    .type-employed {
+      grid-column: 3;
+      text-align: left;
+    }
+
+    .type-employed .timeline-meta {
+      justify-content: flex-start; /* Date pill flushes to the left edge with the text */
+      flex-direction: row;
+    }
+
+    .type-employed .timeline-meta::before {
+      left: calc(-1 * var(--sp-xl));
+      background: var(--clr-text);
+      opacity: 1;
+    }
+    .type-employed .timeline-meta::after {
+      left: calc(-1 * var(--sp-xl) - 8px);
+      background: var(--clr-bg);
+      border: 3px solid var(--clr-text);
+    }
+  }
+</style>
