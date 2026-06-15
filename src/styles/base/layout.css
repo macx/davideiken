@@ -31,7 +31,7 @@ body {
 
   font-family: var(--ff-copy);
   font-size: var(--fs-copy);
-  line-height: 1.5;
+  line-height: var(--lh-copy);
   text-rendering: optimizeLegibility;
 
   background-color: var(--clr-bg);
@@ -39,6 +39,7 @@ body {
   padding-block-start: var(--sp-site);
 
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 img,

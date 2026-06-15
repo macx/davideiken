@@ -4,33 +4,54 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--ff-copy);
-  line-height: 1.15;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: var(--fs-2xl);
+  font-family: var(--ff-h1);
+  font-size: var(--fs-h1);
+  font-variation-settings: var(--fvs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  margin-block: 0;
 }
 
 h2 {
-  font-size: var(--fs-xl);
+  font-family: var(--ff-h2);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-h2);
+  font-variation-settings: var(--fvs-h2);
+  line-height: var(--lh-h2);
+  margin-block: 1.5em 0.5em;
 }
 
 h3 {
-  font-size: var(--fs-l);
+  font-family: var(--ff-h3);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-h3);
+  font-variation-settings: var(--fvs-h3);
+  line-height: var(--lh-h3);
 }
 
 h4,
 h5,
 h6 {
-  font-size: var(--fs-m);
+  font-family: var(--ff-h4);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-h4);
+  font-variation-settings: var(--fvs-h4);
+  line-height: var(--lh-h4);
 }
 
-p,
+/* p,
 li {
   font-size: var(--fs-copy);
   text-wrap: pretty;
+} */
+
+:where(p) {
+  margin-block: 0 1.2em;
+  hyphens: auto;
 }
 
 :where(h1, h2, h3, h4, h5, h6, p, li) {

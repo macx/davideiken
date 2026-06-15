@@ -1,4 +1,5 @@
 :root {
+  --max-width: 50rem;
   --sp: 1.25rem;
   --sp-2xs: calc(var(--sp) * 0.25);
   --sp-xs: calc(var(--sp) * 0.5);
@@ -8,7 +9,7 @@
   --sp-xl: calc(var(--sp) * 3);
   --sp-2xl: calc(var(--sp) * 4);
   --sp-3xl: calc(var(--sp) * 6);
-  --sp-site: var(--sp-3xl);
+  --sp-site: var(--sp-2xl);
 
   /* Core light theme roles (Standard) */
   --clr-bg: oklch(98% 0.01 260);
@@ -17,7 +18,7 @@
   --clr-secondary: oklch(60% 0.15 220);
   --clr-tertiary: oklch(70% 0.15 80);
   --clr-text: oklch(15% 0.01 260);
-  --clr-text-muted: oklch(45% 0.02 260);
+  --clr-text-muted: oklch(52% 0.015 260);
 
   /* Semantic text and surface roles */
   --clr-on-bg: var(--clr-text);
@@ -77,15 +78,53 @@
   --fs-m: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   --fs-l: var(--fs);
   --fs-xl: clamp(1.375rem, 1.15rem + 1vw, 1.875rem);
-  --fs-2xl: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
-  --fs-3xl: clamp(1.875rem, 1.2rem + 3.4vw, 4rem);
+  --fs-2xl: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  --fs-3xl: clamp(2.25rem, 1.5rem + 4vw, 5rem);
 
   /* Semantic aliases */
-  --fs-copy: var(--fs-l);
+  --fs-copy: var(--fs-m);
   --fs-eyebrow: var(--fs-xs);
-  --fs-lead: var(--fs-xl);
   --fs-subtitle: var(--fs-m);
   --fs-headline: var(--fs-3xl);
+
+  /* H1 Tokens */
+  --ff-h1: var(--ff-heading);
+  --fs-h1: var(--fs-3xl);
+  --fvs-h1: "wght" 900, "wdth" 125;
+  --lh-h1: 1.05;
+  --ls-h1: -0.015em;
+
+  /* H2 Tokens */
+  --ff-h2: var(--ff-heading);
+  --fs-h2: var(--fs-2xl);
+  --fw-h2: 700;
+  --fvs-h2: "wght" 800, "wdth" 112;
+  --lh-h2: 1.15;
+
+  /* H3 Tokens */
+  --ff-h3: var(--ff-heading);
+  --fs-h3: var(--fs-xl);
+  --fw-h3: 600;
+  --fvs-h3: "wght" 700, "wdth" 100;
+  --lh-h3: 1.2;
+
+  /* H4-H6 Tokens */
+  --ff-h4: var(--ff-heading);
+  --fs-h4: var(--fs-m);
+  --fw-h4: 600;
+  --fvs-h4: "wght" 700, "wdth" 100;
+  --lh-h4: 1.2;
+
+  /* Generic Font Settings */
+  --fw: 400;
+  --fw-copy: var(--fw);
+  --lh-copy: 1.4;
+
+  /* Lead Tokens */
+  --fs-lead: clamp(1.25rem, 1.2rem + 0.4vw, 1.45rem);
+  --fvs-lead: "wght" 200, "SHRP": -20;
+  --lh-lead: 1.3;
+  --ls-lead: -0.005em;
 }
 
 [data-theme="dark"] {
@@ -95,7 +134,7 @@
   --clr-secondary: oklch(78.9% 0.154 203.4);
   --clr-tertiary: oklch(64.5% 0.246 16.439);
   --clr-text: oklch(97.9% 0.005 253.2);
-  --clr-text-muted: oklch(82.4% 0.078 266.3);
+  --clr-text-muted: oklch(72% 0.02 260);
 
   --clr-surface-dim: color-mix(in oklch, var(--clr-surface), black 20%);
   --clr-surface-strong: color-mix(in oklch, var(--clr-surface), white 9%);
@@ -119,7 +158,7 @@
     --clr-secondary: oklch(78.9% 0.154 203.4);
     --clr-tertiary: oklch(64.5% 0.246 16.439);
     --clr-text: oklch(97.9% 0.005 253.2);
-    --clr-text-muted: oklch(82.4% 0.078 266.3);
+    --clr-text-muted: oklch(72% 0.02 260);
 
     --clr-surface-dim: color-mix(in oklch, var(--clr-surface), black 20%);
     --clr-surface-strong: color-mix(in oklch, var(--clr-surface), white 9%);
@@ -128,7 +167,11 @@
     --clr-primary-strong: color-mix(in oklch, var(--clr-primary), white 16%);
     --clr-primary-deep: color-mix(in oklch, var(--clr-primary), black 24%);
 
-    --clr-secondary-strong: color-mix(in oklch, var(--clr-secondary), white 14%);
+    --clr-secondary-strong: color-mix(
+      in oklch,
+      var(--clr-secondary),
+      white 14%
+    );
     --clr-secondary-deep: color-mix(in oklch, var(--clr-secondary), black 22%);
 
     --clr-tertiary-strong: color-mix(in oklch, var(--clr-tertiary), white 15%);
