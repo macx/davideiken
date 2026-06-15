@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/Layout.astro
 title: "Experience | David Eiken"
-description: "Berufserfahrung, Timeline und Meilensteine."
+description: "Professional experience, timeline, and career milestones."
 navTitle: "Experience"
 navOrder: 2
 ---
@@ -9,14 +9,14 @@ navOrder: 2
 import PageHeader from "../../components/PageHeader.astro";
 import Timeline from "../../components/Timeline.astro";
 import TimelineItem from "../../components/TimelineItem.astro";
-import experienceData from "../../data/experience.de.json";
+import experienceData from "../../data/experience.en.json";
 
 <PageHeader
-  title="Architektur mit Struktur und Absicht."
-  lead="Ich entwerfe Frontend-Architekturen, die Klarheit schaffen: sauberes HTML, langlebiges CSS, TypeScript als Sicherheitsnetz und Stacks, die zu Team, Produkt und Geschäftszielen passen."
+  title="Architecture with structure and intent."
+  lead="I design frontend architectures that create clarity: clean HTML, durable CSS, TypeScript as a safety net, and stacks that fit team, product, and business goals."
 />
 
-<Timeline headingLeft="Selbstständig" headingRight="Angestellt">
+<Timeline headingLeft="Freelance" headingRight="Employed">
   {experienceData.map((item) => (
     <TimelineItem
       date={item.date}
