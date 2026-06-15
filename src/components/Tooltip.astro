@@ -66,7 +66,7 @@ const {
     border-block-start-color: var(--clr-text);
   }
 
-  .has-tooltip:is(:hover, :focus-within) .tooltip {
+  .has-tooltip:is(:hover, :focus-visible) .tooltip {
     opacity: 1;
     transform: translate(-50%, 0);
   }
@@ -83,7 +83,7 @@ const {
     border-color: transparent;
     border-block-end-color: var(--clr-text);
   }
-  .has-tooltip.is-bottom:is(:hover, :focus-within) .tooltip {
+  .has-tooltip.is-bottom:is(:hover, :focus-visible) .tooltip {
     transform: translate(-50%, 0);
   }
 
@@ -103,7 +103,7 @@ const {
     border-color: transparent;
     border-inline-end-color: var(--clr-text);
   }
-  .has-tooltip.is-right:is(:hover, :focus-within) .tooltip {
+  .has-tooltip.is-right:is(:hover, :focus-visible) .tooltip {
     transform: translate(0, -50%);
   }
 
@@ -123,7 +123,7 @@ const {
     border-color: transparent;
     border-inline-start-color: var(--clr-text);
   }
-  .has-tooltip.is-left:is(:hover, :focus-within) .tooltip {
+  .has-tooltip.is-left:is(:hover, :focus-visible) .tooltip {
     transform: translate(0, -50%);
   }
 

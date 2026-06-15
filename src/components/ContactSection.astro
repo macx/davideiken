@@ -1,0 +1,48 @@
+---
+import ContactForm from "./ContactForm.astro";
+
+const locale = Astro.currentLocale ?? "en";
+const title =
+  locale === "de" ? "Kein Pitch, kein Druck." : "No pitch, no pressure.";
+const text =
+  locale === "de"
+    ? "Buche dir ein unverbindliches Online-Meeting. Nur ein offenes Gespräch darüber, wie ich dein Team ergänzen kann. Oder hinterlasse mir eine Nachricht."
+    : "Book a no-strings-attached online meeting. Just an open conversation about how I can complement your team. Or leave me a message.";
+---
+
+<section id="contact" class="section-surface">
+  <div class="editorial-layout fat-divider">
+    <h2>{title}</h2>
+
+    <p>
+      {text}
+    </p>
+
+    <div class="contact-action">
+      <ContactForm action="/api/contact" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-l);
+  }
+
+  .section-surface {
+    background-color: var(--clr-surface);
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .contact-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+</style>
