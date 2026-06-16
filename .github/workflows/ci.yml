@@ -30,8 +30,24 @@ jobs:
     - name: Install dependencies
       run: pnpm install
 
-    - name: Install Playwright Browsers
-      run: pnpm exec playwright install --with-deps chromium
+    - name: Get Playwright version
+      run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | cut -d' ' -f2)" >> $GITHUB_ENV
+
+    - name: Cache Playwright Browsers
+      uses: actions/cache@v4
+      id: playwright-cache
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+
+    - name: Install Playwright Browser
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      run: pnpm exec playwright install chromium
+
+    - name: Install Playwright system dependencies
+      run: pnpm exec playwright install-deps chromium
 
     - name: Run TypeScript Check
       run: pnpm astro check
