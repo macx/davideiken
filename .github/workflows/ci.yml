@@ -11,6 +11,7 @@ jobs:
   build:
     name: Build and Test
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
     
@@ -57,6 +58,7 @@ jobs:
 
     - name: Run Playwright Tests
       run: pnpm test
+      timeout-minutes: 5
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
