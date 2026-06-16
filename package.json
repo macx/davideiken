@@ -10,7 +10,8 @@
     "test": "playwright test",
     "preview": "astro preview",
     "astro": "astro",
-    "codeql": "echo 'CodeQL analysis runs via GitHub Actions workflow. See .github/workflows/codeql.yml'"
+    "codeql": "echo 'CodeQL analysis runs via GitHub Actions workflow. See .github/workflows/codeql.yml'",
+    "release": "release-it"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
@@ -32,6 +33,7 @@
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
     "rehype-slug": "^6.0.0",
+    "release-it": "^20.2.0",
     "remark-smartypants": "^3.0.2"
   }
 }
