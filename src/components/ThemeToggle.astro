@@ -107,6 +107,7 @@ const t = labels[locale as 'en' | 'de'] || labels.en;
 
   /* Custom dynamic toast for 'auto' theme mode confirmation */
   :global(.theme-toast) {
+    --toast-glow-color: color-mix(in oklch, var(--clr-secondary) 50%, transparent);
     position: fixed;
     inset-block-start: 5.5rem;
     left: 50%;
@@ -126,18 +127,45 @@ const t = labels[locale as 'en' | 'de'] || labels.en;
     border: 1px solid rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    box-shadow: 
-      0 10px 30px -10px rgba(0, 0, 0, 0.4),
-      0 0 32px color-mix(in oklch, var(--clr-secondary) 45%, transparent);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
     
     transition: 
       opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), 
       transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  :global(html[data-theme="dark"]) :global(.theme-toast) {
+    --toast-glow-color: oklch(100% 0 0 / 85%); /* Pure white glow in dark mode */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(html[data-theme="auto"]) :global(.theme-toast) {
+      --toast-glow-color: oklch(100% 0 0 / 85%); /* Pure white glow in dark mode auto */
+    }
+  }
+
+  @keyframes toast-glow-flash {
+    0% {
+      box-shadow: 
+        0 10px 30px -10px rgba(0, 0, 0, 0.4),
+        0 0 0px transparent;
+    }
+    15% {
+      box-shadow: 
+        0 10px 30px -10px rgba(0, 0, 0, 0.4),
+        0 0 32px var(--toast-glow-color);
+    }
+    100% {
+      box-shadow: 
+        0 10px 30px -10px rgba(0, 0, 0, 0.4),
+        0 0 0px transparent;
+    }
+  }
+
   :global(.theme-toast.is-visible) {
     opacity: 1;
     transform: translate(-50%, 0);
+    animation: toast-glow-flash 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   }
 
   @media (max-width: 40em) {
@@ -201,7 +229,7 @@ const t = labels[locale as 'en' | 'de'] || labels.en;
       toast.addEventListener('transitionend', () => {
         toast.remove();
       });
-    }, 800);
+    }, 2200);
   }
 
   // Preload when hovering or focusing the button (saves page-load bandwidth)
