@@ -1,4 +1,4 @@
-.editorial-layout {
+.content-center {
   inline-size: min(100% - (var(--sp-m) * 2), var(--max-width, 50rem));
   margin-inline: auto;
 }
@@ -37,14 +37,17 @@
 
 .grid-auto {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--sp-xl);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--sp-content);
 }
 
-.fat-divider {
+.divider {
   border-block-start: 4px solid var(--clr-text);
   margin-block: var(--sp-2xl);
-  clear: both;
+}
+
+.flow-root {
+  display: flow-root;
 }
 
 .section {

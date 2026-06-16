@@ -17,9 +17,8 @@ const privacyLabel = locale === "de" ? "Datenschutz" : "Privacy";
 const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 ---
 
-<footer class="site-footer">
-  <div class="editorial-layout footer-grid">
-    <!-- Column 1: Profile -->
+<footer class="site-footer content-center">
+  <div class="grid-auto divider">
     <div class="footer-col">
       <Image
         src={avatarImg}
@@ -29,19 +28,18 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
         height={160}
         densities={[1.5, 2]}
       />
+
       <p class="footer-name">
-        <strong>David Maciejewski*</strong><br />
-        <em>*ab 21. August 2026: David Eiken (Heirat)</em>
-      </p>
-      <p>
+        <strong>David Maciejewski</strong><br />
+        <em>(ab 21. August 2026: Eiken)</em><br />
         Schillerstr. 35a<br />
         32427 Minden
       </p>
     </div>
 
-    <!-- Column 2: PING -->
     <div class="footer-col">
       <SectionLabel text="PING" />
+
       <dl>
         <dt>TELEFON:</dt>
         <dd>+49 160 06997824</dd>
@@ -58,7 +56,6 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
       </dl>
     </div>
 
-    <!-- Column 3: SETUP -->
     <div class="footer-col">
       <SectionLabel text="SETUP" />
       <dl>
@@ -77,7 +74,7 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
     </div>
   </div>
 
-  <div class="footer-bottom editorial-layout">
+  <div class="footer-bottom content-center">
     <p>&copy; {new Date().getFullYear()} David Maciejewski*. {rights}</p>
     <p>
       <a href={privacyHref}>{privacyLabel}</a>
@@ -88,59 +85,49 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 </footer>
 
 <style>
-  .site-footer {
-    padding-block: var(--sp-2xl) var(--sp-xl);
-    border-top: 1px solid var(--clr-outline);
-    margin: 0;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-xl);
-    margin-block-end: var(--sp-2xl);
-  }
-
-  @media (min-width: 768px) {
-    .footer-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .site-footer .divider {
+    margin-block-start: 0;
+    padding-block-start: var(--sp-xl);
   }
 
   .footer-col {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-s);
+    gap: var(--sp);
     font-size: var(--fs-s);
   }
 
   .footer-avatar {
     border-radius: 50%;
     object-fit: cover;
-    margin-block-end: var(--sp-xs);
   }
 
   .footer-name {
     margin-block-end: var(--sp-2xs);
   }
 
-  .footer-col dl {
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-2xs);
-  }
+  .footer-col {
+    dl {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sp-2xs);
+      margin: 0;
+    }
 
-  .footer-col dt {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: var(--fs-2xs);
-    letter-spacing: 0.05em;
-    margin-block-start: var(--sp-xs);
-  }
+    dt {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: var(--fs-2xs);
 
-  .footer-col dd {
-    margin: 0;
+      &:not(:first-child) {
+        margin-block-start: var(--sp);
+      }
+    }
+
+    dd {
+      margin: 0;
+    }
   }
 
   .footer-bottom {
