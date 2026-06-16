@@ -88,28 +88,24 @@
   --fs-headline: var(--fs-3xl);
 
   /* H1 Tokens */
-  --ff-h1: var(--ff-heading);
   --fs-h1: var(--fs-3xl);
   --fvs-h1: "wght" 900, "wdth" 125;
   --lh-h1: 1.05;
   --ls-h1: -0.015em;
 
   /* H2 Tokens */
-  --ff-h2: var(--ff-heading);
   --fs-h2: var(--fs-2xl);
   --fw-h2: 700;
   --fvs-h2: "wght" 800, "wdth" 112;
   --lh-h2: 1.15;
 
   /* H3 Tokens */
-  --ff-h3: var(--ff-heading);
   --fs-h3: var(--fs-xl);
   --fw-h3: 600;
   --fvs-h3: "wght" 700, "wdth" 100;
   --lh-h3: 1.2;
 
   /* H4-H6 Tokens */
-  --ff-h4: var(--ff-heading);
   --fs-h4: var(--fs-m);
   --fw-h4: 600;
   --fvs-h4: "wght" 700, "wdth" 100;
@@ -125,6 +121,9 @@
   --fvs-lead: "wght" 200, "SHRP": -20;
   --lh-lead: 1.3;
   --ls-lead: -0.005em;
+
+  --focus-outline: 4px solid var(--focus-color, var(--clr-secondary));
+  --focus-outline-offset: 2px;
 }
 
 [data-theme="dark"] {

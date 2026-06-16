@@ -34,6 +34,7 @@ those files must reference these rules and must not contradict them.
 - For component-specific styles (for example header/navigation), define styles in the component `*.astro` file via `<style>` so they stay scoped.
 - Prefer nested CSS style structure for component styles.
 - Avoid BEM naming in new styles.
+- For Media Queries, always use `em` units instead of `px` (e.g. `@media (min-width: 40em)`).
 
 ### Color Roles (Current Design Baseline)
 
@@ -78,13 +79,15 @@ For each task, follow this order:
    - `pnpm test` (when relevant to the change)
 5. Briefly document what changed and why.
 
-## 7) New Content Preference
+## 7) Content Preference
 
 When a new content page is requested:
 
 1. Standard: `src/pages/<slug>.mdx`
 2. Only for layout/interactivity: `src/pages/<slug>.astro`
 3. Reuse shared visual rules from tokens/layers.
+
+When editing content, write primarily MDX instead of using HTML tags. Use double "--" for en-dashes, single "-" for hyphens and single "'" for apostrophes.
 
 ## 8) Maintenance of This Guide
 

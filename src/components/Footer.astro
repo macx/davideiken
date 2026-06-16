@@ -21,11 +21,22 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
   <div class="editorial-layout footer-grid">
     <!-- Column 1: Profile -->
     <div class="footer-col">
-      <Image src={avatarImg} alt="David Eiken" class="footer-avatar" width={160} height={160} densities={[1.5, 2]} />
-      <p class="footer-name"><strong>David Maciejewski*</strong><br />
-      <em>*ab 21. August 2026: David Eiken (Heirat)</em></p>
-      <p>Schillerstr. 35a<br />
-      32427 Minden</p>
+      <Image
+        src={avatarImg}
+        alt="David Eiken"
+        class="footer-avatar"
+        width={160}
+        height={160}
+        densities={[1.5, 2]}
+      />
+      <p class="footer-name">
+        <strong>David Maciejewski*</strong><br />
+        <em>*ab 21. August 2026: David Eiken (Heirat)</em>
+      </p>
+      <p>
+        Schillerstr. 35a<br />
+        32427 Minden
+      </p>
     </div>
 
     <!-- Column 2: PING -->
@@ -34,10 +45,10 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
       <dl>
         <dt>TELEFON:</dt>
         <dd>+49 160 06997824</dd>
-        
+
         <dt>E-MAIL:</dt>
         <dd><a href="mailto:hallo@davideiken.de">hallo@davideiken.de</a></dd>
-        
+
         <dt>WEB:</dt>
         <dd>
           <a href="https://davideiken.de">davideiken.de</a><br />
@@ -53,10 +64,10 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
       <dl>
         <dt>BUILD:</dt>
         <dd>28.02.1977 in Celle</dd>
-        
+
         <dt>ROOTS:</dt>
         <dd>Minden, NRW – fest verwurzelt</dd>
-        
+
         <dt>DEPLOY:</dt>
         <dd>Remote Deutschland, hybrid & DACH auf Anfrage</dd>
 
@@ -80,7 +91,7 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
   .site-footer {
     padding-block: var(--sp-2xl) var(--sp-xl);
     border-top: 1px solid var(--clr-outline);
-    margin-block-start: var(--sp-3xl);
+    margin: 0;
   }
 
   .footer-grid {

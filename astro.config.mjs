@@ -2,6 +2,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import { satteri } from "@astrojs/markdown-satteri";
+import remarkSmartypants from "remark-smartypants";
 
 // https://astro.build/config
 export default defineConfig({
@@ -38,7 +39,15 @@ export default defineConfig({
     },
   ],
   markdown: {
-    processor: satteri(),
+    processor: satteri({
+      features: {
+        smartPunctuation: true,
+      },
+    }),
+    smartypants: false,
+    remarkPlugins: [
+      [remarkSmartypants, { dashes: "oldschool" }],
+    ],
     shikiConfig: { wrap: true },
   },
   integrations: [mdx()],

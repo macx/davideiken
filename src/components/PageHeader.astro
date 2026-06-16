@@ -31,6 +31,10 @@ const leadHtml = unwrapP(leadHtmlRaw);
     margin-block-end: var(--sp-l);
   }
 
+  .title {
+    view-transition-name: page-header-title;
+  }
+
   .lead {
     margin: 0;
     font-size: var(--fs-lead);
@@ -39,8 +43,11 @@ const leadHtml = unwrapP(leadHtmlRaw);
     letter-spacing: var(--ls-lead);
     font-variation-settings: var(--fvs-lead);
     line-height: var(--lh-lead);
+    text-wrap: Balance;
     hyphens: none;
+    view-transition-name: page-header-lead;
   }
+
 
   :global(.accent) {
     color: var(--clr-secondary);

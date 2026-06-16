@@ -1,3 +1,37 @@
-.hero {
-  border: 5px solid red;
+.portrait {
+  width: 100%;
+  max-width: 280px;
+  margin-inline: auto;
+  margin-block-end: var(--sp-m);
+  border-radius: var(--sp-2xs);
+  border: 1px solid var(--clr-outline);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: block;
+  filter: grayscale(1) contrast(1.18);
+  transition: filter 0.3s ease;
 }
+
+/* Dark Mode: Tint the image slightly and darken it to blend with the dark background */
+[data-theme="dark"] .portrait {
+  filter: sepia(0.35) hue-rotate(195deg) saturate(1.4) brightness(0.72) contrast(1.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .portrait {
+    filter: sepia(0.35) hue-rotate(195deg) saturate(1.4) brightness(0.72) contrast(1.2);
+  }
+}
+
+
+
+
+@media (min-width: 768px) {
+  .portrait {
+    float: right;
+    width: 240px;
+    margin-inline-start: var(--sp-xl);
+    margin-block-end: var(--sp-s);
+    margin-block-start: var(--sp-2xs);
+  }
+}
+

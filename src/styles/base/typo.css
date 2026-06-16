@@ -4,11 +4,11 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: var(--ff-heading);
   text-wrap: balance;
 }
 
 h1 {
-  font-family: var(--ff-h1);
   font-size: var(--fs-h1);
   font-variation-settings: var(--fvs-h1);
   line-height: var(--lh-h1);
@@ -17,7 +17,6 @@ h1 {
 }
 
 h2 {
-  font-family: var(--ff-h2);
   font-size: var(--fs-h2);
   font-weight: var(--fw-h2);
   font-variation-settings: var(--fvs-h2);
@@ -26,7 +25,6 @@ h2 {
 }
 
 h3 {
-  font-family: var(--ff-h3);
   font-size: var(--fs-h3);
   font-weight: var(--fw-h3);
   font-variation-settings: var(--fvs-h3);
@@ -36,7 +34,6 @@ h3 {
 h4,
 h5,
 h6 {
-  font-family: var(--ff-h4);
   font-size: var(--fs-h4);
   font-weight: var(--fw-h4);
   font-variation-settings: var(--fvs-h4);
@@ -52,6 +49,14 @@ li {
 :where(p) {
   margin-block: 0 1.2em;
   hyphens: auto;
+}
+
+:where(strong, b) {
+  font-variation-settings: "wght" 500;
+}
+
+:where(em, i) {
+  font-style: italic;
 }
 
 :where(h1, h2, h3, h4, h5, h6, p, li) {

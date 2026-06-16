@@ -1,73 +1,34 @@
 ---
 layout: ../../layouts/Layout.astro
-title: "David Eiken | Digital Architect One-Pager"
-description: "One-Pager von David Eiken mit Fokus auf digitale Architektur, Strategie und technische Umsetzung."
+title: "Frontend. Frustration-free by Design."
+description: "One-pager by David Eiken focused on digital architecture, strategy, and technical execution."
 ---
 
 import PageHeader from "../../components/PageHeader.astro";
 import LogoGrid from "../../components/LogoGrid.astro";
+import { Image } from "astro:assets";
+import portraitImage from "../../assets/images/david-portrait.jpg";
 
 <PageHeader
-  title="David Eiken"
-  lead="Dein nächster __Senior UI/UX Frontend Engineer__. Ich baue hochpräzise, frustfreie Frontends mit chirurgischer Präzision seit 1997."
+  title={frontmatter.title}
+  lead="Hi, I'm David Eiken *(still legally David Maciejewski until my wedding in August)*. For 30 years, I have been designing and building digital media. Today, I channel this experience as a specialized **Senior Frontend Engineer**."
 />
 
-<section id="leistungen" class="section-surface">
-  <div class="section-header">
-    <p class="eyebrow">Leistungen</p>
-    <h2>Von der ersten Idee zur robusten Umsetzung.</h2>
-  </div>
-  <div class="card-grid">
-    <article class="card">
-      <h3>Architektur</h3>
-      <p>
-        Informationsarchitektur, technische Leitplanken und verlässliche Entscheidungsstrukturen für nachhaltige Produktentwicklung.
-      </p>
-    </article>
-    <article class="card">
-      <h3>Design Systeme</h3>
-      <p>
-        Konsistente, token-basierte UI-Bausteine mit klaren Regeln für Skalierbarkeit, Zusammenarbeit und Qualität.
-      </p>
-    </article>
-    <article class="card">
-      <h3>Umsetzung</h3>
-      <p>
-        Schnelle, saubere Implementierung mit Astro, TypeScript und maßgeschneiderten CSS-Workflows für hochperformante Websites.
-      </p>
-    </article>
-  </div>
+<Image src={portraitImage} alt="David Eiken" class="portrait" widths={[240, 480]} sizes="(max-width: 768px) 240px, 480px" />
+
+Starting in print, I made the transition to the web at the turn of the millennium. I learned HTML and CSS autodidactically—long before YouTube or suitable degree programs. Instead of dry theory, my focus was on hands-on practice: as a full-stack developer, I covered concept, design, frontend, and backend for years. This curious mindset and looking beyond the tellerrand still drives me today—all the way to agentic coding.
+
+
+
+
+
+This drive showed early on: as a digital pioneer, I was among the first to shape podcasting in Germany with the launch of "Technikwürze" in 2005. What started as a one-man show quickly evolved into a collaborative format: by purposefully involving external experts, I drove the democratization of technical knowledge—and learned that the best results always arise through collaboration.
+
+This principle still applies today. I work at the intersection of design and deployment—bringing people, ideas, and code together with great UX. Since 2015, I have also been lecturing at the university, showing students how modern websites are built—mobile-first, responsive, and frustration-free.
+
+
+<section class="fat-divider">
+  ## From my project history &mdash;<br />in good company
+
+  <LogoGrid />
 </section>
-
-<section id="projekte" class="section-projekte">
-  <h2>Ausgewählte Arbeiten</h2>
-  <div class="card-grid">
-    <article class="card">
-      <p class="eyebrow">Case Study</p>
-      <h3>Digital Architect One-Pager</h3>
-      <p>
-        Redaktionelles Portfolio-Layout mit asymmetrischer Hero-Struktur, tonaler Schichtung und einem reduzierten Navigationssystem.
-      </p>
-      <ul class="tag-list">
-        <li>Astro</li>
-        <li>Custom CSS</li>
-        <li>TypeScript</li>
-      </ul>
-    </article>
-    <article class="card">
-      <p class="eyebrow">Fokus</p>
-      <h3>Klarheit statt Rauschen</h3>
-      <p>
-        Keine harten Trennlinien. Visuelle Hierarchie durch Oberflächenkontrast, Weißraum und präzisen typografischen Rhythmus.
-      </p>
-      <a href="/de/privacy/construction-camera" class="link-arrow">
-        Datenschutzhinweis ansehen →
-      </a>
-    </article>
-  </div>
-</section>
-
-<hr class="fat-divider" />
-
-<h2>Aus meiner Projektgeschichte – in guter Gesellschaft</h2>
-<LogoGrid />

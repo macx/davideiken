@@ -120,12 +120,12 @@ const contactHref = "#contact";
       <span class="nav-indicator" aria-hidden="true"></span>
     </nav>
 
-    <Tooltip 
+    <Tooltip
       as="a"
       href={contactHref}
       class="nav-icon-link contact-link"
       aria-label={locale === "de" ? "Kontakt" : "Contact"}
-      text={locale === "de" ? "Kontakt" : "Contact"} 
+      text={locale === "de" ? "Kontakt" : "Contact"}
       position="bottom"
     >
       <svg
@@ -145,14 +145,16 @@ const contactHref = "#contact";
 
     <ThemeToggle class="nav-icon-link header-theme-toggle" locale={locale} />
 
-    <Tooltip 
+    <Tooltip
       as="a"
       href={languageSwitchHref}
       hreflang={targetLocale}
       lang={targetLocale}
       class="nav-icon-link lang-switch"
-      aria-label={locale === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
-      text={locale === "de" ? "Switch to English" : "Auf Deutsch wechseln"} 
+      aria-label={locale === "de"
+        ? "Switch to English"
+        : "Auf Deutsch wechseln"}
+      text={locale === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
       position="bottom"
     >
       <span>{languageSwitchLabel}</span>
@@ -385,12 +387,12 @@ const contactHref = "#contact";
       padding-block: 0.5rem;
       padding-inline: 0.75rem;
       border-radius: 9999px;
-      
+
       /* Clean, Flat, Bold Glass */
       background: color-mix(in oklch, var(--clr-surface) 65%, transparent);
       backdrop-filter: blur(24px) saturate(140%);
       -webkit-backdrop-filter: blur(24px) saturate(140%);
-      
+
       /* Crisp border, flat minimal shadow */
       border: 1.5px solid color-mix(in oklch, var(--clr-text) 12%, transparent);
       box-shadow: 0 4px 16px -4px color-mix(in oklch, black 12%, transparent);
@@ -444,7 +446,7 @@ const contactHref = "#contact";
       font-weight: 500;
       letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: var(--clr-text-muted);
+      color: color-mix(in oklch, var(--clr-text) 80%, transparent);
       text-decoration: none;
       position: relative;
       z-index: 1;
@@ -508,7 +510,7 @@ const contactHref = "#contact";
       width: 2rem;
       height: 2rem;
       border-radius: 9999px;
-      color: var(--clr-text-muted);
+      color: color-mix(in oklch, var(--clr-text) 80%, transparent);
       text-decoration: none;
       transition:
         color 160ms ease,
@@ -656,21 +658,14 @@ const contactHref = "#contact";
       opacity: 0;
       padding: 0;
 
-      background:
-        color-mix(in oklch, var(--clr-surface) 72%, transparent) padding-box,
-        linear-gradient(
-            135deg,
-            color-mix(in oklch, white 32%, transparent) 0%,
-            color-mix(in oklch, white 8%, transparent) 35%,
-            color-mix(in oklch, white 2%, transparent) 60%,
-            color-mix(in oklch, white 5%, transparent) 100%
-          )
-          border-box;
-      backdrop-filter: blur(24px) saturate(160%) brightness(1.07);
-      border: 1px solid transparent;
+      /* Match exactly the main navigation color scheme */
+      background: color-mix(in oklch, var(--clr-surface) 85%, transparent);
+      backdrop-filter: blur(24px) saturate(140%);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+      border: 1.5px solid color-mix(in oklch, var(--clr-text) 12%, transparent);
       border-radius: 1.25rem;
-      box-shadow: 0 8px 32px -6px
-        color-mix(in oklch, var(--clr-bg) 75%, transparent);
+      box-shadow: 0 8px 32px -6px color-mix(in oklch, black 12%, transparent);
+
       transform: translateY(-6px) scale(0.97);
       transition:
         opacity 180ms ease,
@@ -705,15 +700,19 @@ const contactHref = "#contact";
     }
 
     .drawer-link {
+      --c-gap: var(--sp-s);
+      --c-padding-inline-start: var(--sp-m);
+      --c-icon-w: 1rem;
+
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: var(--c-gap);
       padding-block: var(--sp-s);
-      padding-inline: var(--sp-m);
+      padding-inline: var(--c-padding-inline-start) var(--sp-l);
       font-size: var(--fs-s);
       font-weight: 500;
       letter-spacing: 0.04em;
-      color: var(--clr-text-muted);
+      color: var(--clr-text);
       text-decoration: none;
       transition:
         color 160ms ease,
@@ -725,13 +724,15 @@ const contactHref = "#contact";
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 16px;
-        height: 16px;
+        width: var(--c-icon-w);
+        height: var(--c-icon-w);
         flex-shrink: 0;
       }
 
       &.drawer-link-no-icon {
-        padding-inline-start: calc(var(--sp-m) + 16px + 0.6rem);
+        padding-inline-start: calc(
+          var(--c-padding-inline-start) + var(--c-icon-w) + var(--c-gap)
+        );
       }
 
       .lang-icon {
@@ -765,7 +766,7 @@ const contactHref = "#contact";
       white-space: nowrap;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 40em) {
       .nav-toggle {
         display: flex;
       }
@@ -793,5 +794,29 @@ const contactHref = "#contact";
       translate: -50% 0;
       margin: 0;
     }
+  }
+
+  /*
+   * Enable view transition names only during active transitions.
+   * This prevents Chrome from breaking backdrop-filter (blur) during normal rendering.
+   */
+  :global(html:active-view-transition) .site-header {
+    view-transition-name: site-header;
+  }
+  :global(html:active-view-transition) .nav-drawer {
+    view-transition-name: nav-drawer;
+  }
+
+  /*
+   * Disable the default cross-fade animation for the header view-transitions.
+   * This prevents the header from flickering or changing opacity during transitions,
+   * keeping the transition as solid and subtle as possible.
+   */
+  :global(::view-transition-old(site-header)),
+  :global(::view-transition-new(site-header)),
+  :global(::view-transition-old(nav-drawer)),
+  :global(::view-transition-new(nav-drawer)) {
+    animation: none !important;
+    mix-blend-mode: normal !important;
   }
 </style>
