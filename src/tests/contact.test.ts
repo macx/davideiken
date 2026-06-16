@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { POST } from "./contact";
+import { POST } from "../pages/api/contact";
 
 // Use vi.hoisted to declare and initialize the mock function BEFORE mock hoisting occurs!
 const { mockSendMail } = vi.hoisted(() => {
