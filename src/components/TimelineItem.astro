@@ -1,5 +1,8 @@
 ---
 import Tooltip from "./Tooltip.astro";
+import workIcon from "../assets/icons/work.svg?raw";
+import cognitionIcon from "../assets/icons/cognition.svg?raw";
+import emojiObjectsIcon from "../assets/icons/emoji-objects.svg?raw";
 
 export interface Props {
   date: string;
@@ -11,13 +14,21 @@ export interface Props {
   gridRow?: number;
 }
 
-const { date, title, company, impact, type, isOffset = false, gridRow } = Astro.props;
+const {
+  date,
+  title,
+  company,
+  impact,
+  type,
+  isOffset = false,
+  gridRow,
+} = Astro.props;
 
-// SVG Icons for mobile differentiation
+// SVG Icons mapping for timeline types
 const ICONS = {
-  freelance: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-  employed: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
-  education: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
+  freelance: emojiObjectsIcon,
+  employed: workIcon,
+  education: cognitionIcon,
 };
 
 const TOOLTIPS = {
@@ -34,13 +45,10 @@ const TOOLTIPS = {
   <div class="timeline-content">
     <div class="timeline-meta">
       <span class="timeline-date">{date}</span>
-      <Tooltip
-        text={TOOLTIPS[type]}
-        class="timeline-icon-tooltip"
-      >
+      <Tooltip text={TOOLTIPS[type]} class="timeline-icon-tooltip">
         <span class="timeline-icon" set:html={ICONS[type]} />
       </Tooltip>
-      <span class="timeline-dot" />
+      <span class="timeline-dot"></span>
     </div>
     <div class="timeline-body">
       <h3 class="timeline-title">{title}</h3>
@@ -57,6 +65,10 @@ const TOOLTIPS = {
   .timeline-item {
     position: relative;
     margin-bottom: var(--sp-2xl);
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
   }
 
   .timeline-meta {
@@ -83,6 +95,12 @@ const TOOLTIPS = {
     align-items: center;
     justify-content: center;
     color: var(--clr-text-muted);
+  }
+
+  .timeline-icon :global(svg) {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
   }
 
   .timeline-meta::before {
@@ -177,6 +195,10 @@ const TOOLTIPS = {
     .timeline-item {
       margin-bottom: var(--sp-xl);
       grid-row: var(--grid-row);
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: var(--sp-xl);
     }
 
     .timeline-item.is-offset {

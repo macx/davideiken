@@ -30,6 +30,24 @@ const messages = {
 };
 
 const t = messages[lang];
+
+const privacyMessages = {
+  en: {
+    part1:
+      "By submitting this form, you agree to the processing of your data for the purpose of handling your request. Further information can be found in the ",
+    linkText: "privacy policy",
+    part2: ".",
+  },
+  de: {
+    part1:
+      "Mit dem Absenden dieses Formulars erklärst du dich mit der Verarbeitung deiner Daten zum Zwecke der Kontaktaufnahme einverstanden. Weitere Informationen findest du in der ",
+    linkText: "Datenschutzerklärung",
+    part2: ".",
+  },
+};
+
+const p = privacyMessages[lang];
+const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
 ---
 
 <form
@@ -85,7 +103,12 @@ const t = messages[lang];
         rows="5"></textarea>
     </div>
 
-    <button type="submit" class="submit-btn" id="submitBtn">{t.send}</button>
+    <div class="form-actions">
+      <p class="privacy-note">
+        {p.part1}<a href={privacyUrl}>{p.linkText}</a>{p.part2}
+      </p>
+      <button type="submit" class="submit-btn" id="submitBtn">{t.send}</button>
+    </div>
   </div>
 
   <div id="formStatus" class="form-status" aria-live="polite"></div>
@@ -194,8 +217,8 @@ const t = messages[lang];
 
   input,
   textarea {
-    font-family: var(--ff-copy, sans-serif);
-    font-size: 1rem;
+    font-family: inherit;
+    font-size: inherit;
     padding: 0.75rem 0.5rem;
     border: none;
     border-bottom: 3px solid var(--clr-text);
@@ -222,7 +245,6 @@ const t = messages[lang];
 
   .submit-btn {
     align-self: flex-end;
-    margin-top: var(--sp-xs);
     padding: 0.8rem 2.2rem;
     background: var(--clr-text);
     color: var(--clr-bg);
@@ -298,5 +320,23 @@ const t = messages[lang];
 
   .form-status.sending {
     color: var(--clr-text-muted);
+  }
+  .privacy-note {
+    font-size: var(--fs-xs);
+    font-style: italic;
+    color: var(--clr-text-muted);
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .privacy-note a {
+    color: var(--clr-text);
+    text-decoration: underline;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
   }
 </style>

@@ -3,11 +3,22 @@ import ContactForm from "./ContactForm.astro";
 
 const locale = Astro.currentLocale ?? "en";
 const title =
-  locale === "de" ? "Kein Pitch, kein Druck." : "No pitch, no pressure.";
-const text =
   locale === "de"
-    ? "Buche dir ein unverbindliches Online-Meeting. Nur ein offenes Gespräch darüber, wie ich dein Team ergänzen kann. Oder hinterlasse mir eine Nachricht."
-    : "Book a no-strings-attached online meeting. Just an open conversation about how I can complement your team. Or leave me a message.";
+    ? "Lass uns reden. Ohne Pitch, ohne Druck."
+    : "Let’s talk. No pitch, no pressure.";
+
+const textPart1 =
+  locale === "de"
+    ? "Buche dir ein unverbindliches Online-Meeting. Nur ein offenes Gespräch darüber, wie ich dein Team ergänzen kann. Melde dich unter "
+    : "Book a no-strings-attached online meeting. Just an open conversation about how I can complement your team. Sign up at ";
+
+const linkUrl = "https://davideiken.de/meeting";
+const linkText = "davideiken.de/meeting";
+
+const textPart2 =
+  locale === "de"
+    ? " an, oder hinterlasse mir eine Nachricht."
+    : ", or leave me a message.";
 ---
 
 <section id="contact" class="contact">
@@ -15,7 +26,8 @@ const text =
     <h2>{title}</h2>
 
     <p>
-      {text}
+      {textPart1}<a href={linkUrl} target="_blank" rel="noopener">{linkText}</a
+      >{textPart2}
     </p>
 
     <div class="contact-action">

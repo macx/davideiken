@@ -20,8 +20,8 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
         src={avatarImg}
         alt="David Eiken"
         class="avatar"
-        width={160}
-        height={160}
+        width={240}
+        height={240}
         densities={[1.5, 2]}
       />
     </div>
@@ -47,6 +47,75 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
       </div>
     </div>
 
+    <!-- Gekurvte Verbindungslinien auf Mobile -->
+    <div class="connector-top" aria-hidden="true">
+      <svg
+        class="connector-top-left"
+        width="30"
+        height="60"
+        viewBox="0 0 30 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M 30,27 L 16.5,27 A 15,15 0 0 0 1.5,42 L 1.5,60"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="square"
+          fill="none"></path>
+      </svg>
+      <div class="connector-top-middle"></div>
+      <svg
+        class="connector-top-right"
+        width="30"
+        height="60"
+        viewBox="0 0 30 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M 30,0 L 30,12 A 15,15 0 0 1 15,27 L 0,27"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="square"
+          fill="none"></path>
+      </svg>
+    </div>
+
+    <div class="connector-bottom" aria-hidden="true">
+      <svg
+        class="connector-bottom-left"
+        width="30"
+        height="60"
+        viewBox="0 0 30 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M 1.5,0 L 1.5,18 A 15,15 0 0 0 16.5,33 L 30,33"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="square"
+          fill="none"></path>
+      </svg>
+      <div class="connector-bottom-middle"></div>
+      <svg
+        class="connector-bottom-right"
+        width="30"
+        height="60"
+        viewBox="0 0 30 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M 0,33 L 15,33 A 15,15 0 0 1 30,48 L 30,60"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="square"
+          fill="none"></path>
+      </svg>
+    </div>
+
     <div class="timeline-headings desktop-only">
       <h2 class="heading-left">{headingLeft}</h2>
       <h2 class="heading-right">{headingRight}</h2>
@@ -64,8 +133,8 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
           src={avatarImg}
           alt="David Eiken"
           class="avatar"
-          width={160}
-          height={160}
+          width={240}
+          height={240}
           densities={[1.5, 2]}
         />
       </div>
@@ -82,22 +151,23 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
 
 <style>
   .timeline-container {
-    margin-block: var(--sp-3xl);
+    margin-block: var(--sp-l) var(--sp-2xl);
     position: relative;
     --c-timeline-gap: var(--sp-l);
   }
 
   .timeline-header {
     display: flex;
-    justify-content: flex-start; /* left align */
+    justify-content: center; /* zentriert auf mobile */
     align-items: center;
     position: relative;
     z-index: 2; /* above center-line */
   }
 
   .avatar-wrapper {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* kreisrund auf mobile und desktop */
     overflow: hidden;
     position: relative;
     z-index: 2;
@@ -108,12 +178,9 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
       border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .avatar-top {
-    border-radius: 50% 50% 50% 0; /* flat bottom-left */
-  }
-
+  .avatar-top,
   .avatar-bottom {
-    border-radius: 0 50% 50% 50%; /* flat top-left */
+    border-radius: 50%;
   }
 
   .avatar {
@@ -128,7 +195,7 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
 
   .timeline-track {
     position: relative;
-    padding-top: var(--sp-xl);
+    padding-top: 100px;
     padding-bottom: var(--sp-xl);
     z-index: 1;
   }
@@ -136,9 +203,9 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
   .center-line {
     anchor-name: --center-line;
     position: absolute;
-    left: 0; /* flush with the left straight edge of the avatar */
-    top: -20px;
-    bottom: -20px;
+    left: 0;
+    top: 60px; /* schließt an connector-top an */
+    bottom: 60px; /* schließt an connector-bottom an */
     width: 3px;
     background: var(--clr-text);
     z-index: -1;
@@ -150,15 +217,61 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
   }
 
   .arrow-down {
+    display: none; /* auf mobile ausgeblendet, da linie abknickt */
+  }
+
+  .connector-top,
+  .connector-bottom {
+    display: block;
     position: absolute;
-    bottom: -20px;
-    left: 0; /* align with extreme left line */
-    transform: translateX(-35%) translateY(100%); /* slight adjustment since line is flush left */
+    z-index: 1;
     color: var(--clr-text);
-    transition:
-      left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-      bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    left: 0;
+    width: 50%;
+    height: 60px;
+    pointer-events: none;
+  }
+
+  .connector-top {
+    top: 0;
+  }
+
+  .connector-bottom {
+    bottom: 0;
+  }
+
+  .connector-top svg,
+  .connector-bottom svg {
+    position: absolute;
+    display: block;
+    overflow: visible;
+  }
+
+  .connector-top-left,
+  .connector-bottom-left {
+    left: 0;
+  }
+
+  .connector-top-right,
+  .connector-bottom-right {
+    right: 0;
+  }
+
+  .connector-top-middle,
+  .connector-bottom-middle {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    height: 3px;
+    background: currentColor;
+  }
+
+  .connector-top-middle {
+    top: 25.5px;
+  }
+
+  .connector-bottom-middle {
+    top: 31.5px;
   }
 
   .timeline-headings {
@@ -178,10 +291,16 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
   .timeline-footer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* left align */
-    text-align: left;
+    align-items: center; /* zentriert auf mobile */
+    text-align: center;
     position: relative;
     z-index: 2;
+  }
+
+  .footer-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .footer-profile h2 {
@@ -206,6 +325,10 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
 
   /* --- Desktop Layout --- */
   @media (min-width: 768px) {
+    .timeline-track {
+      padding-top: var(--sp-xl);
+    }
+
     .timeline-header {
       justify-content: center;
     }
@@ -216,18 +339,22 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
     }
 
     .avatar-wrapper {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%; /* reset to circle */
+      width: 180px;
+      height: 180px;
     }
 
-    .avatar-top,
-    .avatar-bottom {
-      border-radius: 50%; /* reset to circle */
+    .connector-top,
+    .connector-bottom {
+      display: none;
     }
 
     .arrow-down {
+      display: block;
+      position: absolute;
+      bottom: -40px; /* sit exactly at the end of the line */
       left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      color: var(--clr-text);
     }
 
     .desktop-only {
@@ -254,8 +381,8 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
     .center-line {
       left: 50%;
       transform: translateX(-50%);
-      top: -40px; /* reaches up to the top avatar */
-      bottom: -40px; /* reaches down to the bottom avatar */
+      top: -60px; /* reaches up to the top avatar */
+      bottom: -60px; /* reaches down to the bottom avatar */
     }
 
     .arrow-down {
