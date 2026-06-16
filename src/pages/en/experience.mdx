@@ -10,6 +10,9 @@ import PageHeader from "../../components/PageHeader.astro";
 import Timeline from "../../components/Timeline.astro";
 import TimelineItem from "../../components/TimelineItem.astro";
 import experienceData from "../../data/experience.en.json";
+import { processTimelineData } from "../../utils/timeline";
+
+export const processedData = processTimelineData(experienceData);
 
 <PageHeader
   title="Architecture with structure and intent."
@@ -17,13 +20,15 @@ import experienceData from "../../data/experience.en.json";
 />
 
 <Timeline headingLeft="Freelance" headingRight="Employed">
-  {experienceData.map((item) => (
+  {processedData.map((item) => (
     <TimelineItem
       date={item.date}
       title={item.title}
       company={item.company}
       impact={item.impact}
       type={item.type}
+      isOffset={item.isOffset}
+      gridRow={item.gridRow}
     />
   ))}
 </Timeline>

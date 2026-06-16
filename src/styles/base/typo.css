@@ -46,6 +46,20 @@ li {
   text-wrap: pretty;
 } */
 
+main,
+footer {
+  a:any-link {
+    text-decoration: none;
+    color: var(--clr-primary);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--clr-primary);
+      color: var(--clr-surface);
+    }
+  }
+}
+
 :where(p) {
   margin-block: 0 1.2em;
   hyphens: auto;

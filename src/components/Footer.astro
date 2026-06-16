@@ -18,7 +18,7 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 ---
 
 <footer class="site-footer content-center">
-  <div class="grid-auto divider">
+  <div class="grid-auto">
     <div class="footer-col">
       <Image
         src={avatarImg}
@@ -74,8 +74,9 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
     </div>
   </div>
 
-  <div class="footer-bottom content-center">
+  <div class="footer-meta">
     <p>&copy; {new Date().getFullYear()} David Maciejewski*. {rights}</p>
+
     <p>
       <a href={privacyHref}>{privacyLabel}</a>
       <span aria-hidden="true"> · </span>
@@ -85,9 +86,8 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 </footer>
 
 <style>
-  .site-footer .divider {
-    margin-block-start: 0;
-    padding-block-start: var(--sp-xl);
+  .site-footer {
+    padding-block: var(--sp-xl);
   }
 
   .footer-col {
@@ -130,20 +130,19 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
     }
   }
 
-  .footer-bottom {
+  .footer-meta {
     display: flex;
     flex-direction: column;
     gap: var(--sp-s);
     align-items: center;
-    border-top: 1px solid var(--clr-outline);
+    border-top: 1px solid var(--clr-line);
+    margin-block-start: var(--sp-l);
     padding-block-start: var(--sp-l);
     font-size: var(--fs-xs);
     color: var(--clr-text-muted);
     text-align: center;
-  }
 
-  @media (min-width: 768px) {
-    .footer-bottom {
+    @media (min-width: 768px) {
       flex-direction: row;
       justify-content: space-between;
       text-align: left;

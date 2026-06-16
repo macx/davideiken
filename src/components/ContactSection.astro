@@ -10,8 +10,8 @@ const text =
     : "Book a no-strings-attached online meeting. Just an open conversation about how I can complement your team. Or leave me a message.";
 ---
 
-<section id="contact" class="section-surface">
-  <div class="content-center divider">
+<section id="contact" class="contact">
+  <div class="content-center">
     <h2>{title}</h2>
 
     <p>
@@ -25,14 +25,20 @@ const text =
 </section>
 
 <style>
+  .contact {
+    background-color: var(--clr-surface);
+    padding-block: var(--sp-2xl);
+    border-block: 1px solid var(--clr-line);
+
+    h2 {
+      margin-block-start: 0;
+    }
+  }
+
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-l);
-  }
-
-  .section-surface {
-    background-color: var(--clr-surface);
   }
 
   @media (min-width: 768px) {
@@ -40,13 +46,10 @@ const text =
       grid-template-columns: 1fr 1fr;
     }
   }
+
   .contact-action {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-
-  .divider {
-    margin-block-end: 0;
   }
 </style>

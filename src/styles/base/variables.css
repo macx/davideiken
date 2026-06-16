@@ -20,6 +20,7 @@
   --clr-tertiary: oklch(70% 0.15 80);
   --clr-text: oklch(15% 0.01 260);
   --clr-text-muted: oklch(52% 0.015 260);
+  --clr-line: color-mix(in oklch, var(--clr-text) 25%, transparent);
 
   /* Semantic text and surface roles */
   --clr-on-bg: var(--clr-text);

@@ -1,33 +1,53 @@
 ---
+import Tooltip from "./Tooltip.astro";
+
 export interface Props {
   date: string;
   title: string;
   company: string;
   impact: string;
-  type: 'freelance' | 'employed' | 'education';
+  type: "freelance" | "employed" | "education";
+  isOffset?: boolean;
+  gridRow?: number;
 }
 
-const { date, title, company, impact, type } = Astro.props;
+const { date, title, company, impact, type, isOffset = false, gridRow } = Astro.props;
 
 // SVG Icons for mobile differentiation
 const ICONS = {
   freelance: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
   employed: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
-  education: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`
+  education: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
+};
+
+const TOOLTIPS = {
+  freelance: "Selbstständigkeit",
+  employed: "Anstellung",
+  education: "Weiterbildung & Studium",
 };
 ---
 
-<li class={`timeline-item type-${type}`}>
+<li
+  class={`timeline-item type-${type} ${isOffset ? "is-offset" : ""}`}
+  style={gridRow !== undefined ? `--grid-row: ${gridRow + 1}` : undefined}
+>
   <div class="timeline-content">
     <div class="timeline-meta">
       <span class="timeline-date">{date}</span>
-      <span class="timeline-icon mobile-only" set:html={ICONS[type]} title={type} />
+      <Tooltip
+        text={TOOLTIPS[type]}
+        class="timeline-icon-tooltip"
+      >
+        <span class="timeline-icon" set:html={ICONS[type]} />
+      </Tooltip>
+      <span class="timeline-dot" />
     </div>
     <div class="timeline-body">
       <h3 class="timeline-title">{title}</h3>
       <p class="timeline-company">{company}</p>
       <div class="timeline-impact">
-        <span class="impact-label">IMPACT:</span> {impact}
+        <span class="impact-label">IMPACT:</span>
+        {impact}
       </div>
     </div>
   </div>
@@ -70,8 +90,7 @@ const ICONS = {
     display: none; /* hidden on mobile, line is vertical only */
   }
 
-  .timeline-meta::after {
-    content: "";
+  .timeline-dot {
     display: block;
     position: absolute;
     left: -25px; /* aligns perfectly with the extreme left 10px center line on mobile */
@@ -81,17 +100,19 @@ const ICONS = {
     height: 13px;
     border-radius: 50%;
     z-index: 2;
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Specific dot colors based on type */
-  .type-freelance .timeline-meta::after {
-    background: var(--clr-tertiary);
+  .type-freelance .timeline-dot {
+    background: var(--clr-primary);
   }
-  .type-employed .timeline-meta::after {
+  .type-employed .timeline-dot {
     background: var(--clr-text);
   }
-  .type-education .timeline-meta::after {
+  .type-education .timeline-dot {
     background: var(--clr-text-muted);
   }
 
@@ -129,11 +150,13 @@ const ICONS = {
       @keyframes unveil {
         from {
           opacity: 0;
-          transform: translateY(80px) scale(0.95);
+          transform: translateY(
+            10em
+          ); /* intensified slide-in without scaling to avoid line drifting */
         }
         to {
           opacity: 1;
-          transform: translateY(0) scale(1);
+          transform: translateY(0);
         }
       }
 
@@ -153,12 +176,23 @@ const ICONS = {
 
     .timeline-item {
       margin-bottom: var(--sp-xl);
+      grid-row: var(--grid-row);
+    }
+
+    .timeline-item.is-offset {
+      margin-top: 4em;
     }
 
     .timeline-meta {
       margin-bottom: var(--sp-m);
       display: flex;
-      position: relative; /* relative to position the absolute line */
+      position: relative; /* relative to position the absolute line and dot */
+
+      /* Configurable variables in relative units */
+      --c-dot-size: 0.625em; /* ~10px at base 16px */
+      --c-dot-gap: 0.75em; /* ~12px at base 16px */
+      --c-line-thickness: 0.125em; /* ~2px at base 16px */
+      --c-line-offset: calc(var(--c-dot-gap) + var(--c-dot-size));
     }
 
     .impact-label {
@@ -166,71 +200,95 @@ const ICONS = {
       margin-right: 0.2rem;
     }
 
+    /* Common styles for the Dot and Line (::before) */
+    .timeline-dot {
+      display: block;
+      position: absolute;
+      top: 50%;
+      width: var(--c-dot-size);
+      height: var(--c-dot-size);
+      border-radius: 50%;
+      z-index: 2;
+      box-sizing: border-box;
+      transform: translateY(-50%);
+    }
+
     .timeline-meta::before {
       content: "";
       display: block;
       position: absolute;
       top: 50%;
-      height: 2px;
-      width: var(--sp-xl);
+      height: var(--c-line-thickness);
       z-index: 1;
-      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), right 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(-50%);
     }
 
-    /* Freelance & Education go left */
-    .type-freelance, .type-education {
+    /* Freelance & Education (Left Column) */
+    .type-freelance,
+    .type-education {
       grid-column: 1;
       text-align: right;
     }
 
-    .type-freelance .timeline-meta, .type-education .timeline-meta {
-      justify-content: flex-end; /* Date pill flushes to the right edge with the text */
-      flex-direction: row;
+    .type-freelance .timeline-meta,
+    .type-education .timeline-meta {
+      justify-content: flex-start;
+      flex-direction: row-reverse;
     }
 
-    /* Red color for freelance line & dot */
-    .type-freelance .timeline-meta::before {
-      right: calc(-1 * var(--sp-xl));
-      background: var(--clr-tertiary); /* Rot/Primary Accent */
-      opacity: 1;
-    }
-    .type-freelance .timeline-meta::after {
-      left: auto;
-      right: calc(-1 * var(--sp-xl) - 8px); /* Center dot perfectly on the 3px line */
-      background: var(--clr-tertiary);
+    /* Position the dots in the middle of the gap, completely outside the content */
+    .type-freelance .timeline-dot,
+    .type-education .timeline-dot {
+      left: calc(100% + var(--c-dot-gap));
+      right: auto;
     }
 
-    .type-education .timeline-meta::before {
-      right: calc(-1 * var(--sp-xl));
+    .type-freelance .timeline-dot {
+      background: var(--clr-primary);
+    }
+
+    .type-education .timeline-dot {
       background: var(--clr-text-muted);
       opacity: 0.5;
     }
-    .type-education .timeline-meta::after {
-      left: auto;
-      right: calc(-1 * var(--sp-xl) - 8px);
-      background: var(--clr-text-muted);
+
+    /* Spanning lines from the dot edge to the center vertical line */
+    .type-freelance .timeline-meta::before {
+      left: calc(100% + var(--c-line-offset));
+      right: calc(-1 * var(--c-timeline-gap) - 1px);
+      background: var(--clr-primary);
     }
 
-    /* Employed goes right */
+    .type-education .timeline-meta::before {
+      left: calc(100% + var(--c-line-offset));
+      right: calc(-1 * var(--c-timeline-gap) - 1px);
+      background: var(--clr-text-muted);
+      opacity: 0.5;
+    }
+
+    /* Employed (Right Column) */
     .type-employed {
       grid-column: 3;
       text-align: left;
     }
 
     .type-employed .timeline-meta {
-      justify-content: flex-start; /* Date pill flushes to the left edge with the text */
+      justify-content: flex-start;
       flex-direction: row;
     }
 
-    .type-employed .timeline-meta::before {
-      left: calc(-1 * var(--sp-xl));
+    /* Position the dots in the middle of the gap, completely outside the content */
+    .type-employed .timeline-dot {
+      right: calc(100% + var(--c-dot-gap));
+      left: auto;
       background: var(--clr-text);
-      opacity: 1;
     }
-    .type-employed .timeline-meta::after {
-      left: calc(-1 * var(--sp-xl) - 8px);
-      background: var(--clr-bg);
-      border: 3px solid var(--clr-text);
+
+    /* Spanning lines from the dot edge to the center vertical line */
+    .type-employed .timeline-meta::before {
+      right: calc(100% + var(--c-line-offset));
+      left: calc(-1 * var(--c-timeline-gap) - 1px);
+      background: var(--clr-text);
     }
   }
 </style>

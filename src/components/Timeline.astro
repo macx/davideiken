@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import avatarImg from "../assets/images/davideiken-1200.jpg";
-// Note: If you have a signature image, import it here. 
+// Note: If you have a signature image, import it here.
 // For now, we will leave a placeholder for the signature.
 
 interface Props {
@@ -9,17 +9,21 @@ interface Props {
   headingRight?: string;
 }
 
-const { 
-  headingLeft = "Selbstständig", 
-  headingRight = "Angestellt" 
-} = Astro.props;
+const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
+  Astro.props;
 ---
 
 <div class="timeline-container">
-  
   <div class="timeline-header">
     <div class="avatar-wrapper avatar-top">
-      <Image src={avatarImg} alt="David Eiken" class="avatar" width={160} height={160} densities={[1.5, 2]} />
+      <Image
+        src={avatarImg}
+        alt="David Eiken"
+        class="avatar"
+        width={160}
+        height={160}
+        densities={[1.5, 2]}
+      />
     </div>
   </div>
 
@@ -27,12 +31,22 @@ const {
     <div class="center-line">
       <!-- Arrow at the bottom of the line -->
       <div class="arrow-down">
-        <svg width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1L20 18L39 1" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <svg
+          width="40"
+          height="20"
+          viewBox="0 0 40 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 1L20 18L39 1"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"></path>
         </svg>
       </div>
     </div>
-    
+
     <div class="timeline-headings desktop-only">
       <h2 class="heading-left">{headingLeft}</h2>
       <h2 class="heading-right">{headingRight}</h2>
@@ -46,24 +60,31 @@ const {
   <div class="timeline-footer">
     <div class="footer-profile">
       <div class="avatar-wrapper avatar-bottom">
-        <Image src={avatarImg} alt="David Eiken" class="avatar" width={160} height={160} densities={[1.5, 2]} />
+        <Image
+          src={avatarImg}
+          alt="David Eiken"
+          class="avatar"
+          width={160}
+          height={160}
+          densities={[1.5, 2]}
+        />
       </div>
       <h2>David Maciejewski</h2>
       <p class="name-note">(ab 21. August 2026: Eiken)</p>
-      
+
       <div class="signature-placeholder">
         <!-- Add your signature image here later -->
         <span class="sr-only">Signature</span>
       </div>
     </div>
   </div>
-
 </div>
 
 <style>
   .timeline-container {
     margin-block: var(--sp-3xl);
     position: relative;
+    --c-timeline-gap: var(--sp-l);
   }
 
   .timeline-header {
@@ -81,7 +102,10 @@ const {
     position: relative;
     z-index: 2;
     background: var(--clr-bg);
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .avatar-top {
@@ -110,23 +134,31 @@ const {
   }
 
   .center-line {
+    anchor-name: --center-line;
     position: absolute;
     left: 0; /* flush with the left straight edge of the avatar */
-    top: -20px; 
-    bottom: -20px; 
+    top: -20px;
+    bottom: -20px;
     width: 3px;
     background: var(--clr-text);
     z-index: -1;
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), top 0.4s cubic-bezier(0.4, 0, 0.2, 1), bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .arrow-down {
     position: absolute;
-    bottom: -20px; 
+    bottom: -20px;
     left: 0; /* align with extreme left line */
     transform: translateX(-35%) translateY(100%); /* slight adjustment since line is flush left */
     color: var(--clr-text);
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .timeline-headings {
@@ -189,7 +221,8 @@ const {
       border-radius: 50%; /* reset to circle */
     }
 
-    .avatar-top, .avatar-bottom {
+    .avatar-top,
+    .avatar-bottom {
       border-radius: 50%; /* reset to circle */
     }
 
@@ -200,7 +233,7 @@ const {
     .desktop-only {
       display: grid;
       grid-template-columns: 1fr 2px 1fr;
-      gap: var(--sp-xl);
+      gap: 0 var(--c-timeline-gap);
       text-align: center;
     }
 
@@ -233,7 +266,7 @@ const {
     .timeline-list {
       display: grid;
       grid-template-columns: 1fr 2px 1fr;
-      gap: 0 var(--sp-xl);
+      gap: 0 var(--c-timeline-gap);
       padding-left: 0;
     }
   }
