@@ -11,7 +11,7 @@ those files must reference these rules and must not contradict them.
 - Content: Prefer MDX for content pages
 - Styling: Native CSS with layers, no Tailwind
 - Package Manager: pnpm
-- Tests: Playwright
+- Tests: Playwright (local only), Vitest (local & CI)
 
 ## 2) Architecture Decisions
 
@@ -76,7 +76,8 @@ For each task, follow this order:
    - Known breaking changes to watch for: `Astro.glob` was removed in Astro v5 → use `import.meta.glob` instead.
 4. Run relevant scripts if behavior is affected:
    - `pnpm astro check`
-   - `pnpm test` (when relevant to the change)
+   - `pnpm test` (to run Vitest unit tests when behavior is affected)
+   - `pnpm test:e2e` (to run Playwright E2E tests locally when relevant)
 5. Briefly document what changed and why.
 
 ## 7) Content Preference

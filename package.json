@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "test": "playwright test",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
     "preview": "astro preview",
     "astro": "astro",
     "codeql": "echo 'CodeQL analysis runs via GitHub Actions workflow. See .github/workflows/codeql.yml'",
@@ -34,6 +36,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "rehype-slug": "^6.0.0",
     "release-it": "^20.2.0",
-    "remark-smartypants": "^3.0.2"
+    "remark-smartypants": "^3.0.2",
+    "vitest": "^4.1.9"
   }
 }
