@@ -7,29 +7,32 @@ description: "One-pager by David Eiken focused on digital architecture, strategy
 import PageHeader from "../../components/PageHeader.astro";
 import LogoGrid from "../../components/LogoGrid.astro";
 import { Image } from "astro:assets";
-import portraitImage from "../../assets/images/david-portrait.jpg";
+import portraitImage from "../../assets/images/david-portrait-color.jpg";
 
 <PageHeader
   title={frontmatter.title}
   lead="Hi, I'm David Eiken *(still legally David Maciejewski until my wedding in August)*. For 30 years, I have been designing and building digital media. Today, I channel this experience as a specialized **Senior Frontend Engineer**."
 />
 
-<Image
-  src={portraitImage}
-  alt="David Eiken"
-  class="portrait"
-  widths={[240, 480]}
-  sizes="(max-width: 768px) 240px, 480px"
-/>
+<div class="flow-root">
+  <Image
+    src={portraitImage}
+    alt="David Eiken"
+    class="portrait"
+    widths={[240, 480]}
+    sizes="(max-width: 768px) 240px, 480px"
+  />
 
-Starting in print, I made the transition to the web at the turn of the millennium. I learned HTML and CSS autodidactically—long before YouTube or suitable degree programs. Instead of dry theory, my focus was on hands-on practice: as a full-stack developer, I covered concept, design, frontend, and backend for years. This curious mindset and looking beyond the tellerrand still drives me today—all the way to agentic coding.
+Starting in print, I made the transition to the web at the turn of the millennium. I learned HTML and CSS autodidactically -- long before YouTube or suitable degree programs. Instead of dry theory, my focus was on hands-on practice: as a full-stack developer, I covered concept, design, frontend, and backend for years. This curious mindset of looking beyond the horizon still shapes me today -- all the way to agentic coding.
 
-This drive showed early on: as a digital pioneer, I was among the first to shape podcasting in Germany with the launch of "Technikwürze" in 2005. What started as a one-man show quickly evolved into a collaborative format: by purposefully involving external experts, I drove the democratization of technical knowledge—and learned that the best results always arise through collaboration.
+This intrinsic drive showed early on where it would lead: as a digital pioneer, I launched 'Technikwürze' in 2005 -- one of the first German podcasts. What started as a one-man show quickly evolved into a collaborative format: by purposefully involving external experts, I drove the democratization of technical knowledge -- and learned that the best results always arise through collaboration.
 
-This principle still applies today. I work at the intersection of design and deployment—bringing people, ideas, and code together with great UX. Since 2015, I have also been lecturing at the university, showing students how modern websites are built—mobile-first, responsive, and frustration-free.
+This principle still applies today. I work at the intersection of design and deployment -- bringing people, ideas, and code together into a thoughtful user experience. Since 2015, I have also been lecturing at the university, showing students how modern websites are built -- mobile-first, responsive, and frustration-free.
+
+</div>
 
 <section class="divider">
-  ## From my project history &mdash;<br />in good company
+  ## From my project history &ndash;<br />in good company
 
   <LogoGrid />
 </section>

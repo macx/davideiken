@@ -1,36 +1,18 @@
-@keyframes cinematicIntro {
-  0% {
+@keyframes scrollGrayscale {
+  from {
     filter: grayscale(0) contrast(1.02) brightness(1.08);
-    transform: scale(1.06);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   }
-  55% {
-    filter: grayscale(0) contrast(1.02) brightness(1.08);
-    transform: scale(1.06);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-  }
-  100% {
+  to {
     filter: grayscale(1) contrast(1.22) brightness(1.04);
-    transform: scale(1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
 }
 
-@keyframes cinematicIntroDark {
-  0% {
+@keyframes scrollGrayscaleDark {
+  from {
     filter: grayscale(0) contrast(1.02) brightness(1.0);
-    transform: scale(1.06);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
   }
-  55% {
-    filter: grayscale(0) contrast(1.02) brightness(1.0);
-    transform: scale(1.06);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-  }
-  100% {
+  to {
     filter: grayscale(1) contrast(1.22) brightness(0.88);
-    transform: scale(1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -43,45 +25,37 @@
   border: 1px solid var(--clr-outline);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   display: block;
-  filter: grayscale(1) contrast(1.22) brightness(1.04);
-  transform: scale(1);
-  animation: cinematicIntro 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  transition:
-    filter 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-    box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.portrait:hover {
+  
+  /* Fallback: Bild startet farbig */
   filter: grayscale(0) contrast(1.02) brightness(1.08);
-  animation: none;
-  transform: scale(1.03);
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.28);
+
+  /* Progressive Enhancement: Scroll-Driven Animation */
+  @supports (animation-timeline: scroll()) {
+    animation: scrollGrayscale linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 300px;
+  }
 }
 
 [data-theme="dark"] .portrait {
-  filter: grayscale(1) contrast(1.22) brightness(0.88);
-  animation: cinematicIntroDark 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-[data-theme="dark"] .portrait:hover {
   filter: grayscale(0) contrast(1.02) brightness(1.0);
-  animation: none;
-  transform: scale(1.03);
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.55);
+
+  @supports (animation-timeline: scroll()) {
+    animation: scrollGrayscaleDark linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 300px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root[data-theme="auto"] .portrait {
-    filter: grayscale(1) contrast(1.22) brightness(0.88);
-    animation: cinematicIntroDark 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  }
-
-  :root[data-theme="auto"] .portrait:hover {
     filter: grayscale(0) contrast(1.02) brightness(1.0);
-    animation: none;
-    transform: scale(1.03);
-    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.55);
+
+    @supports (animation-timeline: scroll()) {
+      animation: scrollGrayscaleDark linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px 300px;
+    }
   }
 }
 
