@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Astro: Dev + Integrated Browser",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm dev",
+      "cwd": "${workspaceFolder}",
+      "serverReadyAction": {
+        "action": "startDebugging",
+        "name": "Integrated Browser: Launch localhost",
+        "pattern": "(https?://localhost:[0-9]+)",
+        "killOnServerStop": true
+      }
+    },
+    {
+      "name": "Integrated Browser: Launch localhost",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4321",
+      "presentation": {
+        "hidden": true
+      }
+    }
+  ]
+}

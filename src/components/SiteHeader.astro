@@ -1,0 +1,822 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import ThemeToggle from "./ThemeToggle.astro";
+import Tooltip from "./Tooltip.astro";
+import { Image } from "astro:assets";
+import avatarImg from "../assets/images/davideiken-1200.jpg";
+
+interface PageModule {
+  frontmatter?: {
+    navTitle?: string;
+    navOrder?: number;
+  };
+}
+
+const modules = import.meta.glob<PageModule>("../pages/**/*.{astro,mdx}", {
+  eager: true,
+});
+
+const locale = Astro.currentLocale ?? "en";
+const targetLocale = locale === "en" ? "de" : "en";
+
+function toLocaleAndSlug(filePath: string): { locale: string; slug: string } {
+  let route = filePath
+    .replace(/^\.\.\/pages\//, "")
+    .replace(/\.(astro|mdx)$/, "")
+    .replace(/\/index$/, "");
+
+  const parts = route.split("/").filter(Boolean);
+  const pageLocale = parts[0] === "en" ? "en" : "de";
+  const slug = pageLocale === "en" ? parts.slice(1).join("/") : parts.join("/");
+
+  return { locale: pageLocale, slug };
+}
+
+const allLocaleItems = Object.entries(modules)
+  .map(([path, mod]) => ({
+    mod,
+    ...toLocaleAndSlug(path),
+  }))
+  .filter((item) => item.locale === locale && item.mod.frontmatter?.navTitle)
+  .sort(
+    (a, b) =>
+      (a.mod.frontmatter?.navOrder ?? 99) - (b.mod.frontmatter?.navOrder ?? 99),
+  )
+  .map((item) => ({
+    label: item.mod.frontmatter!.navTitle!,
+    href: getRelativeLocaleUrl(locale, item.slug),
+    slug: item.slug,
+  }));
+
+const desktopNavItems = allLocaleItems.filter(
+  (item) => item.slug !== "contact",
+);
+const drawerNavItems = [
+  ...desktopNavItems,
+  {
+    label: locale === "de" ? "Kontakt" : "Contact",
+    href: "#contact",
+    slug: "contact",
+  },
+];
+
+const navItems = desktopNavItems.map((item) => ({
+  label: item.label,
+  href: item.href,
+}));
+
+const currentPath = Astro.url.pathname;
+const currentSlug =
+  locale === "en"
+    ? currentPath.replace(/^\/en\/?/, "")
+    : currentPath.replace(/^\//, "");
+const languageSwitchHref = getRelativeLocaleUrl(targetLocale, currentSlug);
+const languageSwitchLabel = targetLocale === "de" ? "DE" : "EN";
+const navLabel = locale === "de" ? "Hauptnavigation" : "Main navigation";
+const openLabel = locale === "de" ? "Navigation öffnen" : "Open navigation";
+const closeLabel =
+  locale === "de" ? "Navigation schließen" : "Close navigation";
+const homeLabel =
+  locale === "de" ? "David Eiken Startseite" : "David Eiken Home";
+const contactHref = "#contact";
+---
+
+<header class="site-header" role="banner">
+  <!-- Floating glass pill -->
+  <div class="nav-pill">
+    <a
+      href={getRelativeLocaleUrl(locale, "")}
+      class="site-logo"
+      aria-label={homeLabel}
+    >
+      <Image
+        src={avatarImg}
+        alt="David Eiken"
+        class="logo-mark"
+        width={32}
+        height={32}
+        densities={[1.5, 2]}
+      />
+      <span class="logo-wordmark">David Eiken</span>
+    </a>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <nav class="site-nav" aria-label={navLabel}>
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "nav-link",
+              { "is-active": currentPath === item.href },
+            ]}
+            aria-current={currentPath === item.href ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <span class="nav-indicator" aria-hidden="true"></span>
+    </nav>
+
+    <Tooltip
+      as="a"
+      href={contactHref}
+      class="nav-icon-link contact-link"
+      aria-label={locale === "de" ? "Kontakt" : "Contact"}
+      text={locale === "de" ? "Kontakt" : "Contact"}
+      position="bottom"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"
+          stroke="currentColor"
+          stroke-width="1.5"></path>
+        <path d="m4 8 8 6 8-6" stroke="currentColor" stroke-width="1.5"></path>
+      </svg>
+    </Tooltip>
+
+    <ThemeToggle class="nav-icon-link header-theme-toggle" locale={locale} />
+
+    <Tooltip
+      as="a"
+      href={languageSwitchHref}
+      hreflang={targetLocale}
+      lang={targetLocale}
+      class="nav-icon-link lang-switch"
+      aria-label={locale === "de"
+        ? "Switch to English"
+        : "Auf Deutsch wechseln"}
+      text={locale === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
+      position="bottom"
+    >
+      <span>{languageSwitchLabel}</span>
+    </Tooltip>
+
+    <button
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-controls="nav-drawer"
+      aria-expanded="false"
+      aria-label={openLabel}
+      data-label-open={openLabel}
+      data-label-close={closeLabel}
+      popovertarget="nav-drawer"
+      popovertargetaction="toggle"
+    >
+      <!-- Hamburger -->
+      <svg
+        class="icon-menu"
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        aria-hidden="true"
+      >
+        <line
+          x1="2"
+          y1="5"
+          x2="16"
+          y2="5"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"></line>
+        <line
+          x1="2"
+          y1="9"
+          x2="16"
+          y2="9"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"></line>
+        <line
+          x1="2"
+          y1="13"
+          x2="16"
+          y2="13"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"></line>
+      </svg>
+      <!-- Close -->
+      <svg
+        class="icon-close"
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        aria-hidden="true"
+      >
+        <line
+          x1="4"
+          y1="4"
+          x2="14"
+          y2="14"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"></line>
+        <line
+          x1="14"
+          y1="4"
+          x2="4"
+          y2="14"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile drawer (glass panel, separate from pill) -->
+  <div class="nav-drawer" id="nav-drawer" popover="auto" aria-hidden="true">
+    {
+      drawerNavItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "drawer-link",
+            "drawer-link-no-icon",
+            { "is-active": currentPath === item.href },
+          ]}
+          aria-current={currentPath === item.href ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <a
+      class="drawer-link"
+      href={languageSwitchHref}
+      hreflang={targetLocale}
+      lang={targetLocale}
+    >
+      <span class="drawer-icon-placeholder lang-icon" aria-hidden="true"
+        >{languageSwitchLabel}</span
+      >
+      <span class="drawer-link-text"
+        >{locale === "de" ? "English" : "Deutsch"}</span
+      >
+    </a>
+    <ThemeToggle class="drawer-link" variant="drawer" locale={locale} />
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById(
+    "nav-toggle",
+  ) as HTMLButtonElement | null;
+  const drawer = document.getElementById("nav-drawer") as HTMLElement | null;
+  const supportsPopover = typeof drawer?.showPopover === "function";
+  let drawerWasOpen = false;
+
+  function setClosedState() {
+    toggle?.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute(
+      "aria-label",
+      toggle?.dataset.labelOpen ?? "Open navigation",
+    );
+    drawer?.setAttribute("aria-hidden", "true");
+    if (!supportsPopover) drawer?.classList.remove("is-open");
+    drawer?.setAttribute("inert", "");
+    if (drawerWasOpen) {
+      toggle?.focus();
+      drawerWasOpen = false;
+    }
+  }
+
+  function setOpenState() {
+    toggle?.setAttribute("aria-expanded", "true");
+    toggle?.setAttribute(
+      "aria-label",
+      toggle?.dataset.labelClose ?? "Close navigation",
+    );
+    drawer?.setAttribute("aria-hidden", "false");
+    drawer?.removeAttribute("inert");
+    if (!supportsPopover) drawer?.classList.add("is-open");
+    drawerWasOpen = true;
+    requestAnimationFrame(() => {
+      drawer?.querySelector<HTMLElement>("a")?.focus();
+    });
+  }
+
+  function close() {
+    if (supportsPopover) {
+      drawer?.hidePopover();
+      return;
+    }
+
+    setClosedState();
+  }
+
+  setClosedState();
+
+  if (supportsPopover) {
+    drawer?.addEventListener("toggle", () => {
+      if (drawer.matches(":popover-open")) {
+        setOpenState();
+      } else {
+        setClosedState();
+      }
+    });
+
+    drawer?.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest("a")) {
+        close();
+      }
+    });
+  } else {
+    toggle?.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (isOpen) {
+        setClosedState();
+      } else {
+        setOpenState();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const pill = document.querySelector(".nav-pill");
+      if (
+        !pill?.contains(event.target as Node) &&
+        !drawer?.contains(event.target as Node)
+      ) {
+        setClosedState();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setClosedState();
+    });
+
+    drawer?.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest("a")) {
+        setClosedState();
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset-block-start: var(--sp-s);
+    inset-inline: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-xs);
+    pointer-events: none;
+
+    .nav-pill {
+      anchor-name: --nav-pill;
+      pointer-events: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-xs);
+      padding-block: 0.5rem;
+      padding-inline: 0.75rem;
+      border-radius: 9999px;
+
+      /* Clean, Flat, Bold Glass */
+      background: color-mix(in oklch, var(--clr-surface) 65%, transparent);
+      backdrop-filter: blur(24px) saturate(140%);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+
+      /* Crisp border, flat minimal shadow */
+      border: 1.5px solid color-mix(in oklch, var(--clr-text) 12%, transparent);
+      box-shadow: 0 4px 16px -4px color-mix(in oklch, black 12%, transparent);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 1.1rem;
+      background: color-mix(in oklch, var(--clr-text) 16%, transparent);
+      flex-shrink: 0;
+      margin-inline: var(--sp-2xs);
+    }
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-xs);
+      text-decoration: none;
+      color: var(--clr-text);
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      display: inline-block;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid color-mix(in oklch, var(--clr-text) 15%, transparent);
+    }
+
+    .logo-wordmark {
+      font-size: var(--fs-s);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .site-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2xs);
+    }
+
+    .nav-link {
+      display: inline-block;
+      padding-block: 0.3rem;
+      padding-inline: 0.6rem;
+      border-radius: 9999px;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: color-mix(in oklch, var(--clr-text) 80%, transparent);
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+      transition: color 180ms ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--clr-text);
+        outline: none;
+      }
+
+      &.is-active {
+        color: var(--clr-text);
+        background: color-mix(in oklch, var(--clr-primary) 14%, transparent);
+      }
+    }
+
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 9999px;
+      color: var(--clr-text);
+      transition: background 150ms ease;
+
+      &:hover,
+      &:focus-visible {
+        background: color-mix(in oklch, var(--clr-text) 9%, transparent);
+        outline: none;
+      }
+
+      .icon-close {
+        display: none;
+      }
+
+      .icon-menu {
+        display: block;
+      }
+
+      &[aria-expanded="true"] {
+        .icon-close {
+          display: block;
+        }
+
+        .icon-menu {
+          display: none;
+        }
+      }
+    }
+
+    .nav-icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      color: color-mix(in oklch, var(--clr-text) 80%, transparent);
+      text-decoration: none;
+      transition:
+        color 160ms ease,
+        background 160ms ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--clr-text);
+        background: color-mix(in oklch, var(--clr-text) 8%, transparent);
+        outline: none;
+      }
+    }
+
+    .lang-switch {
+      font-size: var(--fs-2xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    @supports (anchor-name: --test) {
+      .nav-link:nth-child(1) {
+        anchor-name: --nav-1;
+      }
+
+      .nav-link:nth-child(2) {
+        anchor-name: --nav-2;
+      }
+
+      .nav-link:nth-child(3) {
+        anchor-name: --nav-3;
+      }
+
+      .nav-link:nth-child(4) {
+        anchor-name: --nav-4;
+      }
+
+      .nav-link:nth-child(5) {
+        anchor-name: --nav-5;
+      }
+
+      .nav-link:nth-child(6) {
+        anchor-name: --nav-6;
+      }
+
+      .nav-link:nth-child(7) {
+        anchor-name: --nav-7;
+      }
+
+      .nav-link:nth-child(8) {
+        anchor-name: --nav-8;
+      }
+
+      .nav-indicator {
+        position: absolute;
+        position-anchor: --nav-1;
+        top: anchor(top);
+        left: anchor(left);
+        width: anchor-size(width);
+        height: anchor-size(height);
+        border-radius: 9999px;
+        background: color-mix(in oklch, var(--clr-text) 9%, transparent);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          left 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          width 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 160ms ease;
+      }
+
+      .site-nav:has(.nav-link.is-active:nth-child(1)) .nav-indicator {
+        position-anchor: --nav-1;
+      }
+
+      .site-nav:has(.nav-link.is-active:nth-child(2)) .nav-indicator {
+        position-anchor: --nav-2;
+      }
+
+      .site-nav:has(.nav-link.is-active:nth-child(3)) .nav-indicator {
+        position-anchor: --nav-3;
+      }
+
+      .site-nav:has(.nav-link.is-active:nth-child(4)) .nav-indicator {
+        position-anchor: --nav-4;
+      }
+
+      .site-nav:has(.nav-link.is-active:nth-child(5)) .nav-indicator {
+        position-anchor: --nav-5;
+      }
+
+      .site-nav:has(.nav-link.is-active:nth-child(6)) .nav-indicator {
+        position-anchor: --nav-6;
+      }
+
+      .site-nav:has(.nav-link.is-active:nth-child(7)) .nav-indicator {
+        position-anchor: --nav-7;
+      }
+
+      .site-nav:has(.nav-link.is-active:nth-child(8)) .nav-indicator {
+        position-anchor: --nav-8;
+      }
+
+      .site-nav:has(.nav-link:hover) .nav-indicator {
+        opacity: 1;
+      }
+
+      .site-nav:has(.nav-link:nth-child(1):hover) .nav-indicator {
+        position-anchor: --nav-1;
+      }
+
+      .site-nav:has(.nav-link:nth-child(2):hover) .nav-indicator {
+        position-anchor: --nav-2;
+      }
+
+      .site-nav:has(.nav-link:nth-child(3):hover) .nav-indicator {
+        position-anchor: --nav-3;
+      }
+
+      .site-nav:has(.nav-link:nth-child(4):hover) .nav-indicator {
+        position-anchor: --nav-4;
+      }
+
+      .site-nav:has(.nav-link:nth-child(5):hover) .nav-indicator {
+        position-anchor: --nav-5;
+      }
+
+      .site-nav:has(.nav-link:nth-child(6):hover) .nav-indicator {
+        position-anchor: --nav-6;
+      }
+
+      .site-nav:has(.nav-link:nth-child(7):hover) .nav-indicator {
+        position-anchor: --nav-7;
+      }
+
+      .site-nav:has(.nav-link:nth-child(8):hover) .nav-indicator {
+        position-anchor: --nav-8;
+      }
+    }
+
+    .nav-drawer {
+      display: none;
+      flex-direction: column;
+      pointer-events: auto;
+      overflow: hidden;
+      inline-size: clamp(16em, max-content, 90vw);
+      opacity: 0;
+      padding: 0;
+
+      /* Match exactly the main navigation color scheme */
+      background: color-mix(in oklch, var(--clr-surface) 85%, transparent);
+      backdrop-filter: blur(24px) saturate(140%);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+      border: 1.5px solid color-mix(in oklch, var(--clr-text) 12%, transparent);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 32px -6px color-mix(in oklch, black 12%, transparent);
+
+      transform: translateY(-6px) scale(0.97);
+      transition:
+        opacity 180ms ease,
+        transform 180ms ease,
+        display 180ms ease allow-discrete,
+        overlay 180ms ease allow-discrete;
+
+      &:popover-open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      @starting-style {
+        &:popover-open {
+          opacity: 0;
+          transform: translateY(-6px) scale(0.97);
+        }
+      }
+
+      &.is-open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .nav-drawer {
+        transition: none;
+      }
+    }
+
+    .drawer-link {
+      --c-gap: var(--sp-s);
+      --c-padding-inline-start: var(--sp-m);
+      --c-icon-w: 1rem;
+
+      display: flex;
+      align-items: center;
+      gap: var(--c-gap);
+      padding-block: var(--sp-s);
+      padding-inline: var(--c-padding-inline-start) var(--sp-l);
+      font-size: var(--fs-s);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--clr-text);
+      text-decoration: none;
+      transition:
+        color 160ms ease,
+        background 160ms ease;
+      border-bottom: 1px solid
+        color-mix(in oklch, var(--clr-text) 6%, transparent);
+
+      .drawer-icon-placeholder {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--c-icon-w);
+        height: var(--c-icon-w);
+        flex-shrink: 0;
+      }
+
+      &.drawer-link-no-icon {
+        padding-inline-start: calc(
+          var(--c-padding-inline-start) + var(--c-icon-w) + var(--c-gap)
+        );
+      }
+
+      .lang-icon {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      @media (pointer: fine) {
+        cursor: pointer;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover,
+      &:focus-visible {
+        color: var(--clr-text);
+        background: color-mix(in oklch, var(--clr-text) 6%, transparent);
+        outline: none;
+      }
+
+      &.is-active {
+        color: var(--clr-text);
+        background: color-mix(in oklch, var(--clr-primary) 10%, transparent);
+      }
+    }
+
+    .drawer-link-text {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 40em) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      .site-nav,
+      .nav-divider,
+      .contact-link,
+      .lang-switch,
+      .header-theme-toggle {
+        display: none;
+      }
+    }
+  }
+
+  /*
+   * Anchor-Positionierung für den Popover-Drawer.
+   * Muss auf Top-Level stehen, da das Popover im CSS Top Layer liegt
+   * und deshalb kein Descendant von .site-header mehr ist.
+   */
+  @supports (anchor-name: --test) {
+    .nav-drawer {
+      position-anchor: --nav-pill;
+      inset-block-start: calc(anchor(bottom) + var(--sp-xs));
+      left: anchor(center);
+      translate: -50% 0;
+      margin: 0;
+    }
+  }
+
+  /*
+   * Enable view transition names only during active transitions.
+   * This prevents Chrome from breaking backdrop-filter (blur) during normal rendering.
+   */
+  :global(html:active-view-transition) .site-header {
+    view-transition-name: site-header;
+  }
+  :global(html:active-view-transition) .nav-drawer {
+    view-transition-name: nav-drawer;
+  }
+
+  /*
+   * Disable the default cross-fade animation for the header view-transitions.
+   * This prevents the header from flickering or changing opacity during transitions,
+   * keeping the transition as solid and subtle as possible.
+   */
+  :global(::view-transition-old(site-header)),
+  :global(::view-transition-new(site-header)),
+  :global(::view-transition-old(nav-drawer)),
+  :global(::view-transition-new(nav-drawer)) {
+    animation: none !important;
+    mix-blend-mode: normal !important;
+  }
+</style>

@@ -1,0 +1,34 @@
+---
+layout: ../../layouts/Layout.astro
+title: "Experience | David Eiken"
+description: "Professional experience, timeline, and career milestones."
+navTitle: "Experience"
+navOrder: 2
+---
+
+import PageHeader from "../../components/PageHeader.astro";
+import Timeline from "../../components/Timeline.astro";
+import TimelineItem from "../../components/TimelineItem.astro";
+import experienceData from "../../data/experience.en.json";
+import { processTimelineData } from "../../utils/timeline";
+
+export const processedData = processTimelineData(experienceData);
+
+<PageHeader
+  title="Technology changes. Quality remains."
+  lead="Milestones of a path between digital pioneering, stack consulting, and university teaching. My career trajectory shows how the web has evolved -- and why a clean architecture and a frustration-free UX are more critical today than ever before."
+/>
+
+<Timeline headingLeft="Freelance" headingRight="Employed">
+  {processedData.map((item) => (
+    <TimelineItem
+      date={item.date}
+      title={item.title}
+      company={item.company}
+      impact={item.impact}
+      type={item.type}
+      isOffset={item.isOffset}
+      gridRow={item.gridRow}
+    />
+  ))}
+</Timeline>

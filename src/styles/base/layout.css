@@ -1,0 +1,90 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+}
+
+:target {
+  scroll-margin-block-start: 5rem;
+  background-color: color-mix(in oklab, var(--clr-highlight) 28%, transparent);
+  border-radius: 0.25rem;
+}
+
+::target-text {
+  background-color: var(--clr-highlight);
+  color: inherit;
+}
+
+body {
+  margin: 0;
+  min-block-size: 100svh;
+
+  font-family: var(--ff-copy);
+  font-size: var(--fs-copy);
+  line-height: var(--lh-copy);
+  text-rendering: optimizeLegibility;
+
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  padding-block-start: var(--sp-site);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-inline-size: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:where(a, button, input, textarea, select, summary):focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom view transition duration for smooth theme toggles */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+}
+
+/* Enable native Same-Origin Cross-Document View Transitions */
+@view-transition {
+  navigation: auto;
+}
+
+

@@ -1,0 +1,70 @@
+---
+import { markdownToHtml } from "satteri";
+
+interface Props {
+  title?: string;
+  lead?: string;
+}
+
+const { title = "", lead = "" } = Astro.props;
+const unwrapP = (html: string) =>
+  html ? html.replace(/^<p>/, "").replace(/<\/p>\n?$/, "") : "";
+
+const { html: titleHtmlRaw } = title ? markdownToHtml(title) : { html: "" };
+const { html: leadHtmlRaw } = lead ? markdownToHtml(lead) : { html: "" };
+
+const titleHtml = unwrapP(titleHtmlRaw);
+const leadHtml = unwrapP(leadHtmlRaw);
+---
+
+<div class="page-header">
+  {titleHtml && <h1 class="title" set:html={titleHtml} />}
+  {leadHtml && <p class="lead" set:html={leadHtml} />}
+</div>
+
+<style>
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-m);
+    padding-block-start: var(--sp-site);
+    margin-block-end: var(--sp-l);
+  }
+
+  .title {
+    view-transition-name: page-header-title;
+  }
+
+  .lead {
+    margin: 0;
+    font-size: var(--fs-lead);
+    color: var(--clr-text-muted);
+    max-inline-size: 50ch;
+    letter-spacing: var(--ls-lead);
+    font-variation-settings: var(--fvs-lead);
+    line-height: var(--lh-lead);
+    text-wrap: Balance;
+    hyphens: none;
+    view-transition-name: page-header-lead;
+  }
+
+
+  :global(.accent) {
+    color: var(--clr-secondary);
+    font-style: italic;
+  }
+
+  :global(.slant) {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--clr-secondary);
+    transform: skewX(-10deg);
+    display: inline-block;
+  }
+
+  @media (max-width: 768px) {
+    .page-header {
+      gap: var(--sp-s);
+    }
+  }
+</style>

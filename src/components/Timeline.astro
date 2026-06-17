@@ -1,0 +1,400 @@
+---
+import { Image } from "astro:assets";
+import avatarImg from "../assets/images/davideiken-1200.jpg";
+// Note: If you have a signature image, import it here.
+// For now, we will leave a placeholder for the signature.
+
+interface Props {
+  headingLeft?: string;
+  headingRight?: string;
+}
+
+const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
+  Astro.props;
+---
+
+<div class="timeline-container">
+  <div class="timeline-header">
+    <div class="avatar-wrapper avatar-top">
+      <Image
+        src={avatarImg}
+        alt="David Eiken"
+        class="avatar"
+        width={240}
+        height={240}
+        densities={[1.5, 2]}
+      />
+    </div>
+  </div>
+
+  <div class="timeline-track">
+    <div class="center-line">
+      <!-- Arrow at the bottom of the line -->
+      <div class="arrow-down">
+        <svg
+          width="40"
+          height="20"
+          viewBox="0 0 40 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 1L20 18L39 1"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Gekurvte Verbindungslinien auf Mobile -->
+    <div class="connector-top" aria-hidden="true">
+      <svg
+        class="connector-top-left"
+        width="30"
+        height="60"
+        viewBox="0 0 30 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M 30,27 L 16.5,27 A 15,15 0 0 0 1.5,42 L 1.5,60"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="square"
+          fill="none"></path>
+      </svg>
+      <div class="connector-top-middle"></div>
+      <svg
+        class="connector-top-right"
+        width="30"
+        height="60"
+        viewBox="0 0 30 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M 30,0 L 30,12 A 15,15 0 0 1 15,27 L 0,27"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="square"
+          fill="none"></path>
+      </svg>
+    </div>
+
+    <div class="connector-bottom" aria-hidden="true">
+      <svg
+        class="connector-bottom-left"
+        width="30"
+        height="60"
+        viewBox="0 0 30 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M 1.5,0 L 1.5,18 A 15,15 0 0 0 16.5,33 L 30,33"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="square"
+          fill="none"></path>
+      </svg>
+      <div class="connector-bottom-middle"></div>
+      <svg
+        class="connector-bottom-right"
+        width="30"
+        height="60"
+        viewBox="0 0 30 60"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M 0,33 L 15,33 A 15,15 0 0 1 30,48 L 30,60"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="square"
+          fill="none"></path>
+      </svg>
+    </div>
+
+    <div class="timeline-headings desktop-only">
+      <h2 class="heading-left">{headingLeft}</h2>
+      <h2 class="heading-right">{headingRight}</h2>
+    </div>
+
+    <ul class="timeline-list">
+      <slot />
+    </ul>
+  </div>
+
+  <div class="timeline-footer">
+    <div class="footer-profile">
+      <div class="avatar-wrapper avatar-bottom">
+        <Image
+          src={avatarImg}
+          alt="David Eiken"
+          class="avatar"
+          width={240}
+          height={240}
+          densities={[1.5, 2]}
+        />
+      </div>
+      <h2>David Maciejewski</h2>
+      <p class="name-note">(ab 21. August 2026: Eiken)</p>
+
+      <div class="signature-placeholder">
+        <!-- Add your signature image here later -->
+        <span class="sr-only">Signature</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .timeline-container {
+    margin-block: var(--sp-l) var(--sp-2xl);
+    position: relative;
+    --c-timeline-gap: var(--sp-l);
+  }
+
+  .timeline-header {
+    display: flex;
+    justify-content: center; /* zentriert auf mobile */
+    align-items: center;
+    position: relative;
+    z-index: 2; /* above center-line */
+  }
+
+  .avatar-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* kreisrund auf mobile und desktop */
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    background: var(--clr-bg);
+    transition:
+      width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .avatar-top,
+  .avatar-bottom {
+    border-radius: 50%;
+  }
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .timeline-track {
+    position: relative;
+    padding-top: 100px;
+    padding-bottom: var(--sp-xl);
+    z-index: 1;
+  }
+
+  .center-line {
+    anchor-name: --center-line;
+    position: absolute;
+    left: 0;
+    top: 60px; /* schließt an connector-top an */
+    bottom: 60px; /* schließt an connector-bottom an */
+    width: 3px;
+    background: var(--clr-text);
+    z-index: -1;
+    transition:
+      left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .arrow-down {
+    display: none; /* auf mobile ausgeblendet, da linie abknickt */
+  }
+
+  .connector-top,
+  .connector-bottom {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    color: var(--clr-text);
+    left: 0;
+    width: 50%;
+    height: 60px;
+    pointer-events: none;
+  }
+
+  .connector-top {
+    top: 0;
+  }
+
+  .connector-bottom {
+    bottom: 0;
+  }
+
+  .connector-top svg,
+  .connector-bottom svg {
+    position: absolute;
+    display: block;
+    overflow: visible;
+  }
+
+  .connector-top-left,
+  .connector-bottom-left {
+    left: 0;
+  }
+
+  .connector-top-right,
+  .connector-bottom-right {
+    right: 0;
+  }
+
+  .connector-top-middle,
+  .connector-bottom-middle {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    height: 3px;
+    background: currentColor;
+  }
+
+  .connector-top-middle {
+    top: 25.5px;
+  }
+
+  .connector-bottom-middle {
+    top: 31.5px;
+  }
+
+  .timeline-headings {
+    margin-bottom: var(--sp-2xl);
+  }
+
+  .timeline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    padding-left: 20px; /* max space for content */
+    transition: padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .timeline-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* zentriert auf mobile */
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-profile h2 {
+    font-size: var(--fs-2xl);
+    margin: var(--sp-m) 0 0.2rem;
+  }
+
+  .name-note {
+    font-size: var(--fs-s);
+    font-style: italic;
+    color: var(--clr-text-muted);
+    margin: 0 0 var(--sp-xl);
+  }
+
+  .signature-placeholder {
+    width: 200px;
+    height: 100px;
+    border-bottom: 1px solid var(--clr-text-muted);
+    margin-inline: auto;
+    opacity: 0.5;
+  }
+
+  /* --- Desktop Layout --- */
+  @media (min-width: 768px) {
+    .timeline-track {
+      padding-top: var(--sp-xl);
+    }
+
+    .timeline-header {
+      justify-content: center;
+    }
+
+    .timeline-footer {
+      align-items: center;
+      text-align: center;
+    }
+
+    .avatar-wrapper {
+      width: 180px;
+      height: 180px;
+    }
+
+    .connector-top,
+    .connector-bottom {
+      display: none;
+    }
+
+    .arrow-down {
+      display: block;
+      position: absolute;
+      bottom: -40px; /* sit exactly at the end of the line */
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      color: var(--clr-text);
+    }
+
+    .desktop-only {
+      display: grid;
+      grid-template-columns: 1fr 2px 1fr;
+      gap: 0 var(--c-timeline-gap);
+      text-align: center;
+    }
+
+    .heading-left {
+      grid-column: 1;
+      font-size: var(--fs-xl);
+      margin: 0;
+      text-align: right;
+    }
+
+    .heading-right {
+      grid-column: 3;
+      font-size: var(--fs-xl);
+      margin: 0;
+      text-align: left;
+    }
+
+    .center-line {
+      left: 50%;
+      transform: translateX(-50%);
+      top: -60px; /* reaches up to the top avatar */
+      bottom: -60px; /* reaches down to the bottom avatar */
+    }
+
+    .arrow-down {
+      bottom: -40px; /* sit exactly at the end of the line */
+      transform: translateX(-50%) translateY(100%);
+    }
+
+    .timeline-list {
+      display: grid;
+      grid-template-columns: 1fr 2px 1fr;
+      gap: 0 var(--c-timeline-gap);
+      padding-left: 0;
+    }
+  }
+</style>

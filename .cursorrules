@@ -1,0 +1,14 @@
+# Cursor Rules
+
+Use AGENTS.md as the single source of truth for this repository.
+If any local rule conflicts with AGENTS.md, AGENTS.md wins.
+
+Key defaults:
+
+- Prefer MDX for content pages in src/pages.
+- Use Astro files for layout/composition concerns.
+- Use native CSS layers and tokens (--clr, --ff, --sp), no Tailwind.
+- Keep changes minimal and focused.
+- The user may prompt in German; prefer responding in German.
+- Apply minimal non-invasive changes directly.
+- For larger or invasive changes, propose first and ask for confirmation.

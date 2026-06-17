@@ -1,0 +1,135 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types';
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+  text?: string;
+  id?: string;
+  position?: 'top' | 'right' | 'bottom' | 'left';
+};
+
+const { 
+  as: Tag = 'span',
+  text, 
+  id = 'tooltip-' + Math.random().toString(36).substring(2, 11), 
+  class: className,
+  position = 'top',
+  ...props
+} = Astro.props;
+---
+
+<Tag class:list={["has-tooltip", position !== 'top' ? `is-${position}` : '', className]} {...props}>
+  <slot />
+  <span id={id} role="tooltip" class="tooltip" aria-hidden="true">
+    {text ? text : <slot name="tooltip-content" />}
+  </span>
+</Tag>
+
+<style>
+  .has-tooltip {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .tooltip {
+    position: absolute;
+    inset-block-end: calc(100% + 0.35rem);
+    inset-inline-start: 50%;
+    transform: translate(-50%, 0.2rem);
+
+    padding-block: 0.3rem;
+    padding-inline: 0.5rem;
+    border-radius: 0.35rem;
+    background-color: var(--clr-text);
+    color: var(--clr-bg);
+    font-size: var(--fs-2xs);
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    z-index: 10;
+
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 150ms ease,
+      transform 150ms ease;
+      
+    box-shadow: 0 4px 12px color-mix(in oklch, black 15%, transparent);
+  }
+
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    border: 0.35rem solid transparent;
+    border-block-start-color: var(--clr-text);
+  }
+
+  .has-tooltip:is(:hover, :focus-visible) .tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* Bottom */
+  .has-tooltip.is-bottom .tooltip {
+    inset-block-start: calc(100% + 0.35rem);
+    inset-block-end: auto;
+    transform: translate(-50%, -0.2rem);
+  }
+  .has-tooltip.is-bottom .tooltip::after {
+    inset-block-end: 100%;
+    inset-block-start: auto;
+    border-color: transparent;
+    border-block-end-color: var(--clr-text);
+  }
+  .has-tooltip.is-bottom:is(:hover, :focus-visible) .tooltip {
+    transform: translate(-50%, 0);
+  }
+
+  /* Right */
+  .has-tooltip.is-right .tooltip {
+    inset-inline-start: calc(100% + 0.35rem);
+    inset-inline-end: auto;
+    inset-block-start: 50%;
+    inset-block-end: auto;
+    transform: translate(-0.2rem, -50%);
+  }
+  .has-tooltip.is-right .tooltip::after {
+    inset-inline-end: 100%;
+    inset-inline-start: auto;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    border-color: transparent;
+    border-inline-end-color: var(--clr-text);
+  }
+  .has-tooltip.is-right:is(:hover, :focus-visible) .tooltip {
+    transform: translate(0, -50%);
+  }
+
+  /* Left */
+  .has-tooltip.is-left .tooltip {
+    inset-inline-end: calc(100% + 0.35rem);
+    inset-inline-start: auto;
+    inset-block-start: 50%;
+    inset-block-end: auto;
+    transform: translate(0.2rem, -50%);
+  }
+  .has-tooltip.is-left .tooltip::after {
+    inset-inline-start: 100%;
+    inset-inline-end: auto;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    border-color: transparent;
+    border-inline-start-color: var(--clr-text);
+  }
+  .has-tooltip.is-left:is(:hover, :focus-visible) .tooltip {
+    transform: translate(0, -50%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tooltip {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,316 @@
+---
+import Tooltip from "./Tooltip.astro";
+import workIcon from "../assets/icons/work.svg?raw";
+import cognitionIcon from "../assets/icons/cognition.svg?raw";
+import emojiObjectsIcon from "../assets/icons/emoji-objects.svg?raw";
+
+export interface Props {
+  date: string;
+  title: string;
+  company: string;
+  impact: string;
+  type: "freelance" | "employed" | "education";
+  isOffset?: boolean;
+  gridRow?: number;
+}
+
+const {
+  date,
+  title,
+  company,
+  impact,
+  type,
+  isOffset = false,
+  gridRow,
+} = Astro.props;
+
+// SVG Icons mapping for timeline types
+const ICONS = {
+  freelance: emojiObjectsIcon,
+  employed: workIcon,
+  education: cognitionIcon,
+};
+
+const TOOLTIPS = {
+  freelance: "Selbstständigkeit",
+  employed: "Anstellung",
+  education: "Weiterbildung & Studium",
+};
+---
+
+<li
+  class={`timeline-item type-${type} ${isOffset ? "is-offset" : ""}`}
+  style={gridRow !== undefined ? `--grid-row: ${gridRow + 1}` : undefined}
+>
+  <div class="timeline-content">
+    <div class="timeline-meta">
+      <span class="timeline-date">{date}</span>
+      <Tooltip text={TOOLTIPS[type]} class="timeline-icon-tooltip">
+        <span class="timeline-icon" set:html={ICONS[type]} />
+      </Tooltip>
+      <span class="timeline-dot"></span>
+    </div>
+    <div class="timeline-body">
+      <h3 class="timeline-title">{title}</h3>
+      <p class="timeline-company">{company}</p>
+      <div class="timeline-impact">
+        <span class="impact-label">IMPACT:</span>
+        {impact}
+      </div>
+    </div>
+  </div>
+</li>
+
+<style>
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--sp-2xl);
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-s);
+    margin-bottom: var(--sp-s);
+    position: relative;
+  }
+
+  .timeline-date {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    border: 1px solid var(--clr-text-muted);
+    border-radius: 99px;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    white-space: nowrap;
+    background: var(--clr-surface);
+  }
+
+  .timeline-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-text-muted);
+  }
+
+  .timeline-icon :global(svg) {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+  }
+
+  .timeline-meta::before {
+    content: "";
+    display: none; /* hidden on mobile, line is vertical only */
+  }
+
+  .timeline-dot {
+    display: block;
+    position: absolute;
+    left: -25px; /* aligns perfectly with the extreme left 10px center line on mobile */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    z-index: 2;
+    transition:
+      left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Specific dot colors based on type */
+  .type-freelance .timeline-dot {
+    background: var(--clr-primary);
+  }
+  .type-employed .timeline-dot {
+    background: var(--clr-text);
+  }
+  .type-education .timeline-dot {
+    background: var(--clr-text-muted);
+  }
+
+  .timeline-title {
+    font-size: var(--fs-m);
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .timeline-company {
+    font-size: var(--fs-s);
+    color: var(--clr-text-muted);
+    margin: 0 0 var(--sp-s);
+  }
+
+  .timeline-impact {
+    font-size: var(--fs-s);
+    line-height: 1.6;
+    color: var(--clr-text);
+  }
+
+  .impact-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  /* Unveil Animation for Scroll */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports ((animation-timeline: view()) and (animation-range: entry)) {
+      @keyframes unveil {
+        from {
+          opacity: 0;
+          transform: translateY(
+            10em
+          ); /* intensified slide-in without scaling to avoid line drifting */
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .timeline-item {
+        animation: unveil auto linear both;
+        animation-timeline: view(block);
+        animation-range: entry 10% cover 35%;
+      }
+    }
+  }
+
+  /* --- Desktop Layout --- */
+  @media (min-width: 768px) {
+    .mobile-only {
+      display: none;
+    }
+
+    .timeline-item {
+      margin-bottom: var(--sp-xl);
+      grid-row: var(--grid-row);
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: var(--sp-xl);
+    }
+
+    .timeline-item.is-offset {
+      margin-top: 4em;
+    }
+
+    .timeline-meta {
+      margin-bottom: var(--sp-m);
+      display: flex;
+      position: relative; /* relative to position the absolute line and dot */
+
+      /* Configurable variables in relative units */
+      --c-dot-size: 0.625em; /* ~10px at base 16px */
+      --c-dot-gap: 0.75em; /* ~12px at base 16px */
+      --c-line-thickness: 0.125em; /* ~2px at base 16px */
+      --c-line-offset: calc(var(--c-dot-gap) + var(--c-dot-size));
+    }
+
+    .impact-label {
+      display: inline;
+      margin-right: 0.2rem;
+    }
+
+    /* Common styles for the Dot and Line (::before) */
+    .timeline-dot {
+      display: block;
+      position: absolute;
+      top: 50%;
+      width: var(--c-dot-size);
+      height: var(--c-dot-size);
+      border-radius: 50%;
+      z-index: 2;
+      box-sizing: border-box;
+      transform: translateY(-50%);
+    }
+
+    .timeline-meta::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      height: var(--c-line-thickness);
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+
+    /* Freelance & Education (Left Column) */
+    .type-freelance,
+    .type-education {
+      grid-column: 1;
+      text-align: right;
+    }
+
+    .type-freelance .timeline-meta,
+    .type-education .timeline-meta {
+      justify-content: flex-start;
+      flex-direction: row-reverse;
+    }
+
+    /* Position the dots in the middle of the gap, completely outside the content */
+    .type-freelance .timeline-dot,
+    .type-education .timeline-dot {
+      left: calc(100% + var(--c-dot-gap));
+      right: auto;
+    }
+
+    .type-freelance .timeline-dot {
+      background: var(--clr-primary);
+    }
+
+    .type-education .timeline-dot {
+      background: var(--clr-text-muted);
+      opacity: 0.5;
+    }
+
+    /* Spanning lines from the dot edge to the center vertical line */
+    .type-freelance .timeline-meta::before {
+      left: calc(100% + var(--c-line-offset));
+      right: calc(-1 * var(--c-timeline-gap) - 1px);
+      background: var(--clr-primary);
+    }
+
+    .type-education .timeline-meta::before {
+      left: calc(100% + var(--c-line-offset));
+      right: calc(-1 * var(--c-timeline-gap) - 1px);
+      background: var(--clr-text-muted);
+      opacity: 0.5;
+    }
+
+    /* Employed (Right Column) */
+    .type-employed {
+      grid-column: 3;
+      text-align: left;
+    }
+
+    .type-employed .timeline-meta {
+      justify-content: flex-start;
+      flex-direction: row;
+    }
+
+    /* Position the dots in the middle of the gap, completely outside the content */
+    .type-employed .timeline-dot {
+      right: calc(100% + var(--c-dot-gap));
+      left: auto;
+      background: var(--clr-text);
+    }
+
+    /* Spanning lines from the dot edge to the center vertical line */
+    .type-employed .timeline-meta::before {
+      right: calc(100% + var(--c-line-offset));
+      left: calc(-1 * var(--c-timeline-gap) - 1px);
+      background: var(--clr-text);
+    }
+  }
+</style>

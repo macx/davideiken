@@ -1,0 +1,38 @@
+---
+layout: ../layouts/Layout.astro
+title: "Frontend. Frustrationsfrei by Design."
+description: "One-pager by David Eiken focused on digital architecture, strategy, and technical execution."
+---
+
+import PageHeader from "../components/PageHeader.astro";
+import LogoGrid from "../components/LogoGrid.astro";
+import { Image } from "astro:assets";
+import portraitImage from "../assets/images/david-contrast.jpg";
+
+<PageHeader
+  title={frontmatter.title}
+  lead="Hallo, ich bin David Eiken *(bis zur Heirat im August noch David Maciejewski)*. Seit 30 Jahren gestalte und baue ich digitale Medien. Heute bündle ich diese Erfahrung als spezialisierter **Senior Frontend Engineer**."
+/>
+
+<div class="flow-root">
+  <Image
+    src={portraitImage}
+    alt="David Eiken"
+    class="portrait"
+    widths={[240, 480]}
+    sizes="(max-width: 768px) 240px, 480px"
+  />
+
+Angefangen im Print, folgte zur Jahrtausendwende der Schritt ins Web. HTML und CSS habe ich mir autodidaktisch beigebracht -- lange vor YouTube oder passenden Studiengängen. Statt grauer Theorie stand für mich die Praxis im Fokus: Als Full-Stack-Entwickler deckte ich jahrelang Konzeption, Design, Frontend und Backend ab. Dieser neugierige Blick weit über den Tellerrand prägt mich bis heute -- bis hin zu Agentic Coding.
+
+Früh zeigte sich, wohin dieser intrinsische Antrieb führte: Als digitaler Pionier launchte ich 2005 „Technikwürze", einen der ersten deutschen Podcasts. Was als One-Man-Show begann, entwickelte sich schnell zu einem kollaborativen Format: Durch die gezielte Einbindung externer Experten trieb ich die Demokratisierung von technischem Wissen voran -- und lernte, dass die besten Ergebnisse immer im Zusammenspiel entstehen.
+
+Bis heute gilt dieses Prinzip. Ich arbeite an der Schnittstelle zwischen Design und Deployment und verbinde Menschen, Ideen und Code zu einer durchdachten User Experience. Seit 2015 unterrichte ich zudem an der Hochschule und zeige Studierenden, wie moderne Websites gebaut werden -- Mobile First, Responsive und frustrationsfrei.
+
+</div>
+
+<section class="divider">
+  ## Aus meiner Projektgeschichte &ndash;<br />in guter Gesellschaft
+
+  <LogoGrid />
+</section>

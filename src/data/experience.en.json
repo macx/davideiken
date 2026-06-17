@@ -1,0 +1,121 @@
+[
+  {
+    "type": "freelance",
+    "date": "Since September 2015",
+    "title": "Lecturer Digital Environments",
+    "company": "HAWK – University of Applied Sciences and Arts · Faculty of Design Hildesheim · Freelance Lecturer",
+    "impact": "Students learn to design digital experiences that don't frustrate people – but inspire them. 2 semesters a year, 5 hours per week."
+  },
+  {
+    "type": "employed",
+    "date": "February 2021 – September 2026",
+    "title": "Senior Frontend Engineer (Consultant)",
+    "company": "IT-P · Hanover · 100% Remote",
+    "impact": "From the first mockup to the finished frontend – I conceptualized, designed, and built products used by millions of people daily. Mobile First, Responsive, and with a UI that does not frustrate. National reach, full responsibility from start to finish."
+  },
+  {
+    "type": "freelance",
+    "date": "May 2018 – December 2022",
+    "title": "Running Coach",
+    "company": "Lauftrainer David · Hanover · Founder",
+    "impact": "Beginners became runners – runners became marathon finishers."
+  },
+  {
+    "type": "freelance",
+    "date": "October 2016 – September 2017",
+    "title": "Lecturer Creative Coder (IHK)",
+    "company": "Dr. Buhmann School · Hanover · Freelance Lecturer",
+    "impact": "Not only did students learn HTML and CSS – colleagues did too. Sharing knowledge was part of my DNA from the very beginning."
+  },
+  {
+    "type": "freelance",
+    "date": "May 2015 – February 2021",
+    "title": "UI/UX Engineer",
+    "company": "macx.io · Hanover · Founder",
+    "impact": "From fantastic agencies and direct clients – interfaces that work and don't frustrate. My specialization in frontend engineering struck a chord."
+  },
+  {
+    "type": "employed",
+    "date": "November 2013 – April 2015",
+    "title": "Frontend Developer",
+    "company": "Neoskop · Hanover",
+    "impact": "Clean documentation and clear GitHub structures ensured that anyone in the team could take over any project at any time – without friction, without questions."
+  },
+  {
+    "type": "employed",
+    "date": "January 2010 – October 2013",
+    "title": "Lead Frontend Developer",
+    "company": "t3n Magazine · Hanover",
+    "impact": "Responsibility for the complete frontend of one of the best-known tech brands in the DACH region – from architecture to the last line of CSS. I wrote my own tech articles, founded the video podcast TechnikLOAD, and established it on YouTube."
+  },
+  {
+    "type": "employed",
+    "date": "February 2008 – December 2009",
+    "title": "Teamlead Frontend Developer",
+    "company": "RpunktDesign Advertising Agency · Hanover",
+    "impact": "From the first client meeting to the finished website – conception, design, frontend, and backend from a single source. The agency gained a point of contact who understood and took responsibility for the entire process."
+  },
+  {
+    "type": "employed",
+    "date": "August 2007 – February 2008",
+    "title": "Senior Frontend Developer",
+    "company": "sevenload · Startup · Cologne",
+    "impact": "I was responsible for the entire frontend of one of the largest German video portals – including a complete redesign before the successful exit to BURDA. White-label solutions for renowned industrial clients showed: The product was scalable and well-received."
+  },
+  {
+    "type": "employed",
+    "date": "February 2005 – July 2007",
+    "title": "Full Stack Web Developer",
+    "company": "AhlersHeinel Advertising Agency · Hanover",
+    "impact": "Brought freelance know-how into everyday agency life – implemented websites for corporate clients from A to Z using Typo3 and webEdition. The agency gained a developer who didn't need explanations, but delivered immediately."
+  },
+  {
+    "type": "employed",
+    "date": "July 2000 – June 2005",
+    "title": "Process and Service Integration",
+    "company": "TSG AG – The Sourcing Group · Zug (Switzerland)",
+    "impact": "Conceived and developed websites and digital services for an international IT consulting company – on-site in Switzerland on a monthly basis. A trusted partner at eye level, not just a service provider."
+  },
+  {
+    "type": "freelance",
+    "date": "July 2000 – February 2005",
+    "title": "Full Stack Design & Developer",
+    "company": "macx online · Hanover · Founder",
+    "impact": "The beginning of it all – from conception through design to backend, everything from a single source, directly for my own clients. Print and online products."
+  },
+  {
+    "type": "employed",
+    "date": "July 1996 – June 2000",
+    "title": "Layout Artist, Media Designer, Illustrator and Editor",
+    "company": "Center for Operative Information · Bundeswehr · Mayen (RLP)",
+    "impact": "Commissioned by NATO during the SFOR mission, I designed the youth magazine MIRKO – one of the most important media of the peace mission, distributed to young people in post-war Bosnia. A music and lifestyle magazine with a mission: to overcome nationalist tunnel vision, promote tolerance, and keep young people in their homeland. Layout as a tool for peace."
+  },
+  {
+    "type": "employed",
+    "date": "July 1996 – June 2000",
+    "title": "Art Director & Print Production",
+    "company": "NATO (SFOR) · Sarajevo · Bosnia and Herzegovina",
+    "impact": "Twice on-site at the SFOR headquarters in Sarajevo – embedded in the multinational CJICTF and later CJPOTF, with English as the working language. Secured the print quality of MIRKO in a local printing plant – and gave the Herald of Progress, the second large NATO print medium of the mission, a new face. Design under real conditions, in the midst of rebuilding a country."
+  },
+  {
+    "type": "employed",
+    "date": "July 1996 – June 2000",
+    "title": "Local Editor",
+    "company": "Rhein-Zeitung · Andernach (RLP)",
+    "impact": "On loan from the MIRKO editorial office, I learned the basics of journalism – and quickly added my own accents: several articles, my own column, and a lead story in the local section that made it into the main edition of the Rhein-Zeitung. Communication has always been my strength."
+  },
+  {
+    "type": "education",
+    "date": "July 1994 – June 1996",
+    "title": "Fachoberschule Gestaltung",
+    "company": "Advanced Technical College Certificate · Hanover",
+    "impact": "Creativity on canvas and in video (TV), true-to-scale mapping of buildings on technical drawings"
+  },
+  {
+    "type": "education",
+    "date": "July 1993 – June 1994",
+    "title": "Berufsbildungsgrundjahr Drucktechnik",
+    "company": "Qualification for Vocational Training · Celle",
+    "impact": "Typesetter (Layout Artist) on the Linotype, PageMaker, letterpress and printing on the Heidelberg platen press, color and printing techniques, DIN formats"
+  }
+]

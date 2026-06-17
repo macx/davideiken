@@ -1,0 +1,283 @@
+---
+import ThemeAuto from '../assets/icons/theme-auto.svg';
+import ThemeLight from '../assets/icons/theme-light.svg';
+import ThemeDark from '../assets/icons/theme-dark.svg';
+
+import Tooltip from './Tooltip.astro';
+
+interface Props {
+  class?: string;
+  variant?: 'header' | 'drawer';
+  locale?: string;
+}
+
+const { class: className, variant = 'header', locale = 'en' } = Astro.props;
+
+const labels = {
+  en: { auto: 'Theme: Auto', light: 'Theme: Light', dark: 'Theme: Dark' },
+  de: { auto: 'Design: Auto', light: 'Design: Hell', dark: 'Design: Dunkel' }
+};
+const t = labels[locale as 'en' | 'de'] || labels.en;
+---
+{variant === 'header' ? (
+  <Tooltip 
+    as="button"
+    type="button"
+    class:list={["theme-toggle", className]} 
+    position="bottom"
+  >
+    <ThemeAuto class="icon-theme icon-auto" aria-hidden="true" />
+    <ThemeLight class="icon-theme icon-light" aria-hidden="true" />
+    <ThemeDark class="icon-theme icon-dark" aria-hidden="true" />
+    <span slot="tooltip-content" class="theme-label">
+      <span class="label-auto">{t.auto}</span>
+      <span class="label-light">{t.light}</span>
+      <span class="label-dark">{t.dark}</span>
+    </span>
+  </Tooltip>
+) : (
+  <button class:list={["theme-toggle is-drawer", className]} type="button">
+    <ThemeAuto class="icon-theme icon-auto" aria-hidden="true" />
+    <ThemeLight class="icon-theme icon-light" aria-hidden="true" />
+    <ThemeDark class="icon-theme icon-dark" aria-hidden="true" />
+    <span class="theme-label">
+      <span class="label-auto">{t.auto}</span>
+      <span class="label-light">{t.light}</span>
+      <span class="label-dark">{t.dark}</span>
+    </span>
+  </button>
+)}
+
+<style>
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-toggle.is-drawer {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.6rem;
+  }
+  .icon-theme {
+    display: none;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+  :global(html[data-theme="auto"]) .icon-auto {
+    display: block;
+  }
+  :global(html[data-theme="light"]) .icon-light {
+    display: block;
+  }
+  :global(html[data-theme="dark"]) .icon-dark {
+    display: block;
+  }
+
+  .theme-label span {
+    display: none;
+  }
+  :global(html[data-theme="auto"]) .label-auto {
+    display: inline;
+  }
+  :global(html[data-theme="light"]) .label-light {
+    display: inline;
+  }
+  :global(html[data-theme="dark"]) .label-dark {
+    display: inline;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Custom dynamic toast for 'auto' theme mode confirmation */
+  :global(.theme-toast) {
+    --toast-glow-color: color-mix(in oklch, var(--clr-secondary) 50%, transparent);
+    position: fixed;
+    inset-block-start: 5.5rem;
+    left: 50%;
+    transform: translate(-50%, -8px);
+    z-index: 9999;
+    padding: 0.6rem 1.1rem;
+    border-radius: 9999px;
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    pointer-events: none;
+    opacity: 0;
+    
+    /* Premium dark glassmorphism styling for high-contrast on both modes */
+    background: color-mix(in oklch, oklch(24.8% 0.035 261.5) 85%, transparent);
+    color: oklch(97.9% 0.005 253.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+    
+    transition: 
+      opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), 
+      transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :global(html[data-theme="dark"]) :global(.theme-toast) {
+    --toast-glow-color: oklch(100% 0 0 / 85%); /* Pure white glow in dark mode */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(html[data-theme="auto"]) :global(.theme-toast) {
+      --toast-glow-color: oklch(100% 0 0 / 85%); /* Pure white glow in dark mode auto */
+    }
+  }
+
+  @keyframes toast-glow-flash {
+    0% {
+      box-shadow: 
+        0 10px 30px -10px rgba(0, 0, 0, 0.4),
+        0 0 0px transparent;
+    }
+    15% {
+      box-shadow: 
+        0 10px 30px -10px rgba(0, 0, 0, 0.4),
+        0 0 32px var(--toast-glow-color);
+    }
+    100% {
+      box-shadow: 
+        0 10px 30px -10px rgba(0, 0, 0, 0.4),
+        0 0 0px transparent;
+    }
+  }
+
+  :global(.theme-toast.is-visible) {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    animation: toast-glow-flash 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+
+  @media (max-width: 40em) {
+    :global(.theme-toast) {
+      inset-block-start: auto;
+      inset-block-end: 3rem;
+      transform: translate(-50%, 8px);
+      padding: 0.85rem 1.5rem;
+      text-align: center;
+    }
+    :global(.theme-toast.is-visible) {
+      transform: translate(-50%, 0);
+    }
+  }
+</style>
+
+<script>
+  const themes = ['auto', 'light', 'dark'];
+  let switchSound: HTMLAudioElement | null = null;
+  let autoSound: HTMLAudioElement | null = null;
+
+  function initSounds() {
+    if (!switchSound) {
+      switchSound = new Audio('/sounds/lightswitch.mp3');
+    }
+    if (!autoSound) {
+      autoSound = new Audio('/sounds/pop.mp3');
+    }
+  }
+
+  function showToast() {
+    // Remove any existing toast
+    const oldToast = document.getElementById('theme-toast');
+    if (oldToast) oldToast.remove();
+
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDe = document.documentElement.lang === 'de';
+    
+    let message = '';
+    if (isDe) {
+      message = `Systemeinstellung aktiv (${isDark ? 'Dunkel' : 'Hell'})`;
+    } else {
+      message = `System theme active (${isDark ? 'Dark' : 'Light'})`;
+    }
+
+    const toast = document.createElement('div');
+    toast.id = 'theme-toast';
+    toast.className = 'theme-toast';
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+
+    // Fade in on next paint
+    requestAnimationFrame(() => {
+      toast.classList.add('is-visible');
+    });
+
+    // Fade out and cleanup
+    setTimeout(() => {
+      toast.classList.remove('is-visible');
+      toast.addEventListener('transitionend', () => {
+        toast.remove();
+      });
+    }, 2200);
+  }
+
+  // Preload when hovering or focusing the button (saves page-load bandwidth)
+  document.addEventListener('mouseover', (e) => {
+    if ((e.target as HTMLElement).closest('.theme-toggle')) {
+      initSounds();
+    }
+  }, { passive: true });
+
+  document.addEventListener('focusin', (e) => {
+    if ((e.target as HTMLElement).closest('.theme-toggle')) {
+      initSounds();
+    }
+  }, { passive: true });
+
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.theme-toggle');
+    if (!btn) return;
+    
+    let currentTheme = document.documentElement.getAttribute('data-theme') || 'auto';
+    let nextIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
+    let nextTheme = themes[nextIndex];
+    
+    // Play the switch sound immediately on click
+    initSounds();
+    const sound = nextTheme === 'auto' ? autoSound : switchSound;
+    if (sound) {
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
+    }
+
+    // Show toast only when returning to Auto mode
+    if (nextTheme === 'auto') {
+      showToast();
+    }
+    
+    // Use View Transitions API for a smooth fade effect if supported
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('theme', nextTheme);
+      });
+    } else {
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+    }
+  });
+</script>
+
+
+

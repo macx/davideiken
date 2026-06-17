@@ -1,0 +1,144 @@
+---
+layout: ../layouts/Layout.astro
+title: "Engineering"
+description: "Ausgewählte Projekte, Technologie-Stack und Engineering-Philosophie."
+navTitle: "Engineering"
+navOrder: 3
+---
+
+import { Image } from "astro:assets";
+import PageHeader from "../components/PageHeader.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import hawkImg from "../assets/images/projects/hawk-gt1191.svg";
+import technikwuerzeImg from "../assets/images/projects/technikwuerze-dummy.svg";
+
+<PageHeader
+  title="Engineering getrieben von __Geschwindigkeit, Qualität__ und Disziplin."
+  lead="Ich genieße technische Tiefe und messbare Ergebnisse. Das gleiche Mindset, das mich im Sport antreibt, leitet mich auch im Engineering: Fokus, Konstanz und Leistung unter echten Bedingungen."
+/>
+
+<div class="grid-auto">
+<div class="content-col">
+  <SectionLabel text="STACK" />
+  <dl class="stack-list">
+    <dt>FUNDAMENT:</dt>
+    <dd>HTML · CSS · TypeScript</dd>
+
+    <dt>FRAMEWORKS & CM:</dt>
+    <dd>
+      Astro · Angular · PrimeNG
+      <br />
+      JSX · MDX · Markdown · Kirby · PHP
+    </dd>
+
+    <dt>KI & AGENTIC CODING:</dt>
+    <dd>
+      Copilot · Antigravity · Claude · Codex
+      <br />
+      Multi-Agenten-Workflows als tägliche Praxis
+    </dd>
+
+    <dt>UX & FRONTEND:</dt>
+    <dd>
+      UX-Experte · Design-to-Code
+      <br />
+      Mobile First · Responsive Design
+    </dd>
+
+  </dl>
+</div>
+
+<div class="content-col">
+  <SectionLabel text="EDITORIAL" />
+
+  <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo" />
+  
+  <p>
+    Umfangreiche Frontend-Tutorials für Studierende meines Seminars an der HAWK
+    – Mobile First, Responsive, frustrationsfrei. Öffentlich zugänglich unter:
+  </p>
+  <p>
+    <a href="https://hawk-gt1191.de" target="_blank" rel="noopener noreferrer">
+      hawk-gt1191.de
+    </a>
+  </p>
+  <br />
+  <p>Der Quellcode der Site ist auf GitHub.</p>
+  <p>
+    <a
+      href="https://github.com/macx/hawk-gt1191"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      github.com/macx/hawk-gt1191
+    </a>
+  </p>
+</div>
+
+  <div class="content-col">
+    <SectionLabel text="PODCAST" />
+    
+    <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
+    
+    <p>
+      Seit 2005 – als Podcast-Pionier in Deutschland. Technikwürze ist mein Podcast für Medienschaffende rund um Gestaltung und Webentwicklung. 188 Episoden, knapp 1,8 Millionen Downloads. Jetzt mit Relaunch zurück.
+    </p>
+
+    <p>
+      <a href="https://technikwuerze.de" target="_blank" rel="noopener noreferrer">technikwuerze.de</a>
+    </p>
+
+  </div>
+</div>
+
+<style>{`
+  .content-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-s);
+  }
+
+  .stack-list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
+  }
+
+  .stack-list dt {
+    font-weight: 700;
+    font-size: var(--fs-2xs);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: var(--sp-xs);
+  }
+  
+  .stack-list dt:first-child {
+    margin-top: 0;
+  }
+
+  .stack-list dd {
+    margin: 0;
+    font-size: var(--fs-s);
+    color: var(--clr-text-muted);
+  }
+
+  .project-logo {
+    max-width: 200px;
+    height: auto;
+    margin-block-end: var(--sp-xs);
+  }
+
+  .content-col p {
+    font-size: var(--fs-s);
+    color: var(--clr-text-muted);
+    margin: 0;
+  }
+  
+  .content-col a {
+    color: var(--clr-primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 600;
+  }
+`}</style>

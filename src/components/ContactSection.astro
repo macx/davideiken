@@ -1,0 +1,67 @@
+---
+import ContactForm from "./ContactForm.astro";
+
+const locale = Astro.currentLocale ?? "en";
+const title =
+  locale === "de"
+    ? "Lass uns reden. Ohne Pitch, ohne Druck."
+    : "Let’s talk. No pitch, no pressure.";
+
+const textPart1 =
+  locale === "de"
+    ? "Buche dir ein unverbindliches Online-Meeting. Nur ein offenes Gespräch darüber, wie ich dein Team ergänzen kann. Melde dich unter "
+    : "Book a no-strings-attached online meeting. Just an open conversation about how I can complement your team. Sign up at ";
+
+const linkUrl = "https://davideiken.de/meeting";
+const linkText = "davideiken.de/meeting";
+
+const textPart2 =
+  locale === "de"
+    ? " an, oder hinterlasse mir eine Nachricht."
+    : ", or leave me a message.";
+---
+
+<section id="contact" class="contact">
+  <div class="content-center">
+    <h2>{title}</h2>
+
+    <p>
+      {textPart1}<a href={linkUrl} target="_blank" rel="noopener">{linkText}</a
+      >{textPart2}
+    </p>
+
+    <div class="contact-action">
+      <ContactForm action="/api/contact" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background-color: var(--clr-surface);
+    padding-block: var(--sp-2xl);
+    border-block: 1px solid var(--clr-line);
+
+    h2 {
+      margin-block-start: 0;
+    }
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-l);
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+</style>

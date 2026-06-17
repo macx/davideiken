@@ -1,6 +1,6 @@
 # davideiken
 
-Personal website built with Astro, TypeScript, MDX, and Tailwind CSS.
+Personal website built with Astro, TypeScript, MDX, and custom CSS.
 
 ## 🚀 Getting Started
 
@@ -33,6 +33,7 @@ pnpm dev
 ### Building
 
 The build script runs three steps:
+
 1. TypeScript type checking via `astro check`
 2. End-to-end tests via Playwright
 3. Production build
@@ -75,7 +76,7 @@ pnpm test
 - ♿ **Accessible** - ARIA labels, keyboard navigation
 - ⚡ **Fast** - Built with Astro for optimal performance
 - 📝 **MDX Support** - Rich content with Markdown and JSX
-- 🎨 **Tailwind CSS** - Utility-first styling
+- 🎨 **Custom CSS** - Native CSS structure with layers
 - 🔒 **Type-safe** - Strict TypeScript configuration
 - 🧪 **Tested** - Playwright end-to-end tests
 - 🔐 **Secure** - CodeQL security scanning via GitHub Actions
@@ -83,6 +84,7 @@ pnpm test
 ## 🔒 Security
 
 This project uses GitHub CodeQL for automated security analysis. CodeQL scans run:
+
 - On every push to main and feature branches
 - On every pull request
 - Weekly on a schedule
