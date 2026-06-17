@@ -74,11 +74,11 @@ For each task, follow this order:
 3. **Always use the current official documentation** for the installed package versions (see Section 1). Never rely on memorized API patterns that may be outdated. If uncertain whether an API still exists, verify against the docs before using it.
    - Astro v6 docs: https://docs.astro.build
    - Known breaking changes to watch for: `Astro.glob` was removed in Astro v5 → use `import.meta.glob` instead.
-4. Run relevant scripts if behavior is affected:
+4. Briefly document what changed and why before any tests or commits. Ask the user for approval of the changes if necessary.
+5. Run relevant scripts if behavior is affected, but only if the user has accepted the changes, has no corrections and has agreed to it.
    - `pnpm astro check`
    - `pnpm test` (to run Vitest unit tests when behavior is affected)
    - `pnpm test:e2e` (to run Playwright E2E tests locally when relevant)
-5. Briefly document what changed and why.
 
 ## 7) Content Preference
 
