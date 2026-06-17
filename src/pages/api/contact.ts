@@ -19,7 +19,12 @@ const contactSchema = z.object({
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   try {
     // 1. Rate Limiting
-    const ip = clientAddress || 'unknown';
+    let ip = 'unknown';
+    try {
+      ip = clientAddress || 'unknown';
+    } catch (e) {
+      console.warn("Failed to get clientAddress:", e);
+    }
     const now = Date.now();
     const clientRecord = rateLimit.get(ip);
     
@@ -43,7 +48,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     const origin = request.headers.get('origin');
     // In production, enforce origin matching
     if (import.meta.env.PROD && origin) {
-      const allowedDomains = ['davideiken.com', 'localhost'];
+      const allowedDomains = ['davideiken.com', 'davideiken.de', 'localhost'];
       const isAllowed = allowedDomains.some(domain => origin.includes(domain));
       if (!isAllowed) {
         return new Response(JSON.stringify({ error: "Forbidden" }), { status: 403 });
@@ -71,20 +76,27 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     }
 
     // 5. Send Email
+    const smtpHost = process.env.SMTP_HOST || import.meta.env.SMTP_HOST;
+    const smtpPort = Number(process.env.SMTP_PORT || import.meta.env.SMTP_PORT) || 587;
+    const smtpSecure = (process.env.SMTP_SECURE || import.meta.env.SMTP_SECURE) === 'true';
+    const smtpUser = process.env.SMTP_USER || import.meta.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS || import.meta.env.SMTP_PASS;
+    const contactEmail = process.env.CONTACT_EMAIL || import.meta.env.CONTACT_EMAIL || smtpUser;
+
     const transporter = nodemailer.createTransport({
-      host: import.meta.env.SMTP_HOST,
-      port: Number(import.meta.env.SMTP_PORT) || 587,
-      secure: import.meta.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpSecure,
       auth: {
-        user: import.meta.env.SMTP_USER,
-        pass: import.meta.env.SMTP_PASS,
+        user: smtpUser,
+        pass: smtpPass,
       },
     });
 
     await transporter.sendMail({
-      from: `"${validatedData.name}" <${import.meta.env.SMTP_USER}>`, // Send via authenticated user
+      from: `"${validatedData.name}" <${smtpUser}>`, // Send via authenticated user
       replyTo: validatedData.email,
-      to: import.meta.env.CONTACT_EMAIL || import.meta.env.SMTP_USER,
+      to: contactEmail,
       subject: `Contact Request: ${validatedData.name}`,
       text: `Name: ${validatedData.name}\nEmail: ${validatedData.email}\n\nMessage:\n${validatedData.message}`,
     });
