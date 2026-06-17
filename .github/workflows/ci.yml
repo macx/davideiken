@@ -2,10 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [ "main", "develop" ]
-    tags: [ "v*" ]
+    branches: ["main", "develop"]
+    tags: ["v*"]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: ["main", "develop"]
 
 jobs:
   build:
@@ -14,39 +14,39 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Enable Corepack
-      run: corepack enable
+      - name: Enable Corepack
+        run: corepack enable
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '24'
-        cache: 'pnpm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
 
-    - name: Install dependencies
-      run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-    - name: Run TypeScript Check
-      run: pnpm astro check
+      - name: Run TypeScript Check
+        run: pnpm astro check
 
-    - name: Build
-      run: pnpm astro build
+      - name: Build
+        run: pnpm astro build
 
-    - name: Run Tests
-      run: pnpm test
+      - name: Run Tests
+        run: pnpm test
 
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      if: success()
-      with:
-        name: dist
-        path: dist/
-        retention-days: 7
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
 
   release:
     name: Create GitHub Release and Deploy to Plesk
@@ -55,41 +55,53 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     permissions:
       contents: write
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_TOKEN }}
 
-    - name: Download Build Artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: dist
-        path: dist
+      - name: Merge release tag into main
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin main:main
+          git checkout main
+          git merge ${{ github.ref_name }} --no-ff -m "chore(release): merge ${{ github.ref_name }} into main"
+          git push origin main
 
-    - name: Create Release Zip
-      run: zip -r dist.zip dist
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
 
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v2
-      with:
-        files: dist.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release Zip
+        run: zip -r dist.zip dist
 
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.DEPLOY_KEY }}
-        known_hosts: "placeholder"
-        if_key_exists: replace
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Adding Known Hosts
-      run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT || 22 }} -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.DEPLOY_KEY }}
+          known_hosts: "placeholder"
+          if_key_exists: replace
 
-    - name: Deploy with Rsync
-      run: |
-        rsync -azP --delete -e "ssh -p ${{ secrets.DEPLOY_PORT || 22 }}" dist/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}
+      - name: Adding Known Hosts
+        run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT || 22 }} -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
 
-    - name: Restart Node Application via Phusion Passenger
-      run: |
-        ssh -p ${{ secrets.DEPLOY_PORT || 22 }} ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "mkdir -p ${{ secrets.DEPLOY_PATH }}tmp && touch ${{ secrets.DEPLOY_PATH }}tmp/restart.txt"
+      - name: Deploy with Rsync
+        run: |
+          rsync -azP --delete -e "ssh -p ${{ secrets.DEPLOY_PORT || 22 }}" dist/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}
+
+      - name: Restart Node Application via Phusion Passenger
+        run: |
+          ssh -p ${{ secrets.DEPLOY_PORT || 22 }} ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "mkdir -p ${{ secrets.DEPLOY_PATH }}tmp && touch ${{ secrets.DEPLOY_PATH }}tmp/restart.txt"
