@@ -31,23 +31,17 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 
       <p class="footer-name">
         <strong>David Maciejewski</strong><br />
-        <em>(ab 21. August 2026: Eiken)</em><br />
-        Schillerstr. 35a<br />
-        32427 Minden
+        <em>
+          {
+            locale === "de"
+              ? "(ab 21. August 2026: Eiken)"
+              : "(from August 21, 2026: Eiken)"
+          }
+        </em>
       </p>
-    </div>
-
-    <div class="footer-col">
-      <SectionLabel text="PING" />
 
       <dl>
-        <dt>TELEFON:</dt>
-        <dd>+49 160 06997824</dd>
-
-        <dt>E-MAIL:</dt>
-        <dd><a href="mailto:hallo@davideiken.de">hallo@davideiken.de</a></dd>
-
-        <dt>WEB:</dt>
+        <dt>Web:</dt>
         <dd>
           <a href="https://davideiken.de">davideiken.de</a><br />
           <a href="https://hawk-gt1191.de">hawk-gt1191.de</a><br />
@@ -57,25 +51,81 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
     </div>
 
     <div class="footer-col">
+      <SectionLabel text="STACK" />
+
+      <dl>
+        <dt>{locale === "de" ? "Fundament:" : "Foundation:"}</dt>
+        <dd>HTML&#xA0;· CSS&#xA0;·&#xA0;TypeScript</dd>
+
+        <dt>{locale === "de" ? "Frameworks & CM:" : "Frameworks & CMS:"}</dt>
+        <dd>
+          Astro&#xA0;· Angular&#xA0;· PrimeNG&#xA0;· JSX&#xA0;· MDX&#xA0;·
+          Markdown&#xA0;· Kirby&#xA0;·&#xA0;PHP
+        </dd>
+
+        <dt>
+          {locale === "de" ? "KI & Agentic Coding:" : "AI & Agentic Coding:"}
+        </dt>
+        <dd>
+          Copilot&#xA0;· Antigravity&#xA0;· Claude&#xA0;· Codex&#xA0;·
+          {
+            locale === "de"
+              ? "Multi-Agenten-Workflows"
+              : "Multi-agent workflows"
+          }
+        </dd>
+
+        <dt>UX & Frontend:</dt>
+        <dd>
+          {
+            locale === "de"
+              ? "UX-Experte · Design-to-Code · Mobile First · Responsive Design"
+              : "UX expert · Design-to-Code · Mobile First · Responsive Design"
+          }
+        </dd>
+      </dl>
+    </div>
+
+    <div class="footer-col">
       <SectionLabel text="SETUP" />
       <dl>
-        <dt>BUILD:</dt>
-        <dd>28.02.1977 in Celle</dd>
+        <dt>Build:</dt>
+        <dd>
+          {locale === "de" ? "28.02.1977 in Celle" : "Feb 28, 1977 in Celle"}
+        </dd>
 
-        <dt>ROOTS:</dt>
-        <dd>Minden, NRW – fest verwurzelt</dd>
+        <dt>Roots:</dt>
+        <dd>
+          {
+            locale === "de"
+              ? "Minden, NRW – fest verwurzelt"
+              : "Minden, NRW – deeply rooted"
+          }
+        </dd>
 
-        <dt>DEPLOY:</dt>
-        <dd>Remote Deutschland, hybrid & DACH auf Anfrage</dd>
+        <dt>Deploy:</dt>
+        <dd>
+          {
+            locale === "de"
+              ? "Remote Deutschland, hybrid & DACH auf Anfrage"
+              : "Remote Germany, hybrid & DACH on request"
+          }
+        </dd>
 
-        <dt>LANGUAGES:</dt>
-        <dd>Deutsch (Muttersprache), Englisch (fließend)</dd>
+        <dt>Languages:</dt>
+        <dd>
+          {
+            locale === "de"
+              ? "Deutsch (Muttersprache), Englisch (fließend)"
+              : "German (Native), English (Fluent)"
+          }
+        </dd>
       </dl>
     </div>
   </div>
 
   <div class="footer-meta">
-    <p>&copy; {new Date().getFullYear()} David Maciejewski*. {rights}</p>
+    <p>&copy; {new Date().getFullYear()} David Maciejewski. {rights}</p>
 
     <p>
       <a href={privacyHref}>{privacyLabel}</a>

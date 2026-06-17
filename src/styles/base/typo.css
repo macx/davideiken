@@ -46,17 +46,24 @@ li {
   text-wrap: pretty;
 } */
 
-main,
-footer {
-  a:any-link {
-    text-decoration: none;
-    color: var(--clr-primary);
+a:any-link:not(.nav-link, .nav-icon-link, .site-logo, .drawer-link) {
+  color: var(--clr-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3.5px;
+  text-decoration-color: color-mix(in oklch, var(--clr-primary) 35%, transparent);
+  border-radius: 0.25rem;
+  transition:
+    color 150ms ease,
+    text-decoration-color 150ms ease,
+    text-decoration-thickness 150ms ease;
 
-    &:hover,
-    &:focus-visible {
-      background-color: var(--clr-primary);
-      color: var(--clr-surface);
-    }
+  &:hover,
+  &:focus-visible {
+    color: var(--clr-primary-strong);
+    text-decoration-color: var(--clr-primary-strong);
+    text-decoration-thickness: 1.5px;
+    background-color: transparent;
   }
 }
 

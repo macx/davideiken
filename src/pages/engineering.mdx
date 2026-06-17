@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Layout.astro
-title: "Engineering"
-description: "Ausgewählte Projekte, Technologie-Stack und Engineering-Philosophie."
+title: "Wissen teilen, Webkultur gestalten."
+description: "Mein Web-Podcast Technikwürze und praxisnahe Tutorials für HAWK-Studierende -- wie ich meine Erfahrung weitergebe."
 navTitle: "Engineering"
 navOrder: 3
 ---
@@ -10,84 +10,37 @@ import { Image } from "astro:assets";
 import PageHeader from "../components/PageHeader.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import hawkImg from "../assets/images/projects/hawk-gt1191.svg";
-import technikwuerzeImg from "../assets/images/projects/technikwuerze-dummy.svg";
+import technikwuerzeImg from "../assets/images/projects/technikwuerze.png";
 
 <PageHeader
-  title="Engineering getrieben von __Geschwindigkeit, Qualität__ und Disziplin."
-  lead="Ich genieße technische Tiefe und messbare Ergebnisse. Das gleiche Mindset, das mich im Sport antreibt, leitet mich auch im Engineering: Fokus, Konstanz und Leistung unter echten Bedingungen."
+  title={frontmatter.title}
+  lead="Für mich lebt gutes Engineering von Austausch und Vernetzung. Mit dem Podcast *Technikwürze* und meinen Tutorials an der HAWK schaffe ich Räume für Wissenstransfer &ndash; als Dialog auf Augenhöhe, bei dem wir alle voneinander lernen."
 />
 
-<div class="grid-auto">
-<div class="content-col">
-  <SectionLabel text="STACK" />
-  <dl class="stack-list">
-    <dt>FUNDAMENT:</dt>
-    <dd>HTML · CSS · TypeScript</dd>
+<div class="grid-auto cols-2 sp-end">
+  <div class="content-col">
+    <SectionLabel text="EDITORIAL" />
 
-    <dt>FRAMEWORKS & CM:</dt>
-    <dd>
-      Astro · Angular · PrimeNG
-      <br />
-      JSX · MDX · Markdown · Kirby · PHP
-    </dd>
-
-    <dt>KI & AGENTIC CODING:</dt>
-    <dd>
-      Copilot · Antigravity · Claude · Codex
-      <br />
-      Multi-Agenten-Workflows als tägliche Praxis
-    </dd>
-
-    <dt>UX & FRONTEND:</dt>
-    <dd>
-      UX-Experte · Design-to-Code
-      <br />
-      Mobile First · Responsive Design
-    </dd>
-
-  </dl>
-</div>
-
-<div class="content-col">
-  <SectionLabel text="EDITORIAL" />
-
-  <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo" />
-  
-  <p>
+    <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo" />
+    
     Umfangreiche Frontend-Tutorials für Studierende meines Seminars an der HAWK
-    – Mobile First, Responsive, frustrationsfrei. Öffentlich zugänglich unter:
-  </p>
-  <p>
-    <a href="https://hawk-gt1191.de" target="_blank" rel="noopener noreferrer">
-      hawk-gt1191.de
-    </a>
-  </p>
-  <br />
-  <p>Der Quellcode der Site ist auf GitHub.</p>
-  <p>
-    <a
-      href="https://github.com/macx/hawk-gt1191"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      github.com/macx/hawk-gt1191
-    </a>
-  </p>
-</div>
+    -- Mobile First, Responsive, frustrationsfrei. Öffentlich zugänglich unter:
+
+    [hawk-gt1191.de](https://hawk-gt1191.de)
+    
+    Der Quellcode der Site ist auf GitHub.
+
+    [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
+  </div>
 
   <div class="content-col">
     <SectionLabel text="PODCAST" />
     
     <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
     
-    <p>
-      Seit 2005 – als Podcast-Pionier in Deutschland. Technikwürze ist mein Podcast für Medienschaffende rund um Gestaltung und Webentwicklung. 188 Episoden, knapp 1,8 Millionen Downloads. Jetzt mit Relaunch zurück.
-    </p>
+    Seit 2005 -- als Podcast-Pionier in Deutschland. Technikwürze ist mein Podcast für Medienschaffende rund um Gestaltung und Webentwicklung. Nach 188 Episoden und knapp 1,8 Millionen Downloads ist das Projekt jetzt per Relaunch zurück -- im Team mit Stefan Nitzsche.
 
-    <p>
-      <a href="https://technikwuerze.de" target="_blank" rel="noopener noreferrer">technikwuerze.de</a>
-    </p>
-
+    [https://technikwuerze.de](https://technikwuerze.de)
   </div>
 </div>
 
@@ -133,12 +86,5 @@ import technikwuerzeImg from "../assets/images/projects/technikwuerze-dummy.svg"
     font-size: var(--fs-s);
     color: var(--clr-text-muted);
     margin: 0;
-  }
-  
-  .content-col a {
-    color: var(--clr-primary);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    font-weight: 600;
   }
 `}</style>

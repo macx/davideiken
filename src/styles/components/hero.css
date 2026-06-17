@@ -1,3 +1,21 @@
+@keyframes scrollGrayscale {
+  from {
+    filter: grayscale(0) contrast(1.02) brightness(1.08);
+  }
+  to {
+    filter: grayscale(1) contrast(1.22) brightness(1.04);
+  }
+}
+
+@keyframes scrollGrayscaleDark {
+  from {
+    filter: grayscale(0) contrast(1.02) brightness(1.0);
+  }
+  to {
+    filter: grayscale(1) contrast(1.22) brightness(0.88);
+  }
+}
+
 .portrait {
   width: 100%;
   max-width: 280px;
@@ -7,27 +25,44 @@
   border: 1px solid var(--clr-outline);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   display: block;
-  filter: grayscale(1) contrast(1.18);
-  transition: filter 0.3s ease;
+  
+  /* Fallback: Bild startet farbig */
+  filter: grayscale(0) contrast(1.02) brightness(1.08);
+
+  /* Progressive Enhancement: Scroll-Driven Animation */
+  @supports (animation-timeline: scroll()) {
+    animation: scrollGrayscale linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 300px;
+  }
 }
 
-/* Dark Mode: Tint the image slightly and darken it to blend with the dark background */
 [data-theme="dark"] .portrait {
-  filter: sepia(0.35) hue-rotate(195deg) saturate(1.4) brightness(0.72)
-    contrast(1.2);
+  filter: grayscale(0) contrast(1.02) brightness(1.0);
+
+  @supports (animation-timeline: scroll()) {
+    animation: scrollGrayscaleDark linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 300px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root[data-theme="auto"] .portrait {
-    filter: sepia(0.35) hue-rotate(195deg) saturate(1.4) brightness(0.72)
-      contrast(1.2);
+    filter: grayscale(0) contrast(1.02) brightness(1.0);
+
+    @supports (animation-timeline: scroll()) {
+      animation: scrollGrayscaleDark linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px 300px;
+    }
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48em) {
   .portrait {
     float: right;
-    width: 240px;
+    width: 16rem;
     margin-inline-start: var(--sp-xl);
     margin-block-end: var(--sp-s);
     margin-block-start: var(--sp-2xs);

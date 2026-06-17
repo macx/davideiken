@@ -1,8 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import avatarImg from "../assets/images/davideiken-1200.jpg";
-// Note: If you have a signature image, import it here.
-// For now, we will leave a placeholder for the signature.
+import DavidSign from "../assets/images/david-sign.svg";
 
 interface Props {
   headingLeft?: string;
@@ -138,12 +137,12 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
           densities={[1.5, 2]}
         />
       </div>
+
       <h2>David Maciejewski</h2>
       <p class="name-note">(ab 21. August 2026: Eiken)</p>
 
-      <div class="signature-placeholder">
-        <!-- Add your signature image here later -->
-        <span class="sr-only">Signature</span>
+      <div class="signature sr-only">
+        <DavidSign />
       </div>
     </div>
   </div>
@@ -196,7 +195,7 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
   .timeline-track {
     position: relative;
     padding-top: 100px;
-    padding-bottom: var(--sp-xl);
+    padding-bottom: var(--sp-2xl);
     z-index: 1;
   }
 
@@ -315,12 +314,11 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
     margin: 0 0 var(--sp-xl);
   }
 
-  .signature-placeholder {
-    width: 200px;
-    height: 100px;
-    border-bottom: 1px solid var(--clr-text-muted);
+  .signature {
+    inline-size: 12em;
+    height: auto;
     margin-inline: auto;
-    opacity: 0.5;
+    transform: translateX(2.5ch);
   }
 
   /* --- Desktop Layout --- */

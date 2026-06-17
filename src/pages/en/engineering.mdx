@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/Layout.astro
-title: "Engineering"
-description: "Selected projects, technology stack, and engineering philosophy."
+title: "Sharing knowledge, __shaping web culture__."
+description: "My web podcast Technikwürze and hands-on tutorials for HAWK students -- how I pass on my experience."
 navTitle: "Engineering"
 navOrder: 3
 ---
@@ -10,84 +10,37 @@ import { Image } from "astro:assets";
 import PageHeader from "../../components/PageHeader.astro";
 import SectionLabel from "../../components/SectionLabel.astro";
 import hawkImg from "../../assets/images/projects/hawk-gt1191.svg";
-import technikwuerzeImg from "../../assets/images/projects/technikwuerze-dummy.svg";
+import technikwuerzeImg from "../../assets/images/projects/technikwuerze.png";
 
 <PageHeader
-  title="Engineering driven by __speed, quality__, and discipline."
-  lead="I enjoy technical depth and measurable outcomes. The same mindset that drives me in sports drives my engineering work: focus, consistency, and performance under real constraints."
+  title={frontmatter.title}
+  lead="For me, great engineering thrives on exchange and collaboration. With the podcast *Technikwürze* and my tutorials at the HAWK, I create spaces for sharing knowledge -- as a dialogue at eye level where we all learn from each other."
 />
 
-<div class="grid-auto">
-<div class="content-col">
-  <SectionLabel text="STACK" />
-  <dl class="stack-list">
-    <dt>FUNDAMENT:</dt>
-    <dd>HTML · CSS · TypeScript</dd>
+<div class="grid-auto cols-2 sp-end">
+  <div class="content-col">
+    <SectionLabel text="EDITORIAL" />
 
-    <dt>FRAMEWORKS & CM:</dt>
-    <dd>
-      Astro · Angular · PrimeNG
-      <br />
-      JSX · MDX · Markdown · Kirby · PHP
-    </dd>
-
-    <dt>AI & AGENTIC CODING:</dt>
-    <dd>
-      Copilot · Antigravity · Claude · Codex
-      <br />
-      Multi-agent workflows as daily practice
-    </dd>
-
-    <dt>UX & FRONTEND:</dt>
-    <dd>
-      UX Expert · Design-to-Code
-      <br />
-      Mobile First · Responsive Design
-    </dd>
-
-  </dl>
-</div>
-
-<div class="content-col">
-  <SectionLabel text="EDITORIAL" />
-
-  <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo" />
-  
-  <p>
+    <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo" />
+    
     Comprehensive frontend tutorials for students of my seminar at HAWK
-    – Mobile First, Responsive, frustration-free. Publicly accessible under:
-  </p>
-  <p>
-    <a href="https://hawk-gt1191.de" target="_blank" rel="noopener noreferrer">
-      hawk-gt1191.de
-    </a>
-  </p>
-  <br />
-  <p>The site's source code is on GitHub.</p>
-  <p>
-    <a
-      href="https://github.com/macx/hawk-gt1191"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      github.com/macx/hawk-gt1191
-    </a>
-  </p>
-</div>
+    -- Mobile First, Responsive, frustration-free. Publicly accessible under:
+
+    [hawk-gt1191.de](https://hawk-gt1191.de)
+    
+    The site's source code is on GitHub.
+
+    [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
+  </div>
 
   <div class="content-col">
     <SectionLabel text="PODCAST" />
     
     <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
     
-    <p>
-      Since 2005 – as a podcast pioneer in Germany. Technikwürze is my podcast for media creators covering design and web development. 188 episodes, nearly 1.8 million downloads. Now back with a relaunch.
-    </p>
+    Since 2005 -- as a podcast pioneer in Germany. Technikwürze is my podcast for media creators covering design and web development. After 188 episodes and nearly 1.8 million downloads, the project is now back with a relaunch -- co-hosted with Stefan Nitzsche.
 
-    <p>
-      <a href="https://technikwuerze.de" target="_blank" rel="noopener noreferrer">technikwuerze.de</a>
-    </p>
-
+    [https://technikwuerze.de](https://technikwuerze.de)
   </div>
 </div>
 
@@ -133,12 +86,5 @@ import technikwuerzeImg from "../../assets/images/projects/technikwuerze-dummy.s
     font-size: var(--fs-s);
     color: var(--clr-text-muted);
     margin: 0;
-  }
-  
-  .content-col a {
-    color: var(--clr-primary);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    font-weight: 600;
   }
 `}</style>

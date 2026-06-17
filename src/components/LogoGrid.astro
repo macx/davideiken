@@ -50,7 +50,7 @@ const processedLogos = logos
         as="div"
         class="logo-item"
         text={logo!.name}
-        style={`--scale: ${logo!.scale}`}
+        style={`--scale: ${logo!.scale};`}
       >
         <Fragment set:html={logo!.html} />
       </Tooltip>
@@ -69,13 +69,14 @@ const processedLogos = logos
     justify-items: center;
   }
 
-  .logo-item {
-    width: 100%;
-    max-width: 140px;
-    height: 60px; /* Base height to align items uniformly */
+  .logo-grid :global(.logo-item) {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    inline-size: 100%;
+    max-inline-size: 140px;
+    block-size: 60px;
     transition: background-color 0.3s ease;
   }
 
@@ -83,16 +84,18 @@ const processedLogos = logos
   :root {
     --logo-fallback-bg: transparent;
   }
+
   @media (prefers-color-scheme: dark) {
     :global(:root:not([data-theme="light"])) {
       --logo-fallback-bg: #ffffff;
     }
   }
+
   :global([data-theme="dark"]) {
     --logo-fallback-bg: #ffffff;
   }
 
-  .logo-item :global(svg) {
+  .logo-grid :global(.logo-item svg) {
     width: 100%;
     height: 100%;
     /* 
@@ -102,11 +105,4 @@ const processedLogos = logos
     */
     transform: scale(var(--scale, 1));
   }
-
-  /* @media (min-width: 768px) {
-    .logo-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-xl);
-    }
-  } */
 </style>

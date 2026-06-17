@@ -39,6 +39,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--sp-content);
+
+  &.cols-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }
 
 .divider {
@@ -52,4 +56,8 @@
 
 .section {
   padding-block: var(--sp-2xl);
+}
+
+.sp-end {
+  padding-block-end: var(--sp-2xl);
 }
