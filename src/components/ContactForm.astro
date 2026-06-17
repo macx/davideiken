@@ -224,7 +224,7 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
     border-bottom: 3px solid var(--clr-text);
     background: color-mix(in oklch, var(--clr-text) 5%, transparent);
     color: var(--clr-text);
-    border-radius: 0;
+    border-radius: 0.5rem;
     transition:
       border-color 0.2s ease,
       outline-color 0.2s ease;
@@ -232,15 +232,13 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
 
   input:focus,
   textarea:focus {
-    outline: none;
-    border-bottom-color: var(--clr-primary);
+    outline-color: transparent;
   }
 
   input:focus-visible,
   textarea:focus-visible {
     outline: var(--focus-outline);
     outline-offset: var(--focus-outline-offset);
-    border-bottom-color: var(--clr-primary);
   }
 
   .submit-btn {
@@ -249,7 +247,7 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
     background: var(--clr-text);
     color: var(--clr-bg);
     border: 2px solid var(--clr-text);
-    border-radius: 0;
+    border-radius: 9999px;
     font-family: var(--ff-copy, sans-serif);
     font-weight: 700;
     text-transform: uppercase;
@@ -267,7 +265,7 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
     background: transparent;
     color: var(--clr-text);
     border-color: var(--clr-text);
-    outline: none;
+    outline-color: transparent;
   }
 
   .submit-btn:focus-visible {
@@ -327,11 +325,6 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
     color: var(--clr-text-muted);
     line-height: 1.4;
     text-align: left;
-  }
-
-  .privacy-note a {
-    color: var(--clr-text);
-    text-decoration: underline;
   }
 
   .form-actions {

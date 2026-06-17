@@ -52,6 +52,11 @@ const desktopNavItems = allLocaleItems.filter(
   (item) => item.slug !== "contact",
 );
 const drawerNavItems = [
+  {
+    label: locale === "de" ? "Startseite" : "Home",
+    href: getRelativeLocaleUrl(locale, ""),
+    slug: "",
+  },
   ...desktopNavItems,
   {
     label: locale === "de" ? "Kontakt" : "Contact",
@@ -84,154 +89,172 @@ const contactHref = "#contact";
 <header class="site-header" role="banner">
   <!-- Floating glass pill -->
   <div class="nav-pill">
-    <a
-      href={getRelativeLocaleUrl(locale, "")}
-      class="site-logo"
-      aria-label={homeLabel}
-    >
-      <Image
-        src={avatarImg}
-        alt="David Eiken"
-        class="logo-mark"
-        width={32}
-        height={32}
-        densities={[1.5, 2]}
-      />
-      <span class="logo-wordmark">David Eiken</span>
-    </a>
-
-    <span class="nav-divider" aria-hidden="true"></span>
-
     <nav class="site-nav" aria-label={navLabel}>
-      {
-        navItems.map((item) => (
+      <ul class="nav-list">
+        <li class="nav-item logo-item">
           <a
-            href={item.href}
-            class:list={[
-              "nav-link",
-              { "is-active": currentPath === item.href },
-            ]}
-            aria-current={currentPath === item.href ? "page" : undefined}
+            href={getRelativeLocaleUrl(locale, "")}
+            class="site-logo"
+            aria-label={homeLabel}
           >
-            {item.label}
+            <Image
+              src={avatarImg}
+              alt="David Eiken"
+              class="logo-mark"
+              width={48}
+              height={48}
+              densities={[1.5, 2]}
+            />
+            <span class="logo-wordmark">David Eiken</span>
           </a>
-        ))
-      }
+        </li>
+
+        {
+          navItems.map((item) => (
+            <li class="nav-item text-link-item">
+              <a
+                href={item.href}
+                class:list={[
+                  "nav-link",
+                  { "is-active": currentPath === item.href },
+                ]}
+                aria-current={currentPath === item.href ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+
+        <li class="nav-divider-item" aria-hidden="true">
+          <span class="nav-divider"></span>
+        </li>
+
+        <li class="nav-item icon-link-item">
+          <Tooltip
+            as="a"
+            href={contactHref}
+            class="nav-icon-link contact-link"
+            aria-label={locale === "de" ? "Kontakt" : "Contact"}
+            text={locale === "de" ? "Kontakt" : "Contact"}
+            position="bottom"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"
+                stroke="currentColor"
+                stroke-width="1.5"
+              ></path>
+              <path d="m4 8 8 6 8-6" stroke="currentColor" stroke-width="1.5"></path>
+            </svg>
+          </Tooltip>
+        </li>
+        <li class="nav-item icon-link-item">
+          <ThemeToggle class="nav-icon-link header-theme-toggle" locale={locale} />
+        </li>
+        <li class="nav-item icon-link-item">
+          <Tooltip
+            as="a"
+            href={languageSwitchHref}
+            hreflang={targetLocale}
+            lang={targetLocale}
+            class="nav-icon-link lang-switch"
+            aria-label={locale === "de"
+              ? "Switch to English"
+              : "Auf Deutsch wechseln"}
+            text={locale === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
+            position="bottom"
+          >
+            <span>{languageSwitchLabel}</span>
+          </Tooltip>
+        </li>
+      </ul>
       <span class="nav-indicator" aria-hidden="true"></span>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-controls="nav-drawer"
+        aria-expanded="false"
+        aria-label={openLabel}
+        data-label-open={openLabel}
+        data-label-close={closeLabel}
+        popovertarget="nav-drawer"
+        popovertargetaction="toggle"
+      >
+        <!-- Hamburger -->
+        <svg
+          class="icon-menu"
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          aria-hidden="true"
+        >
+          <line
+            x1="2"
+            y1="5"
+            x2="16"
+            y2="5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          ></line>
+          <line
+            x1="2"
+            y1="9"
+            x2="16"
+            y2="9"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          ></line>
+          <line
+            x1="2"
+            y1="13"
+            x2="16"
+            y2="13"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          ></line>
+        </svg>
+        <!-- Close -->
+        <svg
+          class="icon-close"
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          aria-hidden="true"
+        >
+          <line
+            x1="4"
+            y1="4"
+            x2="14"
+            y2="14"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          ></line>
+          <line
+            x1="14"
+            y1="4"
+            x2="4"
+            y2="14"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          ></line>
+        </svg>
+      </button>
     </nav>
-
-    <Tooltip
-      as="a"
-      href={contactHref}
-      class="nav-icon-link contact-link"
-      aria-label={locale === "de" ? "Kontakt" : "Contact"}
-      text={locale === "de" ? "Kontakt" : "Contact"}
-      position="bottom"
-    >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"
-          stroke="currentColor"
-          stroke-width="1.5"></path>
-        <path d="m4 8 8 6 8-6" stroke="currentColor" stroke-width="1.5"></path>
-      </svg>
-    </Tooltip>
-
-    <ThemeToggle class="nav-icon-link header-theme-toggle" locale={locale} />
-
-    <Tooltip
-      as="a"
-      href={languageSwitchHref}
-      hreflang={targetLocale}
-      lang={targetLocale}
-      class="nav-icon-link lang-switch"
-      aria-label={locale === "de"
-        ? "Switch to English"
-        : "Auf Deutsch wechseln"}
-      text={locale === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
-      position="bottom"
-    >
-      <span>{languageSwitchLabel}</span>
-    </Tooltip>
-
-    <button
-      class="nav-toggle"
-      id="nav-toggle"
-      aria-controls="nav-drawer"
-      aria-expanded="false"
-      aria-label={openLabel}
-      data-label-open={openLabel}
-      data-label-close={closeLabel}
-      popovertarget="nav-drawer"
-      popovertargetaction="toggle"
-    >
-      <!-- Hamburger -->
-      <svg
-        class="icon-menu"
-        width="18"
-        height="18"
-        viewBox="0 0 18 18"
-        fill="none"
-        aria-hidden="true"
-      >
-        <line
-          x1="2"
-          y1="5"
-          x2="16"
-          y2="5"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"></line>
-        <line
-          x1="2"
-          y1="9"
-          x2="16"
-          y2="9"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"></line>
-        <line
-          x1="2"
-          y1="13"
-          x2="16"
-          y2="13"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"></line>
-      </svg>
-      <!-- Close -->
-      <svg
-        class="icon-close"
-        width="18"
-        height="18"
-        viewBox="0 0 18 18"
-        fill="none"
-        aria-hidden="true"
-      >
-        <line
-          x1="4"
-          y1="4"
-          x2="14"
-          y2="14"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"></line>
-        <line
-          x1="14"
-          y1="4"
-          x2="4"
-          y2="14"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"></line>
-      </svg>
-    </button>
   </div>
 
   <!-- Mobile drawer (glass panel, separate from pill) -->
@@ -363,12 +386,10 @@ const contactHref = "#contact";
       }
     });
   }
-</script>
-
-<style>
+</script><style>
   .site-header {
     position: fixed;
-    inset-block-start: var(--sp-s);
+    inset-block-start: var(--sp);
     inset-inline: 0;
     z-index: 100;
     display: flex;
@@ -382,10 +403,12 @@ const contactHref = "#contact";
       pointer-events: auto;
       position: relative;
       display: flex;
-      align-items: center;
+      align-items: stretch;
+      height: 3.25rem;
       gap: var(--sp-xs);
-      padding-block: 0.5rem;
-      padding-inline: 0.75rem;
+      padding-block: 0;
+      padding-inline-start: 0.5rem;
+      padding-inline-end: 0.5rem;
       border-radius: 9999px;
 
       /* Clean, Flat, Bold Glass */
@@ -398,12 +421,18 @@ const contactHref = "#contact";
       box-shadow: 0 4px 16px -4px color-mix(in oklch, black 12%, transparent);
     }
 
+    .nav-divider-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-inline: var(--sp-2xs);
+    }
+
     .nav-divider {
       width: 1px;
       height: 1.1rem;
       background: color-mix(in oklch, var(--clr-text) 16%, transparent);
       flex-shrink: 0;
-      margin-inline: var(--sp-2xs);
     }
 
     .site-logo {
@@ -413,12 +442,37 @@ const contactHref = "#contact";
       text-decoration: none;
       color: var(--clr-text);
       flex-shrink: 0;
+      align-self: center;
+      padding-block: 0.35rem;
+      padding-inline-start: 0;
+      padding-inline-end: 0.65rem;
+      border-radius: 9999px;
+      transition: background 150ms ease;
+      position: relative;
+      z-index: 1;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset-block: 0.15rem;
+        inset-inline-start: -0.25rem;
+        inset-inline-end: 0.25rem;
+        border-radius: 9999px;
+        background: transparent;
+        z-index: -1;
+        transition: background 150ms ease;
+      }
+
+      &:hover::before,
+      &:focus-visible::before {
+        background: color-mix(in oklch, var(--clr-text) 6%, transparent);
+      }
     }
 
     .logo-mark {
       display: inline-block;
-      width: 1.75rem;
-      height: 1.75rem;
+      width: 2.25rem;
+      height: 2.25rem;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid color-mix(in oklch, var(--clr-text) 15%, transparent);
@@ -433,14 +487,30 @@ const contactHref = "#contact";
     .site-nav {
       position: relative;
       display: flex;
-      align-items: center;
-      gap: var(--sp-2xs);
+      align-items: stretch;
+      width: 100%;
+      height: 100%;
+    }
+
+    .nav-list {
+      display: flex;
+      align-items: stretch;
+      gap: 2px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: stretch;
     }
 
     .nav-link {
-      display: inline-block;
-      padding-block: 0.3rem;
-      padding-inline: 0.6rem;
+      display: flex;
+      align-items: center;
+      padding-inline: 0.8rem;
       border-radius: 9999px;
       font-size: var(--fs-xs);
       font-weight: 500;
@@ -452,15 +522,33 @@ const contactHref = "#contact";
       z-index: 1;
       transition: color 180ms ease;
 
+      &::before {
+        content: "";
+        position: absolute;
+        inset-block: 0.35rem;
+        inset-inline: 0.25rem;
+        border-radius: 9999px;
+        background: transparent;
+        z-index: -1;
+        transition: background 180ms ease;
+      }
+
       &:hover,
       &:focus-visible {
         color: var(--clr-text);
-        outline: none;
+      }
+
+      &:hover::before,
+      &:focus-visible::before {
+        background: color-mix(in oklch, var(--clr-text) 6%, transparent);
       }
 
       &.is-active {
         color: var(--clr-text);
-        background: color-mix(in oklch, var(--clr-primary) 14%, transparent);
+      }
+
+      &.is-active::before {
+        background: color-mix(in oklch, var(--clr-text) 8%, transparent);
       }
     }
 
@@ -468,20 +556,39 @@ const contactHref = "#contact";
       display: none;
       align-items: center;
       justify-content: center;
-      width: 2rem;
-      height: 2rem;
+      width: 2.75rem;
+      height: 100%;
+      align-self: stretch;
       padding: 0;
       background: none;
       border: none;
       cursor: pointer;
-      border-radius: 9999px;
       color: var(--clr-text);
-      transition: background 150ms ease;
+      position: relative;
+      z-index: 1;
+      border-radius: 50%;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 2.05rem;
+        height: 2.05rem;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+        border-radius: 50%;
+        background: transparent;
+        z-index: -1;
+        transition: background 150ms ease;
+      }
 
       &:hover,
       &:focus-visible {
+      }
+
+      &:hover::before,
+      &:focus-visible::before {
         background: color-mix(in oklch, var(--clr-text) 9%, transparent);
-        outline: none;
       }
 
       .icon-close {
@@ -501,26 +608,48 @@ const contactHref = "#contact";
           display: none;
         }
       }
+
+      @media (max-width: 40em) {
+        display: flex;
+        margin-inline-start: auto;
+      }
     }
 
     .nav-icon-link {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 9999px;
+      width: 2.75rem;
+      height: 100%;
       color: color-mix(in oklch, var(--clr-text) 80%, transparent);
       text-decoration: none;
-      transition:
-        color 160ms ease,
-        background 160ms ease;
+      position: relative;
+      z-index: 1;
+      transition: color 160ms ease;
+      border-radius: 50%;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 2.05rem;
+        height: 2.05rem;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+        border-radius: 50%;
+        background: transparent;
+        z-index: -1;
+        transition: background 160ms ease;
+      }
 
       &:hover,
       &:focus-visible {
         color: var(--clr-text);
+      }
+
+      &:hover::before,
+      &:focus-visible::before {
         background: color-mix(in oklch, var(--clr-text) 8%, transparent);
-        outline: none;
       }
     }
 
@@ -531,121 +660,152 @@ const contactHref = "#contact";
     }
 
     @supports (anchor-name: --test) {
-      .nav-link:nth-child(1) {
+      /* Statische Hover-Hintergründe deaktivieren, wenn der gleitende Indikator aktiv ist */
+      .site-logo:hover::before,
+      .nav-link:hover::before,
+      .nav-icon-link:hover::before {
+        background: transparent !important;
+      }
+
+      .logo-item .site-logo {
+        anchor-name: --nav-logo;
+      }
+
+      .nav-item:nth-child(2) .nav-link {
         anchor-name: --nav-1;
       }
 
-      .nav-link:nth-child(2) {
+      .nav-item:nth-child(3) .nav-link {
         anchor-name: --nav-2;
       }
 
-      .nav-link:nth-child(3) {
+      .nav-item:nth-child(4) .nav-link {
         anchor-name: --nav-3;
       }
 
-      .nav-link:nth-child(4) {
+      .nav-item:nth-child(5) .nav-link {
         anchor-name: --nav-4;
       }
 
-      .nav-link:nth-child(5) {
-        anchor-name: --nav-5;
+      /* Icons */
+      .nav-item:nth-child(5) .nav-icon-link {
+        anchor-name: --nav-contact;
       }
 
-      .nav-link:nth-child(6) {
-        anchor-name: --nav-6;
+      .nav-item:nth-child(6) .nav-icon-link {
+        anchor-name: --nav-theme;
       }
 
-      .nav-link:nth-child(7) {
-        anchor-name: --nav-7;
-      }
-
-      .nav-link:nth-child(8) {
-        anchor-name: --nav-8;
+      .nav-item:nth-child(7) .nav-icon-link {
+        anchor-name: --nav-lang;
       }
 
       .nav-indicator {
         position: absolute;
         position-anchor: --nav-1;
-        top: anchor(top);
-        left: anchor(left);
-        width: anchor-size(width);
-        height: anchor-size(height);
+        top: calc(anchor(top) + 0.35rem);
+        height: calc(anchor-size(height) - 0.7rem);
+        left: calc(anchor(left) + 0.25rem);
+        width: calc(anchor-size(width) - 0.5rem);
         border-radius: 9999px;
-        background: color-mix(in oklch, var(--clr-text) 9%, transparent);
+        background: color-mix(in oklch, var(--clr-text) 7%, transparent);
         opacity: 0;
         pointer-events: none;
         transition:
           left 240ms cubic-bezier(0.4, 0, 0.2, 1),
           width 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          top 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          height 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          border-radius 240ms cubic-bezier(0.4, 0, 0.2, 1),
           opacity 160ms ease;
       }
 
-      .site-nav:has(.nav-link.is-active:nth-child(1)) .nav-indicator {
+      /* Logo Hover State */
+      .site-nav:has(.logo-item .site-logo:hover) .nav-indicator {
+        position-anchor: --nav-logo;
+        top: calc(anchor(top) + 0.15rem);
+        height: calc(anchor-size(height) - 0.3rem);
+        left: calc(anchor(left) - 0.25rem);
+        width: calc(anchor-size(width) + 0.5rem);
+        border-radius: 9999px;
+      }
+
+      /* Active Link Anchor Mappings */
+      .site-nav:has(.nav-item:nth-child(2) .nav-link.is-active) .nav-indicator {
         position-anchor: --nav-1;
       }
 
-      .site-nav:has(.nav-link.is-active:nth-child(2)) .nav-indicator {
+      .site-nav:has(.nav-item:nth-child(3) .nav-link.is-active) .nav-indicator {
         position-anchor: --nav-2;
       }
 
-      .site-nav:has(.nav-link.is-active:nth-child(3)) .nav-indicator {
+      .site-nav:has(.nav-item:nth-child(4) .nav-link.is-active) .nav-indicator {
         position-anchor: --nav-3;
       }
 
-      .site-nav:has(.nav-link.is-active:nth-child(4)) .nav-indicator {
+      .site-nav:has(.nav-item:nth-child(5) .nav-link.is-active) .nav-indicator {
         position-anchor: --nav-4;
       }
 
-      .site-nav:has(.nav-link.is-active:nth-child(5)) .nav-indicator {
-        position-anchor: --nav-5;
+      /* Text Link Hover States */
+      .site-nav:has(.text-link-item .nav-link:hover) .nav-indicator {
+        top: calc(anchor(top) + 0.35rem);
+        height: calc(anchor-size(height) - 0.7rem);
+        border-radius: 9999px;
       }
 
-      .site-nav:has(.nav-link.is-active:nth-child(6)) .nav-indicator {
-        position-anchor: --nav-6;
+      .site-nav:has(.nav-item:nth-child(2) .nav-link:hover) .nav-indicator {
+        position-anchor: --nav-1;
+        left: calc(anchor(left) + 0.25rem);
+        width: calc(anchor-size(width) - 0.5rem);
       }
 
-      .site-nav:has(.nav-link.is-active:nth-child(7)) .nav-indicator {
-        position-anchor: --nav-7;
+      .site-nav:has(.nav-item:nth-child(3) .nav-link:hover) .nav-indicator {
+        position-anchor: --nav-2;
+        left: calc(anchor(left) + 0.25rem);
+        width: calc(anchor-size(width) - 0.5rem);
       }
 
-      .site-nav:has(.nav-link.is-active:nth-child(8)) .nav-indicator {
-        position-anchor: --nav-8;
+      .site-nav:has(.nav-item:nth-child(4) .nav-link:hover) .nav-indicator {
+        position-anchor: --nav-3;
+        left: calc(anchor(left) + 0.25rem);
+        width: calc(anchor-size(width) - 0.5rem);
       }
 
-      .site-nav:has(.nav-link:hover) .nav-indicator {
+      .site-nav:has(.nav-item:nth-child(5) .nav-link:hover) .nav-indicator {
+        position-anchor: --nav-4;
+        left: calc(anchor(left) + 0.25rem);
+        width: calc(anchor-size(width) - 0.5rem);
+      }
+
+      /* Icon Hover States (Morph to centered circles) */
+      .site-nav:has(.icon-link-item .nav-icon-link:hover) .nav-indicator {
+        width: 2.05rem;
+        height: 2.05rem;
+        top: calc(anchor(top) + anchor-size(height) / 2 - 1.025rem);
+        border-radius: 50%;
+      }
+
+      .site-nav:has(.nav-item:nth-child(5) .nav-icon-link:hover) .nav-indicator {
+        position-anchor: --nav-contact;
+        left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
+      }
+
+      .site-nav:has(.nav-item:nth-child(6) .nav-icon-link:hover) .nav-indicator {
+        position-anchor: --nav-theme;
+        left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
+      }
+
+      .site-nav:has(.nav-item:nth-child(7) .nav-icon-link:hover) .nav-indicator {
+        position-anchor: --nav-lang;
+        left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
+      }
+
+      /* Show indicator when hovered */
+      .site-nav:has(.site-logo:hover) .nav-indicator,
+      .site-nav:has(.nav-link:hover) .nav-indicator,
+      .site-nav:has(.nav-icon-link:hover) .nav-indicator {
         opacity: 1;
-      }
-
-      .site-nav:has(.nav-link:nth-child(1):hover) .nav-indicator {
-        position-anchor: --nav-1;
-      }
-
-      .site-nav:has(.nav-link:nth-child(2):hover) .nav-indicator {
-        position-anchor: --nav-2;
-      }
-
-      .site-nav:has(.nav-link:nth-child(3):hover) .nav-indicator {
-        position-anchor: --nav-3;
-      }
-
-      .site-nav:has(.nav-link:nth-child(4):hover) .nav-indicator {
-        position-anchor: --nav-4;
-      }
-
-      .site-nav:has(.nav-link:nth-child(5):hover) .nav-indicator {
-        position-anchor: --nav-5;
-      }
-
-      .site-nav:has(.nav-link:nth-child(6):hover) .nav-indicator {
-        position-anchor: --nav-6;
-      }
-
-      .site-nav:has(.nav-link:nth-child(7):hover) .nav-indicator {
-        position-anchor: --nav-7;
-      }
-
-      .site-nav:has(.nav-link:nth-child(8):hover) .nav-indicator {
-        position-anchor: --nav-8;
       }
     }
 
@@ -752,13 +912,12 @@ const contactHref = "#contact";
       &:hover,
       &:focus-visible {
         color: var(--clr-text);
-        background: color-mix(in oklch, var(--clr-text) 6%, transparent);
-        outline: none;
+        background: color-mix(in oklch, var(--clr-text) 4%, transparent);
       }
 
       &.is-active {
         color: var(--clr-text);
-        background: color-mix(in oklch, var(--clr-primary) 10%, transparent);
+        background: color-mix(in oklch, var(--clr-text) 8%, transparent);
       }
     }
 
@@ -769,14 +928,13 @@ const contactHref = "#contact";
     @media (max-width: 40em) {
       .nav-toggle {
         display: flex;
+        margin-inline-start: auto;
       }
 
-      .site-nav,
-      .nav-divider,
-      .contact-link,
-      .lang-switch,
-      .header-theme-toggle {
-        display: none;
+      .text-link-item,
+      .nav-divider-item,
+      .icon-link-item {
+        display: none !important;
       }
     }
   }
