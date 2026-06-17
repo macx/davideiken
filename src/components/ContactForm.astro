@@ -13,7 +13,7 @@ const messages = {
     success: "Message sent successfully! I will get back to you soon.",
     error: "Something went wrong. Please try again.",
     networkError:
-      "Network error or server unavailable (500). Please try again later.",
+      "A server error occurred (500). Please try again later or reach out directly via hallo@davideiken.de.",
   },
   de: {
     name: "Name",
@@ -25,7 +25,7 @@ const messages = {
       "Vielen Dank! Die Nachricht wurde erfolgreich gesendet. Ich melde mich in Kürze.",
     error: "Es ist ein Fehler aufgetreten. Bitte versuche es noch einmal.",
     networkError:
-      "Netzwerkfehler oder Server-Problem (500). Bitte versuche es später noch einmal.",
+      "Es gab ein Server-Problem (Fehler 500). Bitte versuche es später noch einmal oder schreibe mir direkt an hallo@davideiken.de.",
   },
 };
 
@@ -149,7 +149,11 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
           form.reset();
         } else {
           // If 500 error or validation error
-          statusEl.textContent = result.error || msgError;
+          if (response.status === 500) {
+            statusEl.textContent = msgNetwork;
+          } else {
+            statusEl.textContent = result.error || msgError;
+          }
           statusEl.className = "form-status error";
           submitBtn.disabled = false;
         }
@@ -311,9 +315,13 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
   }
 
   .form-status.error {
-    background: rgba(255, 68, 68, 0.1);
-    color: var(--clr-tertiary, #ff4444);
-    border: 1px solid var(--clr-tertiary, #ff4444);
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: var(--fs-s);
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
   }
 
   .form-status.sending {
