@@ -17,14 +17,13 @@ const contactSchema = z.object({
 });
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
-  console.log("--> API /contact reached!", { method: request.method, url: request.url });
   try {
     // 1. Rate Limiting
     let ip = 'unknown';
     try {
       ip = clientAddress || 'unknown';
     } catch (e) {
-      console.warn("Failed to get clientAddress:", e);
+
     }
     const now = Date.now();
     const clientRecord = rateLimit.get(ip);
