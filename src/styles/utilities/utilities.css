@@ -1,6 +1,10 @@
 .content-center {
   inline-size: min(100% - (var(--sp-m) * 2), var(--max-width, 50rem));
   margin-inline: auto;
+
+  main > & {
+    padding-block-end: var(--sp-2xl);
+  }
 }
 
 .stack > * + * {
@@ -60,4 +64,12 @@
 
 .sp-end {
   padding-block-end: var(--sp-2xl);
+}
+
+.meta {
+  margin-block-start: var(--sp-site);
+  padding-block: var(--sp-xs);
+  font-size: var(--fs-s);
+  color: var(--clr-text-muted);
+  border-block-start: 2px dashed var(--clr-line);
 }

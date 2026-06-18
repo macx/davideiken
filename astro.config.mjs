@@ -11,7 +11,7 @@ export default defineConfig({
   }),
   vite: {
     ssr: {
-      noExternal: true,
+      noExternal: process.argv.includes("build") ? true : undefined,
     },
   },
   security: {

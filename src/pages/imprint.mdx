@@ -6,37 +6,25 @@ description: "Impressum und Profilklärung für diese Website."
 
 import PageHeader from "../components/PageHeader.astro";
 import EmailLink from "../components/EmailLink.astro";
-import pkg from '../../package.json';
+import pkg from "../../package.json";
 
 <PageHeader
   title="Impressum"
-  lead="Informationen gemäß § 5 TMG"
+  compactTitle={true}
+  lead="Informationen gemäß § 5 TMG"
 />
 
-<section class="section-surface">
-  <div class="section-header">
-    <h2>1. Angaben zur Person</h2>
-  </div>
-  <address>
-    David Maciejewski<br />
-    [Deine Straße und Hausnummer]<br />
-    [Deine PLZ und Ort]<br />
-  </address>
-  <p>
-    <strong>Wichtiger Hinweis:</strong><br />
-    Die Inhalte dieser Website dienen ausschließlich privaten sowie beruflichen Informationszwecken (Bewerbungsportfolio). Es werden keine gewerblichen Dienstleistungen angeboten.
-  </p>
-</section>
+## 1. Angaben zur Person
 
-<section class="section-projekte">
-  <div class="section-header">
-    <h2>2. Kontakt</h2>
-  </div>
-  <p>
-    E-Mail: <EmailLink email="hello@davideiken.de" /><br />
-    Oder nutze alternativ das <a href="/#contact">Kontaktformular</a>.
-  </p>
-  <p>
-    <small>App-Version: v{pkg.version}</small>
-  </p>
-</section>
+<address>David Maciejewski Schillerstraße 35a 32427 Minden</address>
+<br />
+
+**Wichtiger Hinweis:**
+Die Inhalte dieser Website dienen ausschließlich privaten sowie beruflichen Informationszwecken (Bewerbungs‑Portfolio). Es werden keine gewerblichen Dienstleistungen angeboten.
+
+## 2. Kontakt
+
+E‑Mail: <EmailLink email="hallo@davideiken.de" /><br />
+Oder nutze alternativ das [Kontaktformular](/#contact).
+
+<div class="meta">App‑Version: v{pkg.version}</div>

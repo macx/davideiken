@@ -3,6 +3,11 @@
     <style>
       .cls-1 {
         fill: #000;
+      
+      }
+      
+      .cls-3 {
+        fill: #fff;
       }
 
       .cls-1, .cls-2, .cls-3 {
@@ -13,9 +18,26 @@
         fill: #004fcd;
       }
 
-      .cls-3 {
+      @media (prefers-color-scheme: dark) {
+        .cls-1 {
+          fill: #fff;
+        }
+      }
+
+      @media (prefers-color-scheme: light) {
+        .cls-1 {
+          fill: #000;
+        }
+      }
+
+      [data-theme="dark"] .cls-1, [data-theme="dark"] .cls-3 {
         fill: #fff;
       }
+
+      [data-theme="light"] .cls-1 {
+        fill: #000;
+      }
+
     </style>
   </defs>
   <path class="cls-1" d="M5.36,18.74h12.64v15.76h5.35V0h-5.35v13.79H5.36V0H0v34.5h5.36v-15.76ZM34.5,0l-9.64,34.5h5.84l3.58-12.86h8.33l-1.17-4.92h-5.79L40.34,0h-5.84ZM40.82,0l8.32,34.5h5.84l6.57-27.96,6.56,27.96h5.84L82.27,0h-5.83l-5.48,27.66L64.46,0h-5.83l-6.49,27.66L46.67,0h-5.85ZM81.74,16.73l10.69,17.77h6.33l-10.7-17.76L98.52,0h-6.33l-10.45,16.73Z"/>

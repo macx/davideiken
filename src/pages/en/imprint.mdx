@@ -6,38 +6,25 @@ description: "Legal notice and profile clarification for this website."
 
 import PageHeader from "../../components/PageHeader.astro";
 import EmailLink from "../../components/EmailLink.astro";
-import pkg from '../../../package.json';
+import pkg from "../../../package.json";
 
 <PageHeader
   title="Legal Notice"
-  lead="Information in accordance with § 5 TMG"
+  compactTitle={true}
+  lead="Information in accordance with § 5 TMG"
 />
 
-<section class="section-surface">
-  <div class="section-header">
-    <h2>1. Personal Details</h2>
-  </div>
-  <address>
-    David Maciejewski<br />
-    [Your Street and Number]<br />
-    [Your ZIP Code and City]<br />
-    Germany
-  </address>
-  <p>
-    <strong>Important Notice:</strong><br />
-    The content of this website serves exclusively private and professional informational purposes (job application portfolio). No commercial services are offered.
-  </p>
-</section>
+## 1. Personal Details
 
-<section class="section-projekte">
-  <div class="section-header">
-    <h2>2. Contact</h2>
-  </div>
-  <p>
-    Email: <EmailLink email="hello@davideiken.de" /><br />
-    Alternatively, please use the <a href="/en/#contact">contact form</a>.
-  </p>
-  <p>
-    <small>App version: v{pkg.version}</small>
-  </p>
-</section>
+<address>David Maciejewski, Schillerstraße 35a, 32427 Minden</address>
+<br />
+
+**Important Notice:**
+The content of this website serves exclusively private and professional informational purposes (job‑application portfolio). No commercial services are offered.
+
+## 2. Contact
+
+Email: <EmailLink email="hallo@davideiken.de" /><br />
+Or alternatively use the [contact form](/en/#contact).
+
+<div class="meta">App‑Version: v{pkg.version}</div>

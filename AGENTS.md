@@ -88,7 +88,7 @@ When a new content page is requested:
 2. Only for layout/interactivity: `src/pages/<slug>.astro`
 3. Reuse shared visual rules from tokens/layers.
 
-When editing content, write primarily MDX instead of using HTML tags. Use double "--" for en-dashes, single "-" for hyphens and single "'" for apostrophes.
+When editing content, write primarily MDX instead of using HTML tags. Only allowed HTML element for semantic address markup is `<address>`; other HTML may be used only when pure Markdown cannot achieve the required semantics (e.g., complex tables, custom embedded media). All structural markup must use MDX headings, lists, etc. Use double "--" for en‑dashes, single "-" for hyphens and single "'" for apostrophes.
 
 ## 8) Maintenance of This Guide
 
