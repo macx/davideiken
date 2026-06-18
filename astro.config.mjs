@@ -14,6 +14,9 @@ export default defineConfig({
       noExternal: true,
     },
   },
+  security: {
+    checkOrigin: false,
+  },
   i18n: {
     locales: ["en", "de"],
     defaultLocale: "de",
