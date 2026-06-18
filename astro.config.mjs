@@ -9,6 +9,11 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  vite: {
+    ssr: {
+      noExternal: true,
+    },
+  },
   i18n: {
     locales: ["en", "de"],
     defaultLocale: "de",
