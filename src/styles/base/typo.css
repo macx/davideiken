@@ -47,47 +47,54 @@ h6 {
   line-height: var(--lh-h4);
 }
 
-:where(main ul) {
-  margin-block: 0 1.5em;
-  padding-inline-start: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  list-style: none;
-}
+:where(main) {
+  ul:not([class]) {
+    margin-block: 0 1.5em;
+    padding-inline-start: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
 
-:where(main ul li) {
-  position: relative;
-  padding-inline-start: 1.5rem;
-  line-height: var(--lh-copy);
-}
+    li {
+      position: relative;
+      padding-inline-start: 1.5rem;
+      line-height: var(--lh-copy);
+    }
 
-:where(main ul li)::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--clr-primary);
-}
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--clr-primary);
+    }
+  }
 
-:where(main ol) {
-  margin-block: 0 1.5em;
-  padding-inline-start: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
+  /* Red dot for timeline list items */
+  ul.timeline-list li::before {
+    background-color: var(--clr-tertiary);
+  }
 
-:where(main ol li) {
-  line-height: var(--lh-copy);
-}
+  ol:not([class]) {
+    margin-block: 0 1.5em;
+    padding-inline-start: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 
-:where(main ol) > li::marker {
-  color: var(--clr-primary);
-  font-weight: 600;
+  ol li {
+    line-height: var(--lh-copy);
+  }
+
+  ol > li::marker {
+    color: var(--clr-primary);
+    font-weight: 600;
+  }
 }
 
 a:any-link:not(.nav-link, .nav-icon-link, .site-logo, .drawer-link) {
