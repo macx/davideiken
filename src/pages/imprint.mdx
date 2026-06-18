@@ -5,6 +5,7 @@ description: "Impressum und Profilklärung für diese Website."
 ---
 
 import PageHeader from "../components/PageHeader.astro";
+import pkg from '../../package.json';
 
 <PageHeader
   title="Impressum und Geltungsbereich dieser Website"
@@ -28,5 +29,8 @@ import PageHeader from "../components/PageHeader.astro";
   </div>
   <p>
     E-Mail: <a href="mailto:hello@davideiken.de">hello@davideiken.de</a>
+  </p>
+  <p>
+    <small>App-Version: v{pkg.version}</small>
   </p>
 </section>

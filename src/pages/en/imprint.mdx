@@ -5,6 +5,7 @@ description: "Legal notice and profile clarification for this website."
 ---
 
 import PageHeader from "../../components/PageHeader.astro";
+import pkg from '../../../package.json';
 
 <PageHeader
   title="Imprint and scope of this website"
@@ -29,5 +30,8 @@ import PageHeader from "../../components/PageHeader.astro";
   </div>
   <p>
     Email: <a href="mailto:hello@davideiken.de">hello@davideiken.de</a>
+  </p>
+  <p>
+    <small>App version: v{pkg.version}</small>
   </p>
 </section>
