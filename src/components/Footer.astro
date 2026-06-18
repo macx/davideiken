@@ -7,12 +7,9 @@ import SectionLabel from "./SectionLabel.astro";
 const locale = Astro.currentLocale ?? "de";
 const privacyHref =
   locale === "de"
-    ? getRelativeLocaleUrl(locale, "datenschutz/baustellenkamera")
-    : getRelativeLocaleUrl(locale, "privacy/construction-camera");
+    ? getRelativeLocaleUrl(locale, "datenschutz")
+    : getRelativeLocaleUrl(locale, "privacy");
 const imprintHref = getRelativeLocaleUrl(locale, "imprint");
-
-const rights =
-  locale === "de" ? "Alle Rechte vorbehalten." : "All rights reserved.";
 const privacyLabel = locale === "de" ? "Datenschutz" : "Privacy";
 const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 ---
@@ -125,13 +122,10 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
   </div>
 
   <div class="footer-meta">
-    <p>&copy; {new Date().getFullYear()} David Maciejewski. {rights}</p>
-
-    <p>
-      <a href={privacyHref}>{privacyLabel}</a>
-      <span aria-hidden="true"> · </span>
-      <a href={imprintHref}>{imprintLabel}</a>
-    </p>
+    <nav class="legal-nav" aria-label="Legal">
+      <a href={privacyHref} class="legal-link">{privacyLabel}</a>
+      <a href={imprintHref} class="legal-link">{imprintLabel}</a>
+    </nav>
   </div>
 </footer>
 
@@ -181,21 +175,40 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
   }
 
   .footer-meta {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-s);
-    align-items: center;
-    border-top: 1px solid var(--clr-line);
     margin-block-start: var(--sp-l);
     padding-block-start: var(--sp-l);
-    font-size: var(--fs-xs);
-    color: var(--clr-text-muted);
-    text-align: center;
+    border-top: 1px solid var(--clr-line);
+  }
 
-    @media (min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-between;
-      text-align: left;
+  .legal-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: center;
+    border: 1px solid var(--clr-text);
+    width: fit-content;
+  }
+
+  .legal-link {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--sp-s) var(--sp-m);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--clr-text);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:first-child {
+      border-right: 1px solid var(--clr-text);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--clr-text);
+      color: var(--clr-bg);
     }
   }
 </style>

@@ -4,6 +4,16 @@ title: "Datenschutzerklärung zur Videoüberwachung (Baustellenkamera)"
 description: "Informationen zur Baustellenkamera und Datenschutz"
 ---
 
+import PageHeader from "../../components/PageHeader.astro";
+import PrivacyNav from "../../components/PrivacyNav.astro";
+
+<PageHeader
+  title={frontmatter.title}
+  lead="Die Bilder der Baustellenkamera sind öffentlich zugänglich."
+/>
+
+<PrivacyNav />
+
 <div class="max-w-4xl mx-auto prose prose-lg dark:prose-invert">
   <h1 class="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">
    {frontmatter.title}

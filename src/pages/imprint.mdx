@@ -5,30 +5,36 @@ description: "Impressum und Profilklärung für diese Website."
 ---
 
 import PageHeader from "../components/PageHeader.astro";
+import EmailLink from "../components/EmailLink.astro";
 import pkg from '../../package.json';
 
 <PageHeader
-  title="Impressum und Geltungsbereich dieser Website"
-  lead="Diese Website ist ein persönliches berufliches Profil und Portfolio."
+  title="Impressum"
+  lead="Informationen gemäß § 5 TMG"
 />
 
 <section class="section-surface">
   <div class="section-header">
-    <h2>Zweck dieser Website</h2>
+    <h2>1. Angaben zur Person</h2>
   </div>
+  <address>
+    David Maciejewski<br />
+    [Deine Straße und Hausnummer]<br />
+    [Deine PLZ und Ort]<br />
+  </address>
   <p>
-    Diese Website dient dem Zweck der beruflichen Präsentation und für Bewerbungen auf Stellen wie UI/UX Frontend Engineer.
+    <strong>Wichtiger Hinweis:</strong><br />
+    Die Inhalte dieser Website dienen ausschließlich privaten sowie beruflichen Informationszwecken (Bewerbungsportfolio). Es werden keine gewerblichen Dienstleistungen angeboten.
   </p>
-  <p>Über diese Website werden keine Dienstleistungen angeboten oder verkauft.</p>
-  <p>Parallel dazu bin ich auch als Hochschuldozent tätig.</p>
 </section>
 
 <section class="section-projekte">
   <div class="section-header">
-    <h2>Kontakt</h2>
+    <h2>2. Kontakt</h2>
   </div>
   <p>
-    E-Mail: <a href="mailto:hello@davideiken.de">hello@davideiken.de</a>
+    E-Mail: <EmailLink email="hello@davideiken.de" /><br />
+    Oder nutze alternativ das <a href="/#contact">Kontaktformular</a>.
   </p>
   <p>
     <small>App-Version: v{pkg.version}</small>

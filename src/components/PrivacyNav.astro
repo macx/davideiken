@@ -1,0 +1,50 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const locale = Astro.currentLocale ?? "de";
+const { pathname } = Astro.url;
+
+const mainHref = getRelativeLocaleUrl(locale, locale === "de" ? "datenschutz" : "privacy");
+const cameraHref = getRelativeLocaleUrl(locale, locale === "de" ? "datenschutz/kamera" : "privacy/camera");
+
+// Determine active state
+const isCameraActive = pathname.includes("kamera") || pathname.includes("camera");
+const isMainActive = !isCameraActive;
+
+const mainLabel = locale === "de" ? "Website" : "Website";
+const cameraLabel = locale === "de" ? "Kamera" : "Camera";
+---
+
+<nav class="privacy-tabs" aria-label="Datenschutz Navigation">
+  <a href={mainHref} class:list={["tab", { active: isMainActive }]}>{mainLabel}</a>
+  <a href={cameraHref} class:list={["tab", { active: isCameraActive }]}>{cameraLabel}</a>
+</nav>
+
+<style>
+  .privacy-tabs {
+    display: flex;
+    gap: var(--sp-2xs);
+    margin-block-end: var(--sp-l);
+    border-bottom: 1px solid var(--clr-line);
+    padding-block-end: var(--sp-xs);
+  }
+  .tab {
+    padding: var(--sp-2xs) var(--sp-m);
+    text-decoration: none;
+    color: var(--clr-text-muted);
+    font-weight: 600;
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .tab:hover, .tab:focus-visible {
+    background-color: color-mix(in oklch, var(--clr-text) 10%, transparent);
+    color: var(--clr-text);
+  }
+  .tab.active {
+    color: var(--clr-bg);
+    background-color: var(--clr-text);
+  }
+</style>
