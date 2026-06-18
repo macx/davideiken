@@ -7,7 +7,7 @@ import SectionLabel from "./SectionLabel.astro";
 const locale = Astro.currentLocale ?? "de";
 const privacyHref =
   locale === "de"
-    ? getRelativeLocaleUrl(locale, "datenschutz")
+    ? getRelativeLocaleUrl(locale, "privacy")
     : getRelativeLocaleUrl(locale, "privacy");
 const imprintHref = getRelativeLocaleUrl(locale, "imprint");
 const privacyLabel = locale === "de" ? "Datenschutz" : "Privacy";
@@ -121,10 +121,10 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
     </div>
   </div>
 
-  <div class="footer-meta">
+  <div class="meta">
     <nav class="legal-nav" aria-label="Legal">
-      <a href={privacyHref} class="legal-link">{privacyLabel}</a>
-      <a href={imprintHref} class="legal-link">{imprintLabel}</a>
+      <a href={imprintHref}>{imprintLabel}</a>
+      <a href={privacyHref}>{privacyLabel}</a>
     </nav>
   </div>
 </footer>
@@ -174,41 +174,33 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
     }
   }
 
-  .footer-meta {
-    margin-block-start: var(--sp-l);
-    padding-block-start: var(--sp-l);
-    border-top: 1px solid var(--clr-line);
-  }
-
   .legal-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0;
+    gap: var(--sp-m);
     align-items: center;
-    border: 1px solid var(--clr-text);
-    width: fit-content;
+    width: 100%;
+    justify-content: center;
+
+    @media (min-width: 768px) {
+      justify-content: flex-end;
+    }
   }
 
-  .legal-link {
-    display: inline-flex;
-    align-items: center;
-    padding: var(--sp-s) var(--sp-m);
+  .legal-nav a {
     font-size: var(--fs-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--clr-text);
+    color: var(--clr-text-muted);
     text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
-
-    &:first-child {
-      border-right: 1px solid var(--clr-text);
-    }
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
 
     &:hover,
     &:focus-visible {
-      background-color: var(--clr-text);
-      color: var(--clr-bg);
+      color: var(--clr-text);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
     }
   }
 </style>
