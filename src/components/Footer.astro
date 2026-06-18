@@ -7,12 +7,9 @@ import SectionLabel from "./SectionLabel.astro";
 const locale = Astro.currentLocale ?? "de";
 const privacyHref =
   locale === "de"
-    ? getRelativeLocaleUrl(locale, "datenschutz/baustellenkamera")
-    : getRelativeLocaleUrl(locale, "privacy/construction-camera");
+    ? getRelativeLocaleUrl(locale, "privacy")
+    : getRelativeLocaleUrl(locale, "privacy");
 const imprintHref = getRelativeLocaleUrl(locale, "imprint");
-
-const rights =
-  locale === "de" ? "Alle Rechte vorbehalten." : "All rights reserved.";
 const privacyLabel = locale === "de" ? "Datenschutz" : "Privacy";
 const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 ---
@@ -124,14 +121,11 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
     </div>
   </div>
 
-  <div class="footer-meta">
-    <p>&copy; {new Date().getFullYear()} David Maciejewski. {rights}</p>
-
-    <p>
-      <a href={privacyHref}>{privacyLabel}</a>
-      <span aria-hidden="true"> · </span>
+  <div class="meta">
+    <nav class="legal-nav" aria-label="Legal">
       <a href={imprintHref}>{imprintLabel}</a>
-    </p>
+      <a href={privacyHref}>{privacyLabel}</a>
+    </nav>
   </div>
 </footer>
 
@@ -180,22 +174,33 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
     }
   }
 
-  .footer-meta {
+  .legal-nav {
     display: flex;
-    flex-direction: column;
-    gap: var(--sp-s);
+    flex-wrap: wrap;
+    gap: var(--sp-m);
     align-items: center;
-    border-top: 1px solid var(--clr-line);
-    margin-block-start: var(--sp-l);
-    padding-block-start: var(--sp-l);
-    font-size: var(--fs-xs);
-    color: var(--clr-text-muted);
-    text-align: center;
+    width: 100%;
+    justify-content: center;
 
     @media (min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-between;
-      text-align: left;
+      justify-content: flex-end;
+    }
+  }
+
+  .legal-nav a {
+    font-size: var(--fs-xs);
+    color: var(--clr-text-muted);
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--clr-text);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
     }
   }
 </style>

@@ -5,29 +5,26 @@ description: "Legal notice and profile clarification for this website."
 ---
 
 import PageHeader from "../../components/PageHeader.astro";
+import EmailLink from "../../components/EmailLink.astro";
+import pkg from "../../../package.json";
 
 <PageHeader
-  title="Imprint and scope of this website"
-  lead="This website is a personal professional profile and portfolio."
+  title="Legal Notice"
+  compactTitle={true}
+  lead="Information in accordance with § 5 TMG"
 />
 
-<section class="section-surface">
-  <div class="section-header">
-    <h2>Purpose of this website</h2>
-  </div>
-  <p>
-    This website serves the purpose of professional presentation and job
-    applications for roles such as UI/UX Frontend Engineer.
-  </p>
-  <p>No services are offered or sold through this website.</p>
-  <p>In parallel, I also work independently as a university lecturer.</p>
-</section>
+## 1. Personal Details
 
-<section class="section-projekte">
-  <div class="section-header">
-    <h2>Contact</h2>
-  </div>
-  <p>
-    Email: <a href="mailto:hello@davideiken.de">hello@davideiken.de</a>
-  </p>
-</section>
+<address>David Maciejewski, Schillerstraße 35a, 32427 Minden</address>
+<br />
+
+**Important Notice:**
+The content of this website serves exclusively private and professional informational purposes (job‑application portfolio). No commercial services are offered.
+
+## 2. Contact
+
+Email: <EmailLink email="hallo@davideiken.de" /><br />
+Or alternatively use the [contact form](/en/#contact).
+
+<div class="meta">App‑Version: v{pkg.version}</div>

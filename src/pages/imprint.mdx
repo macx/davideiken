@@ -5,28 +5,26 @@ description: "Impressum und Profilklärung für diese Website."
 ---
 
 import PageHeader from "../components/PageHeader.astro";
+import EmailLink from "../components/EmailLink.astro";
+import pkg from "../../package.json";
 
 <PageHeader
-  title="Impressum und Geltungsbereich dieser Website"
-  lead="Diese Website ist ein persönliches berufliches Profil und Portfolio."
+  title="Impressum"
+  compactTitle={true}
+  lead="Informationen gemäß § 5 TMG"
 />
 
-<section class="section-surface">
-  <div class="section-header">
-    <h2>Zweck dieser Website</h2>
-  </div>
-  <p>
-    Diese Website dient dem Zweck der beruflichen Präsentation und für Bewerbungen auf Stellen wie UI/UX Frontend Engineer.
-  </p>
-  <p>Über diese Website werden keine Dienstleistungen angeboten oder verkauft.</p>
-  <p>Parallel dazu bin ich auch als Hochschuldozent tätig.</p>
-</section>
+## 1. Angaben zur Person
 
-<section class="section-projekte">
-  <div class="section-header">
-    <h2>Kontakt</h2>
-  </div>
-  <p>
-    E-Mail: <a href="mailto:hello@davideiken.de">hello@davideiken.de</a>
-  </p>
-</section>
+<address>David Maciejewski Schillerstraße 35a 32427 Minden</address>
+<br />
+
+**Wichtiger Hinweis:**
+Die Inhalte dieser Website dienen ausschließlich privaten sowie beruflichen Informationszwecken (Bewerbungs‑Portfolio). Es werden keine gewerblichen Dienstleistungen angeboten.
+
+## 2. Kontakt
+
+E‑Mail: <EmailLink email="hallo@davideiken.de" /><br />
+Oder nutze alternativ das [Kontaktformular](/#contact).
+
+<div class="meta">App‑Version: v{pkg.version}</div>

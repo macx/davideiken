@@ -1,5 +1,7 @@
 :root {
   --max-width: 50rem;
+  --radius: 1em;
+
   --sp: 1.25rem;
   --sp-2xs: calc(var(--sp) * 0.25);
   --sp-xs: calc(var(--sp) * 0.5);

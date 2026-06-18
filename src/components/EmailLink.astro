@@ -1,0 +1,29 @@
+---
+interface Props {
+  email: string;
+}
+
+const { email } = Astro.props;
+
+// Base64 encode the email at build time
+const encodedEmail = Buffer.from(email).toString('base64');
+---
+
+<span class="protected-email" data-email={encodedEmail}>
+  <noscript>
+    {/* Fallback for users without JS */}
+    {email.replace('@', ' (at) ').replace('.', ' (dot) ')}
+  </noscript>
+</span>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const emailEls = document.querySelectorAll<HTMLElement>('.protected-email');
+    emailEls.forEach(el => {
+      if (el.dataset.email) {
+        const decoded = atob(el.dataset.email);
+        el.innerHTML = `<a href="mailto:${decoded}">${decoded}</a>`;
+      }
+    });
+  });
+</script>

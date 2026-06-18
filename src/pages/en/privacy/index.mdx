@@ -1,0 +1,80 @@
+---
+layout: ../../../layouts/Layout.astro
+title: "Privacy Policy | David Maciejewski"
+description: "Information on data protection on my personal website."
+---
+
+import PageHeader from "../../../components/PageHeader.astro";
+import PrivacyNav from "../../../components/PrivacyNav.astro";
+import pkg from "../../../../package.json";
+
+<PageHeader
+  title="Privacy Policy"
+  compactTitle={true}
+  lead="Transparency regarding the processing of your data on my website."
+/>
+
+<PrivacyNav />
+
+<section class="section-surface">
+  <div class="section-header">
+    <h2>1. General Information</h2>
+  </div>
+  <p>
+    The protection of your personal data is very important to me. I treat your personal data confidentially and in accordance with the statutory data protection regulations and this privacy policy.
+  </p>
+  <p>
+    This website serves as a private professional portfolio.
+  </p>
+</section>
+
+<section class="section-projekte">
+  <div class="section-header">
+    <h2>2. Data Collection on this Website</h2>
+  </div>
+  
+  <h3>Server Log Files</h3>
+  <p>
+    The provider of the pages automatically collects and stores information in so-called server log files, which your browser automatically transmits to us. These are:
+  </p>
+  <ul>
+    <li>Browser type and browser version</li>
+    <li>Operating system used</li>
+    <li>Referrer URL</li>
+    <li>Host name of the accessing computer</li>
+    <li>Time of the server request</li>
+    <li>IP address</li>
+  </ul>
+  <p>
+    This data is not merged with other data sources. The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data for the fulfillment of a contract or for measures preliminary to a contract. The website operator has a legitimate interest in the technically error-free presentation and optimization of his website – for this purpose, the server log files must be recorded.
+  </p>
+
+  <h3>Contact Form</h3>
+  <p>
+    If you send me inquiries via the contact form, your details from the inquiry form, including the contact details you provided there (name, email address), will be stored by me for the purpose of processing the inquiry and in case of follow-up questions. I will not share this information without your consent.
+  </p>
+  <p>
+    The processing of this data is based on Art. 6 (1) (b) GDPR if your request is related to the execution of a contract or is necessary to carry out pre-contractual measures. In all other cases, processing is based on my legitimate interest in the effective processing of the requests addressed to me (Art. 6 (1) (f) GDPR) or on your consent (Art. 6 (1) (a) GDPR) if this was requested.
+  </p>
+  <p>
+    The data you entered in the contact form will remain with me until you ask me to delete it, revoke your consent to its storage, or the purpose for data storage no longer applies.
+  </p>
+</section>
+
+<section class="section-surface">
+  <div class="section-header">
+    <h2>3. Contact & Responsible Person</h2>
+  </div>
+  <p>
+    The responsible party for data processing on this website is:
+  </p>
+  <address>
+    David Maciejewski<br />
+    Schillerstraße 35a<br />
+    32427 Minden<br />
+    Email: hallo@davideiken.de
+  </address>
+  <p>
+    <small>App version: v{pkg.version}</small>
+  </p>
+</section>

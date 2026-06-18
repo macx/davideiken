@@ -4,9 +4,10 @@ import { markdownToHtml } from "satteri";
 interface Props {
   title?: string;
   lead?: string;
+  compactTitle?: boolean;
 }
 
-const { title = "", lead = "" } = Astro.props;
+const { title = "", lead = "", compactTitle = false } = Astro.props;
 const unwrapP = (html: string) =>
   html ? html.replace(/^<p>/, "").replace(/<\/p>\n?$/, "") : "";
 
@@ -18,7 +19,14 @@ const leadHtml = unwrapP(leadHtmlRaw);
 ---
 
 <div class="page-header">
-  {titleHtml && <h1 class="title" set:html={titleHtml} />}
+  {
+    titleHtml && (
+      <h1
+        class:list={["title", { "title-compact": compactTitle }]}
+        set:html={titleHtml}
+      />
+    )
+  }
   {leadHtml && <p class="lead" set:html={leadHtml} />}
 </div>
 
@@ -47,7 +55,6 @@ const leadHtml = unwrapP(leadHtmlRaw);
     hyphens: none;
     view-transition-name: page-header-lead;
   }
-
 
   :global(.accent) {
     color: var(--clr-secondary);

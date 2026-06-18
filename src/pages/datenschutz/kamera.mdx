@@ -1,0 +1,96 @@
+---
+layout: ../../layouts/Layout.astro
+title: "Datenschutzerklärung zur Videoüberwachung (Baustellenkamera)"
+description: "Informationen zur Baustellenkamera und Datenschutz"
+---
+
+import PageHeader from "../../components/PageHeader.astro";
+import PrivacyNav from "../../components/PrivacyNav.astro";
+import EmailLink from "../../components/EmailLink.astro";
+
+<PageHeader
+  title={frontmatter.title}
+  compactTitle={true}
+  lead="Die Bilder der Baustellenkamera sind nicht öffentlich zugänglich und dienen rein privaten Sicherheitszwecken."
+/>
+
+<PrivacyNav />
+
+<section class="section-surface">
+  <div class="section-header">
+    <h2>1. Zweck der Baustellenkamera</h2>
+  </div>
+  <p>
+    Die Bilder der Baustellenkamera sind <strong>nicht öffentlich zugänglich</strong>. Sie sind rein privat und werden ausschließlich auf dem eigenen Grundstück aufgezeichnet. Der Einsatz der Kamera erfolgt zur Wahrung des Hausrechts und dient folgenden Zwecken:
+  </p>
+  <ul>
+    <li>Verhinderung von unberechtigtem Zutritt</li>
+    <li>Diebstahlschutz und Prävention von Vandalismus</li>
+    <li>Überwachung zur Unfallprävention auf der Baustelle</li>
+  </ul>
+</section>
+
+<section class="section-projekte">
+  <div class="section-header">
+    <h2>2. Datenschutzrechtliche Hinweise</h2>
+  </div>
+  
+  <h3>Verantwortliche Stelle</h3>
+  <p>
+    Der Betreiber der Baustellenkamera ist verantwortlich für die Einhaltung aller datenschutzrechtlichen Bestimmungen gemäß der Datenschutz-Grundverordnung (DSGVO).
+  </p>
+
+  <h3>Art der erfassten Daten</h3>
+  <ul>
+    <li>Bildaufnahmen der Baustelle</li>
+    <li>Zeitstempel der Aufnahmen</li>
+    <li>Technische Metadaten (z.B. Kameraeinstellungen)</li>
+  </ul>
+
+  <h3>Rechtsgrundlage</h3>
+  <p>
+    Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Unser berechtigtes Interesse besteht im Schutz unseres Eigentums (Diebstahl- und Vandalismusschutz) sowie in der Unfallprävention und Wahrung des Hausrechts.
+  </p>
+
+  <h3>Speicherdauer</h3>
+  <p>
+    Die Aufnahmen werden für die Dauer des Bauprojekts (unter Beachtung etwaiger gesetzlicher Aufbewahrungsfristen) gespeichert und anschließend gelöscht.
+  </p>
+
+  <h3>Deine Rechte</h3>
+  <p>Als betroffene Person hast du folgende Rechte:</p>
+  <ul>
+    <li>Auskunftsrecht (Art. 15 DSGVO)</li>
+    <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+    <li>Recht auf Löschung (Art. 17 DSGVO)</li>
+    <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+    <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
+    <li>Widerspruchsrecht (Art. 21 DSGVO)</li>
+  </ul>
+</section>
+
+<section class="section-surface">
+  <div class="section-header">
+    <h2>3. Technische Sicherheitsmaßnahmen</h2>
+  </div>
+  <p>Um die Daten bestmöglich zu schützen, setzen wir folgende Maßnahmen ein:</p>
+  <ul>
+    <li><strong>Verschlüsselung:</strong> Alle Datenübertragungen erfolgen verschlüsselt.</li>
+    <li><strong>Zugangskontrolle:</strong> Nur autorisierte Personen haben Zugriff auf die Kamera und die Aufzeichnungen.</li>
+    <li><strong>Sichere Speicherung:</strong> Die Daten werden auf sicheren Servern gespeichert.</li>
+    <li><strong>Protokollierung:</strong> Jegliche Zugriffe werden protokolliert und überwacht.</li>
+  </ul>
+</section>
+
+<section class="section-projekte">
+  <div class="section-header">
+    <h2>4. Kontakt</h2>
+  </div>
+  <p>
+    Bei Fragen zum Datenschutz oder zur Ausübung deiner Rechte wende dich bitte an:
+  </p>
+  <address>
+    David Maciejewski (ab August 2026: Eiken)<br />
+    E-Mail: <EmailLink email="hallo@davideiken.de" />
+  </address>
+</section>
