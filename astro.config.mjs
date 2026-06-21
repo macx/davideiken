@@ -1,7 +1,7 @@
 import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
-import { unified } from "@astrojs/markdown-remark";
+import { satteri } from "@astrojs/markdown-satteri";
 
 // https://astro.build/config
 export default defineConfig({
@@ -53,9 +53,9 @@ export default defineConfig({
     },
   ],
   markdown: {
-    processor: unified({
-      smartypants: {
-        dashes: "oldschool",
+    processor: satteri({
+      features: {
+        smartPunctuation: { dashes: true },
       },
     }),
   },
