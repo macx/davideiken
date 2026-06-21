@@ -1,8 +1,7 @@
 import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
-import { satteri } from "@astrojs/markdown-satteri";
-import remarkSmartypants from "remark-smartypants";
+import { unified } from "@astrojs/markdown-remark";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,6 +11,13 @@ export default defineConfig({
   vite: {
     ssr: {
       noExternal: process.argv.includes("build") ? true : undefined,
+    },
+    css: {
+      devSourcemap: true,
+      transformer: "lightningcss",
+    },
+    build: {
+      cssMinify: "lightningcss",
     },
   },
   security: {
@@ -47,16 +53,11 @@ export default defineConfig({
     },
   ],
   markdown: {
-    processor: satteri({
-      features: {
-        smartPunctuation: true,
+    processor: unified({
+      smartypants: {
+        dashes: "oldschool",
       },
     }),
-    smartypants: false,
-    remarkPlugins: [
-      [remarkSmartypants, { dashes: "oldschool" }],
-    ],
-    shikiConfig: { wrap: true },
   },
   integrations: [mdx()],
   experimental: {
