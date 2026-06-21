@@ -29,7 +29,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: "26"
           cache: "pnpm"
 
       - name: Install dependencies
@@ -92,6 +92,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # --- NEW: build production node_modules for the server runtime ---
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "26"
+          cache: "pnpm"
+
+      - name: Install production dependencies for deployment
+        run: pnpm install --prod --no-frozen-lockfile
+      # --- END NEW ---
+
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -102,9 +116,13 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -p ${{ secrets.DEPLOY_PORT || 22 }} -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy with Rsync
+      - name: Deploy app with Rsync
         run: |
           rsync -azP --delete -e "ssh -p ${{ secrets.DEPLOY_PORT || 22 }}" dist/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}
+
+      - name: Deploy node_modules with Rsync
+        run: |
+          rsync -azP --delete -e "ssh -p ${{ secrets.DEPLOY_PORT || 22 }}" node_modules/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}node_modules/
 
       - name: Restart Node Application via Phusion Passenger
         run: |
