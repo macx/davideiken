@@ -159,3 +159,19 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     );
   }
 };
+
+// Explicit 405 for all other HTTP methods on this route
+const methodNotAllowed: APIRoute = () => {
+  return new Response(JSON.stringify({ error: "Method not allowed." }), {
+    status: 405,
+    headers: {
+      "Content-Type": "application/json",
+      Allow: "POST",
+    },
+  });
+};
+
+export const GET = methodNotAllowed;
+export const PUT = methodNotAllowed;
+export const PATCH = methodNotAllowed;
+export const DELETE = methodNotAllowed;
