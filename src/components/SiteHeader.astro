@@ -149,14 +149,17 @@ const contactHref = "#contact";
               <path
                 d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"
                 stroke="currentColor"
-                stroke-width="1.5"
+                stroke-width="1.5"></path>
+              <path d="m4 8 8 6 8-6" stroke="currentColor" stroke-width="1.5"
               ></path>
-              <path d="m4 8 8 6 8-6" stroke="currentColor" stroke-width="1.5"></path>
             </svg>
           </Tooltip>
         </li>
         <li class="nav-item icon-link-item">
-          <ThemeToggle class="nav-icon-link header-theme-toggle" locale={locale} />
+          <ThemeToggle
+            class="nav-icon-link header-theme-toggle"
+            locale={locale}
+          />
         </li>
         <li class="nav-item icon-link-item">
           <Tooltip
@@ -168,7 +171,9 @@ const contactHref = "#contact";
             aria-label={locale === "de"
               ? "Switch to English"
               : "Auf Deutsch wechseln"}
-            text={locale === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
+            text={locale === "de"
+              ? "Switch to English"
+              : "Auf Deutsch wechseln"}
             position="bottom"
           >
             <span>{languageSwitchLabel}</span>
@@ -204,8 +209,7 @@ const contactHref = "#contact";
             y2="5"
             stroke="currentColor"
             stroke-width="1.5"
-            stroke-linecap="round"
-          ></line>
+            stroke-linecap="round"></line>
           <line
             x1="2"
             y1="9"
@@ -213,8 +217,7 @@ const contactHref = "#contact";
             y2="9"
             stroke="currentColor"
             stroke-width="1.5"
-            stroke-linecap="round"
-          ></line>
+            stroke-linecap="round"></line>
           <line
             x1="2"
             y1="13"
@@ -222,8 +225,7 @@ const contactHref = "#contact";
             y2="13"
             stroke="currentColor"
             stroke-width="1.5"
-            stroke-linecap="round"
-          ></line>
+            stroke-linecap="round"></line>
         </svg>
         <!-- Close -->
         <svg
@@ -241,8 +243,7 @@ const contactHref = "#contact";
             y2="14"
             stroke="currentColor"
             stroke-width="1.5"
-            stroke-linecap="round"
-          ></line>
+            stroke-linecap="round"></line>
           <line
             x1="14"
             y1="4"
@@ -250,8 +251,7 @@ const contactHref = "#contact";
             y2="14"
             stroke="currentColor"
             stroke-width="1.5"
-            stroke-linecap="round"
-          ></line>
+            stroke-linecap="round"></line>
         </svg>
       </button>
     </nav>
@@ -413,8 +413,8 @@ const contactHref = "#contact";
 
       /* Clean, Flat, Bold Glass */
       background: color-mix(in oklch, var(--clr-surface) 65%, transparent);
-      backdrop-filter: blur(24px) saturate(140%);
       -webkit-backdrop-filter: blur(24px) saturate(140%);
+      backdrop-filter: blur(24px) saturate(140%);
 
       /* Crisp border, flat minimal shadow */
       border: 1.5px solid color-mix(in oklch, var(--clr-text) 12%, transparent);
@@ -786,17 +786,20 @@ const contactHref = "#contact";
         border-radius: 50%;
       }
 
-      .site-nav:has(.nav-item:nth-child(5) .nav-icon-link:hover) .nav-indicator {
+      .site-nav:has(.nav-item:nth-child(5) .nav-icon-link:hover)
+        .nav-indicator {
         position-anchor: --nav-contact;
         left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
       }
 
-      .site-nav:has(.nav-item:nth-child(6) .nav-icon-link:hover) .nav-indicator {
+      .site-nav:has(.nav-item:nth-child(6) .nav-icon-link:hover)
+        .nav-indicator {
         position-anchor: --nav-theme;
         left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
       }
 
-      .site-nav:has(.nav-item:nth-child(7) .nav-icon-link:hover) .nav-indicator {
+      .site-nav:has(.nav-item:nth-child(7) .nav-icon-link:hover)
+        .nav-indicator {
         position-anchor: --nav-lang;
         left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
       }
@@ -821,7 +824,6 @@ const contactHref = "#contact";
       /* Match exactly the main navigation color scheme */
       background: color-mix(in oklch, var(--clr-surface) 85%, transparent);
       backdrop-filter: blur(24px) saturate(140%);
-      -webkit-backdrop-filter: blur(24px) saturate(140%);
       border: 1.5px solid color-mix(in oklch, var(--clr-text) 12%, transparent);
       border-radius: 1.25rem;
       box-shadow: 0 8px 32px -6px color-mix(in oklch, black 12%, transparent);
