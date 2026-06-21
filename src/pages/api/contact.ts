@@ -62,13 +62,27 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       }
     }
 
-    // 3. Parse and Validate Body
-    const formData = await request.formData();
+    // 3. Parse and Validate Body (JSON instead of multipart/form-data)
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch (e) {
+      return new Response(
+        JSON.stringify({
+          error: "Invalid JSON body.",
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+    }
+
     const data = {
-      name: formData.get("name")?.toString() || "",
-      email: formData.get("email")?.toString() || "",
-      message: formData.get("message")?.toString() || "",
-      fax: formData.get("fax")?.toString() || "",
+      name: (body as Record<string, unknown>)?.name?.toString() || "",
+      email: (body as Record<string, unknown>)?.email?.toString() || "",
+      message: (body as Record<string, unknown>)?.message?.toString() || "",
+      fax: (body as Record<string, unknown>)?.fax?.toString() || "",
     };
 
     const result = contactSchema.safeParse(data);

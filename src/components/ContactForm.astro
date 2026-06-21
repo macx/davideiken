@@ -129,6 +129,7 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
       e.preventDefault();
 
       const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
 
       statusEl.textContent = msgSending;
       statusEl.className = "form-status sending";
@@ -137,7 +138,8 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
       try {
         const response = await fetch(form.action, {
           method: "POST",
-          body: formData,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
         });
 
         const result = await response.json().catch(() => ({}));
