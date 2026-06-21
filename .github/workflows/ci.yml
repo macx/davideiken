@@ -118,7 +118,7 @@ jobs:
 
       - name: Deploy app with Rsync
         run: |
-          rsync -azP --delete -e "ssh -p ${{ secrets.DEPLOY_PORT || 22 }}" dist/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}
+          rsync -azP --delete --exclude='.bootstrap.cjs' --exclude='node_modules' -e "ssh -p ${{ secrets.DEPLOY_PORT || 22 }}" dist/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}
 
       - name: Deploy node_modules with Rsync
         run: |
