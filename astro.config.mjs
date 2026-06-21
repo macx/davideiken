@@ -2,6 +2,10 @@ import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import { satteri } from "@astrojs/markdown-satteri";
+import browserslist from "browserslist";
+import { browserslistToTargets } from "lightningcss";
+
+const lightningcssTargets = browserslistToTargets(browserslist());
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,6 +19,9 @@ export default defineConfig({
     css: {
       devSourcemap: true,
       transformer: "lightningcss",
+      lightningcss: {
+        targets: lightningcssTargets,
+      },
     },
     build: {
       cssMinify: "lightningcss",
