@@ -16,20 +16,24 @@ vi.mock("nodemailer", () => ({
   },
 }));
 
+function jsonRequest(body: Record<string, unknown>) {
+  return new Request("http://localhost/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
 describe("Contact API Route", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it("should return status 400 for invalid form data", async () => {
-    const formData = new FormData();
-    formData.append("name", "");
-    formData.append("email", "invalid-email");
-    formData.append("message", "short"); // min 10 required
-
-    const request = new Request("http://localhost/api/contact", {
-      method: "POST",
-      body: formData,
+    const request = jsonRequest({
+      name: "",
+      email: "invalid-email",
+      message: "short", // min 10 required
     });
 
     const response = await POST({
@@ -45,15 +49,11 @@ describe("Contact API Route", () => {
   });
 
   it("should catch honeypot bot submission and return status 200 silently without sending mail", async () => {
-    const formData = new FormData();
-    formData.append("name", "Spam Bot");
-    formData.append("email", "bot@spam.com");
-    formData.append("message", "This is a spam message that is long enough.");
-    formData.append("fax", "bot-detector"); // Honeypot field filled!
-
-    const request = new Request("http://localhost/api/contact", {
-      method: "POST",
-      body: formData,
+    const request = jsonRequest({
+      name: "Spam Bot",
+      email: "bot@spam.com",
+      message: "This is a spam message that is long enough.",
+      fax: "bot-detector", // Honeypot field filled!
     });
 
     const response = await POST({
@@ -68,14 +68,11 @@ describe("Contact API Route", () => {
   });
 
   it("should send email and return status 200 for valid form submission", async () => {
-    const formData = new FormData();
-    formData.append("name", "David Eiken");
-    formData.append("email", "david@eiken.com");
-    formData.append("message", "Hello! This is a valid message that meets the length requirements.");
-
-    const request = new Request("http://localhost/api/contact", {
-      method: "POST",
-      body: formData,
+    const request = jsonRequest({
+      name: "David Eiken",
+      email: "david@eiken.com",
+      message:
+        "Hello! This is a valid message that meets the length requirements.",
     });
 
     const response = await POST({
@@ -91,7 +88,25 @@ describe("Contact API Route", () => {
       expect.objectContaining({
         replyTo: "david@eiken.com",
         subject: "Contact Request: David Eiken",
-      })
+      }),
     );
+  });
+
+  it("should return status 400 for an invalid JSON body", async () => {
+    const request = new Request("http://localhost/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "not valid json",
+    });
+
+    const response = await POST({
+      request,
+      clientAddress: "127.0.0.1",
+    } as any);
+
+    expect(response.status).toBe(400);
+    const body = await response.json();
+    expect(body.error).toBe("Invalid JSON body.");
+    expect(mockSendMail).not.toHaveBeenCalled();
   });
 });
