@@ -1,6 +1,6 @@
-import type { APIRoute } from 'astro';
-import nodemailer from 'nodemailer';
-import { z } from 'zod';
+import type { APIRoute } from "astro";
+import nodemailer from "nodemailer";
+import { z } from "zod";
 
 export const prerender = false;
 
@@ -11,7 +11,7 @@ const MAX_REQUESTS_PER_WINDOW = 5;
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
-  email: z.string().email({ message: "Invalid email address" }).max(100),
+  email: z.email({ message: "Invalid email address" }).max(100),
   message: z.string().min(10, "Message is too short").max(3000),
   fax: z.string().max(100).optional(), // Honeypot field
 });
@@ -19,22 +19,25 @@ const contactSchema = z.object({
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   try {
     // 1. Rate Limiting
-    let ip = 'unknown';
+    let ip = "unknown";
     try {
-      ip = clientAddress || 'unknown';
-    } catch (e) {
-
-    }
+      ip = clientAddress || "unknown";
+    } catch (e) {}
     const now = Date.now();
     const clientRecord = rateLimit.get(ip);
-    
+
     if (clientRecord) {
       if (now - clientRecord.timestamp < RATE_LIMIT_WINDOW_MS) {
         if (clientRecord.count >= MAX_REQUESTS_PER_WINDOW) {
-          return new Response(JSON.stringify({ error: "Too many requests. Please try again later." }), {
-            status: 429,
-            headers: { 'Content-Type': 'application/json' }
-          });
+          return new Response(
+            JSON.stringify({
+              error: "Too many requests. Please try again later.",
+            }),
+            {
+              status: 429,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
         }
         clientRecord.count++;
       } else {
@@ -45,43 +48,63 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     }
 
     // 2. CSRF / Origin Check
-    const origin = request.headers.get('origin');
+    const origin = request.headers.get("origin");
     // In production, enforce origin matching
     if (import.meta.env.PROD && origin) {
-      const allowedDomains = ['davideiken.com', 'davideiken.de', 'localhost'];
-      const isAllowed = allowedDomains.some(domain => origin.includes(domain));
+      const allowedDomains = ["davideiken.com", "davideiken.de", "localhost"];
+      const isAllowed = allowedDomains.some((domain) =>
+        origin.includes(domain),
+      );
       if (!isAllowed) {
-        return new Response(JSON.stringify({ error: "Forbidden" }), { status: 403 });
+        return new Response(JSON.stringify({ error: "Forbidden" }), {
+          status: 403,
+        });
       }
     }
 
     // 3. Parse and Validate Body
     const formData = await request.formData();
     const data = {
-      name: formData.get('name')?.toString() || '',
-      email: formData.get('email')?.toString() || '',
-      message: formData.get('message')?.toString() || '',
-      fax: formData.get('fax')?.toString() || '',
+      name: formData.get("name")?.toString() || "",
+      email: formData.get("email")?.toString() || "",
+      message: formData.get("message")?.toString() || "",
+      fax: formData.get("fax")?.toString() || "",
     };
 
-    const validatedData = contactSchema.parse(data);
+    const result = contactSchema.safeParse(data);
+    if (!result.success) {
+      return new Response(
+        JSON.stringify({
+          error: "Invalid form data.",
+          details: result.error.issues,
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+    }
+    const validatedData = result.data;
 
     // 4. Honeypot Check
     if (validatedData.fax) {
       // Silently succeed to trick the bot
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { "Content-Type": "application/json" },
       });
     }
 
     // 5. Send Email
     const smtpHost = process.env.SMTP_HOST || import.meta.env.SMTP_HOST;
-    const smtpPort = Number(process.env.SMTP_PORT || import.meta.env.SMTP_PORT) || 587;
-    const smtpSecure = (process.env.SMTP_SECURE || import.meta.env.SMTP_SECURE) === 'true';
+    const smtpPort =
+      Number(process.env.SMTP_PORT || import.meta.env.SMTP_PORT) || 587;
+    const smtpSecure =
+      (process.env.SMTP_SECURE || import.meta.env.SMTP_SECURE) === "true";
     const smtpUser = process.env.SMTP_USER || import.meta.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS || import.meta.env.SMTP_PASS;
-    const contactEmail = process.env.CONTACT_EMAIL || import.meta.env.CONTACT_EMAIL || smtpUser;
+    const contactEmail =
+      process.env.CONTACT_EMAIL || import.meta.env.CONTACT_EMAIL || smtpUser;
 
     const transporter = nodemailer.createTransport({
       host: smtpHost,
@@ -101,24 +124,24 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       text: `Name: ${validatedData.name}\nEmail: ${validatedData.email}\n\nMessage:\n${validatedData.message}`,
     });
 
-    return new Response(JSON.stringify({ success: true, message: "Email sent successfully!" }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
-
+    return new Response(
+      JSON.stringify({ success: true, message: "Email sent successfully!" }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   } catch (error) {
     console.error("Contact Form Error:", error);
-    
-    if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: "Invalid form data.", details: error.issues }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-
-    return new Response(JSON.stringify({ error: "Internal server error. Please try again later." }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    // Fallback for unexpected errors
+    return new Response(
+      JSON.stringify({
+        error: "Internal server error. Please try again later.",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
 };

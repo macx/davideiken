@@ -1,5 +1,5 @@
 ---
-import { markdownToHtml } from "satteri";
+import markdownit from "markdown-it";
 
 interface Props {
   title?: string;
@@ -8,14 +8,10 @@ interface Props {
 }
 
 const { title = "", lead = "", compactTitle = false } = Astro.props;
-const unwrapP = (html: string) =>
-  html ? html.replace(/^<p>/, "").replace(/<\/p>\n?$/, "") : "";
 
-const { html: titleHtmlRaw } = title ? markdownToHtml(title) : { html: "" };
-const { html: leadHtmlRaw } = lead ? markdownToHtml(lead) : { html: "" };
-
-const titleHtml = unwrapP(titleHtmlRaw);
-const leadHtml = unwrapP(leadHtmlRaw);
+const md = markdownit();
+const titleHtml = md.renderInline(title);
+const leadHtml = md.renderInline(lead);
 ---
 
 <div class="page-header">
@@ -27,7 +23,7 @@ const leadHtml = unwrapP(leadHtmlRaw);
       />
     )
   }
-  {leadHtml && <p class="lead" set:html={leadHtml} />}
+  {titleHtml && <p class="lead" set:html={leadHtml} />}
 </div>
 
 <style>
