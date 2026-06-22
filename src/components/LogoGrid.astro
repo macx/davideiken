@@ -11,6 +11,8 @@ import { brandLogos, logoSymbolId } from "../data/brandLogos";
         class="logo-item"
         text={logo.name}
         style={`--scale: ${logo.scale};`}
+        role="img"
+        aria-label={logo.name}
       >
         <svg aria-hidden="true" focusable="false">
           <use href={`/sprites/logos.svg#${logoSymbolId(logo.file)}`} />
