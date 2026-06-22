@@ -42,5 +42,12 @@
     "rehype-slug": "^6.0.0",
     "release-it": "^20.2.0",
     "vitest": "^4.1.9"
-  }
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions",
+    "last 2 iOS versions"
+  ]
 }
