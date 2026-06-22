@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/Layout.astro
-title: "Sharing knowledge, __shaping web culture__."
+title: "Sharing knowledge, shaping web culture."
 description: "My web podcast Technikwürze and hands-on tutorials for HAWK students -- how I pass on my experience."
 navTitle: "Engineering"
 navOrder: 3
@@ -15,52 +15,73 @@ import starterkitImg from "../../assets/images/projects/hawk-website-starterkit.
 <PageHeader
   title={frontmatter.title}
   lead="For me, great engineering thrives on exchange and collaboration. With the podcast *Technikwürze* and my tutorials at the HAWK, I create spaces for sharing knowledge -- as a dialogue at eye level where we all learn from each other."
+  compactTitle={true}
 />
 
-<section class="divider">
+<section class="tech-section">
   ## HAWK
 
+<div class="tech-section-aside">
   <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo" />
+</div>
 
-  Comprehensive frontend tutorials for students of my seminar at HAWK
-  -- Mobile First, Responsive, frustration-free. Publicly accessible under:
+  <div>
+    Comprehensive frontend tutorials for students of my seminar at HAWK
+    -- Mobile First, Responsive, frustration-free. Publicly accessible under:
 
-  [hawk-gt1191.de](https://hawk-gt1191.de)
+    [hawk-gt1191.de](https://hawk-gt1191.de)
 
-  The site's source code is on GitHub.
+    The site's source code is on GitHub.
 
-  [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
+    [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
+
+  </div>
 </section>
 
-<section class="divider">
+<section class="tech-section">
   ## Technikwürze
 
-  <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
+<div class="tech-section-aside">
+  <Image
+    src={technikwuerzeImg}
+    alt="Technikwürze"
+    class="project-logo"
+    width={208}
+    height={208}
+    densities={[1, 1.5, 2]}
+  />
+</div>
 
-  Since 2005 -- as a podcast pioneer in Germany. Technikwürze is my podcast for media creators covering design and web development. After 188 episodes and nearly 1.8 million downloads, the project is now back with a relaunch -- co-hosted with Stefan Nitzsche.
+  <div>
+    Since 2005 -- as a podcast pioneer in Germany. Technikwürze is my podcast for media creators covering design and web development. After 188 episodes and nearly 1.8 million downloads, the project is now back with a relaunch -- co-hosted with Stefan Nitzsche.
 
-  [https://technikwuerze.de](https://technikwuerze.de)
+    [https://technikwuerze.de](https://technikwuerze.de)
+
+  </div>
 </section>
 
-<section class="divider">
+<section class="tech-section">
   ## Website Starter Kit
 
-  <Image src={starterkitImg} alt="HAWK Website Starter Kit" class="project-preview" />
+  <div>
+    For my GT 1191 seminar at HAWK, I built my own starter kit. A single terminal command produces a fully pre-configured website – image optimization, web fonts, and less boilerplate included.
 
-  For my GT 1191 seminar at HAWK, I built my own starter kit. A single terminal command produces a fully pre-configured website – image optimization, web fonts, and less boilerplate included.
+    Three variants cover different learning goals: playground, one-pager, multi-pager. The result: students get started faster and learn more – because the environment doesn't get in the way.
 
-  Three variants cover different learning goals: playground, one-pager, multi-pager. The result: students get started faster and learn more – because the environment doesn't get in the way.
+    <Image
+      src={starterkitImg}
+      alt="HAWK Website Starter Kit"
+      class="project-preview"
+      widths={[400, 507, 800, 1014]}
+      sizes="(max-width: 640px) 400px, 507px"
+    />
+
+  </div>
 </section>
 
 <style>{`
-  section.divider {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-s);
-  }
-
   .project-logo {
-    max-width: 200px;
+    max-width: 100%;
     height: auto;
     margin-block-end: var(--sp-xs);
   }
@@ -69,11 +90,5 @@ import starterkitImg from "../../assets/images/projects/hawk-website-starterkit.
     max-width: 100%;
     height: auto;
     margin-block-end: var(--sp-xs);
-  }
-
-  section.divider p {
-    font-size: var(--fs-s);
-    color: var(--clr-text-muted);
-    margin: 0;
   }
 `}</style>

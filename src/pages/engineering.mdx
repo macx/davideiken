@@ -15,52 +15,75 @@ import starterkitImg from "../assets/images/projects/hawk-website-starterkit.png
 <PageHeader
   title={frontmatter.title}
   lead="Für mich lebt gutes Engineering von Austausch und Vernetzung. Mit dem Podcast *Technikwürze* und meinen Tutorials an der HAWK schaffe ich Räume für Wissenstransfer &ndash; als Dialog auf Augenhöhe, bei dem wir alle voneinander lernen."
+  compactTitle={true}
 />
 
-<section class="divider">
+<section class="tech-section">
   ## HAWK
 
+<div class="tech-section-aside">
   <HawkImage alt="HAWK GT 1191" class="project-logo" />
+</div>
 
-  Umfangreiche Frontend-Tutorials für Studierende meines Seminars an der HAWK
-  -- Mobile First, Responsive, frustrationsfrei. Öffentlich zugänglich unter:
+  <div>
+    Umfangreiche Frontend-Tutorials für Studierende meines Seminars an der HAWK
+    -- Mobile First, Responsive, frustrationsfrei. Öffentlich zugänglich unter:
 
-  [hawk-gt1191.de](https://hawk-gt1191.de)
+    [hawk-gt1191.de](https://hawk-gt1191.de)
 
-  Der Quellcode der Site ist auf GitHub.
+    Der Quellcode der Site ist auf GitHub.
 
-  [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
+    [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
+
+  </div>
 </section>
 
-<section class="divider">
+<section class="tech-section">
   ## Technikwürze
 
-  <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
+<div class="tech-section-aside">
+  <Image
+    src={technikwuerzeImg}
+    alt="Technikwürze"
+    class="project-logo"
+    width={208}
+    height={208}
+    densities={[1, 1.5, 2]}
+  />
+</div>
 
-  Seit 2005 -- als Podcast-Pionier in Deutschland. Technikwürze ist mein Podcast für Medienschaffende rund um Gestaltung und Webentwicklung. Nach 188 Episoden und knapp 1,8 Millionen Downloads ist das Projekt jetzt per Relaunch zurück -- im Team mit Stefan Nitzsche.
+  <div>
+    Seit 2005 -- als Podcast-Pionier in Deutschland. Technikwürze ist mein Podcast für Medienschaffende rund um Gestaltung und Webentwicklung.
 
-  [https://technikwuerze.de](https://technikwuerze.de)
+    Nach 188 Episoden und knapp 1,8 Millionen Downloads ist das Projekt jetzt per Relaunch zurück -- im Team mit Stefan Nitzsche.
+
+    [https://technikwuerze.de](https://technikwuerze.de)
+
+  </div>
 </section>
 
-<section class="divider">
+<section class="tech-section">
   ## Website-Starterkit
 
-  <Image src={starterkitImg} alt="HAWK Website-Starterkit" class="project-preview" />
+  <div>
+    Für mein Seminar GT 1191 an der HAWK habe ich ein eigenes Starterkit entwickelt. Mit einem einzigen Terminal-Befehl entsteht eine fertig vorkonfigurierte Website – Bildoptimierung, Schriftarten und weniger Boilerplate inklusive.
 
-  Für mein Seminar GT 1191 an der HAWK habe ich ein eigenes Starterkit entwickelt. Mit einem einzigen Terminal-Befehl entsteht eine fertig vorkonfigurierte Website – Bildoptimierung, Schriftarten und weniger Boilerplate inklusive.
+    Drei Varianten decken unterschiedliche Lernziele ab: Playground, Onepager, Multipager. Das Ergebnis: Studierende starten schneller und lernen mehr – weil die Umgebung nicht im Weg steht.
 
-  Drei Varianten decken unterschiedliche Lernziele ab: Playground, Onepager, Multipager. Das Ergebnis: Studierende starten schneller und lernen mehr – weil die Umgebung nicht im Weg steht.
+    <Image
+      src={starterkitImg}
+      alt="HAWK Website-Starterkit"
+      class="project-preview"
+      widths={[400, 507, 800, 1014]}
+      sizes="(max-width: 640px) 400px, 507px"
+    />
+
+  </div>
 </section>
 
 <style>{`
-  section.divider {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-s);
-  }
-
   .project-logo {
-    max-width: 200px;
+    max-width: 100%;
     height: auto;
     margin-block-end: var(--sp-xs);
   }
@@ -69,11 +92,5 @@ import starterkitImg from "../assets/images/projects/hawk-website-starterkit.png
     max-width: 100%;
     height: auto;
     margin-block-end: var(--sp-xs);
-  }
-
-  section.divider p {
-    font-size: var(--fs-s);
-    color: var(--clr-text-muted);
-    margin: 0;
   }
 `}</style>
