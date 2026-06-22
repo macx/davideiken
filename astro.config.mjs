@@ -38,6 +38,9 @@ export default defineConfig({
   security: {
     checkOrigin: false,
   },
+  prefetch: {
+    defaultStrategy: "viewport",
+  },
   i18n: {
     locales: ["en", "de"],
     defaultLocale: "de",
