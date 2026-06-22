@@ -8,72 +8,55 @@ navOrder: 3
 
 import { Image } from "astro:assets";
 import PageHeader from "../components/PageHeader.astro";
-import SectionLabel from "../components/SectionLabel.astro";
 import HawkImage from "../assets/images/projects/hawk-gt1191.svg";
 import technikwuerzeImg from "../assets/images/projects/technikwuerze.png";
+import starterkitImg from "../assets/images/projects/hawk-website-starterkit.png";
 
 <PageHeader
   title={frontmatter.title}
   lead="Für mich lebt gutes Engineering von Austausch und Vernetzung. Mit dem Podcast *Technikwürze* und meinen Tutorials an der HAWK schaffe ich Räume für Wissenstransfer &ndash; als Dialog auf Augenhöhe, bei dem wir alle voneinander lernen."
 />
 
-<div class="grid-auto cols-2 sp-end">
-  <div class="content-col">
-    <SectionLabel text="EDITORIAL" />
+<section class="divider">
+  ## HAWK
 
-    <HawkImage alt="HAWK GT 1191"  class="project-logo" />
-    
-    Umfangreiche Frontend-Tutorials für Studierende meines Seminars an der HAWK
-    -- Mobile First, Responsive, frustrationsfrei. Öffentlich zugänglich unter:
+  <HawkImage alt="HAWK GT 1191" class="project-logo" />
 
-    [hawk-gt1191.de](https://hawk-gt1191.de)
-    
-    Der Quellcode der Site ist auf GitHub.
+  Umfangreiche Frontend-Tutorials für Studierende meines Seminars an der HAWK
+  -- Mobile First, Responsive, frustrationsfrei. Öffentlich zugänglich unter:
 
-    [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
-  </div>
+  [hawk-gt1191.de](https://hawk-gt1191.de)
 
-  <div class="content-col">
-    <SectionLabel text="PODCAST" />
-    
-    <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
-    
-    Seit 2005 -- als Podcast-Pionier in Deutschland. Technikwürze ist mein Podcast für Medienschaffende rund um Gestaltung und Webentwicklung. Nach 188 Episoden und knapp 1,8 Millionen Downloads ist das Projekt jetzt per Relaunch zurück -- im Team mit Stefan Nitzsche.
+  Der Quellcode der Site ist auf GitHub.
 
-    [https://technikwuerze.de](https://technikwuerze.de)
-  </div>
-</div>
+  [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
+</section>
+
+<section class="divider">
+  ## Technikwürze
+
+  <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
+
+  Seit 2005 -- als Podcast-Pionier in Deutschland. Technikwürze ist mein Podcast für Medienschaffende rund um Gestaltung und Webentwicklung. Nach 188 Episoden und knapp 1,8 Millionen Downloads ist das Projekt jetzt per Relaunch zurück -- im Team mit Stefan Nitzsche.
+
+  [https://technikwuerze.de](https://technikwuerze.de)
+</section>
+
+<section class="divider">
+  ## Website-Starterkit
+
+  <Image src={starterkitImg} alt="HAWK Website-Starterkit" class="project-preview" />
+
+  Für mein Seminar GT 1191 an der HAWK habe ich ein eigenes Starterkit entwickelt. Mit einem einzigen Terminal-Befehl entsteht eine fertig vorkonfigurierte Website – Bildoptimierung, Schriftarten und weniger Boilerplate inklusive.
+
+  Drei Varianten decken unterschiedliche Lernziele ab: Playground, Onepager, Multipager. Das Ergebnis: Studierende starten schneller und lernen mehr – weil die Umgebung nicht im Weg steht.
+</section>
 
 <style>{`
-  .content-col {
+  section.divider {
     display: flex;
     flex-direction: column;
     gap: var(--sp-s);
-  }
-
-  .stack-list {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-xs);
-  }
-
-  .stack-list dt {
-    font-weight: 700;
-    font-size: var(--fs-2xs);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-top: var(--sp-xs);
-  }
-  
-  .stack-list dt:first-child {
-    margin-top: 0;
-  }
-
-  .stack-list dd {
-    margin: 0;
-    font-size: var(--fs-s);
-    color: var(--clr-text-muted);
   }
 
   .project-logo {
@@ -82,7 +65,13 @@ import technikwuerzeImg from "../assets/images/projects/technikwuerze.png";
     margin-block-end: var(--sp-xs);
   }
 
-  .content-col p {
+  .project-preview {
+    max-width: 100%;
+    height: auto;
+    margin-block-end: var(--sp-xs);
+  }
+
+  section.divider p {
     font-size: var(--fs-s);
     color: var(--clr-text-muted);
     margin: 0;

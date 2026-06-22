@@ -8,72 +8,55 @@ navOrder: 3
 
 import { Image } from "astro:assets";
 import PageHeader from "../../components/PageHeader.astro";
-import SectionLabel from "../../components/SectionLabel.astro";
 import hawkImg from "../../assets/images/projects/hawk-gt1191.svg";
 import technikwuerzeImg from "../../assets/images/projects/technikwuerze.png";
+import starterkitImg from "../../assets/images/projects/hawk-website-starterkit.png";
 
 <PageHeader
   title={frontmatter.title}
   lead="For me, great engineering thrives on exchange and collaboration. With the podcast *Technikwürze* and my tutorials at the HAWK, I create spaces for sharing knowledge -- as a dialogue at eye level where we all learn from each other."
 />
 
-<div class="grid-auto cols-2 sp-end">
-  <div class="content-col">
-    <SectionLabel text="EDITORIAL" />
+<section class="divider">
+  ## HAWK
 
-    <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo" />
-    
-    Comprehensive frontend tutorials for students of my seminar at HAWK
-    -- Mobile First, Responsive, frustration-free. Publicly accessible under:
+  <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo" />
 
-    [hawk-gt1191.de](https://hawk-gt1191.de)
-    
-    The site's source code is on GitHub.
+  Comprehensive frontend tutorials for students of my seminar at HAWK
+  -- Mobile First, Responsive, frustration-free. Publicly accessible under:
 
-    [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
-  </div>
+  [hawk-gt1191.de](https://hawk-gt1191.de)
 
-  <div class="content-col">
-    <SectionLabel text="PODCAST" />
-    
-    <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
-    
-    Since 2005 -- as a podcast pioneer in Germany. Technikwürze is my podcast for media creators covering design and web development. After 188 episodes and nearly 1.8 million downloads, the project is now back with a relaunch -- co-hosted with Stefan Nitzsche.
+  The site's source code is on GitHub.
 
-    [https://technikwuerze.de](https://technikwuerze.de)
-  </div>
-</div>
+  [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
+</section>
+
+<section class="divider">
+  ## Technikwürze
+
+  <Image src={technikwuerzeImg} alt="Technikwürze" class="project-logo" />
+
+  Since 2005 -- as a podcast pioneer in Germany. Technikwürze is my podcast for media creators covering design and web development. After 188 episodes and nearly 1.8 million downloads, the project is now back with a relaunch -- co-hosted with Stefan Nitzsche.
+
+  [https://technikwuerze.de](https://technikwuerze.de)
+</section>
+
+<section class="divider">
+  ## Website Starter Kit
+
+  <Image src={starterkitImg} alt="HAWK Website Starter Kit" class="project-preview" />
+
+  For my GT 1191 seminar at HAWK, I built my own starter kit. A single terminal command produces a fully pre-configured website – image optimization, web fonts, and less boilerplate included.
+
+  Three variants cover different learning goals: playground, one-pager, multi-pager. The result: students get started faster and learn more – because the environment doesn't get in the way.
+</section>
 
 <style>{`
-  .content-col {
+  section.divider {
     display: flex;
     flex-direction: column;
     gap: var(--sp-s);
-  }
-
-  .stack-list {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-xs);
-  }
-
-  .stack-list dt {
-    font-weight: 700;
-    font-size: var(--fs-2xs);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-top: var(--sp-xs);
-  }
-  
-  .stack-list dt:first-child {
-    margin-top: 0;
-  }
-
-  .stack-list dd {
-    margin: 0;
-    font-size: var(--fs-s);
-    color: var(--clr-text-muted);
   }
 
   .project-logo {
@@ -82,7 +65,13 @@ import technikwuerzeImg from "../../assets/images/projects/technikwuerze.png";
     margin-block-end: var(--sp-xs);
   }
 
-  .content-col p {
+  .project-preview {
+    max-width: 100%;
+    height: auto;
+    margin-block-end: var(--sp-xs);
+  }
+
+  section.divider p {
     font-size: var(--fs-s);
     color: var(--clr-text-muted);
     margin: 0;
