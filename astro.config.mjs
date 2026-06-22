@@ -4,8 +4,16 @@ import node from "@astrojs/node";
 import { satteri } from "@astrojs/markdown-satteri";
 import browserslist from "browserslist";
 import { browserslistToTargets } from "lightningcss";
+import { resolveToEsbuildTarget } from "esbuild-plugin-browserslist";
 
-const lightningcssTargets = browserslistToTargets(browserslist());
+// Single source of truth: the "browserslist" field in package.json.
+const targets = browserslist();
+const lightningcssTargets = browserslistToTargets(targets);
+
+// Astro forces Vite's `build.target` to "esnext", which `build.cssTarget`
+// would otherwise inherit — leaving CSS minification with no browser info.
+// Set it explicitly from the same browserslist config instead.
+const cssTarget = resolveToEsbuildTarget(targets);
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,7 +32,7 @@ export default defineConfig({
       },
     },
     build: {
-      cssMinify: "lightningcss",
+      cssTarget,
     },
   },
   security: {
