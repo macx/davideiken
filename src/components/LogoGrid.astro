@@ -1,58 +1,20 @@
 ---
-// cspell:words eticket vdv
-const rawLogos = import.meta.glob("../assets/images/brands/*.svg", {
-  query: "?raw",
-  import: "default",
-  eager: true,
-});
-
 import Tooltip from "./Tooltip.astro";
-
-const logos = [
-  { name: "DHL", file: "dhl.svg", scale: 1 },
-  { name: "Postbank", file: "postbank.svg", scale: 1 },
-  { name: "BMW", file: "bmw.svg", scale: 1 },
-  { name: "ROSSMANN", file: "rossmann.svg", scale: 1 },
-  { name: "STIEBEL ELTRON", file: "stiebel-eltron.svg", scale: 0.9 },
-  {
-    name: "Bertelsmann Stiftung",
-    file: "bertelsmann-stiftung.svg",
-    scale: 1,
-  },
-  { name: "VHV Versicherungen", file: "vhv.svg", scale: 0.8 },
-  { name: "sevenload", file: "sevenload.svg", scale: 0.9 },
-  { name: "NATO", file: "nato.svg", scale: 0.9 },
-  { name: "e-ticket", file: "vdv-eticket.svg", scale: 0.8 },
-  { name: "t3n", file: "t3n.svg", scale: 0.8 },
-  { name: "Versacommerce", file: "versacommerce.svg", scale: 0.8 },
-  { name: "TUI", file: "tui.svg", scale: 0.7 },
-  { name: "Ärztekammer", file: "aekn.svg", scale: 1 },
-  { name: "D-TICKET", file: "d-ticket.svg", scale: 1.1 },
-  { name: "Identitätsstiftung", file: "identitaetsstiftung.svg", scale: 1.1 },
-];
-
-const processedLogos = logos
-  .map((logo) => {
-    const path = `../assets/images/brands/${logo.file}`;
-    const rawSvg = rawLogos[path] as string;
-
-    if (!rawSvg) return null;
-
-    return { html: rawSvg, scale: logo.scale, name: logo.name };
-  })
-  .filter(Boolean);
+import { brandLogos, logoSymbolId } from "../data/brandLogos";
 ---
 
 <div class="logo-grid">
   {
-    processedLogos.map((logo) => (
+    brandLogos.map((logo) => (
       <Tooltip
         as="div"
         class="logo-item"
-        text={logo!.name}
-        style={`--scale: ${logo!.scale};`}
+        text={logo.name}
+        style={`--scale: ${logo.scale};`}
       >
-        <Fragment set:html={logo!.html} />
+        <svg aria-hidden="true" focusable="false">
+          <use href={`/sprites/logos.svg#${logoSymbolId(logo.file)}`} />
+        </svg>
       </Tooltip>
     ))
   }
