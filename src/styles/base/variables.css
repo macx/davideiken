@@ -11,7 +11,7 @@
   --sp-xl: calc(var(--sp) * 3);
   --sp-2xl: calc(var(--sp) * 4);
   --sp-3xl: calc(var(--sp) * 6);
-  --sp-site: var(--sp-2xl);
+  --sp-site: var(--sp-xl);
   --sp-content: var(--sp-l);
 
   /* Core light theme roles (Standard) */
