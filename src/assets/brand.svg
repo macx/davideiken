@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 5000 5000">
+  <title>Davide Iken</title>
+  <style>
+    <![CDATA[
+      .circle {
+        fill: var(--clr-surface);
+      }
+
+      .sign {
+        fill: var(--clr-text);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .circle {
+          fill: var(--clr-text);
+        }
+
+        .sign {
+          fill: var(--clr-surface);
+        }
+      }
+    ]]>
+  </style>
+  <circle cx="2500" cy="2500" r="2500" class="circle" />
+  <path d="M.04 0v-.7h.273q.112 0 .198.042a.3.3 0 0 1 .132.119.35.35 0 0 1 .047.185.36.36 0 0 1-.047.188.3.3 0 0 1-.132.122.4.4 0 0 1-.198.043zm.22-.09L.168-.165h.145a.16.16 0 0 0 .084-.022.15.15 0 0 0 .051-.065.3.3 0 0 0 .018-.101.24.24 0 0 0-.018-.098.14.14 0 0 0-.051-.062.15.15 0 0 0-.084-.022H.168L.26-.61z" class="sign" style="fill-rule:nonzero" transform="matrix(4001.79487 0 0 3479.82076 1135.178 3717.936)" />
+</svg>
