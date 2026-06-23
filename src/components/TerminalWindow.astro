@@ -1,0 +1,158 @@
+---
+export interface Props {
+  title: string;
+  command: string;
+}
+
+const { title, command } = Astro.props;
+---
+
+<div class="terminal-window">
+  <div class="terminal-titlebar">
+    <span class="terminal-dot dot-red"></span>
+    <span class="terminal-dot dot-yellow"></span>
+    <span class="terminal-dot dot-green"></span>
+    <span class="terminal-title">{title}</span>
+  </div>
+  <pre
+    class="terminal-body"><code><span class="terminal-prompt">$</span> <span class="terminal-command" style={`--c-command-len: ${command.length}ch; --c-command-steps: ${command.length}`}>{command}</span></code></pre>
+</div>
+
+<style>
+  .terminal-window {
+    --c-chrome: oklch(22% 0.01 260);
+    --c-titlebar: oklch(28% 0.01 260);
+    --c-text: oklch(92% 0.01 260);
+    --c-prompt: oklch(75% 0.16 152);
+
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--c-chrome);
+    box-shadow: 0 1.5em 3em -1em rgb(0 0 0 / 35%);
+    margin-block-end: var(--sp-m);
+    font-family:
+      ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  /* Dark theme: the fixed near-black chrome above sits too close in
+     lightness to --clr-bg/--clr-surface and disappears into the page.
+     Lift it onto the site's own raised-surface token and tie the prompt
+     and edge to the brand accent colors so it reads as part of the site. */
+  :global([data-theme="dark"]) .terminal-window {
+    --c-chrome: var(--clr-surface-strong);
+    --c-titlebar: var(--clr-surface-raised);
+    --c-prompt: var(--clr-secondary);
+    box-shadow:
+      0 0 0 1px color-mix(in oklch, var(--clr-primary) 45%, transparent),
+      0 1.5em 3em -1em rgb(0 0 0 / 55%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(html[data-theme="auto"]) .terminal-window {
+      --c-chrome: var(--clr-surface);
+      --c-titlebar: var(--clr-surface-raised);
+      --c-prompt: var(--clr-secondary);
+      box-shadow:
+        0 0 0 1px color-mix(in oklch, var(--clr-primary) 35%, transparent),
+        0 1.5em 3em -1em rgb(0 0 0 / 55%);
+    }
+  }
+
+  .terminal-titlebar {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    padding: var(--sp-xs) var(--sp-s);
+    background: var(--c-titlebar);
+  }
+
+  .terminal-dot {
+    inline-size: 0.7em;
+    block-size: 0.7em;
+    border-radius: 50%;
+  }
+
+  .dot-red {
+    background: oklch(65% 0.2 25);
+  }
+
+  .dot-yellow {
+    background: oklch(80% 0.16 84);
+  }
+
+  .dot-green {
+    background: oklch(72% 0.18 142);
+  }
+
+  .terminal-title {
+    margin-inline-start: var(--sp-xs);
+    color: var(--c-text);
+    opacity: 0.6;
+    font-size: var(--fs-xs);
+  }
+
+  .terminal-body {
+    margin: 0;
+    padding: var(--sp-m);
+    color: var(--c-text);
+    font-size: var(--fs-s);
+    overflow-x: auto;
+  }
+
+  .terminal-prompt {
+    color: var(--c-prompt);
+  }
+
+  .terminal-command {
+    display: inline-block;
+    max-inline-size: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    border-inline-end: 2px solid var(--c-text);
+  }
+
+  /* Typewriter reveal, triggered once the window scrolls into view.
+     A named view-timeline on the window itself is used (rather than the
+     anonymous view() on .terminal-command) because .terminal-window's own
+     overflow: hidden would otherwise become the nearest scroll container
+     and make the timeline track visibility within its own tiny box. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports ((animation-timeline: view()) and (animation-range: entry)) {
+      .terminal-window {
+        view-timeline-name: --terminal-reveal;
+      }
+
+      @keyframes terminal-type {
+        from {
+          inline-size: 0;
+        }
+        to {
+          inline-size: var(--c-command-len);
+        }
+      }
+
+      @keyframes terminal-caret {
+        from,
+        to {
+          border-inline-end-color: transparent;
+        }
+        50% {
+          border-inline-end-color: var(--c-text);
+        }
+      }
+
+      .terminal-command {
+        inline-size: 0;
+        animation:
+          terminal-type 1.5s linear both,
+          terminal-caret 0.8s step-end infinite;
+        animation-timing-function: steps(var(--c-command-steps), end), step-end;
+        animation-timeline: --terminal-reveal, auto;
+        animation-range:
+          contain 15% contain 55%,
+          normal;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,56 @@
+.tech-section {
+  display: grid;
+  gap: var(--sp) var(--sp-content);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "heading"
+    "content"
+    "aside";
+
+  border-block-start: 4px solid var(--clr-text);
+  margin-block: var(--sp-l);
+  padding-block-start: var(--sp-l);
+
+  & > :is(h1, h2, h3, h4, h5, h6) {
+    grid-area: heading;
+    margin-block: 0;
+  }
+
+  & > .tech-section-aside {
+    grid-area: aside;
+  }
+
+  & > :not(:is(h1, h2, h3, h4, h5, h6), .tech-section-aside) {
+    grid-area: content;
+  }
+
+  p {
+    text-wrap: pretty;
+    hyphens: manual;
+  }
+
+  .project-logo {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    margin-block-end: var(--sp-xs);
+  }
+
+  .hawk-logo {
+    transition: all 250ms ease-in-out;
+  }
+
+  @media (width >= 40em) {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "heading aside"
+      "content aside";
+    align-items: start;
+
+    .hawk-logo {
+      transform: translateX(-20%) rotate(-90deg);
+      transform-origin: 100% 100%;
+      scale: 1.5;
+    }
+  }
+}
