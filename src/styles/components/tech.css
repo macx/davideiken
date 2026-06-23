@@ -8,8 +8,8 @@
     "aside";
 
   border-block-start: 4px solid var(--clr-text);
-  margin-block: var(--sp-l);
-  padding-block-start: var(--sp-l);
+  margin-block: var(--sp-2xl);
+  padding-block-start: var(--sp-xl);
 
   & > :is(h1, h2, h3, h4, h5, h6) {
     grid-area: heading;
