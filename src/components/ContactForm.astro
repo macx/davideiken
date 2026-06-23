@@ -10,7 +10,7 @@ const messages = {
     message: "Message",
     send: "Send Message",
     sending: "Sending...",
-    success: "Message sent successfully! I will get back to you soon.",
+    success: "Thanks — I'll be in touch!",
     error: "Something went wrong. Please try again.",
     networkError:
       "A server error occurred (500). Please try again later or reach out directly via hallo@davideiken.de.",
@@ -21,8 +21,7 @@ const messages = {
     message: "Nachricht",
     send: "Nachricht senden",
     sending: "Wird gesendet...",
-    success:
-      "Vielen Dank! Die Nachricht wurde erfolgreich gesendet. Ich melde mich in Kürze.",
+    success: "Danke dir, ich melde mich!",
     error: "Es ist ein Fehler aufgetreten. Bitte versuche es noch einmal.",
     networkError:
       "Es gab ein Server-Problem (Fehler 500). Bitte versuche es später noch einmal oder schreibe mir direkt an hallo@davideiken.de.",
@@ -60,6 +59,8 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
   data-msg-error={t.error}
   data-msg-network={t.networkError}
 >
+  <div id="formStatus" class="form-status" aria-live="polite"></div>
+
   <div class="form-content">
     <div class="form-group honeypot" aria-hidden="true">
       <label for="fax">Fax (Leave this empty)</label>
@@ -110,8 +111,6 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
       <button type="submit" class="submit-btn" id="submitBtn">{t.send}</button>
     </div>
   </div>
-
-  <div id="formStatus" class="form-status" aria-live="polite"></div>
 </form>
 
 <script>
@@ -133,6 +132,8 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
 
       statusEl.textContent = msgSending;
       statusEl.className = "form-status sending";
+      statusEl.removeAttribute("role");
+      form.classList.remove("is-error");
       submitBtn.disabled = true;
 
       try {
@@ -147,6 +148,7 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
         if (response.ok && result.success) {
           statusEl.textContent = msgSuccess;
           statusEl.className = "form-status success";
+          statusEl.removeAttribute("role");
           form.classList.add("is-success");
           form.reset();
         } else {
@@ -157,11 +159,15 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
             statusEl.textContent = result.error || msgError;
           }
           statusEl.className = "form-status error";
+          statusEl.setAttribute("role", "alert");
+          form.classList.add("is-error");
           submitBtn.disabled = false;
         }
       } catch (err) {
         statusEl.textContent = msgNetwork;
         statusEl.className = "form-status error";
+        statusEl.setAttribute("role", "alert");
+        form.classList.add("is-error");
         submitBtn.disabled = false;
       }
     });
@@ -173,173 +179,194 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
     display: flex;
     flex-direction: column;
     gap: var(--sp-s);
-  }
 
-  .form-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-m);
-  }
-
-  .contact-form.is-success .form-content {
-    display: none;
-  }
-
-  .form-row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-m);
-  }
-
-  @media (min-width: 40em) {
-    .form-row {
-      flex-direction: row;
+    .form-content {
+      display: flex;
+      flex-direction: column;
       gap: var(--sp-m);
     }
 
-    .form-row .form-group {
-      flex: 1;
+    &.is-success .form-content {
+      display: none;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-m);
+
+      @media (min-width: 40em) {
+        flex-direction: row;
+
+        .form-group {
+          flex: 1;
+        }
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .honeypot {
+      display: none;
+    }
+
+    label {
+      font-family: var(--ff-copy, sans-serif);
+      font-size: var(--fs-xs);
+      color: var(--clr-text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input,
+    textarea {
+      font-family: inherit;
+      font-size: inherit;
+      padding: 0.75rem 0.5rem;
+      border: none;
+      border-block-end: 3px solid var(--clr-text);
+      background: color-mix(in oklch, var(--clr-text) 5%, transparent);
+      color: var(--clr-text);
+      border-radius: 0.5rem;
+      transition:
+        border-color 0.2s ease,
+        outline-color 0.2s ease;
+
+      &:focus {
+        outline-color: transparent;
+      }
+
+      &:focus-visible {
+        outline: var(--focus-outline);
+        outline-offset: var(--focus-outline-offset);
+      }
+    }
+
+    &.is-error input,
+    &.is-error textarea {
+      border-block-end-color: var(--clr-danger);
+      background-color: color-mix(in oklch, var(--clr-danger) 12%, transparent);
+    }
+
+    .submit-btn {
+      align-self: flex-end;
+      padding: 0.8rem 2.2rem;
+      background: var(--clr-text);
+      color: var(--clr-bg);
+      border: 2px solid var(--clr-text);
+      border-radius: 9999px;
+      font-family: var(--ff-copy, sans-serif);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.1s ease;
+
+      &:hover,
+      &:focus-visible {
+        background: transparent;
+        color: var(--clr-text);
+        border-color: var(--clr-text);
+        outline-color: transparent;
+      }
+
+      &:focus-visible {
+        outline: var(--focus-outline);
+        outline-offset: var(--focus-outline-offset);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: var(--clr-text);
+        color: var(--clr-bg);
+        border-color: var(--clr-text);
+        transform: none;
+      }
+    }
+
+    .form-status {
+      font-size: 0.9rem;
+      font-family: var(--ff-copy, sans-serif);
+      padding: 1rem;
+      border-radius: 4px;
+      display: none;
+      text-wrap: balance;
+
+      &.sending,
+      &.success,
+      &.error {
+        display: block;
+      }
+
+      &.success {
+        background: none;
+        border: none;
+        padding-block: var(--sp-xl);
+        text-align: center;
+        font-family: var(--ff-heading);
+        font-size: clamp(2.5rem, 1.8rem + 5vw, 5.5rem);
+        font-variation-settings: var(--fvs-h1);
+        line-height: var(--lh-h1);
+        letter-spacing: var(--ls-h1);
+        color: var(--clr-primary);
+        animation: contact-success-reveal 0.8s cubic-bezier(0.25, 1, 0.5, 1)
+          both;
+      }
+
+      &.error {
+        background: #000000;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: var(--fs-s);
+        text-align: center;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+      }
+
+      &.sending {
+        color: var(--clr-text-muted);
+      }
+    }
+
+    .privacy-note {
+      font-size: var(--fs-xs);
+      font-style: italic;
+      color: var(--clr-text-muted);
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-xs);
     }
   }
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .honeypot {
-    display: none;
-  }
-
-  label {
-    font-family: var(--ff-copy, sans-serif);
-    font-size: var(--fs-xs);
-    color: var(--clr-text-muted);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  input,
-  textarea {
-    font-family: inherit;
-    font-size: inherit;
-    padding: 0.75rem 0.5rem;
-    border: none;
-    border-bottom: 3px solid var(--clr-text);
-    background: color-mix(in oklch, var(--clr-text) 5%, transparent);
-    color: var(--clr-text);
-    border-radius: 0.5rem;
-    transition:
-      border-color 0.2s ease,
-      outline-color 0.2s ease;
-  }
-
-  input:focus,
-  textarea:focus {
-    outline-color: transparent;
-  }
-
-  input:focus-visible,
-  textarea:focus-visible {
-    outline: var(--focus-outline);
-    outline-offset: var(--focus-outline-offset);
-  }
-
-  .submit-btn {
-    align-self: flex-end;
-    padding: 0.8rem 2.2rem;
-    background: var(--clr-text);
-    color: var(--clr-bg);
-    border: 2px solid var(--clr-text);
-    border-radius: 9999px;
-    font-family: var(--ff-copy, sans-serif);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease,
-      border-color 0.2s ease,
-      transform 0.1s ease;
-  }
-
-  .submit-btn:hover,
-  .submit-btn:focus-visible {
-    background: transparent;
-    color: var(--clr-text);
-    border-color: var(--clr-text);
-    outline-color: transparent;
-  }
-
-  .submit-btn:focus-visible {
-    outline: var(--focus-outline);
-    outline-offset: var(--focus-outline-offset);
-  }
-
-  .submit-btn:active {
-    transform: translateY(1px);
-  }
-
-  .submit-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: var(--clr-text);
-    color: var(--clr-bg);
-    border-color: var(--clr-text);
-    transform: none;
-  }
-
-  .form-status {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    font-family: var(--ff-copy, sans-serif);
-    padding: 1rem;
-    border-radius: 4px;
-    display: none;
-  }
-
-  .form-status.sending,
-  .form-status.success,
-  .form-status.error {
-    display: block;
-  }
-
-  .form-status.success {
-    background: var(--clr-surface);
-    color: var(--clr-primary);
-    border: 1px solid var(--clr-primary);
-    font-size: 1.1rem;
-    text-align: center;
-    padding: 2rem;
-  }
-
-  .form-status.error {
-    background: #000000;
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: var(--fs-s);
-    text-align: center;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-  }
-
-  .form-status.sending {
-    color: var(--clr-text-muted);
-  }
-  .privacy-note {
-    font-size: var(--fs-xs);
-    font-style: italic;
-    color: var(--clr-text-muted);
-    line-height: 1.4;
-    text-align: left;
-  }
-
-  .form-actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-xs);
+  @keyframes contact-success-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(1.5em);
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0% 0);
+    }
   }
 </style>

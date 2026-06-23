@@ -8,14 +8,14 @@ those files must reference these rules and must not contradict them.
 
 - Framework: Astro (v6)
 - Language: TypeScript
-- Content: Prefer MDX for content pages
+- Content: Prefer Markdown/MDX for content pages
 - Styling: Native CSS with layers, no Tailwind
 - Package Manager: pnpm
 - Tests: Playwright (local only), Vitest (local & CI)
 
 ## 2) Architecture Decisions
 
-- Prefer MDX for content pages under `src/pages/**`.
+- Prefer Markdown/MDX for content pages under `src/pages/**`.
 - Use `*.astro` primarily for layout, structure, and composition.
 - For editorial content: MDX first, Astro only when truly necessary.
 - Preserve the current project structure; avoid unnecessary rewrites.
@@ -32,13 +32,14 @@ those files must reference these rules and must not contradict them.
 - Keep the reset minimal-modern (no heavy legacy reset).
 - Do not introduce Tailwind utilities.
 - For component-specific styles (for example header/navigation), define styles in the component `*.astro` file via `<style>` so they stay scoped.
-- Prefer nested CSS style structure for component styles.
-- Avoid BEM naming in new styles.
+- Prefer nested CSS style structure overall.
+- Use semantic class names for components, but avoid BEM naming in new styles.
+- Use Logical CSS properties (e.g., `margin-block`, `padding-inline`) instead of physical properties (e.g., `margin-top`, `padding-left`) for better internationalization support.
 - For Media Queries, always use `em` units instead of `px` (e.g. `@media (min-width: 40em)`).
 
 ### Color Roles (Current Design Baseline)
 
-- Default theme: dark-first only, no light theme unless explicitly requested.
+- Default theme: Light and Dark Mode.
 - Source of truth for color values: `src/styles/base/variables.css`.
 - Agents must reference colors via `--clr-*` tokens only (no hardcoded color values in new code).
 - Background (Deep): `--clr-bg`
