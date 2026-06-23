@@ -18,6 +18,10 @@
 
   & > .tech-section-aside {
     grid-area: aside;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp);
+    max-inline-size: 16rem;
   }
 
   & > :not(:is(h1, h2, h3, h4, h5, h6), .tech-section-aside) {
