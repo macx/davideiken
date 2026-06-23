@@ -6,3 +6,4 @@
 @import "./utilities/utilities.css" layer(utilities);
 
 @import "./components/hero.css" layer(components);
+@import "./components/tech.css" layer(components);

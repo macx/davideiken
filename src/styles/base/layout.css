@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+/* Enable native Same-Origin Cross-Document View Transitions */
+@view-transition {
+  navigation: auto;
+}
+
 :root {
   color-scheme: dark;
 }
@@ -80,45 +85,4 @@ select {
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 0.35s;
-}
-
-/* Enable native Same-Origin Cross-Document View Transitions */
-@view-transition {
-  navigation: auto;
-}
-
-.tech-section {
-  display: grid;
-  gap: var(--sp) var(--sp-content);
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "heading"
-    "content"
-    "aside";
-
-  border-block-start: 4px solid var(--clr-text);
-  margin-block: var(--sp-l);
-  padding-block-start: var(--sp-l);
-
-  & > :is(h1, h2, h3, h4, h5, h6) {
-    grid-area: heading;
-    margin-block: 0;
-  }
-
-  & > .tech-section-aside {
-    grid-area: aside;
-    max-width: 13rem;
-  }
-
-  & > :not(:is(h1, h2, h3, h4, h5, h6), .tech-section-aside) {
-    grid-area: content;
-  }
-
-  @media (min-width: 40em) {
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas:
-      "heading aside"
-      "content aside";
-    align-items: start;
-  }
 }

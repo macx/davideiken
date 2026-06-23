@@ -8,9 +8,9 @@ navOrder: 3
 
 import { Image } from "astro:assets";
 import PageHeader from "../components/PageHeader.astro";
+import TerminalWindow from "../components/TerminalWindow.astro";
 import HawkImage from "../assets/images/projects/hawk-gt1191.svg";
 import technikwuerzeImg from "../assets/images/projects/technikwuerze.png";
-import starterkitImg from "../assets/images/projects/hawk-website-starterkit.png";
 
 <PageHeader
   title={frontmatter.title}
@@ -19,19 +19,18 @@ import starterkitImg from "../assets/images/projects/hawk-website-starterkit.png
 />
 
 <section class="tech-section">
-  ## HAWK
+  ## Hochschullehre
 
 <div class="tech-section-aside">
-  <HawkImage alt="HAWK GT 1191" class="project-logo" />
+  <HawkImage alt="HAWK GT 1191" class="project-logo hawk-logo" />
 </div>
 
   <div>
-    Umfangreiche Frontend-Tutorials für Studierende meines Seminars an der HAWK
-    -- Mobile First, Responsive, frustrationsfrei. Öffentlich zugänglich unter:
+    Das Seminar GT 1191 ist ein Seminar des Studiengangs Bachelor of Arts (BA) der Fakultät Gestaltung im Kompetenzfeld Digital Environments an der HAWK Hochschule für angewandte Wissenschaft und Kunst in Hildesheim und mein Beitrag zur Hochschullehre. Es vermittelt Studierenden praxisnahes Wissen rund um Frontend-Entwicklung, Webdesign und Usability.
 
-    [hawk-gt1191.de](https://hawk-gt1191.de)
+    Neben der Lehre veröffentliche ich regelmäßig auf der Website zum Seminar [hawk-gt1191.de](https://hawk-gt1191.de) umfangreiche und interaktive Tutorials, mit denen Studierende, aber auch andere Interessierte, lernen, wie man Websites heute erstellt. Mobile First, Responsive und frustrationsfrei.
 
-    Der Quellcode der Site ist auf GitHub.
+    Der Quellcode ist Open Source auf GitHub:
 
     [github.com/macx/hawk-gt1191](https://github.com/macx/hawk-gt1191)
 
@@ -57,7 +56,7 @@ import starterkitImg from "../assets/images/projects/hawk-website-starterkit.png
 
     Nach 188 Episoden und knapp 1,8 Millionen Downloads ist das Projekt jetzt per Relaunch zurück -- im Team mit Stefan Nitzsche.
 
-    [https://technikwuerze.de](https://technikwuerze.de)
+    [technikwuerze.de](https://technikwuerze.de)
 
   </div>
 </section>
@@ -68,29 +67,12 @@ import starterkitImg from "../assets/images/projects/hawk-website-starterkit.png
   <div>
     Für mein Seminar GT 1191 an der HAWK habe ich ein eigenes Starterkit entwickelt. Mit einem einzigen Terminal-Befehl entsteht eine fertig vorkonfigurierte Website – Bildoptimierung, Schriftarten und weniger Boilerplate inklusive.
 
-    Drei Varianten decken unterschiedliche Lernziele ab: Playground, Onepager, Multipager. Das Ergebnis: Studierende starten schneller und lernen mehr – weil die Umgebung nicht im Weg steht.
-
-    <Image
-      src={starterkitImg}
-      alt="HAWK Website-Starterkit"
-      class="project-preview"
-      widths={[400, 507, 800, 1014]}
-      sizes="(max-width: 640px) 400px, 507px"
+    <TerminalWindow
+      title="HAWK GT 1191 Starter Kit"
+      command="npm create website-starter-kit@latest"
     />
+
+    Drei Varianten decken unterschiedliche Lernziele ab: Playground, Onepager, Multipager. Das Ergebnis: Studierende starten schneller und lernen mehr – weil die Umgebung nicht im Weg steht.
 
   </div>
 </section>
-
-<style>{`
-  .project-logo {
-    max-width: 100%;
-    height: auto;
-    margin-block-end: var(--sp-xs);
-  }
-
-  .project-preview {
-    max-width: 100%;
-    height: auto;
-    margin-block-end: var(--sp-xs);
-  }
-`}</style>
