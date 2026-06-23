@@ -4,6 +4,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 import Tooltip from "./Tooltip.astro";
 import { Image } from "astro:assets";
 import avatarImg from "../assets/images/davideiken-1200.jpg";
+import Logo from "../assets/brand.svg";
 
 interface PageModule {
   frontmatter?: {
@@ -97,14 +98,19 @@ const contactHref = "#contact";
             class="site-logo"
             aria-label={homeLabel}
           >
-            <Image
-              src={avatarImg}
-              alt="David Eiken"
-              class="logo-mark"
-              width={48}
-              height={48}
-              densities={[1.5, 2]}
-            />
+            <span class="logo-stack">
+              <Logo width={48} height={48} class="logo-mark logo-svg" />
+              <Image
+                src={avatarImg}
+                alt=""
+                aria-hidden="true"
+                class="logo-mark avatar-mark"
+                width={48}
+                height={48}
+                densities={[1.5, 2]}
+                loading="eager"
+              />
+            </span>
             <span class="logo-wordmark">David Eiken</span>
           </a>
         </li>
@@ -387,6 +393,24 @@ const contactHref = "#contact";
     });
   }
 </script><style>
+  @keyframes logoFadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes avatarFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   .site-header {
     position: fixed;
     inset-block-start: var(--sp);
@@ -469,13 +493,49 @@ const contactHref = "#contact";
       }
     }
 
+    .logo-stack {
+      display: grid;
+      grid-template-areas: "stack";
+      width: 2.25rem;
+      height: 2.25rem;
+      flex-shrink: 0;
+    }
+
     .logo-mark {
+      grid-area: stack;
       display: inline-block;
       width: 2.25rem;
       height: 2.25rem;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid color-mix(in oklch, var(--clr-text) 15%, transparent);
+    }
+
+    .logo-svg {
+      opacity: 1;
+    }
+
+    .avatar-mark {
+      opacity: 0;
+    }
+
+    /* Progressive Enhancement: Logo/Avatar-Swap via Scroll-Driven Animation */
+    @supports (animation-timeline: scroll()) {
+      --c-trigger-point: 20vh;
+
+      .logo-svg {
+        animation: logoFadeOut linear both;
+        animation-timeline: scroll(root);
+        animation-range: var(--c-trigger-point)
+          calc(var(--c-trigger-point) + 120px);
+      }
+
+      .avatar-mark {
+        animation: avatarFadeIn linear both;
+        animation-timeline: scroll(root);
+        animation-range: var(--c-trigger-point)
+          calc(var(--c-trigger-point) + 120px);
+      }
     }
 
     .logo-wordmark {
