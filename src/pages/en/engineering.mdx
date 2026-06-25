@@ -9,7 +9,7 @@ navOrder: 3
 import { Image } from "astro:assets";
 import PageHeader from "../../components/PageHeader.astro";
 import TerminalWindow from "../../components/TerminalWindow.astro";
-import hawkImg from "../../assets/images/projects/hawk-gt1191.svg";
+import HawkImage from "../../assets/images/projects/hawk-gt1191.svg";
 import technikwuerzeImg from "../../assets/images/projects/technikwuerze.png";
 import GithubLogo from "../../assets/images/projects/github.svg";
 import CodepenLogo from "../../assets/images/projects/codepen.svg";
@@ -20,11 +20,21 @@ import CodepenLogo from "../../assets/images/projects/codepen.svg";
   compactTitle={true}
 />
 
+<section class="tech-section tech-section-full">
+  ## Semantics. For Humans. For Machines.
+
+  <div>
+    Semantic HTML is no relic. What makes content accessible to screen readers also makes it interpretable for AI models. Clean markup of structure and meaning has always been the foundation of good frontend engineering -- in the age of AI, it's more relevant than ever.
+
+    For me, that's nothing new. Semantics has been part of my work from the start -- and that's exactly what makes the difference: while others retrofit it, I've brought this quality for 30 years.
+  </div>
+</section>
+
 <section class="tech-section">
   ## University teaching
 
 <div class="tech-section-aside">
-  <Image src={hawkImg} alt="HAWK GT 1191" class="project-logo hawk-logo" />
+  <HawkImage alt="HAWK GT 1191" class="project-logo hawk-logo" />
 </div>
 
   <div>

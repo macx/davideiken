@@ -43,6 +43,7 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
           <a href="https://davideiken.de">davideiken.de</a><br />
           <a href="https://hawk-gt1191.de">hawk-gt1191.de</a><br />
           <a href="https://technikwuerze.de">technikwuerze.de</a>
+          <a href="https://starterguide.dev">starterguide.dev</a>
         </dd>
       </dl>
     </div>
@@ -52,32 +53,56 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 
       <dl>
         <dt>{locale === "de" ? "Fundament:" : "Foundation:"}</dt>
-        <dd>HTML&#xA0;· CSS&#xA0;·&#xA0;TypeScript</dd>
+        <dd>
+          {
+            locale === "de" ? (
+              <>
+                <strong>Semantisches HTML</strong> für Menschen, Assistive
+                Technologie und <strong>KI</strong>&#xA0;·
+              </>
+            ) : (
+              <>
+                <strong>Semantic HTML</strong> for humans, assistive technology
+                and <strong>AI</strong>&#xA0;·
+              </>
+            )
+          }{" "}
+          Modern&nbsp;CSS&#xA0;·&#xA0;TypeScript
+        </dd>
 
         <dt>{locale === "de" ? "Frameworks & CM:" : "Frameworks & CMS:"}</dt>
         <dd>
-          Astro&#xA0;· Angular&#xA0;· PrimeNG&#xA0;· JSX&#xA0;· MDX&#xA0;·
-          Markdown&#xA0;· Kirby&#xA0;·&#xA0;PHP
+          Astro&#xA0;· JSX&#xA0;· Markdown&#xA0;· MDX&#xA0;· Angular&#xA0;·
+          PrimeNG&#xA0;· Kirby&#xA0;·&#xA0;PHP
         </dd>
 
         <dt>
           {locale === "de" ? "KI & Agentic Coding:" : "AI & Agentic Coding:"}
         </dt>
         <dd>
-          Copilot&#xA0;· Antigravity&#xA0;· Claude&#xA0;· Codex&#xA0;·
+          Claude&#xA0;· Gemini&#xA0;· Antigravity&#xA0;· Copilot&#xA0;·
+          Codex&#xA0;·
           {
             locale === "de"
               ? "Multi-Agenten-Workflows"
               : "Multi-agent workflows"
-          }
+          }&#xA0;· MCP
         </dd>
 
         <dt>UX & Frontend:</dt>
         <dd>
           {
-            locale === "de"
-              ? "UX-Experte · Design-to-Code · Mobile First · Responsive Design"
-              : "UX expert · Design-to-Code · Mobile First · Responsive Design"
+            locale === "de" ? (
+              <>
+                <strong>UX für Mensch und KI</strong> · Design&#8209;to-Code ·
+                Mobile First · Responsive&nbsp;Design
+              </>
+            ) : (
+              <>
+                <strong>UX for Human and AI</strong> · Design&#8209;to-Code ·
+                Mobile First · Responsive&nbsp;Design
+              </>
+            )
           }
         </dd>
       </dl>
@@ -113,8 +138,8 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
         <dd>
           {
             locale === "de"
-              ? "Deutsch (Muttersprache), Englisch (fließend)"
-              : "German (Native), English (Fluent)"
+              ? "Deutsch (Muttersprache), Englisch (fluent enough)"
+              : "German (Native), English (fluent enough)"
           }
         </dd>
       </dl>
