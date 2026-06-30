@@ -94,13 +94,30 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
           {
             locale === "de" ? (
               <>
-                <strong>UX für Mensch und KI</strong> · Design&#8209;to-Code ·
+                <strong>UX für Mensch und KI</strong> · Frustrationsfrei ·
                 Mobile First · Responsive&nbsp;Design
               </>
             ) : (
               <>
-                <strong>UX for Human and AI</strong> · Design&#8209;to-Code ·
-                Mobile First · Responsive&nbsp;Design
+                <strong>UX for Human and AI</strong> · Frustation free · Mobile
+                First · Responsive&nbsp;Design
+              </>
+            )
+          }
+        </dd>
+
+        <dt>Editorial & Media:</dt>
+        <dd>
+          {
+            locale === "de" ? (
+              <>
+                Tutorials · Fachbeiträge (Print&nbsp;& Online) · Kolumne ·
+                Podcast (Audio&nbsp;& Video)
+              </>
+            ) : (
+              <>
+                Tutorials · Technical articles (Print&nbsp;& Online) · Column ·
+                Podcast (Audio&nbsp;& Video)
               </>
             )
           }
@@ -128,9 +145,11 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
         <dt>Deploy:</dt>
         <dd>
           {
-            locale === "de"
-              ? "Remote Deutschland, hybrid & DACH auf Anfrage"
-              : "Remote Germany, hybrid & DACH on request"
+            locale === "de" ? (
+              <>Remote Deutschland, hybrid&nbsp;& DACH auf Anfrage</>
+            ) : (
+              <>Remote Germany, hybrid&nbsp;& DACH on request</>
+            )
           }
         </dd>
 
@@ -141,6 +160,11 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
               ? "Deutsch (Muttersprache), Englisch (fluent enough)"
               : "German (Native), English (fluent enough)"
           }
+        </dd>
+
+        <dt>Start:</dt>
+        <dd>
+          {locale === "de" ? "sofort" : "immediately"}
         </dd>
       </dl>
     </div>
