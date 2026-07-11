@@ -22,7 +22,7 @@ const encodedEmail = Buffer.from(email).toString('base64');
     emailEls.forEach(el => {
       if (el.dataset.email) {
         const decoded = atob(el.dataset.email);
-        el.innerHTML = `<a href="mailto:${decoded}">${decoded}</a>`;
+        el.innerHTML = `<a href="#contact">${decoded}</a>`;
       }
     });
   });

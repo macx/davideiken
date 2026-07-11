@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/Layout.astro
-title: "Datenschutzerklärung zur Videoüberwachung (Baustellenkamera)"
-description: "Informationen zur Baustellenkamera und Datenschutz"
+title: "Datenschutzerklärung zur Videoüberwachung (Grundstückskamera)"
+description: "Informationen zur Grundstücksüberwachung per Kamera und Datenschutz"
 ---
 
 import PageHeader from "../../components/PageHeader.astro";
@@ -11,23 +11,27 @@ import EmailLink from "../../components/EmailLink.astro";
 <PageHeader
   title={frontmatter.title}
   compactTitle={true}
-  lead="Die Bilder der Baustellenkamera sind nicht öffentlich zugänglich und dienen rein privaten Sicherheitszwecken."
+  lead="Die Bilder unserer Kamera(s) sind nicht öffentlich zugänglich und dienen rein privaten Sicherheitszwecken auf unserem Grundstück."
 />
 
 <PrivacyNav />
 
 <section class="section-surface">
   <div class="section-header">
-    <h2>1. Zweck der Baustellenkamera</h2>
+    <h2>1. Zweck der Kamera(s)</h2>
   </div>
   <p>
-    Die Bilder der Baustellenkamera sind <strong>nicht öffentlich zugänglich</strong>. Sie sind rein privat und werden ausschließlich auf dem eigenen Grundstück aufgezeichnet. Der Einsatz der Kamera erfolgt zur Wahrung des Hausrechts und dient folgenden Zwecken:
+    Die Bilder unserer Kamera(s) sind <strong>nicht öffentlich zugänglich</strong>. Sie sind rein privat und werden ausschließlich innerhalb der Grenzen unseres eigenen Grundstücks aufgezeichnet. <strong>Öffentliche Wege, Gehsteige, die Straße sowie Nachbargrundstücke werden nicht erfasst.</strong> Der Einsatz der Kamera(s) erfolgt zur Wahrung des Hausrechts und dient folgenden Zwecken:
   </p>
   <ul>
     <li>Verhinderung von unberechtigtem Zutritt</li>
     <li>Diebstahlschutz und Prävention von Vandalismus</li>
-    <li>Überwachung zur Unfallprävention auf der Baustelle</li>
+    <li>Überwachung zur Unfallprävention während der Bauphase</li>
+    <li>Dauerhafte Sicherung des Grundstücks nach Fertigstellung des Hauses</li>
   </ul>
+  <p>
+    Während der Bauphase dient die Kamera zusätzlich der dokumentarischen Aufzeichnung des Baufortschritts (Zeitraffer/Timelapse). Nach Fertigstellung und Bezug des Hauses wird die Kamera ausschließlich zu Sicherheitszwecken weiterbetrieben.
+  </p>
 </section>
 
 <section class="section-projekte">
@@ -37,24 +41,27 @@ import EmailLink from "../../components/EmailLink.astro";
   
   <h3>Verantwortliche Stelle</h3>
   <p>
-    Der Betreiber der Baustellenkamera ist verantwortlich für die Einhaltung aller datenschutzrechtlichen Bestimmungen gemäß der Datenschutz-Grundverordnung (DSGVO).
+    Der Betreiber der Kamera(s) ist verantwortlich für die Einhaltung aller datenschutzrechtlichen Bestimmungen gemäß der Datenschutz-Grundverordnung (DSGVO).
   </p>
 
   <h3>Art der erfassten Daten</h3>
   <ul>
-    <li>Bildaufnahmen der Baustelle</li>
+    <li>Bildaufnahmen des Grundstücks</li>
     <li>Zeitstempel der Aufnahmen</li>
     <li>Technische Metadaten (z.B. Kameraeinstellungen)</li>
   </ul>
 
   <h3>Rechtsgrundlage</h3>
   <p>
-    Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Unser berechtigtes Interesse besteht im Schutz unseres Eigentums (Diebstahl- und Vandalismusschutz) sowie in der Unfallprävention und Wahrung des Hausrechts.
+    Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Unser berechtigtes Interesse besteht im Schutz unseres Eigentums (Diebstahl- und Vandalismusschutz), in der Unfallprävention während der Bauphase sowie in der dauerhaften Wahrung unseres Hausrechts nach Fertigstellung des Hauses.
   </p>
 
   <h3>Speicherdauer</h3>
   <p>
-    Die Aufnahmen werden für die Dauer des Bauprojekts (unter Beachtung etwaiger gesetzlicher Aufbewahrungsfristen) gespeichert und anschließend gelöscht.
+    Während der Bauphase werden die Aufnahmen aufgrund der zusätzlichen dokumentarischen Zeitraffer-Aufzeichnung des Baufortschritts für die Dauer des Bauprojekts (unter Beachtung etwaiger gesetzlicher Aufbewahrungsfristen) gespeichert und anschließend gelöscht.
+  </p>
+  <p>
+    Im Regelbetrieb nach Fertigstellung und Bezug des Hauses werden die Aufnahmen der Sicherheitskamera(s) automatisiert nach <strong>72 Stunden</strong> gelöscht. Eine längere Speicherung erfolgt ausschließlich, wenn die Aufnahmen zur Aufklärung eines konkreten Vorfalls (z.&nbsp;B. Einbruch, Sachbeschädigung) benötigt werden, etwa zur Weitergabe an Strafverfolgungsbehörden.
   </p>
 
   <h3>Deine Rechte</h3>
@@ -76,7 +83,7 @@ import EmailLink from "../../components/EmailLink.astro";
   <p>Um die Daten bestmöglich zu schützen, setzen wir folgende Maßnahmen ein:</p>
   <ul>
     <li><strong>Verschlüsselung:</strong> Alle Datenübertragungen erfolgen verschlüsselt.</li>
-    <li><strong>Zugangskontrolle:</strong> Nur autorisierte Personen haben Zugriff auf die Kamera und die Aufzeichnungen.</li>
+    <li><strong>Zugangskontrolle:</strong> Nur autorisierte Personen haben Zugriff auf die Kamera(s) und die Aufzeichnungen.</li>
     <li><strong>Sichere Speicherung:</strong> Die Daten werden auf sicheren Servern gespeichert.</li>
     <li><strong>Protokollierung:</strong> Jegliche Zugriffe werden protokolliert und überwacht.</li>
   </ul>
