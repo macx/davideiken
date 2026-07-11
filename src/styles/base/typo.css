@@ -21,6 +21,8 @@ h1.title-compact,
   font-size: clamp(1.875rem, 1.5rem + 2.5vw, 3.25rem);
   line-height: var(--lh-h2);
   letter-spacing: normal;
+  hyphens: auto;
+  text-wrap: balance;
 }
 
 h2 {
