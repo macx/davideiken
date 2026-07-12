@@ -82,8 +82,7 @@ const navLabel = locale === "de" ? "Hauptnavigation" : "Main navigation";
 const openLabel = locale === "de" ? "Navigation öffnen" : "Open navigation";
 const closeLabel =
   locale === "de" ? "Navigation schließen" : "Close navigation";
-const homeLabel =
-  locale === "de" ? "David Eiken Startseite" : "David Eiken Home";
+const homeSuffix = locale === "de" ? "Startseite" : "Home";
 const contactHref = "#contact";
 ---
 
@@ -93,11 +92,7 @@ const contactHref = "#contact";
     <nav class="site-nav" aria-label={navLabel}>
       <ul class="nav-list">
         <li class="nav-item logo-item">
-          <a
-            href={getRelativeLocaleUrl(locale, "")}
-            class="site-logo"
-            aria-label={homeLabel}
-          >
+          <a href={getRelativeLocaleUrl(locale, "")} class="site-logo">
             <span class="logo-stack">
               <Logo width={48} height={48} class="logo-mark logo-svg" />
               <Image
@@ -111,7 +106,10 @@ const contactHref = "#contact";
                 loading="eager"
               />
             </span>
-            <span class="logo-wordmark">David Eiken</span>
+            <span class="logo-wordmark"
+              >David Eiken<span class="visually-hidden"> {homeSuffix}</span
+              ></span
+            >
           </a>
         </li>
 

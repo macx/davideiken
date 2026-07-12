@@ -100,13 +100,13 @@ h6 {
 }
 
 a:any-link:not(.nav-link, .nav-icon-link, .site-logo, .drawer-link) {
-  color: var(--clr-primary);
+  color: var(--clr-primary-link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3.5px;
   text-decoration-color: color-mix(
     in oklch,
-    var(--clr-primary) 35%,
+    var(--clr-primary-link) 35%,
     transparent
   );
   border-radius: 0.25rem;
@@ -117,8 +117,8 @@ a:any-link:not(.nav-link, .nav-icon-link, .site-logo, .drawer-link) {
 
   &:hover,
   &:focus-visible {
-    color: var(--clr-primary-strong);
-    text-decoration-color: var(--clr-primary-strong);
+    color: var(--clr-primary-link-strong);
+    text-decoration-color: var(--clr-primary-link-strong);
     text-decoration-thickness: 1.5px;
     background-color: transparent;
   }
