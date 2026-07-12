@@ -44,6 +44,8 @@
   );
   --clr-primary-strong: color-mix(in oklch, var(--clr-primary), black 16%);
   --clr-primary-deep: color-mix(in oklch, var(--clr-primary), black 24%);
+  --clr-primary-link: var(--clr-primary);
+  --clr-primary-link-strong: var(--clr-primary-strong);
 
   --clr-secondary-weak: color-mix(
     in oklch,
@@ -145,6 +147,8 @@
 
   --clr-primary-strong: color-mix(in oklch, var(--clr-primary), white 16%);
   --clr-primary-deep: color-mix(in oklch, var(--clr-primary), black 24%);
+  --clr-primary-link: color-mix(in oklch, var(--clr-primary), white 24%);
+  --clr-primary-link-strong: color-mix(in oklch, var(--clr-primary), white 38%);
 
   --clr-secondary-strong: color-mix(in oklch, var(--clr-secondary), white 14%);
   --clr-secondary-deep: color-mix(in oklch, var(--clr-secondary), black 22%);
@@ -169,6 +173,12 @@
 
     --clr-primary-strong: color-mix(in oklch, var(--clr-primary), white 16%);
     --clr-primary-deep: color-mix(in oklch, var(--clr-primary), black 24%);
+    --clr-primary-link: color-mix(in oklch, var(--clr-primary), white 24%);
+    --clr-primary-link-strong: color-mix(
+      in oklch,
+      var(--clr-primary),
+      white 38%
+    );
 
     --clr-secondary-strong: color-mix(
       in oklch,

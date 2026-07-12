@@ -39,9 +39,9 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 
       <dl>
         <dt>Web:</dt>
-        <dd>
-          <a href="https://davideiken.de">davideiken.de</a><br />
-          <a href="https://hawk-gt1191.de">hawk-gt1191.de</a><br />
+        <dd class="web-links">
+          <a href="https://davideiken.de">davideiken.de</a>
+          <a href="https://hawk-gt1191.de">hawk-gt1191.de</a>
           <a href="https://technikwuerze.de">technikwuerze.de</a>
           <a href="https://starterguide.dev">starterguide.dev</a>
         </dd>
@@ -220,6 +220,16 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 
     dd {
       margin: 0;
+    }
+  }
+
+  .web-links {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      display: inline-block;
+      padding-block: var(--sp-2xs);
     }
   }
 
