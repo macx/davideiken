@@ -14,8 +14,18 @@ interface Props {
 const { class: className, variant = "header", locale = "en" } = Astro.props;
 
 const labels = {
-  en: { auto: "Theme: Auto", light: "Theme: Light", dark: "Theme: Dark" },
-  de: { auto: "Design: Auto", light: "Design: Hell", dark: "Design: Dunkel" },
+  en: {
+    auto: "Theme: Auto",
+    light: "Theme: Light",
+    dark: "Theme: Dark",
+    toggle: "Toggle theme",
+  },
+  de: {
+    auto: "Design: Auto",
+    light: "Design: Hell",
+    dark: "Design: Dunkel",
+    toggle: "Design wechseln",
+  },
 };
 const t = labels[locale as "en" | "de"] || labels.en;
 ---
@@ -27,6 +37,7 @@ const t = labels[locale as "en" | "de"] || labels.en;
       type="button"
       class:list={["theme-toggle", className]}
       position="bottom"
+      aria-label={t.toggle}
     >
       <ThemeAuto class="icon-theme icon-auto" aria-hidden="true" />
       <ThemeLight class="icon-theme icon-light" aria-hidden="true" />
@@ -38,7 +49,11 @@ const t = labels[locale as "en" | "de"] || labels.en;
       </span>
     </Tooltip>
   ) : (
-    <button class:list={["theme-toggle is-drawer", className]} type="button">
+    <button
+      class:list={["theme-toggle is-drawer", className]}
+      type="button"
+      aria-label={t.toggle}
+    >
       <ThemeAuto class="icon-theme icon-auto" aria-hidden="true" />
       <ThemeLight class="icon-theme icon-light" aria-hidden="true" />
       <ThemeDark class="icon-theme icon-dark" aria-hidden="true" />
