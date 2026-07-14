@@ -39,7 +39,7 @@ const TOOLTIPS = {
 ---
 
 <li
-  class={`timeline-item type-${type} ${isOffset ? "is-offset" : ""}`}
+  class={`timeline-item type-${type} ${isOffset ? "is-offset" : ""} ${gridRow === 0 ? "is-lead-row" : ""}`}
   style={gridRow !== undefined ? `--grid-row: ${gridRow + 1}` : undefined}
 >
   <div class="timeline-content">
@@ -179,10 +179,31 @@ const TOOLTIPS = {
         }
       }
 
+      /* Item(s) in the first grid row (mobile: just the first item;
+         desktop: the first item plus whichever item shares its row in
+         the two-column layout) can already sit inside the
+         animation-range on load on short viewports, leaving text at
+         partial opacity without any scrolling -- so they only slide in
+         at full opacity. Tied to the actual grid row (gridRow === 0),
+         not DOM position, so this stays correct regardless of how the
+         underlying data is ordered. */
+      @keyframes unveil-slide {
+        from {
+          transform: translateY(10em);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
       .timeline-item {
         animation: unveil auto linear both;
         animation-timeline: view(block);
         animation-range: entry 10% cover 35%;
+
+        &.is-lead-row {
+          animation-name: unveil-slide;
+        }
       }
     }
   }
