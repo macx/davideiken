@@ -78,7 +78,7 @@ export default defineConfig({
     }),
   },
   integrations: [mdx()],
-  experimental: {
-    rustCompiler: true,
-  },
+  // v7 default: JSX-style whitespace handling (collapses line breaks,
+  // preserves intentional inline spacing).
+  compressHTML: "jsx",
 });
