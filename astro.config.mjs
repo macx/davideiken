@@ -78,7 +78,5 @@ export default defineConfig({
     }),
   },
   integrations: [mdx()],
-  // v7 default: JSX-style whitespace handling (collapses line breaks,
-  // preserves intentional inline spacing).
   compressHTML: "jsx",
 });
