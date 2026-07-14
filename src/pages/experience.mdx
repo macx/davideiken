@@ -20,7 +20,11 @@ export const processedData = processTimelineData(experienceData);
   compactTitle={true}
 />
 
-<Timeline headingLeft="Selbstständig" headingRight="Angestellt">
+<Timeline
+  headingLeft="Selbstständig"
+  headingRight="Angestellt"
+  accessibilityHeading="Timeline meiner beruflichen Stationen"
+>
   {processedData.map((item) => (
     <TimelineItem
       date={item.date}

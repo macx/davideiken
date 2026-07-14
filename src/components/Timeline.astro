@@ -6,10 +6,14 @@ import DavidSign from "../assets/images/david-sign.svg";
 interface Props {
   headingLeft?: string;
   headingRight?: string;
+  accessibilityHeading?: string;
 }
 
-const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
-  Astro.props;
+const {
+  headingLeft = "Selbstständig",
+  headingRight = "Angestellt",
+  accessibilityHeading,
+} = Astro.props;
 ---
 
 <div class="timeline-container">
@@ -115,9 +119,10 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
       </svg>
     </div>
 
-    <div class="timeline-headings desktop-only">
-      <h2 class="heading-left">{headingLeft}</h2>
-      <h2 class="heading-right">{headingRight}</h2>
+    <div class="timeline-headings">
+      <h2 class="heading-left desktop-only">{headingLeft}</h2>
+      <h2 class="heading-right desktop-only">{headingRight}</h2>
+      <h2 class="visually-hidden">{accessibilityHeading}</h2>
     </div>
 
     <ul class="timeline-list">
@@ -356,6 +361,10 @@ const { headingLeft = "Selbstständig", headingRight = "Angestellt" } =
     }
 
     .desktop-only {
+      display: block;
+    }
+
+    .timeline-headings {
       display: grid;
       grid-template-columns: 1fr 2px 1fr;
       gap: 0 var(--c-timeline-gap);
