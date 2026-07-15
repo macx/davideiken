@@ -14,9 +14,14 @@ h1 {
   line-height: var(--lh-h1);
   letter-spacing: var(--ls-h1);
   margin-block: 0;
+
+  strong {
+    font-size: 0.6em;
+    line-height: var(--lh-h2);
+    font-variation-settings: var(--fvs-h1);
+  }
 }
 
-h1.title-compact,
 .title-compact {
   font-size: clamp(1.875rem, 1.5rem + 2.5vw, 3.25rem);
   line-height: var(--lh-h2);

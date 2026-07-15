@@ -58,6 +58,9 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
   data-msg-success={t.success}
   data-msg-error={t.error}
   data-msg-network={t.networkError}
+  toolname="contactForm"
+  tooldescription={t.send}
+  toolautosubmit
 >
   <div id="formStatus" class="form-status" aria-live="polite"></div>
 
@@ -180,6 +183,11 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
     flex-direction: column;
     gap: var(--sp-s);
 
+    &:tool-form-active {
+      outline: var(--focus-outline);
+      outline-offset: var(--focus-outline-offset);
+    }
+
     .form-content {
       display: flex;
       flex-direction: column;
@@ -279,7 +287,8 @@ const privacyUrl = lang === "de" ? "/privacy" : "/en/privacy";
         outline-color: transparent;
       }
 
-      &:focus-visible {
+      &:focus-visible,
+      &:tool-subnit-active {
         outline: var(--focus-outline);
         outline-offset: var(--focus-outline-offset);
       }
