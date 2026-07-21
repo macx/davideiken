@@ -1,0 +1,44 @@
+<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="illo-404-title">
+  <title id="illo-404-title">Eine „404“-Anzeige, deren mittlere Null in lose Pixel-Fragmente zerbricht</title>
+
+  <rect x="0" y="0" width="640" height="320" style="fill: var(--clr-surface-dim)" />
+
+  <text
+    x="30"
+    y="248"
+    font-family="var(--ff-heading, sans-serif)"
+    font-size="210"
+    font-weight="900"
+    style="fill: var(--clr-text)"
+  >4</text>
+
+  <text
+    x="435"
+    y="248"
+    font-family="var(--ff-heading, sans-serif)"
+    font-size="210"
+    font-weight="900"
+    style="fill: var(--clr-text)"
+  >4</text>
+
+  <g stroke-linecap="round">
+    <path
+      d="M 218 160 A 102 102 0 0 1 422 160"
+      transform="translate(-9,-16) rotate(-6 320 160)"
+      style="fill: none; stroke: var(--clr-primary); stroke-width: 30"
+    />
+    <path
+      d="M 218 160 A 102 102 0 0 0 422 160"
+      transform="translate(9,16) rotate(5 320 160)"
+      style="fill: none; stroke: var(--clr-primary); stroke-width: 30"
+    />
+  </g>
+
+  <g>
+    <rect width="16" height="16" x="292" y="112" transform="rotate(18 300 120)" style="fill: var(--clr-secondary)" />
+    <rect width="11" height="11" x="336" y="96" transform="rotate(-12 341 101)" style="fill: var(--clr-secondary)" />
+    <rect width="13" height="13" x="240" y="178" transform="rotate(30 246 184)" style="fill: var(--clr-tertiary)" />
+    <rect width="9" height="9" x="384" y="196" transform="rotate(-20 388 200)" style="fill: var(--clr-tertiary)" />
+    <rect width="10" height="10" x="308" y="222" transform="rotate(10 313 227)" style="fill: var(--clr-secondary)" />
+  </g>
+</svg>

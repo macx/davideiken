@@ -30,7 +30,10 @@ const cleanTitle = stripMarkdown(title);
 const cleanDescription = stripMarkdown(description);
 
 const locale = Astro.url.pathname.startsWith("/en") ? "en" : "de";
-const alternates = getAlternates(Astro.url.pathname);
+// The 404 page renders for arbitrary, non-existent paths -- a canonical/
+// hreflang tag pointing at those would be an SEO anti-pattern, so skip both.
+const isErrorPage = Astro.response.status === 404;
+const alternates = isErrorPage ? undefined : getAlternates(Astro.url.pathname);
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -41,7 +44,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={cleanDescription} />
     <meta name="viewport" content="width=device-width" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="canonical" href={canonicalUrl} />
+    {!isErrorPage && <link rel="canonical" href={canonicalUrl} />}
     {
       alternates && (
         <>
