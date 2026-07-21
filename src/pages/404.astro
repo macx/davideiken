@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Figure from "../components/Figure.astro";
+import Button from "../components/Button.astro";
+import Illustration404 from "../assets/images/404-illustration.svg";
+
+Astro.response.status = 404;
+
+const locale = Astro.url.pathname.startsWith("/en") ? "en" : "de";
+
+const copy = {
+  de: {
+    title: "Seite nicht gefunden | David Maciejewski",
+    description:
+      "Fehler 404 – diese Seite gibt es nicht, aber alle anderen Seiten funktionieren tadellos.",
+    heading: "Huch! Wo ist sie hin?",
+    lead: "Diese Route gibt es nicht. Ich baue seit über 30 Jahren Websites – aber ausgerechnet diese URL kenne ich beim besten Willen nicht.",
+    caption: "Eine Null, komplett auseinandergefallen. Immerhin semantisch korrekt kaputt.",
+    body1:
+      "Vielleicht hast du dich vertippt, vielleicht habe ich einen Link vergessen umzuleiten, vielleicht ist die Seite auch einfach in Rente gegangen. So oder so: Hier gibt es nichts zu sehen außer dieser sehr symbolischen kaputten Null.",
+    body2:
+      "Semantisches HTML rettet Screenreader und Suchmaschinen – kaputte Links rettet es leider nicht. Zum Glück kennt der Rest meiner Website den Weg noch.",
+    cta: "Zurück zur Startseite",
+    ctaHref: "/",
+  },
+  en: {
+    title: "Page Not Found | David Maciejewski",
+    description:
+      "Error 404 – this page doesn't exist, but all my other pages work just fine.",
+    heading: "Oops! Where did it go?",
+    lead: "This route doesn't exist. I've been building websites for over 30 years – and somehow I still don't recognize this particular URL.",
+    caption: "A zero, completely fallen apart. At least it's semantically broken correctly.",
+    body1:
+      "Maybe you mistyped something, maybe I forgot to redirect a link, maybe the page simply retired. Either way: there's nothing to see here except this very symbolic broken zero.",
+    body2:
+      "Semantic HTML saves screen readers and search engines – unfortunately not broken links. Luckily, the rest of my website still knows the way.",
+    cta: "Back to homepage",
+    ctaHref: "/en",
+  },
+} as const;
+
+const t = copy[locale];
+---
+
+<Layout title={t.title} description={t.description}>
+  <PageHeader title={t.heading} compactTitle={true} lead={t.lead} />
+
+  <Figure caption={t.caption}>
+    <Illustration404 />
+  </Figure>
+
+  <p>{t.body1}</p>
+  <p>{t.body2}</p>
+
+  <p><Button href={t.ctaHref}>{t.cta}</Button></p>
+</Layout>
