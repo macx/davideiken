@@ -1,5 +1,76 @@
 <svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="illo-404-title">
-  <title id="illo-404-title">Eine „404“-Anzeige, deren mittlere Null in lose Pixel-Fragmente zerbricht</title>
+  <title id="illo-404-title">Eine „404“-Anzeige, deren mittlere Null zu einem Gesicht wird -- mit Kopf, Kinn, blinzelnden Augen und einem Lächeln</title>
+
+  <style>
+    .ring-half {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: ring-drift 4.5s ease-in-out infinite;
+    }
+    .ring-half--a {
+      --dx: -9px;
+      --dy: -16px;
+      --rot: -6deg;
+    }
+    .ring-half--b {
+      --dx: 9px;
+      --dy: 16px;
+      --rot: 5deg;
+      animation-delay: 0.3s;
+    }
+    @keyframes ring-drift {
+      0%,
+      100% {
+        transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+      }
+      50% {
+        transform: translate(calc(var(--dx) * 1.7), calc(var(--dy) * 1.7))
+          rotate(calc(var(--rot) * 2));
+      }
+    }
+
+    .eye {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: blink 4.4s ease-in-out infinite;
+    }
+    .eye--right {
+      animation-delay: 0.06s;
+    }
+    @keyframes blink {
+      0%,
+      92%,
+      100% {
+        transform: scaleY(1);
+      }
+      96% {
+        transform: scaleY(0.15);
+      }
+    }
+
+    .mouth {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: smile 3.6s ease-in-out infinite;
+    }
+    @keyframes smile {
+      0%,
+      100% {
+        transform: scaleX(1);
+      }
+      50% {
+        transform: scaleX(1.18);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ring-half,
+      .eye,
+      .mouth {
+        animation: none;
+      }
+    }
+  </style>
 
   <rect x="0" y="0" width="640" height="320" style="fill: var(--clr-surface-dim)" />
 
@@ -21,24 +92,23 @@
     style="fill: var(--clr-text)"
   >4</text>
 
+  <!-- The "0": head (top arc) and chin (bottom arc), with a face in between -->
   <g stroke-linecap="round">
     <path
+      class="ring-half ring-half--a"
       d="M 218 160 A 102 102 0 0 1 422 160"
-      transform="translate(-9,-16) rotate(-6 320 160)"
       style="fill: none; stroke: var(--clr-primary); stroke-width: 30"
     />
     <path
+      class="ring-half ring-half--b"
       d="M 218 160 A 102 102 0 0 0 422 160"
-      transform="translate(9,16) rotate(5 320 160)"
       style="fill: none; stroke: var(--clr-primary); stroke-width: 30"
     />
   </g>
 
   <g>
-    <rect width="16" height="16" x="292" y="112" transform="rotate(18 300 120)" style="fill: var(--clr-secondary)" />
-    <rect width="11" height="11" x="336" y="96" transform="rotate(-12 341 101)" style="fill: var(--clr-secondary)" />
-    <rect width="13" height="13" x="240" y="178" transform="rotate(30 246 184)" style="fill: var(--clr-tertiary)" />
-    <rect width="9" height="9" x="384" y="196" transform="rotate(-20 388 200)" style="fill: var(--clr-tertiary)" />
-    <rect width="10" height="10" x="308" y="222" transform="rotate(10 313 227)" style="fill: var(--clr-secondary)" />
+    <rect class="eye eye--left" width="16" height="16" x="286" y="132" rx="3" style="fill: var(--clr-secondary)" />
+    <rect class="eye eye--right" width="16" height="16" x="338" y="132" rx="3" style="fill: var(--clr-secondary)" />
+    <rect class="mouth" width="40" height="12" x="300" y="196" rx="6" style="fill: var(--clr-tertiary)" />
   </g>
 </svg>
