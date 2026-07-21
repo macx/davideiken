@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /eigentumsnachweis
+Disallow: /en/proof-of-ownership

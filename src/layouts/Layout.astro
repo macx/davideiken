@@ -2,9 +2,11 @@
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
   frontmatter?: {
     title?: string;
     description?: string;
+    noindex?: boolean;
   };
 }
 
@@ -12,28 +14,65 @@ const { frontmatter } = Astro.props;
 const title = frontmatter?.title || Astro.props.title || "David Eiken";
 const description =
   frontmatter?.description || Astro.props.description || "David Eiken";
+const noindex = frontmatter?.noindex ?? Astro.props.noindex ?? false;
 
 import { Font } from "astro:assets";
 import "../styles/main.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import Footer from "../components/Footer.astro";
 import ContactSection from "../components/ContactSection.astro";
+import { getAlternates } from "../i18n/routes";
+import { stripMarkdown } from "../utils/text";
+
+// Frontmatter titles/descriptions may contain Markdown (e.g. "__Bold__") meant
+// for on-page rendering via PageHeader -- <title> and <meta> need plain text.
+const cleanTitle = stripMarkdown(title);
+const cleanDescription = stripMarkdown(description);
 
 const locale = Astro.url.pathname.startsWith("/en") ? "en" : "de";
+const alternates = getAlternates(Astro.url.pathname);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
 <html lang={locale}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
+    <meta name="description" content={cleanDescription} />
     <meta name="viewport" content="width=device-width" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      alternates && (
+        <>
+          <link
+            rel="alternate"
+            hreflang="de"
+            href={new URL(alternates.de, Astro.site)}
+          />
+          <link
+            rel="alternate"
+            hreflang="en"
+            href={new URL(alternates.en, Astro.site)}
+          />
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL(alternates.de, Astro.site)}
+          />
+        </>
+      )
+    }
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <Font cssVariable="--ff-copy" preload />
     <Font cssVariable="--ff-heading" preload />
     <meta name="generator" content={Astro.generator} />
-    <title>{title === "David Eiken" ? title : `${title} | David Eiken`}</title>
+    <title>
+      {cleanTitle === "David Eiken"
+        ? cleanTitle
+        : `${cleanTitle} | David Eiken`}
+    </title>
     <script is:inline>
       // Language Detection & Redirect (only on root path)
       if (window.location.pathname === "/") {

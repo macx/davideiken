@@ -1,5 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { getAlternates } from "../i18n/routes";
 import ThemeToggle from "./ThemeToggle.astro";
 import Tooltip from "./Tooltip.astro";
 import { Image } from "astro:assets";
@@ -76,7 +77,10 @@ const currentSlug =
   locale === "en"
     ? currentPath.replace(/^\/en\/?/, "")
     : currentPath.replace(/^\//, "");
-const languageSwitchHref = getRelativeLocaleUrl(targetLocale, currentSlug);
+const alternates = getAlternates(currentPath);
+const languageSwitchHref = alternates
+  ? alternates[targetLocale]
+  : getRelativeLocaleUrl(targetLocale, currentSlug);
 const languageSwitchLabel = targetLocale === "de" ? "DE" : "EN";
 const navLabel = locale === "de" ? "Hauptnavigation" : "Main navigation";
 const openLabel = locale === "de" ? "Navigation öffnen" : "Open navigation";
