@@ -17,6 +17,7 @@ const cssTarget = resolveToEsbuildTarget(targets);
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://davideiken.de",
   adapter: node({
     mode: "standalone",
   }),

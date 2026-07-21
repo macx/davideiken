@@ -5,10 +5,10 @@ import avatarImg from "../assets/images/davideiken-1200.jpg";
 import SectionLabel from "./SectionLabel.astro";
 
 const locale = Astro.currentLocale ?? "de";
-const privacyHref =
-  locale === "de"
-    ? getRelativeLocaleUrl(locale, "privacy")
-    : getRelativeLocaleUrl(locale, "privacy");
+const privacyHref = getRelativeLocaleUrl(
+  locale,
+  locale === "de" ? "datenschutz" : "privacy",
+);
 const imprintHref = getRelativeLocaleUrl(locale, "imprint");
 const privacyLabel = locale === "de" ? "Datenschutz" : "Privacy";
 const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";

@@ -1,0 +1,33 @@
+---
+layout: ../layouts/Layout.astro
+title: "Eigentumsnachweis | David Maciejewski"
+description: "Eigentumsnachweis für Werkzeuge, Leitern und weiteres Eigentum von David Maciejewski."
+noindex: true
+---
+
+import PageHeader from "../components/PageHeader.astro";
+import EmailLink from "../components/EmailLink.astro";
+import Figure from "../components/Figure.astro";
+import davidLeiterImg from "../assets/images/david-leiter.jpg";
+
+<PageHeader
+  title="Eigentumsnachweis"
+  compactTitle={true}
+  lead="Hey, du hast hier gerade mein Werkzeug oder eines meiner Dinge gefunden. Sei bitte so lieb und bring es mir zurück, oder schreib mir kurz – ich hänge nämlich sehr an dem, was ich dort hinterlassen habe."
+/>
+
+<Figure
+  src={davidLeiterImg}
+  alt="David auf einer Leiter bei der Arbeit"
+  caption="Ich, meine Leiter, und ein gesundes Maß Vorsicht."
+/>
+
+Diese Leiter, dieser Akkuschrauber oder was auch immer dich hierher geführt hat, gehört tatsächlich mir. Melde dich einfach kurz über <EmailLink email="hallo@davideiken.de" /> oder das [Kontaktformular](/#contact), dann erwartet dich eine Belohnung. Es sei denn, ich habe dir das Objekt wissentlich ausgeliehen, dann wäre eine Belohnung nicht nötig. Denn eine Hand wäscht die andere, und ich bin ein sehr dankbarer Mensch.
+
+<address>
+  David Maciejewski <br />
+  Schillerstraße 35a <br />
+  32427 Minden
+</address>
+
+Und falls du gerade eher denkst _„wie bescheuert muss man sein, einen QR-Code auf sein Werkzeug zu kleben“_ statt _„ach, das gehört ja David“_ -- willkommen im Club, das fragen sich meine Nachbarn auch. Die ehrliche Antwort: ziemlich bescheuert, aber lieber einmal kurz belächelt, als ein drittes Mal eine neue Leiter kaufen.
