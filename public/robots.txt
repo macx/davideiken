@@ -1,3 +1,5 @@
 User-agent: *
 Disallow: /eigentumsnachweis
 Disallow: /en/proof-of-ownership
+
+Sitemap: https://davideiken.de/sitemap-index.xml
