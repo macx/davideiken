@@ -1,0 +1,16 @@
+---
+// Decorative binary-digit rendition of the portrait, crossfaded in on scroll
+// alongside the grayscale filter in hero.css. Generated via
+// scripts/generate-binary-portrait.mjs. Two variants exist because the
+// overlay is a single theme color (currentColor): "light" puts glyphs where
+// the photo is dark (ink on a light card), "dark" puts glyphs where the
+// photo is light (light ink on a dark card) -- so dense glyphs always read
+// as the photo's dark regions, in both themes.
+import binaryPortraitLight from "../assets/images/david-portrait-binary-light.svg?raw";
+import binaryPortraitDark from "../assets/images/david-portrait-binary-dark.svg?raw";
+---
+
+<div class="portrait-binary">
+  <div class="binary-variant binary-variant--light" set:html={binaryPortraitLight} />
+  <div class="binary-variant binary-variant--dark" set:html={binaryPortraitDark} />
+</div>

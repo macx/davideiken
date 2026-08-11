@@ -430,7 +430,7 @@ const contactHref = "#contact";
       position: relative;
       display: flex;
       align-items: stretch;
-      height: 3.25rem;
+      block-size: 3.25rem;
       gap: var(--sp-xs);
       padding-block: 0;
       padding-inline-start: 0.5rem;
@@ -455,8 +455,8 @@ const contactHref = "#contact";
     }
 
     .nav-divider {
-      width: 1px;
-      height: 1.1rem;
+      inline-size: 1px;
+      block-size: 1.1rem;
       background: color-mix(in oklch, var(--clr-text) 16%, transparent);
       flex-shrink: 0;
     }
@@ -498,16 +498,16 @@ const contactHref = "#contact";
     .logo-stack {
       display: grid;
       grid-template-areas: "stack";
-      width: 2.25rem;
-      height: 2.25rem;
+      inline-size: 2.25rem;
+      block-size: 2.25rem;
       flex-shrink: 0;
     }
 
     .logo-mark {
       grid-area: stack;
       display: inline-block;
-      width: 2.25rem;
-      height: 2.25rem;
+      inline-size: 2.25rem;
+      block-size: 2.25rem;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid color-mix(in oklch, var(--clr-text) 15%, transparent);
@@ -550,8 +550,8 @@ const contactHref = "#contact";
       position: relative;
       display: flex;
       align-items: stretch;
-      width: 100%;
-      height: 100%;
+      inline-size: 100%;
+      block-size: 100%;
     }
 
     .nav-list {
@@ -561,7 +561,7 @@ const contactHref = "#contact";
       list-style: none;
       padding: 0;
       margin: 0;
-      width: 100%;
+      inline-size: 100%;
     }
 
     .nav-item {
@@ -618,8 +618,8 @@ const contactHref = "#contact";
       display: none;
       align-items: center;
       justify-content: center;
-      width: 2.75rem;
-      height: 100%;
+      inline-size: 2.75rem;
+      block-size: 100%;
       align-self: stretch;
       padding: 0;
       background: none;
@@ -633,10 +633,10 @@ const contactHref = "#contact";
       &::before {
         content: "";
         position: absolute;
-        width: 2.05rem;
-        height: 2.05rem;
-        left: 50%;
-        top: 50%;
+        inline-size: 2.05rem;
+        block-size: 2.05rem;
+        inset-inline-start: 50%;
+        inset-block-start: 50%;
         translate: -50% -50%;
         border-radius: 50%;
         background: transparent;
@@ -681,8 +681,8 @@ const contactHref = "#contact";
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 2.75rem;
-      height: 100%;
+      inline-size: 2.75rem;
+      block-size: 100%;
       color: color-mix(in oklch, var(--clr-text) 80%, transparent);
       text-decoration: none;
       position: relative;
@@ -693,10 +693,10 @@ const contactHref = "#contact";
       &::before {
         content: "";
         position: absolute;
-        width: 2.05rem;
-        height: 2.05rem;
-        left: 50%;
-        top: 50%;
+        inline-size: 2.05rem;
+        block-size: 2.05rem;
+        inset-inline-start: 50%;
+        inset-block-start: 50%;
         translate: -50% -50%;
         border-radius: 50%;
         background: transparent;
@@ -765,19 +765,19 @@ const contactHref = "#contact";
       .nav-indicator {
         position: absolute;
         position-anchor: --nav-1;
-        top: calc(anchor(top) + 0.35rem);
-        height: calc(anchor-size(height) - 0.7rem);
-        left: calc(anchor(left) + 0.25rem);
-        width: calc(anchor-size(width) - 0.5rem);
+        inset-block-start: calc(anchor(top) + 0.35rem);
+        block-size: calc(anchor-size(height) - 0.7rem);
+        inset-inline-start: calc(anchor(left) + 0.25rem);
+        inline-size: calc(anchor-size(width) - 0.5rem);
         border-radius: 9999px;
         background: color-mix(in oklch, var(--clr-text) 7%, transparent);
         opacity: 0;
         pointer-events: none;
         transition:
-          left 240ms cubic-bezier(0.4, 0, 0.2, 1),
-          width 240ms cubic-bezier(0.4, 0, 0.2, 1),
-          top 240ms cubic-bezier(0.4, 0, 0.2, 1),
-          height 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          inset-inline-start 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          inline-size 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          inset-block-start 240ms cubic-bezier(0.4, 0, 0.2, 1),
+          block-size 240ms cubic-bezier(0.4, 0, 0.2, 1),
           border-radius 240ms cubic-bezier(0.4, 0, 0.2, 1),
           opacity 160ms ease;
       }
@@ -785,10 +785,10 @@ const contactHref = "#contact";
       /* Logo Hover State */
       .site-nav:has(.logo-item .site-logo:hover) .nav-indicator {
         position-anchor: --nav-logo;
-        top: calc(anchor(top) + 0.15rem);
-        height: calc(anchor-size(height) - 0.3rem);
-        left: calc(anchor(left) - 0.25rem);
-        width: calc(anchor-size(width) + 0.5rem);
+        inset-block-start: calc(anchor(top) + 0.15rem);
+        block-size: calc(anchor-size(height) - 0.3rem);
+        inset-inline-start: calc(anchor(left) - 0.25rem);
+        inline-size: calc(anchor-size(width) + 0.5rem);
         border-radius: 9999px;
       }
 
@@ -811,59 +811,59 @@ const contactHref = "#contact";
 
       /* Text Link Hover States */
       .site-nav:has(.text-link-item .nav-link:hover) .nav-indicator {
-        top: calc(anchor(top) + 0.35rem);
-        height: calc(anchor-size(height) - 0.7rem);
+        inset-block-start: calc(anchor(top) + 0.35rem);
+        block-size: calc(anchor-size(height) - 0.7rem);
         border-radius: 9999px;
       }
 
       .site-nav:has(.nav-item:nth-child(2) .nav-link:hover) .nav-indicator {
         position-anchor: --nav-1;
-        left: calc(anchor(left) + 0.25rem);
-        width: calc(anchor-size(width) - 0.5rem);
+        inset-inline-start: calc(anchor(left) + 0.25rem);
+        inline-size: calc(anchor-size(width) - 0.5rem);
       }
 
       .site-nav:has(.nav-item:nth-child(3) .nav-link:hover) .nav-indicator {
         position-anchor: --nav-2;
-        left: calc(anchor(left) + 0.25rem);
-        width: calc(anchor-size(width) - 0.5rem);
+        inset-inline-start: calc(anchor(left) + 0.25rem);
+        inline-size: calc(anchor-size(width) - 0.5rem);
       }
 
       .site-nav:has(.nav-item:nth-child(4) .nav-link:hover) .nav-indicator {
         position-anchor: --nav-3;
-        left: calc(anchor(left) + 0.25rem);
-        width: calc(anchor-size(width) - 0.5rem);
+        inset-inline-start: calc(anchor(left) + 0.25rem);
+        inline-size: calc(anchor-size(width) - 0.5rem);
       }
 
       .site-nav:has(.nav-item:nth-child(5) .nav-link:hover) .nav-indicator {
         position-anchor: --nav-4;
-        left: calc(anchor(left) + 0.25rem);
-        width: calc(anchor-size(width) - 0.5rem);
+        inset-inline-start: calc(anchor(left) + 0.25rem);
+        inline-size: calc(anchor-size(width) - 0.5rem);
       }
 
       /* Icon Hover States (Morph to centered circles) */
       .site-nav:has(.icon-link-item .nav-icon-link:hover) .nav-indicator {
-        width: 2.05rem;
-        height: 2.05rem;
-        top: calc(anchor(top) + anchor-size(height) / 2 - 1.025rem);
+        inline-size: 2.05rem;
+        block-size: 2.05rem;
+        inset-block-start: calc(anchor(top) + anchor-size(height) / 2 - 1.025rem);
         border-radius: 50%;
       }
 
       .site-nav:has(.nav-item:nth-child(5) .nav-icon-link:hover)
         .nav-indicator {
         position-anchor: --nav-contact;
-        left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
+        inset-inline-start: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
       }
 
       .site-nav:has(.nav-item:nth-child(6) .nav-icon-link:hover)
         .nav-indicator {
         position-anchor: --nav-theme;
-        left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
+        inset-inline-start: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
       }
 
       .site-nav:has(.nav-item:nth-child(7) .nav-icon-link:hover)
         .nav-indicator {
         position-anchor: --nav-lang;
-        left: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
+        inset-inline-start: calc(anchor(left) + anchor-size(width) / 2 - 1.025rem);
       }
 
       /* Show indicator when hovered */
@@ -941,15 +941,15 @@ const contactHref = "#contact";
       transition:
         color 160ms ease,
         background 160ms ease;
-      border-bottom: 1px solid
+      border-block-end: 1px solid
         color-mix(in oklch, var(--clr-text) 6%, transparent);
 
       .drawer-icon-placeholder {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: var(--c-icon-w);
-        height: var(--c-icon-w);
+        inline-size: var(--c-icon-w);
+        block-size: var(--c-icon-w);
         flex-shrink: 0;
       }
 
@@ -970,7 +970,7 @@ const contactHref = "#contact";
       }
 
       &:last-child {
-        border-bottom: none;
+        border-block-end: none;
       }
 
       &:hover,
@@ -1012,7 +1012,7 @@ const contactHref = "#contact";
     .nav-drawer {
       position-anchor: --nav-pill;
       inset-block-start: calc(anchor(bottom) + var(--sp-xs));
-      left: anchor(center);
+      inset-inline-start: anchor(center);
       translate: -50% 0;
       margin: 0;
     }

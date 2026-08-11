@@ -1,6 +1,7 @@
 import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
+import sitemap from "@astrojs/sitemap";
 import { satteri } from "@astrojs/markdown-satteri";
 import browserslist from "browserslist";
 import { browserslistToTargets } from "lightningcss";
@@ -78,6 +79,19 @@ export default defineConfig({
       },
     }),
   },
-  integrations: [mdx()],
+  integrations: [
+    mdx(),
+    sitemap({
+      i18n: {
+        defaultLocale: "de",
+        locales: {
+          de: "de-DE",
+          en: "en-US",
+        },
+      },
+      filter: (page) =>
+        !/\/(eigentumsnachweis|en\/proof-of-ownership|api\/|sprites\/)/.test(page),
+    }),
+  ],
   compressHTML: "jsx",
 });

@@ -6,6 +6,7 @@ description: "One-pager by David Eiken focused on digital architecture, strategy
 
 import PageHeader from "../../components/PageHeader.astro";
 import LogoGrid from "../../components/LogoGrid.astro";
+import BinaryPortrait from "../../components/BinaryPortrait.astro";
 import { Image } from "astro:assets";
 import portraitImage from "../../assets/images/david-portrait-color.jpg";
 
@@ -15,21 +16,24 @@ import portraitImage from "../../assets/images/david-portrait-color.jpg";
 />
 
 <div class="flow-root">
-  <Image
-    src={portraitImage}
-    alt="David Eiken"
-    class="portrait"
-    widths={[240, 480]}
-    sizes="(max-width: 768px) 240px, 480px"
-    loading="eager"
-    fetchpriority="high"
-  />
+  <div class="portrait-wrap">
+    <Image
+      src={portraitImage}
+      alt="David Eiken"
+      class="portrait"
+      widths={[240, 480]}
+      sizes="(max-width: 768px) 240px, 480px"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <BinaryPortrait />
+  </div>
 
 Starting in print, I made the transition to the web at the turn of the millennium. I learned HTML and CSS autodidactically -- long before YouTube or suitable degree programs. Instead of dry theory, my focus was on hands-on practice: as a full-stack developer, I covered concept, design, frontend, and backend for years. This curious mindset of looking beyond the horizon still shapes me today -- all the way to agentic coding.
 
 This intrinsic drive showed early on where it would lead: as a digital pioneer, I launched 'Technikwürze' in 2005 -- one of the first German podcasts. What started as a one-man show quickly evolved into a collaborative format: by purposefully involving external experts, I drove the democratization of technical knowledge -- and learned that the best results always arise through collaboration.
 
-This principle still applies today. I work at the intersection of design and deployment -- bringing people, ideas, and code together into a thoughtful user experience. Since 2015, I have also been lecturing students how modern websites are built -- mobile-first, responsive, and frustration-free.
+This principle still applies today. I work at the intersection of design and deployment -- bringing people, ideas, and code together into a thoughtful user experience. I train people -- whether in the lecture hall or pairing with a team. For 11 years as a lecturer at HAWK, I gave students the tools to build modern websites, and that drive still lives on in every project I shape today: mobile-first, responsive, and frustration-free.
 
 </div>
 
