@@ -169,16 +169,16 @@ const {
   }
 
   .avatar-wrapper {
-    width: 120px;
-    height: 120px;
+    inline-size: 120px;
+    block-size: 120px;
     border-radius: 50%; /* kreisrund auf mobile und desktop */
     overflow: hidden;
     position: relative;
     z-index: 2;
     background: var(--clr-bg);
     transition:
-      width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-      height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      inline-size 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      block-size 0.4s cubic-bezier(0.4, 0, 0.2, 1),
       border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -188,8 +188,8 @@ const {
   }
 
   .avatar {
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     object-fit: cover;
   }
 
@@ -199,25 +199,24 @@ const {
 
   .timeline-track {
     position: relative;
-    padding-top: 100px;
-    padding-bottom: var(--sp-2xl);
+    padding-block: 1em var(--sp-2xl);
     z-index: 1;
   }
 
   .center-line {
     anchor-name: --center-line;
     position: absolute;
-    left: 0;
-    top: 60px; /* schließt an connector-top an */
-    bottom: 60px; /* schließt an connector-bottom an */
-    width: 3px;
+    inset-inline-start: 0;
+    inset-block-start: 60px; /* schließt an connector-top an */
+    inset-block-end: 60px; /* schließt an connector-bottom an */
+    inline-size: 3px;
     background: var(--clr-text);
     z-index: -1;
     transition:
-      left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      inset-inline-start 0.4s cubic-bezier(0.4, 0, 0.2, 1),
       transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-      top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-      bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      inset-block-start 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      inset-block-end 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .arrow-down {
@@ -230,18 +229,18 @@ const {
     position: absolute;
     z-index: 1;
     color: var(--clr-text);
-    left: 0;
-    width: 50%;
-    height: 60px;
+    inset-inline-start: 0;
+    inline-size: 50%;
+    block-size: 60px;
     pointer-events: none;
   }
 
   .connector-top {
-    top: 0;
+    inset-block-start: 0;
   }
 
   .connector-bottom {
-    bottom: 0;
+    inset-block-end: 0;
   }
 
   .connector-top svg,
@@ -253,43 +252,41 @@ const {
 
   .connector-top-left,
   .connector-bottom-left {
-    left: 0;
+    inset-inline-start: 0;
   }
 
   .connector-top-right,
   .connector-bottom-right {
-    right: 0;
+    inset-inline-end: 0;
   }
 
   .connector-top-middle,
   .connector-bottom-middle {
     position: absolute;
-    left: 30px;
-    right: 30px;
-    height: 3px;
+    inset-inline: 30px;
+    block-size: 3px;
     background: currentColor;
   }
 
   .connector-top-middle {
-    top: 25.5px;
+    inset-block-start: 25.5px;
   }
 
   .connector-bottom-middle {
-    top: 31.5px;
-  }
-
-  .timeline-headings {
-    margin-bottom: var(--sp-2xl);
+    inset-block-start: 31.5px;
   }
 
   .timeline-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-block-start: var(
+      --sp-xl
+    ); /* clears the connector-top curve (60px incl. track padding) */
     position: relative;
     z-index: 2;
-    padding-left: 20px; /* max space for content */
-    transition: padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-inline-start: 20px; /* max space for content */
+    transition: padding-inline-start 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .timeline-footer {
@@ -309,19 +306,21 @@ const {
 
   .footer-profile h2 {
     font-size: var(--fs-2xl);
-    margin: var(--sp-m) 0 0.2rem;
+    margin-block: var(--sp-m) 0.2rem;
+    margin-inline: 0;
   }
 
   .name-note {
     font-size: var(--fs-s);
     font-style: italic;
     color: var(--clr-text-muted);
-    margin: 0 0 var(--sp-xl);
+    margin-block: 0 var(--sp-xl);
+    margin-inline: 0;
   }
 
   .signature {
     inline-size: 12em;
-    height: auto;
+    block-size: auto;
     margin-inline: auto;
     transform: translateX(2.5ch);
   }
@@ -329,7 +328,7 @@ const {
   /* --- Desktop Layout --- */
   @media (min-width: 768px) {
     .timeline-track {
-      padding-top: var(--sp-xl);
+      padding-block-start: var(--sp-xl);
     }
 
     .timeline-header {
@@ -342,8 +341,8 @@ const {
     }
 
     .avatar-wrapper {
-      width: 180px;
-      height: 180px;
+      inline-size: 180px;
+      block-size: 180px;
     }
 
     .connector-top,
@@ -354,8 +353,8 @@ const {
     .arrow-down {
       display: block;
       position: absolute;
-      bottom: -40px; /* sit exactly at the end of the line */
-      left: 50%;
+      inset-block-end: -40px; /* sit exactly at the end of the line */
+      inset-inline-start: 50%;
       transform: translateX(-50%) translateY(100%);
       color: var(--clr-text);
     }
@@ -369,31 +368,32 @@ const {
       grid-template-columns: 1fr 2px 1fr;
       gap: 0 var(--c-timeline-gap);
       text-align: center;
+      margin-block-end: var(--sp-2xl);
     }
 
     .heading-left {
       grid-column: 1;
       font-size: var(--fs-xl);
       margin: 0;
-      text-align: right;
+      text-align: end;
     }
 
     .heading-right {
       grid-column: 3;
       font-size: var(--fs-xl);
       margin: 0;
-      text-align: left;
+      text-align: start;
     }
 
     .center-line {
-      left: 50%;
+      inset-inline-start: 50%;
       transform: translateX(-50%);
-      top: -60px; /* reaches up to the top avatar */
-      bottom: -60px; /* reaches down to the bottom avatar */
+      inset-block-start: -60px; /* reaches up to the top avatar */
+      inset-block-end: -60px; /* reaches down to the bottom avatar */
     }
 
     .arrow-down {
-      bottom: -40px; /* sit exactly at the end of the line */
+      inset-block-end: -40px; /* sit exactly at the end of the line */
       transform: translateX(-50%) translateY(100%);
     }
 
@@ -401,7 +401,8 @@ const {
       display: grid;
       grid-template-columns: 1fr 2px 1fr;
       gap: 0 var(--c-timeline-gap);
-      padding-left: 0;
+      padding-inline-start: 0;
+      margin-block-start: 0;
     }
   }
 </style>

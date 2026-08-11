@@ -75,6 +75,7 @@
   --clr-danger: oklch(68% 0.2 25);
 
   --clr-highlight: hsl(50 100% 62%);
+  --clr-on-highlight: oklch(15% 0.01 260);
 
   /* Unified type scale */
   --fs: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);

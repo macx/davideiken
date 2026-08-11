@@ -6,6 +6,7 @@ description: "One-pager by David Eiken focused on digital architecture, strategy
 
 import PageHeader from "../components/PageHeader.astro";
 import LogoGrid from "../components/LogoGrid.astro";
+import BinaryPortrait from "../components/BinaryPortrait.astro";
 import { Image } from "astro:assets";
 import portraitImage from "../assets/images/david-portrait-color.jpg";
 
@@ -15,15 +16,18 @@ import portraitImage from "../assets/images/david-portrait-color.jpg";
 />
 
 <div class="flow-root">
-  <Image
-    src={portraitImage}
-    alt="David Eiken"
-    class="portrait"
-    widths={[240, 480]}
-    sizes="(max-width: 768px) 240px, 480px"
-    loading="eager"
-    fetchpriority="high"
-  />
+  <div class="portrait-wrap">
+    <Image
+      src={portraitImage}
+      alt="David Eiken"
+      class="portrait"
+      widths={[240, 480]}
+      sizes="(max-width: 768px) 240px, 480px"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <BinaryPortrait />
+  </div>
 
 Angefangen im Print, folgte zur Jahrtausendwende der Schritt ins Web. HTML und CSS habe ich mir autodidaktisch beigebracht -- lange vor YouTube oder passenden Studiengängen. Statt grauer Theorie stand für mich die Praxis im Fokus: Als Full-Stack-Entwickler deckte ich jahrelang Konzeption, Design, Frontend und Backend ab. Dieser neugierige Blick weit über den Tellerrand prägt mich bis heute -- bis hin zu Agentic Coding.
 

@@ -66,23 +66,24 @@ const TOOLTIPS = {
 <style>
   .timeline-item {
     position: relative;
-    margin-bottom: var(--sp-2xl);
+    margin-block-end: var(--sp-2xl);
   }
   .timeline-item:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   .timeline-meta {
     display: flex;
     align-items: center;
     gap: var(--sp-s);
-    margin-bottom: var(--sp-s);
+    margin-block-end: var(--sp-s);
     position: relative;
   }
 
   .timeline-date {
     display: inline-block;
-    padding: 0.2rem 0.8rem;
+    padding-block: 0.2rem;
+    padding-inline: 0.8rem;
     border: 1px solid var(--clr-text-muted);
     border-radius: 99px;
     font-size: var(--fs-xs);
@@ -99,8 +100,8 @@ const TOOLTIPS = {
   }
 
   .timeline-icon :global(svg) {
-    width: 1em;
-    height: 1em;
+    inline-size: 1em;
+    block-size: 1em;
     fill: currentColor;
   }
 
@@ -112,16 +113,16 @@ const TOOLTIPS = {
   .timeline-dot {
     display: block;
     position: absolute;
-    left: -25px; /* aligns perfectly with the extreme left 10px center line on mobile */
-    top: 50%;
+    inset-inline-start: -25px; /* aligns perfectly with the extreme left 10px center line on mobile */
+    inset-block-start: 50%;
     transform: translateY(-50%);
-    width: 13px;
-    height: 13px;
+    inline-size: 13px;
+    block-size: 13px;
     border-radius: 50%;
     z-index: 2;
     transition:
-      left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-      right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      inset-inline-start 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      inset-inline-end 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Specific dot colors based on type */
@@ -145,7 +146,8 @@ const TOOLTIPS = {
   .timeline-company {
     font-size: var(--fs-s);
     color: var(--clr-text-muted);
-    margin: 0 0 var(--sp-s);
+    margin-block: 0 var(--sp-s);
+    margin-inline: 0;
   }
 
   .timeline-impact {
@@ -161,7 +163,7 @@ const TOOLTIPS = {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     display: block;
-    margin-bottom: 0.2rem;
+    margin-block-end: 0.2rem;
   }
 
   /* Unveil Animation for Scroll */
@@ -180,17 +182,9 @@ const TOOLTIPS = {
         }
       }
 
-      /* Item(s) in the first grid row (mobile: just the first item;
-         desktop: the first item plus whichever item shares its row in
-         the two-column layout) can already sit inside the
-         animation-range on load on short viewports, leaving text at
-         partial opacity without any scrolling -- so they only slide in
-         at full opacity. Tied to the actual grid row (gridRow === 0),
-         not DOM position, so this stays correct regardless of how the
-         underlying data is ordered. */
       @keyframes unveil-slide {
         from {
-          transform: translateY(10em);
+          transform: translateY(2em);
         }
         to {
           transform: translateY(0);
@@ -202,6 +196,11 @@ const TOOLTIPS = {
         animation-timeline: view(block);
         animation-range: entry 10% cover 35%;
 
+        /* Lead row can sit only partially inside the viewport on load,
+           leaving the view-timeline's entry phase unresolved -- which
+           shows up as a leftover translateY offset before any scroll.
+           A short, opacity-free slide keeps that leftover offset small
+           enough to be unnoticeable while still animating in. */
         &.is-lead-row {
           animation-name: unveil-slide;
         }
@@ -216,20 +215,20 @@ const TOOLTIPS = {
     }
 
     .timeline-item {
-      margin-bottom: var(--sp-xl);
+      margin-block-end: var(--sp-xl);
       grid-row: var(--grid-row);
     }
 
     .timeline-item:last-child {
-      margin-bottom: var(--sp-xl);
+      margin-block-end: var(--sp-xl);
     }
 
     .timeline-item.is-offset {
-      margin-top: 4em;
+      margin-block-start: 4em;
     }
 
     .timeline-meta {
-      margin-bottom: var(--sp-m);
+      margin-block-end: var(--sp-m);
       display: flex;
       position: relative; /* relative to position the absolute line and dot */
 
@@ -242,16 +241,16 @@ const TOOLTIPS = {
 
     .impact-label {
       display: inline;
-      margin-right: 0.2rem;
+      margin-inline-end: 0.2rem;
     }
 
     /* Common styles for the Dot and Line (::before) */
     .timeline-dot {
       display: block;
       position: absolute;
-      top: 50%;
-      width: var(--c-dot-size);
-      height: var(--c-dot-size);
+      inset-block-start: 50%;
+      inline-size: var(--c-dot-size);
+      block-size: var(--c-dot-size);
       border-radius: 50%;
       z-index: 2;
       box-sizing: border-box;
@@ -262,8 +261,8 @@ const TOOLTIPS = {
       content: "";
       display: block;
       position: absolute;
-      top: 50%;
-      height: var(--c-line-thickness);
+      inset-block-start: 50%;
+      block-size: var(--c-line-thickness);
       z-index: 1;
       transform: translateY(-50%);
     }
@@ -272,7 +271,7 @@ const TOOLTIPS = {
     .type-freelance,
     .type-education {
       grid-column: 1;
-      text-align: right;
+      text-align: end;
     }
 
     .type-freelance .timeline-meta,
@@ -284,8 +283,8 @@ const TOOLTIPS = {
     /* Position the dots in the middle of the gap, completely outside the content */
     .type-freelance .timeline-dot,
     .type-education .timeline-dot {
-      left: calc(100% + var(--c-dot-gap));
-      right: auto;
+      inset-inline-start: calc(100% + var(--c-dot-gap));
+      inset-inline-end: auto;
     }
 
     .type-freelance .timeline-dot {
@@ -299,14 +298,14 @@ const TOOLTIPS = {
 
     /* Spanning lines from the dot edge to the center vertical line */
     .type-freelance .timeline-meta::before {
-      left: calc(100% + var(--c-line-offset));
-      right: calc(-1 * var(--c-timeline-gap) - 1px);
+      inset-inline-start: calc(100% + var(--c-line-offset));
+      inset-inline-end: calc(-1 * var(--c-timeline-gap) - 1px);
       background: var(--clr-primary);
     }
 
     .type-education .timeline-meta::before {
-      left: calc(100% + var(--c-line-offset));
-      right: calc(-1 * var(--c-timeline-gap) - 1px);
+      inset-inline-start: calc(100% + var(--c-line-offset));
+      inset-inline-end: calc(-1 * var(--c-timeline-gap) - 1px);
       background: var(--clr-text-muted);
       opacity: 0.5;
     }
@@ -314,7 +313,7 @@ const TOOLTIPS = {
     /* Employed (Right Column) */
     .type-employed {
       grid-column: 3;
-      text-align: left;
+      text-align: start;
     }
 
     .type-employed .timeline-meta {
@@ -324,15 +323,15 @@ const TOOLTIPS = {
 
     /* Position the dots in the middle of the gap, completely outside the content */
     .type-employed .timeline-dot {
-      right: calc(100% + var(--c-dot-gap));
-      left: auto;
+      inset-inline-end: calc(100% + var(--c-dot-gap));
+      inset-inline-start: auto;
       background: var(--clr-text);
     }
 
     /* Spanning lines from the dot edge to the center vertical line */
     .type-employed .timeline-meta::before {
-      right: calc(100% + var(--c-line-offset));
-      left: calc(-1 * var(--c-timeline-gap) - 1px);
+      inset-inline-end: calc(100% + var(--c-line-offset));
+      inset-inline-start: calc(-1 * var(--c-timeline-gap) - 1px);
       background: var(--clr-text);
     }
   }

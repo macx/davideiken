@@ -16,24 +16,102 @@
   }
 }
 
-.portrait {
-  width: 100%;
-  max-width: 280px;
+@keyframes portraitFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+@keyframes revealBinary {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.portrait-wrap {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  max-inline-size: 280px;
   margin-inline: auto;
   margin-block-end: var(--sp-m);
   border-radius: var(--sp-2xs);
-  border: 1px solid var(--clr-outline);
+  overflow: hidden;
+  background: var(--clr-surface);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.portrait {
+  inline-size: 100%;
+  block-size: auto;
   display: block;
+  border: 1px solid var(--clr-outline);
 
   /* Fallback: Bild startet farbig */
   filter: grayscale(0) contrast(1.02) brightness(1.08);
 
   /* Progressive Enhancement: Scroll-Driven Animation */
   @supports (animation-timeline: scroll()) {
-    animation: scrollGrayscale linear both;
+    animation:
+      scrollGrayscale linear both,
+      portraitFadeOut linear both;
+    animation-timeline: scroll(root), scroll(root);
+    animation-range:
+      0px 200px,
+      160px 320px;
+  }
+}
+
+.portrait-binary {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  color: var(--clr-text);
+  opacity: 0;
+  pointer-events: none;
+
+  @supports (animation-timeline: scroll()) {
+    animation: revealBinary linear both;
     animation-timeline: scroll(root);
-    animation-range: 0px 300px;
+    animation-range: 160px 320px;
+  }
+
+  & svg {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  & .binary-variant--dark {
+    display: none;
+  }
+}
+
+[data-theme="dark"] .portrait-binary {
+  & .binary-variant--light {
+    display: none;
+  }
+
+  & .binary-variant--dark {
+    display: block;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .portrait-binary {
+    & .binary-variant--light {
+      display: none;
+    }
+
+    & .binary-variant--dark {
+      display: block;
+    }
   }
 }
 
@@ -41,9 +119,13 @@
   filter: grayscale(0) contrast(1.5) brightness(0.7);
 
   @supports (animation-timeline: scroll()) {
-    animation: scrollGrayscaleDark linear both;
-    animation-timeline: scroll(root);
-    animation-range: 0px 300px;
+    animation:
+      scrollGrayscaleDark linear both,
+      portraitFadeOut linear both;
+    animation-timeline: scroll(root), scroll(root);
+    animation-range:
+      0px 200px,
+      160px 320px;
   }
 }
 
@@ -52,19 +134,30 @@
     filter: grayscale(0) contrast(1.5) brightness(0.7);
 
     @supports (animation-timeline: scroll()) {
-      animation: scrollGrayscaleDark linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0px 300px;
+      animation:
+        scrollGrayscaleDark linear both,
+        portraitFadeOut linear both;
+      animation-timeline: scroll(root), scroll(root);
+      animation-range:
+        0px 200px,
+        160px 320px;
     }
   }
 }
 
 @media (min-width: 48em) {
-  .portrait {
-    float: right;
-    width: 16rem;
+  .portrait-wrap {
+    float: inline-end;
+    inline-size: 16rem;
     margin-inline-start: var(--sp-xl);
     margin-block-end: var(--sp-s);
     margin-block-start: var(--sp-2xs);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait,
+  .portrait-binary {
+    animation: none;
   }
 }

@@ -235,7 +235,8 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
     textarea {
       font-family: inherit;
       font-size: inherit;
-      padding: 0.75rem 0.5rem;
+      padding-block: 0.75rem;
+      padding-inline: 0.5rem;
       border: none;
       border-block-end: 3px solid var(--clr-text);
       background: color-mix(in oklch, var(--clr-text) 5%, transparent);
@@ -263,7 +264,8 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
 
     .submit-btn {
       align-self: flex-end;
-      padding: 0.8rem 2.2rem;
+      padding-block: 0.8rem;
+      padding-inline: 2.2rem;
       background: var(--clr-text);
       color: var(--clr-bg);
       border: 2px solid var(--clr-text);
@@ -356,7 +358,7 @@ const privacyUrl = lang === "de" ? "/datenschutz" : "/en/privacy";
       font-style: italic;
       color: var(--clr-text-muted);
       line-height: 1.4;
-      text-align: left;
+      text-align: start;
     }
 
     .form-actions {
