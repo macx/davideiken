@@ -22,17 +22,17 @@
   },
   {
     "type": "freelance",
-    "date": "October 2016 – September 2017",
-    "title": "Lecturer Creative Coder (IHK)",
-    "company": "Dr. Buhmann School · Hanover · Freelance Lecturer",
-    "impact": "Not only did students learn HTML and CSS – colleagues did too. Sharing knowledge was part of my DNA from the very beginning."
-  },
-  {
-    "type": "freelance",
     "date": "May 2015 – February 2021",
     "title": "UI/UX Engineer",
     "company": "macx.io · Hanover · Founder",
     "impact": "From fantastic agencies and direct clients – interfaces that work and don't frustrate. My specialization in frontend engineering struck a chord."
+  },
+  {
+    "type": "freelance",
+    "date": "October 2016 – September 2017",
+    "title": "Lecturer Creative Coder (IHK)",
+    "company": "Dr. Buhmann School · Hanover · Freelance Lecturer",
+    "impact": "Not only did students learn HTML and CSS – colleagues did too. Sharing knowledge was part of my DNA from the very beginning."
   },
   {
     "type": "employed",
