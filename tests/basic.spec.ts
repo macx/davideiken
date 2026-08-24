@@ -52,7 +52,7 @@ test.describe("Contact Form", () => {
     await expect(form).toBeVisible();
 
     // Mock the contact form API route to prevent real email sending
-    await page.route("**/api/contact", async (route) => {
+    await page.route("**/api/contact/", async (route) => {
       expect(route.request().method()).toBe("POST");
       const postData = route.request().postData();
       expect(postData).toContain("name=E2E+Tester");
