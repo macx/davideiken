@@ -117,6 +117,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       (process.env.SMTP_SECURE || import.meta.env.SMTP_SECURE) === "true";
     const smtpUser = process.env.SMTP_USER || import.meta.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS || import.meta.env.SMTP_PASS;
+    const smtpFrom =
+      process.env.SMTP_FROM || import.meta.env.SMTP_FROM || smtpUser;
     const contactEmail =
       process.env.CONTACT_EMAIL || import.meta.env.CONTACT_EMAIL || smtpUser;
 
@@ -131,7 +133,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     });
 
     await transporter.sendMail({
-      from: `"${validatedData.name}" <${smtpUser}>`, // Send via authenticated user
+      from: `"${validatedData.name}" <${smtpFrom}>`,
       replyTo: validatedData.email,
       to: contactEmail,
       subject: `Contact Request: ${validatedData.name}`,
