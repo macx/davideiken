@@ -127,3 +127,8 @@ jobs:
       - name: Restart Node Application via Phusion Passenger
         run: |
           ssh -p ${{ secrets.DEPLOY_PORT || 22 }} ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "mkdir -p ${{ secrets.DEPLOY_PATH }}tmp && touch ${{ secrets.DEPLOY_PATH }}tmp/restart.txt"
+
+      - name: Purge Bunny CDN cache
+        run: |
+          curl -sf -X POST "https://api.bunny.net/pullzone/6404584/purgeCache" \
+            -H "AccessKey: ${{ secrets.BUNNY_API_KEY }}"
