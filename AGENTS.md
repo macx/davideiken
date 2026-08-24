@@ -102,3 +102,37 @@ When editing content, write primarily MDX instead of using HTML tags. Only allow
 - Any time an German MDX file under `src/pages/` is fully drafted, modified, renamed, or deleted, you MUST trigger the `mdx-translation-sync` skill.
 - Read the instructions in `skills/mdx-translation-sync/SKILL.md` to perform the sync.
 - To save tokens, do not perform line-by-line translations during drafting. Only execute the sync as a final step when the German file is ready.
+
+## 10) Infrastructure & Deployment
+
+Not derivable from the code alone — established 2026-08-24 while migrating to a CDN and fixing the contact form.
+
+### Hosting
+
+- Origin server: Plesk (Ubuntu/Postfix), reachable at `46.252.196.112`. **Multiple unrelated sites share this IP** (name-based virtual hosting via SNI) — any origin config that bypasses normal DNS (CDN pull zone, ad-hoc SSH/curl tests) must explicitly send `Host: davideiken.de`, or Plesk cannot tell which site to serve.
+- DNS is managed at a separate registrar reseller panel (`robot.s-dns.de`, INWX-style "Domain-Robot"), **not** in Plesk itself and **not** at Bunny. It supports `ALIAS` records on the zone apex (not just `CNAME`/`A`).
+- Mail is fully migrated to **Fastmail** (MX, SPF, DKIM `fm1-3._domainkey` CNAMEs, DMARC all point there). The Plesk server still runs Postfix but it is legacy — do not assume `mail.davideiken.de` is a live mailbox for any address.
+
+### CDN (Bunny.net)
+
+- Chosen over Cloudflare specifically for GDPR reasons (Bunny is an EU/Slovenian company; only the "Europe & North America" pricing zone is enabled — Europe-only is the deliberate choice for data residency, at no cost difference since that tier bundles both regions).
+- Root domain `davideiken.de` points to Bunny via an `ALIAS` record (DNS spec forbids `CNAME` on the apex) → `davideiken-de.b-cdn.net`. Pull Zone ID: `6404584`.
+- Origin in the Pull Zone is the raw IP (`46.252.196.112`), with the **Host header** field (not an Edge Rule — the origin settings page has a native "Host header (optional)" field) set to `davideiken.de`, and "Forward Host Header" disabled. This is what makes the shared-IP origin resolve to the right site.
+- Cache-Control on HTML is `public, max-age=2592000` (30 days, set by the origin/Astro, respected by Bunny). **Hashed `/_astro/*` assets never need purging** (filename changes with content), but HTML pages keep stable URLs and go stale in the CDN cache after every deploy. CI purges the whole zone via the Bunny API after each deploy (see below) — don't skip this step when touching the deploy workflow.
+
+### `trailingSlash: "always"` (astro.config.mjs)
+
+- Set deliberately to make canonical tags, hreflang, the sitemap, and internal links (`getRelativeLocaleUrl`, `getAlternates` in `src/i18n/routes.ts`) all agree on trailing-slash URLs — a mismatch here caused real Google Search Console "wrong canonical" reports.
+- **Consequence for API/action URLs:** any `fetch`/form `action` pointing at a `src/pages/api/*` route must use the trailing-slash form (e.g. `/api/contact/`, not `/api/contact`). Astro 301-redirects the slash-less form, and browsers turn a POST into a GET on a 301 — this silently broke the contact form in production once already. When adding a new POST endpoint, point every caller (components, tests, Playwright route mocks) at the `/…/` URL directly.
+
+### CI/CD (`.github/workflows/ci.yml`)
+
+- Deploys only fire on `v*` tag pushes (i.e. via `pnpm release`), not on every push to `develop`.
+- `DEPLOY_HOST` must be the origin **IP**, not the `davideiken.de` domain — since the domain now resolves to Bunny, using the domain here would point SSH/rsync at the CDN instead of the server.
+- Deploy order: rsync `dist/` → rsync `node_modules/` → touch `tmp/restart.txt` (Phusion Passenger restart) → purge Bunny cache via `POST https://api.bunny.net/pullzone/6404584/purgeCache` (needs the `BUNNY_API_KEY` secret). If you reorder this, purge must stay **after** the restart, not before.
+
+### Contact form SMTP (`src/pages/api/contact.ts`)
+
+- Sends via Fastmail (`smtp.fastmail.com:465`). **`SMTP_USER` must be the actual Fastmail login address** (`hallo@davideiken.de`), not a domain alias (`noreply@davideiken.de` fails auth even though it's a valid alias/send-as address).
+- `SMTP_FROM` (defaults to `SMTP_USER` if unset) controls the visible From address independently of the auth identity, so the mail doesn't have to appear from the same address it's sent to (`CONTACT_EMAIL`).
+- All SMTP config is Plesk Node.js app env vars, not `.env` files in the repo. There is no accessible app-level stdout/stderr log in this Plesk setup for debugging — verify SMTP credentials directly via an `openssl s_client` `AUTH LOGIN` handshake against the host/port in question instead of relying on app logs.
