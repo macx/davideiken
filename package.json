@@ -41,7 +41,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "rehype-slug": "^6.0.0",
     "release-it": "^21.0.2",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   },
   "browserslist": [
     "last 2 Chrome versions",
