@@ -50,8 +50,14 @@
     margin-block-end: var(--sp-xs);
   }
 
-  .hawk-logo {
+  .hawk {
     transition: all 250ms ease-in-out;
+  }
+
+  .hawk-rotate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp);
   }
 
   @media (width >= 40em) {
@@ -61,10 +67,18 @@
       "content aside";
     align-items: start;
 
-    .hawk-logo {
-      transform: translateX(-20%) rotate(-90deg);
-      transform-origin: 100% 100%;
-      scale: 1.5;
+    .hawk {
+      position: relative;
+      overflow: clip;
+      aspect-ratio: 2 / 3;
+    }
+
+    .hawk-rotate {
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      inline-size: 100%;
+      transform: translate(-50%, -50%) rotate(-90deg) scale(1.5);
     }
 
     &.tech-section-full {

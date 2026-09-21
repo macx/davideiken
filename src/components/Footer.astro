@@ -29,7 +29,11 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
       <p class="footer-name">
         <strong>David Eiken</strong><br />
         <em>
-          {locale === "de" ? "(geb. Maciejewski)" : "(born Maciejewski)"}
+          {
+            locale === "de"
+              ? "(vormals David Maciejewski)"
+              : "(formerly David Maciejewski)"
+          }
         </em>
       </p>
 
@@ -37,9 +41,8 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
         <dt>Web:</dt>
         <dd class="web-links">
           <a href="https://davideiken.de">davideiken.de</a>
-          <a href="https://hawk-gt1191.de">hawk-gt1191.de</a>
+          <a href="https://frustfrei.dev">frustfrei.dev</a>
           <a href="https://technikwuerze.de">technikwuerze.de</a>
-          <a href="https://starterguide.dev">starterguide.dev</a>
         </dd>
       </dl>
     </div>
@@ -68,8 +71,21 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 
         <dt>{locale === "de" ? "Frameworks & CM:" : "Frameworks & CMS:"}</dt>
         <dd>
-          Astro&#xA0;· JSX&#xA0;· Markdown&#xA0;· MDX&#xA0;· Angular&#xA0;·
-          PrimeNG&#xA0;· Kirby&#xA0;·&#xA0;PHP
+          {
+            locale === "de" ? (
+              <strong>Technologieoffen</strong>
+            ) : (
+              <strong>Technology-agnostic</strong>
+            )
+          }
+          &#xA0;· Astro&#xA0;· JSX&#xA0;· Markdown&#xA0;· MDX&#xA0;·
+          Angular&#xA0;· React&#xA0;· Vue.js&#xA0;· PrimeNG&#xA0;· Kirby&#xA0;·&#xA0;PHP
+        </dd>
+
+        <dt>Tooling & Deploy:</dt>
+        <dd>
+          Git&#xA0;· CI/CD Pipelines (GitHub Actions, Azure DevOps)&#xA0;·
+          Deployment Automation&#xA0;· Prettier&#xA0;· Vitest&#xA0;·&#xA0;Playwright
         </dd>
 
         <dt>
@@ -123,7 +139,19 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
       <dl>
         <dt>Build:</dt>
         <dd>
-          {locale === "de" ? "28.02.1977 in Celle" : "Feb 28, 1977 in Celle"}
+          {
+            locale === "de" ? (
+              <>
+                Kommunikationsstark · Pragmatisch · Neugierig ·
+                Lösungsorientiert · Teamplayer&#xA0;·&#xA0;Eigenverantwortlich
+              </>
+            ) : (
+              <>
+                Strong communicator · Pragmatic · Curious · Solution-oriented ·
+                Team player&#xA0;·&#xA0;Self-driven
+              </>
+            )
+          }
         </dd>
 
         <dt>Roots:</dt>
@@ -159,6 +187,9 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
         <dd>
           {locale === "de" ? "sofort" : "immediately"}
         </dd>
+
+        <dt>Collaboration:</dt>
+        <dd>Agile (Scrum & Kanban)&#xA0;·&#xA0;Code Reviews</dd>
       </dl>
     </div>
   </div>
