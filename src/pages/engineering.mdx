@@ -10,6 +10,7 @@ import { Image } from "astro:assets";
 import PageHeader from "../components/PageHeader.astro";
 import TerminalWindow from "../components/TerminalWindow.astro";
 import HawkImage from "../assets/images/projects/hawk-gt1191.svg";
+import FrustfreiImage from "../assets/images/projects/frustfrei.svg";
 import technikwuerzeImg from "../assets/images/projects/technikwuerze.png";
 import GithubLogo from "../assets/images/projects/github.svg";
 import CodepenLogo from "../assets/images/projects/codepen.svg";
@@ -34,8 +35,11 @@ import CodepenLogo from "../assets/images/projects/codepen.svg";
 <section class="tech-section">
   ## Hochschullehre
 
-<div class="tech-section-aside">
-  <HawkImage alt="HAWK GT 1191" class="project-logo hawk-logo" />
+<div class="tech-section-aside hawk">
+  <div class="hawk-rotate">
+    <HawkImage alt="HAWK GT 1191" class="project-logo hawk-logo" />
+    <FrustfreiImage alt="Logo frustfrei.dev" class="project-logo hawk-logo" />
+  </div>
 </div>
 
   <div>
@@ -43,7 +47,7 @@ import CodepenLogo from "../assets/images/projects/codepen.svg";
 
     Die Website zum Seminar bleibt aktuell: Ich veröffentliche dort weiterhin regelmäßig umfangreiche und interaktive Tutorials, mit denen Studierende, aber auch andere Interessierte, lernen, wie man Websites heute erstellt -- Mobile First, Responsive und frustrationsfrei. Dieser direkte Austausch mit einer neuen Generation von Gestaltenden prägt meine Arbeit bis heute.
 
-    [hawk-gt1191.de](https://hawk-gt1191.de)
+    [frustfrei.dev](https://frustfrei.dev)
 
   </div>
 </section>

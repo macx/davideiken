@@ -4,21 +4,21 @@ import ContactForm from "./ContactForm.astro";
 const locale = Astro.currentLocale ?? "en";
 const title =
   locale === "de"
-    ? "Lass uns reden. Ohne Pitch, ohne Druck."
-    : "Let’s talk. No pitch, no pressure.";
+    ? "Lass uns ins Gespräch kommen."
+    : "Let’s start a conversation.";
 
 const textPart1 =
   locale === "de"
-    ? "Buche dir ein unverbindliches Online-Meeting. Nur ein offenes Gespräch darüber, wie ich dein Team ergänzen kann. Melde dich unter "
-    : "Book a no-strings-attached online meeting. Just an open conversation about how I can complement your team. Sign up at ";
+    ? "Ich freue mich über einen unverbindlichen Austausch darüber, wie ich dein Team ergänzen kann. Buche dir gern einen Termin unter "
+    : "I’d love an open exchange about how I can complement your team. Feel free to book a time at ";
 
 const linkUrl = "https://davideiken.de/meeting";
 const linkText = "davideiken.de/meeting";
 
 const textPart2 =
   locale === "de"
-    ? " an, oder hinterlasse mir eine Nachricht."
-    : ", or leave me a message.";
+    ? ", oder schreib mir direkt."
+    : ", or just drop me a message.";
 ---
 
 <section id="contact" class="contact">
