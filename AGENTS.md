@@ -80,6 +80,7 @@ For each task, follow this order:
    - `pnpm astro check`
    - `pnpm test` (to run Vitest unit tests when behavior is affected)
    - `pnpm test:e2e` (to run Playwright E2E tests locally when relevant)
+   - `pnpm cspell` (spell check, German + English, local only — not a CI gate; add legitimate names/terms to `words` in `cspell.yaml`)
 
 ## 7) Content Preference
 
