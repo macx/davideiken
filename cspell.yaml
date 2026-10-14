@@ -1,6 +1,22 @@
 $schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
 version: "0.2"
+language: en,de
+import:
+  - "@cspell/dict-de-de/cspell-ext.json"
+useGitignore: true
+ignorePaths:
+  - pnpm-lock.yaml
+  - pnpm-workspace.yaml
+  - "**/*.svg"
+  - "src/assets/**"
+  - "public/sounds/**"
+  - LICENSE
 languageSettings:
+  # The German dictionary enables case-sensitive checking for "de";
+  # project words and file names (rossmann.svg) are matched case-insensitively.
+  - languageId: "*"
+    locale: "*"
+    caseSensitive: false
   - languageId: html,css,md,mdx,astro,js,ts
     dictionaries:
       - html
@@ -11,8 +27,94 @@ languageSettings:
       - javascript
       - typescript
       - markdown
-      - python
-    include:
-      - "src/**/*.css"
 ignoreRegExpList:
   - '"[a-z]{4}"'
+  - "&[a-z]+;"
+# Project-specific names, brands, technical terms and German compounds.
+# Keep alphabetical (case-insensitive).
+words:
+  - aekn
+  - Ahlers
+  - Anfrageformular
+  - badbot
+  - bertelsmann
+  - Bewerbungs
+  - CJICTF
+  - CJPOTF
+  - codepen
+  - Consolas
+  - crossfaded
+  - david
+  - davideiken
+  - DMARC
+  - domainkey
+  - DSGVO
+  - Eiken
+  - ELTRON
+  - Fastmail
+  - frontmatter
+  - frustfrei
+  - frustrationsfrei
+  - Frustrationsfreie
+  - Geologica
+  - glassmorphism
+  - Heinel
+  - Imunify
+  - INWX
+  - ITAG
+  - kamera
+  - Kommunikationsstark
+  - launchte
+  - letterboxing
+  - lightningcss
+  - lightswitch
+  - llms
+  - llmstxt
+  - luebecker
+  - Maciejewski
+  - macx
+  - Marathonfinisher
+  - marcelschwarzenberger
+  - markdownit
+  - Menlo
+  - modellunabhängig
+  - modsecurity
+  - Multipager
+  - nato
+  - Neoskop
+  - nginx
+  - Nitzsche
+  - Nutzerzentriert
+  - Onepager
+  - openssl
+  - Phusion
+  - Plesk
+  - Plesk's
+  - Rheinwerk
+  - roechling
+  - ROSSMANN
+  - Rpunkt
+  - Röchling
+  - satteri
+  - Screenreader
+  - sevenload
+  - starterguide
+  - STIEBEL
+  - Teamlead
+  - Teamplayer
+  - technikwuerze
+  - Technikwürze
+  - Technologieoffen
+  - Timelapse
+  - toolautosubmit
+  - tooldescription
+  - toolname
+  - Trilos
+  - tsconfigs
+  - Vandalismusschutz
+  - Versacommerce
+  - versioniert
+  - vhosts
+  - Vitest
+  - wdth
+  - wordmark

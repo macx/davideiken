@@ -80,6 +80,7 @@ For each task, follow this order:
    - `pnpm astro check`
    - `pnpm test` (to run Vitest unit tests when behavior is affected)
    - `pnpm test:e2e` (to run Playwright E2E tests locally when relevant)
+   - `pnpm cspell` (spell check, German + English, local only — not a CI gate; add legitimate names/terms to `words` in `cspell.yaml`)
 
 ## 7) Content Preference
 
@@ -102,6 +103,7 @@ When editing content, write primarily MDX instead of using HTML tags. Only allow
 - Any time an German MDX file under `src/pages/` is fully drafted, modified, renamed, or deleted, you MUST trigger the `mdx-translation-sync` skill.
 - Read the instructions in `skills/mdx-translation-sync/SKILL.md` to perform the sync.
 - To save tokens, do not perform line-by-line translations during drafting. Only execute the sync as a final step when the German file is ready.
+- Afterwards, run the `llms-markdown-sync` skill (`skills/llms-markdown-sync/SKILL.md`) for the affected English page. It regenerates the LLM Markdown twin (`public/en/**/index.html.md`, llmstxt.org) with a Haiku subagent from the raw English MDX. Twins exist in English only; German pages link to them. `src/tests/llms.test.ts` fails in CI if a twin is missing or its headings drift from the MDX.
 
 ## 10) Infrastructure & Deployment
 

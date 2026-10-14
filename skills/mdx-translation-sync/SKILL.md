@@ -46,3 +46,5 @@ If an German MDX file is renamed or its slug changes:
 
 - Always ensure the translated MDX file is valid and correctly imports the layout.
 - Check that no broken links or invalid components were introduced during translation.
+- Run `pnpm exec cspell --no-progress <German file> <English file>`. Fix real typos; add
+  legitimate names or terms to `words` in `cspell.yaml` (alphabetical).
