@@ -4,11 +4,13 @@
 
 Formerly known as David Maciejewski. Focus areas: AI-native frontend engineering (spec-driven development, context engineering, multi-agent orchestration, agent skills, MCP), semantic HTML and accessibility, frustration-free UX, design systems. Technology-agnostic: Angular, React, Vue.js, Astro and others. Lecturer at HAWK Hildesheim for 11 years (~660 students), podcast pioneer since 2005 (Technikwürze). Languages: German (native), English.
 
+Every page listed below is a clean Markdown version of the corresponding HTML page (remove `index.html.md` for the HTML URL). The German pages share the same content; their English Markdown version is linked via `<link rel="alternate" type="text/markdown">`.
+
 ## Profile
 
-- [Home (EN)](https://davideiken.de/en/): Introduction and positioning
-- [Engineering (EN)](https://davideiken.de/en/engineering/): AI-native workflow, teaching, podcast, open source
-- [Experience (EN)](https://davideiken.de/en/experience/): Career timeline since 1993
+- [Home](https://davideiken.de/en/index.html.md): Introduction and positioning
+- [Engineering](https://davideiken.de/en/engineering/index.html.md): AI-native workflow, teaching, podcast, open source
+- [Experience](https://davideiken.de/en/experience/index.html.md): Career timeline since 1993
 - [Startseite (DE)](https://davideiken.de/): German version of the introduction
 
 ## Projects
@@ -28,4 +30,6 @@ Formerly known as David Maciejewski. Focus areas: AI-native frontend engineering
 - [CodePen](https://codepen.io/macx): Code snippets from tutorials
 - [Experience (DE)](https://davideiken.de/experience/): German career timeline
 - [Engineering (DE)](https://davideiken.de/engineering/): German version of the engineering page
-- [Legal notice](https://davideiken.de/en/imprint/)
+- [Legal notice](https://davideiken.de/en/imprint/index.html.md)
+- [Privacy policy](https://davideiken.de/en/privacy/index.html.md)
+- [Privacy policy: property camera](https://davideiken.de/en/privacy/camera/index.html.md)
