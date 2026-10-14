@@ -144,6 +144,16 @@ Not derivable from the code alone — established 2026-08-24 while migrating to 
 - Plesk's Node.js support serves this domain via nginx → Node (`server/entry.mjs`, Passenger-managed) **without routing through Apache**. Confirmed via the domain's own request log (Websites & Domains → davideiken.de → Protokolle): every entry's "Quelle" is either "SSL/Zugriff für nginx" or "Node.js" — Apache never appears.
 - Practical consequence: **Apache-level config (ModSecurity/Comodo WAF, `Additional Apache directives`) does not apply to this domain's own traffic at all.** Don't waste time adding `<LocationMatch>`/`SecRuleEngine` exceptions here for a davideiken.de-specific problem — verified by hard experience (see incident below), the WAF's own audit log (Tools & Einstellungen → Web Application Firewall) never showed a single entry for davideiken.de despite a real, reproducible failure.
 - The clean way to check what's actually happening for a given request: Websites & Domains → davideiken.de → **Protokolle**, filter by IP in the filter row (not a free-text global search — the per-column IP field). This is the nginx SSL access log plus Node.js stdout, and it's ground truth for whether a request even reached the app.
+- **Static files in `public/` are served by nginx itself, not by Node.** MIME types therefore come from nginx's `mime.types`, not from Astro/Node (which serves `.md` correctly in local `astro preview`). nginx doesn't know `.md`, and combined with `x-content-type-options: nosniff` the LLM Markdown twins (`*/index.html.md`) were downloaded as `application/octet-stream` instead of shown. Fixed (2026-10-14) under davideiken.de → Apache & nginx-Einstellungen → **Zusätzliche nginx-Anweisungen**:
+
+  ```nginx
+  location ~ \.md$ {
+      types { }
+      default_type "text/markdown; charset=utf-8";
+  }
+  ```
+
+  Never use a server-level `types { … }` block for this — it replaces the whole inherited MIME map and breaks CSS/JS. After any header change at the origin, purge Bunny: it caches response headers along with the body.
 
 ### Incident (2026-08-25): `/eigentumsnachweis/` and `/en/proof-of-ownership/` 504 via Bunny only — fixed with Origin Shield
 
