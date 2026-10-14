@@ -1,0 +1,31 @@
+# David Eiken
+
+> Senior Frontend Engineer with an AI-native workflow, based in Minden, Germany. 30 years of experience in digital media, from print to full-stack web development. Today, AI agents write the code; David owns architecture, UX and quality. Available immediately – remote in Germany, hybrid and DACH on request.
+
+Formerly known as David Maciejewski. Focus areas: AI-native frontend engineering (spec-driven development, context engineering, multi-agent orchestration, agent skills, MCP), semantic HTML and accessibility, frustration-free UX, design systems. Technology-agnostic: Angular, React, Vue.js, Astro and others. Lecturer at HAWK Hildesheim for 11 years (~660 students), podcast pioneer since 2005 (Technikwürze). Languages: German (native), English.
+
+## Profile
+
+- [Home (EN)](https://davideiken.de/en/): Introduction and positioning
+- [Engineering (EN)](https://davideiken.de/en/engineering/): AI-native workflow, teaching, podcast, open source
+- [Experience (EN)](https://davideiken.de/en/experience/): Career timeline since 1993
+- [Startseite (DE)](https://davideiken.de/): German version of the introduction
+
+## Projects
+
+- [frustfrei.dev](https://frustfrei.dev): Tutorials on modern frontend development
+- [Technikwürze](https://technikwuerze.de): Podcast on design and web development since 2005
+- [starterguide.dev](https://starterguide.dev): Website starter kit for students
+- [GitHub](https://github.com/macx): Open-source projects
+
+## Contact
+
+- [Contact form](https://davideiken.de/en/#contact): Direct message
+- [Book a meeting](https://davideiken.de/meeting): Schedule a call
+
+## Optional
+
+- [CodePen](https://codepen.io/macx): Code snippets from tutorials
+- [Experience (DE)](https://davideiken.de/experience/): German career timeline
+- [Engineering (DE)](https://davideiken.de/engineering/): German version of the engineering page
+- [Legal notice](https://davideiken.de/en/imprint/)
