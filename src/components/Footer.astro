@@ -47,90 +47,115 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
       </dl>
     </div>
 
-    <div class="footer-col">
+    <div class="footer-col footer-stack">
       <SectionLabel text="STACK" />
 
-      <dl>
-        <dt>{locale === "de" ? "Fundament:" : "Foundation:"}</dt>
-        <dd>
-          {
-            locale === "de" ? (
-              <>
-                <strong>Semantisches HTML</strong> für Menschen, Assistive
-                Technologie und <strong>KI</strong>&#xA0;·
-              </>
-            ) : (
-              <>
-                <strong>Semantic HTML</strong> for humans, assistive technology
-                and <strong>AI</strong>&#xA0;·
-              </>
-            )
-          }{" "}
-          Native&nbsp;CSS&#xA0;·&#xA0;Tailwind CSS&#xA0;·&#xA0;TypeScript
-        </dd>
+      <dl class="stack-list">
+        <div>
+          <dt>AI & Agentic Coding:</dt>
+          <dd>
+            {
+              locale === "de" ? (
+                <>
+                  <strong>Agenten steuern, Qualität verantworten</strong>&#xA0;·
+                </>
+              ) : (
+                <>
+                  <strong>Directing agents, owning quality</strong>&#xA0;·
+                </>
+              )
+            }{" "}
+            Spec-Driven Development&#xA0;· Context Engineering&#xA0;· Multi-Agent
+            Orchestration&#xA0;· Agent Skills&#xA0;· MCP&#xA0;· Plugins&#xA0;· Claude&#xA0;Code&#xA0;·
+            Codex&#xA0;· Gemini&#xA0;· Copilot&#xA0;·&#xA0;Antigravity
+          </dd>
+        </div>
 
-        <dt>{locale === "de" ? "Frameworks & CM:" : "Frameworks & CMS:"}</dt>
-        <dd>
-          {
-            locale === "de" ? (
-              <strong>Technologieoffen</strong>
-            ) : (
-              <strong>Technology-agnostic</strong>
-            )
-          }
-          &#xA0;· Astro&#xA0;· JSX&#xA0;· Markdown&#xA0;· MDX&#xA0;·
-          Angular&#xA0;· React&#xA0;· Vue.js&#xA0;· PrimeNG&#xA0;· Kirby&#xA0;·&#xA0;PHP
-        </dd>
+        <div>
+          <dt>{locale === "de" ? "Fundament:" : "Foundation:"}</dt>
+          <dd>
+            {
+              locale === "de" ? (
+                <>
+                  <strong>Semantisches HTML</strong> für Menschen, Assistive
+                  Technologie und <strong>KI</strong>&#xA0;·
+                </>
+              ) : (
+                <>
+                  <strong>Semantic HTML</strong> for humans, assistive
+                  technology and <strong>AI</strong>&#xA0;·
+                </>
+              )
+            }{" "}
+            Native&nbsp;CSS&#xA0;·&#xA0;Tailwind CSS&#xA0;·&#xA0;TypeScript
+          </dd>
+        </div>
 
-        <dt>Tooling & Deploy:</dt>
-        <dd>
-          Git&#xA0;· CI/CD Pipelines (GitHub Actions, Azure DevOps)&#xA0;·
-          Deployment Automation&#xA0;· Prettier&#xA0;· Vitest&#xA0;·&#xA0;Playwright
-        </dd>
+        <div>
+          <dt>{locale === "de" ? "Frameworks & CM:" : "Frameworks & CMS:"}</dt>
+          <dd>
+            {
+              locale === "de" ? (
+                <strong>Technologieoffen</strong>
+              ) : (
+                <strong>Technology-agnostic</strong>
+              )
+            }
+            &#xA0;· Astro&#xA0;· JSX&#xA0;· Markdown&#xA0;· MDX&#xA0;· Angular&#xA0;·
+            React&#xA0;· Vue.js&#xA0;· PrimeNG&#xA0;· Kirby&#xA0;·&#xA0;PHP
+          </dd>
+        </div>
 
-        <dt>
-          {locale === "de" ? "KI & Agentic Coding:" : "AI & Agentic Coding:"}
-        </dt>
-        <dd>
-          Claude&#xA0;· Gemini&#xA0;· Antigravity&#xA0;· Copilot&#xA0;·
-          Codex&#xA0;·{" "}
-          {locale === "de" ? "Multi-Agents" : "Multi-agents"}&#xA0;·
-          Skills&#xA0;· MCP
-        </dd>
+        <div>
+          <dt>Tooling & Deploy:</dt>
+          <dd>
+            Git&#xA0;· CI/CD Pipelines (GitHub Actions, Azure DevOps)&#xA0;·
+            Deployment Automation&#xA0;· Prettier&#xA0;·
+            Vitest&#xA0;·&#xA0;Playwright
+          </dd>
+        </div>
 
-        <dt>UX & Frontend:</dt>
-        <dd>
-          {
-            locale === "de" ? (
-              <>
-                <strong>UX für Mensch und KI</strong> · Frustrationsfrei ·
-                Mobile First · Responsive&nbsp;Design
-              </>
-            ) : (
-              <>
-                <strong>UX for Human and AI</strong> · Frustation free · Mobile
-                First · Responsive&nbsp;Design
-              </>
-            )
-          }
-        </dd>
+        <div>
+          <dt>UX & Frontend:</dt>
+          <dd>
+            {
+              locale === "de" ? (
+                <>
+                  <strong>Frustrationsfreie UX für Mensch und KI</strong>&#xA0;·
+                  Accessibility&#xA0;· Usability&#xA0;· Design Systems&#xA0;·
+                  Corporate Design&#xA0;· AI-Driven Prototyping&#xA0;·
+                  Mobile&nbsp;First&#xA0;· Responsive&nbsp;Design
+                </>
+              ) : (
+                <>
+                  <strong>Frustration-free UX for humans and AI</strong>&#xA0;·
+                  Accessibility&#xA0;· Usability&#xA0;· Design systems&#xA0;·
+                  Corporate design&#xA0;· AI-driven prototyping&#xA0;·
+                  Mobile&nbsp;First&#xA0;· Responsive&nbsp;Design
+                </>
+              )
+            }
+          </dd>
+        </div>
 
-        <dt>Editorial & Media:</dt>
-        <dd>
-          {
-            locale === "de" ? (
-              <>
-                Tutorials · Fachbeiträge (Print&nbsp;& Online) · Kolumne ·
-                Podcast (Audio&nbsp;& Video)
-              </>
-            ) : (
-              <>
-                Tutorials · Technical articles (Print&nbsp;& Online) · Column ·
-                Podcast (Audio&nbsp;& Video)
-              </>
-            )
-          }
-        </dd>
+        <div>
+          <dt>Editorial & Media:</dt>
+          <dd>
+            {
+              locale === "de" ? (
+                <>
+                  Tutorials&#xA0;· Fachbeiträge (Print&nbsp;& Online)&#xA0;·
+                  Kolumne&#xA0;·&#xA0;Podcast (Audio&nbsp;& Video)
+                </>
+              ) : (
+                <>
+                  Tutorials&#xA0;· Technical articles (Print&nbsp;&
+                  Online)&#xA0;· Column&#xA0;·&#xA0;Podcast (Audio&nbsp;& Video)
+                </>
+              )
+            }
+          </dd>
+        </div>
       </dl>
     </div>
 
@@ -142,13 +167,13 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
           {
             locale === "de" ? (
               <>
-                Kommunikationsstark · Pragmatisch · Neugierig ·
-                Lösungsorientiert · Teamplayer&#xA0;·&#xA0;Eigenverantwortlich
+                Neugierig&#xA0;· Eigenverantwortlich&#xA0;· Kommunikationsstark&#xA0;·
+                Teamplayer&#xA0;· Lösungsorientiert&#xA0;·&#xA0;Pragmatisch
               </>
             ) : (
               <>
-                Strong communicator · Pragmatic · Curious · Solution-oriented ·
-                Team player&#xA0;·&#xA0;Self-driven
+                Curious&#xA0;· Self-driven&#xA0;· Strong communicator&#xA0;·
+                Team player&#xA0;· Solution-oriented&#xA0;·&#xA0;Pragmatic
               </>
             )
           }
@@ -205,6 +230,40 @@ const imprintLabel = locale === "de" ? "Impressum" : "Legal Notice";
 <style>
   .site-footer {
     padding-block: var(--sp-xl);
+
+    @media (min-width: 60em) {
+      --max-width: var(--max-width-footer);
+
+      /* Four equal tracks: the stack spans two, so its sub-columns match Setup */
+      .grid-auto {
+        grid-template-columns: 0.75fr repeat(3, 1fr);
+      }
+
+      .footer-stack {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  .footer-col .stack-list {
+    row-gap: calc(var(--sp) + var(--sp-2xs));
+
+    > div {
+      display: grid;
+      align-content: start;
+      gap: var(--sp-2xs);
+    }
+
+    @media (min-width: 60em) {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--sp-content);
+
+      /* The text-heavy first and the last entry span both columns */
+      > div:first-child,
+      > div:last-child {
+        grid-column: 1 / -1;
+      }
+    }
   }
 
   .footer-col {

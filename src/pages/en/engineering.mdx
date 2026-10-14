@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/Layout.astro
 title: "Sharing knowledge, shaping web culture."
-description: "A solid technical foundation, my web podcast Technikwürze and hands-on tutorials for HAWK students -- how I pass on quality and experience."
+description: "AI-native frontend engineering, a solid technical foundation, my web podcast Technikwürze and hands-on tutorials for HAWK students -- how I pass on quality and experience."
 navTitle: "Engineering"
 navOrder: 3
 ---
@@ -10,21 +10,61 @@ import { Image } from "astro:assets";
 import PageHeader from "../../components/PageHeader.astro";
 import TerminalWindow from "../../components/TerminalWindow.astro";
 import HawkImage from "../../assets/images/projects/hawk-gt1191.svg";
+import FrustfreiImage from "../../assets/images/projects/frustfrei.svg";
 import technikwuerzeImg from "../../assets/images/projects/technikwuerze.png";
+import agenticSessionImg from "../../assets/images/agentic-session.jpg";
 import GithubLogo from "../../assets/images/projects/github.svg";
 import CodepenLogo from "../../assets/images/projects/codepen.svg";
 
 <PageHeader
   title={frontmatter.title}
-  lead="For me, great engineering thrives on a solid technical foundation&nbsp;&ndash; and on exchange with others. With the podcast *Technikwürze* and my tutorials at the HAWK, I create spaces for sharing knowledge&nbsp;&ndash; as a dialogue at eye level where we all learn from each other."
+  lead="For me, great engineering thrives on a solid technical foundation&nbsp;&ndash; on exchange with others, and on curiously trying out new tools such as AI agents. With the podcast *Technikwürze* and my tutorials at the HAWK, I create spaces for sharing knowledge&nbsp;&ndash; as a dialogue at eye level where we all learn from each other."
   compactTitle={true}
 />
+
+<section class="tech-section tech-section-sticky">
+  ## AI-native Frontend Engineering
+
+<figure class="tech-section-aside project-figure">
+  <Image
+    src={agenticSessionImg}
+    alt="David Eiken seen from behind at his desk in front of a wide monitor"
+    class="project-photo"
+    widths={[256, 512]}
+    sizes="16rem"
+  />
+  <figcaption>
+    My AI-native workflow: on the left, the agent session in the editor; on the
+    right, the result&nbsp;&ndash; this website.
+  </figcaption>
+</figure>
+
+  <div class="tw-balance">
+    Agents write the code, I steer the process -- from the first specification to the final review. Behind it is a clearly structured workflow:
+
+    <dl class="workflow-list">
+      <dt>Spec-Driven Development</dt>
+      <dd>Concepts and requirements take shape in dialogue with an agent and are precisely specified before the first line of code is written.</dd>
+      <dt>Context Engineering</dt>
+      <dd>Project rules, architecture decisions, and documented knowledge give agents the context they need&nbsp;&ndash; versioned in the repository and more solid with every project.</dd>
+      <dt>Agent Skills</dt>
+      <dd>Recurring workflows are encapsulated as reusable skills, for translation, operations, and maintenance, for example.</dd>
+      <dt>Multi-Agent Orchestration</dt>
+      <dd>Specialized agents work in parallel, connected via MCP and plugins&nbsp;&ndash; model-agnostic, whether Claude, Codex, or Gemini.</dd>
+      <dt>Owning quality</dt>
+      <dd>Automated tests, linting, and CI pipelines safeguard every step. My review has the final say.</dd>
+    </dl>
+
+    This is how this website and the administration of my own infrastructure come about. Experience makes the difference: anyone who has known semantics, accessibility, and UX for decades sees immediately whether an agent has done clean work.
+
+  </div>
+</section>
 
 <section class="tech-section tech-section-full">
   ## Semantics. For Humans. For Machines.
 
   <div>
-    Semantic HTML is no relic. What makes content accessible to screen readers also makes it interpretable for AI models. Clean markup of structure and meaning has always been the foundation of good frontend engineering -- in the age of AI, it's more relevant than ever.
+    Semantic HTML is no relic. What makes content accessible to screen readers also makes it interpretable for AI models. Clean markup of structure and meaning has always been the foundation of good frontend engineering -- in the age of AI, it's more relevant than ever -- agents, too, work better with clear structure.
 
     For me, that's nothing new. Semantics has been part of my work from the start -- and that's exactly what makes the difference: while others retrofit it, I've brought this quality for 30 years.
 
@@ -34,14 +74,17 @@ import CodepenLogo from "../../assets/images/projects/codepen.svg";
 <section class="tech-section">
   ## University teaching
 
-<div class="tech-section-aside">
-  <HawkImage alt="HAWK GT 1191" class="project-logo hawk-logo" />
+<div class="tech-section-aside hawk">
+  <div class="hawk-rotate">
+    <HawkImage alt="HAWK GT 1191" class="project-logo hawk-logo" />
+    <FrustfreiImage alt="frustfrei.dev logo" class="project-logo hawk-logo" />
+  </div>
 </div>
 
-  <div>
+  <div class="tw-balance">
     The seminar GT 1191 was part of the Bachelor of Arts (BA) program at the Faculty of Design, within the Digital Environments competence field at HAWK University of Applied Sciences and Arts in Hildesheim -- eleven years of my contribution to university teaching. Around 660 students across 22 semesters gained hands-on knowledge in frontend development, web design, and usability.
 
-    The seminar's website stays current: I keep publishing extensive, interactive tutorials there, helping students -- and anyone else interested -- learn how to build websites today. Mobile first, responsive, and frustration-free. This direct exchange with a new generation of designers still shapes my work today.
+    The seminar's website stays current: I keep publishing extensive, interactive tutorials there, helping students -- and anyone else interested -- learn how to build websites today. Mobile first, responsive, and frustration-free. This direct exchange with a new generation of designers still shapes my work today. Next up are tutorials there showing how to develop cleanly with AI agents.
 
     [frustfrei.dev](https://frustfrei.dev)
 
