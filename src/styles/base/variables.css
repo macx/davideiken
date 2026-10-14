@@ -1,5 +1,6 @@
 :root {
   --max-width: 50rem;
+  --max-width-footer: 80rem;
   --radius: 1em;
 
   --sp: 1.25rem;

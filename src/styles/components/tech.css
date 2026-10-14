@@ -50,6 +50,56 @@
     margin-block-end: var(--sp-xs);
   }
 
+  .workflow-list {
+    --icon-size: 1.25em;
+
+    margin-block: var(--sp);
+    padding-inline-start: calc(var(--icon-size) + var(--sp-xs));
+
+    dt {
+      position: relative;
+      font-weight: 700;
+
+      &:not(:first-child) {
+        margin-block-start: var(--sp-s);
+      }
+
+      /* Terminal prompt icon, tinted via mask so it follows the token */
+      &::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: calc((var(--icon-size) + var(--sp-xs)) * -1);
+        inset-block-start: 0.1em;
+        inline-size: var(--icon-size);
+        block-size: var(--icon-size);
+        background-color: var(--clr-primary);
+        mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M4 17l6-5-6-5'/><path d='M12 19h8'/></svg>")
+          center / contain no-repeat;
+      }
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+
+  .project-figure {
+    margin: 0;
+
+    figcaption {
+      font-size: var(--fs-xs);
+      color: var(--clr-text-muted);
+      text-wrap: pretty;
+    }
+  }
+
+  .project-photo {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    border-radius: var(--radius);
+  }
+
   .hawk {
     transition: all 250ms ease-in-out;
   }
@@ -86,6 +136,15 @@
       grid-template-areas:
         "heading"
         "content";
+    }
+  }
+
+  /* The aside stays in view while the text scrolls */
+  @media (width >= 40em) {
+    &.tech-section-sticky > .tech-section-aside {
+      position: sticky;
+      /* Clears the fixed site header (offset + height + gap) */
+      inset-block-start: 6rem;
     }
   }
 }

@@ -73,3 +73,11 @@
   color: var(--clr-text-muted);
   border-block-start: 2px dashed var(--clr-line);
 }
+
+.tw-balance {
+  text-wrap: balance;
+}
+
+.tw-pretty {
+  text-wrap: pretty;
+}
