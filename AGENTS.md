@@ -6,7 +6,7 @@ those files must reference these rules and must not contradict them.
 
 ## 1) Product and Stack Context
 
-- Framework: Astro (v6)
+- Framework: Astro (v7)
 - Language: TypeScript
 - Content: Prefer Markdown/MDX for content pages
 - Styling: Native CSS with layers, no Tailwind
@@ -73,7 +73,7 @@ For each task, follow this order:
 1. Read existing files before editing.
 2. Choose the minimal solution path.
 3. **Always use the current official documentation** for the installed package versions (see Section 1). Never rely on memorized API patterns that may be outdated. If uncertain whether an API still exists, verify against the docs before using it.
-   - Astro v6 docs: https://docs.astro.build
+   - Astro v7 docs: https://docs.astro.build
    - Known breaking changes to watch for: `Astro.glob` was removed in Astro v5 → use `import.meta.glob` instead.
 4. Briefly document what changed and why before any tests or commits. Ask the user for approval of the changes if necessary.
 5. Run relevant scripts if behavior is affected, but only if the user has accepted the changes, has no corrections and has agreed to it.
